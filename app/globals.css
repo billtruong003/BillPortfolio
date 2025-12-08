@@ -1,0 +1,55 @@
+/* app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: 255 184 77;
+}
+
+body {
+  background-color: #050505;
+  color: #FAFAFA;
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* Custom Selection */
+::selection {
+  background: rgba(var(--primary), 0.3);
+  color: #FFB84D;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FFB84D;
+}
+
+/* Utilities */
+.text-glow {
+  text-shadow: 0 0 20px rgba(var(--primary), 0.3);
+}
+
+.glass-panel {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.clip-glitch {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
