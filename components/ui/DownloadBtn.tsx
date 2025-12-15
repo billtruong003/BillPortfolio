@@ -1,6 +1,7 @@
 'use client';
 import { Download } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { getAssetPath } from '@/lib/utils';
 
 interface DownloadBtnProps {
     href: string;
@@ -10,7 +11,7 @@ interface DownloadBtnProps {
 export const DownloadBtn = ({ href, text = "Download CV" }: DownloadBtnProps) => {
     return (
         <motion.a
-            href={href}
+            href={getAssetPath(href)}
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}

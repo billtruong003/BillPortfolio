@@ -1,22 +1,19 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-// Cần khớp với REPO_NAME trong next.config.mjs
-const REPO_NAME = "BillPortfolio";
-
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
 export function getAssetPath(path: string) {
-  const isProd = process.env.NODE_ENV === 'production';
-  // Xóa dấu / ở đầu nếu có để tránh double slash khi nối chuỗi
-  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
   
-  if (isProd) {
-    return `/${REPO_NAME}/${cleanPath}`;
+  if (path.startsWith("http") || path.startsWith("data:") || path.startsWith("blob:")) {
+      return path;
   }
-  return `/${cleanPath}`;
+
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  return `${basePath}${cleanPath}`;
 }
 
 export const getYoutubeThumbnail = (url: string) => {
@@ -32,13 +29,8 @@ export const getYoutubeThumbnail = (url: string) => {
         if (videoId) return `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
     }
 
-    if (url.includes('vimeo.com')) {
-        return "https://placehold.co/1920x1080/1a1a1a/ffae42?text=Vimeo+Project";
-    }
-
-    if (url.includes('dms.licdn.com') || url.endsWith('.mp4')) {
-        return "https://placehold.co/1920x1080/1a1a1a/ffae42?text=Video+Preview";
-    }
+    if (url.includes('vimeo.com')) return "https://placehold.co/1920x1080/1a1a1a/ffae42?text=Vimeo+Project";
+    if (url.includes('dms.licdn.com') || url.endsWith('.mp4')) return "https://placehold.co/1920x1080/1a1a1a/ffae42?text=Video+Preview";
 
     return url;
   } catch {

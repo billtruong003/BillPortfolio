@@ -6,10 +6,10 @@ import { Badge } from '@/components/ui/Badge';
 import Image from 'next/image';
 import { Project } from '@/types';
 import { useState, useEffect, useCallback } from 'react';
+import { getAssetPath } from '@/lib/utils'; // Import Helper
 
 const GalleryContent = ({ project, closeModal }: { project: Project; closeModal: () => void }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
-    // Nếu gallery rỗng, tạo mảng slide mặc định từ src chính
     const slides = project.gallery ?? [{ type: project.type, src: project.src }];
     const currentSlide = slides[currentIndex];
 
@@ -34,7 +34,6 @@ const GalleryContent = ({ project, closeModal }: { project: Project; closeModal:
         setCurrentIndex((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
     }, [slides.length]);
 
-    // --- UX IMPROVEMENT: Keyboard Navigation ---
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === 'Escape') closeModal();
@@ -70,11 +69,19 @@ const GalleryContent = ({ project, closeModal }: { project: Project; closeModal:
                         <iframe
                             src={currentSlide.src}
                             className="w-full h-full pointer-events-auto bg-white"
-                            sandbox="allow-scripts allow-same-origin allow-forms"
+                            // FIX: Thêm sandbox attributes chặt chẽ hơn để tránh warning
+                            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                             loading="lazy"
                         />
                     ) : (
-                        <Image src={currentSlide.src} alt="" fill className="object-contain" priority />
+                        // FIX: Wrap getAssetPath vào src
+                        <Image 
+                            src={getAssetPath(currentSlide.src)} 
+                            alt="" 
+                            fill 
+                            className="object-contain" 
+                            priority 
+                        />
                     )}
                 </motion.div>
             </AnimatePresence>
@@ -124,7 +131,6 @@ export const ProjectModal = () => {
                             layoutId={`card-${selectedProject.id}`}
                             className="pointer-events-auto bg-[#0A0A0A]/95 border border-zinc-800 w-full max-w-6xl max-h-[90vh] overflow-hidden rounded-2xl shadow-[0_0_50px_-10px_rgba(0,0,0,0.8)] flex flex-col lg:flex-row ring-1 ring-white/10"
                         >
-                            {/* Truyền prop closeModal vào GalleryContent để xử lý phím ESC */}
                             <GalleryContent key={selectedProject.id} project={selectedProject} closeModal={closeModal} />
 
                             <div className="w-full lg:w-[35%] flex flex-col bg-zinc-900/50 backdrop-blur-xl border-l border-zinc-800/50">

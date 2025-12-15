@@ -75,15 +75,11 @@ declare global {
     }
 }
 
-// FIX: Sử dụng hàm getAssetPath để lấy đúng đường dẫn trên Github Pages
-const MODEL_PATH = 'models/hero-model.glb';
-
 const HologramModel = () => {
     const materialRef = useRef<THREE.ShaderMaterial>(null);
     const [useFallback, setUseFallback] = useState(false);
     
-    // FIX: Prepend basePath
-    const gltf = useGLTF(getAssetPath(MODEL_PATH), true) as any;
+    const gltf = useGLTF(getAssetPath("/models/hero-model.glb"), true) as any;
 
     useFrame((state) => {
         if (materialRef.current) {

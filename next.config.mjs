@@ -2,11 +2,11 @@
 
 const REPO_NAME = "BillPortfolio";
 const isProd = process.env.NODE_ENV === "production";
+const basePath = isProd ? `/${REPO_NAME}` : "";
 
 const nextConfig = {
   output: "export",
-  basePath: isProd ? `/${REPO_NAME}` : "",
-  assetPrefix: isProd ? `/${REPO_NAME}/` : "",
+  basePath: basePath,
   images: {
     unoptimized: true,
     remotePatterns: [
@@ -25,6 +25,9 @@ const nextConfig = {
       { protocol: "https", hostname: "vumbnail.com" },
     ],
     dangerouslyAllowSVG: true,
+  },
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
   },
   async headers() {
     return [
