@@ -45,7 +45,12 @@ export const Portfolio = () => {
             <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <AnimatePresence>
                     {projects.map((project) => {
-                        const imageSrc = project.type === 'video' 
+                        // FIX LOGIC:
+                        // 1. Nếu là video ONLINE (http/https) -> lấy thumbnail Youtube/Vimeo
+                        // 2. Còn lại (ảnh local hoặc video local) -> dùng getAssetPath để thêm prefix Repo
+                        const isOnlineVideo = project.type === 'video' && project.src.startsWith('http');
+                        
+                        const imageSrc = isOnlineVideo
                             ? getYoutubeThumbnail(project.src) 
                             : getAssetPath(project.src);
 
@@ -70,6 +75,7 @@ export const Portfolio = () => {
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-40" />
                                     
+                                    {/* Chỉ hiện nút Play nếu đúng là video */}
                                     {project.type === 'video' && (
                                         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <PlayCircle className="w-12 h-12 text-primary drop-shadow-[0_0_15px_rgba(255,184,77,0.5)]" />

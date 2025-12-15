@@ -13,6 +13,9 @@ const GalleryContent = ({ project, closeModal }: { project: Project; closeModal:
     const slides = project.gallery ?? [{ type: project.type, src: project.src }];
     const currentSlide = slides[currentIndex];
 
+    // Helper kiểm tra file ảnh
+    const isImageFile = (src: string) => /\.(jpg|jpeg|png|gif|webp)$/i.test(src);
+
     const getEmbedUrl = (url: string) => {
         if (url.includes('vimeo.com')) {
             const id = url.split('/').pop();
@@ -47,6 +50,45 @@ const GalleryContent = ({ project, closeModal }: { project: Project; closeModal:
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [closeModal, nextSlide, prevSlide, slides.length]);
 
+    // Logic Render nội dung:
+    // 1. Nếu type là video VÀ src là link online -> Iframe
+    // 2. Nếu type là web -> Iframe Web
+    // 3. Còn lại (Ảnh, hoặc Video type nhưng src là ảnh local) -> Render Image Component
+    const renderContent = () => {
+        if (currentSlide.type === 'video' && !isImageFile(currentSlide.src) && currentSlide.src.startsWith('http')) {
+            return (
+                <iframe
+                    src={getEmbedUrl(currentSlide.src)}
+                    className="w-full h-full pointer-events-auto"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                />
+            );
+        }
+
+        if (currentSlide.type === 'web') {
+            return (
+                <iframe
+                    src={currentSlide.src}
+                    className="w-full h-full pointer-events-auto bg-white"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                    loading="lazy"
+                />
+            );
+        }
+
+        // Fallback về Image cho mọi trường hợp còn lại (bao gồm local image được gắn mác video)
+        return (
+            <Image 
+                src={getAssetPath(currentSlide.src)} 
+                alt="" 
+                fill 
+                className="object-contain" 
+                priority 
+            />
+        );
+    };
+
     return (
         <div className="w-full lg:w-[65%] bg-black relative aspect-video lg:aspect-auto group overflow-hidden">
             <AnimatePresence mode="wait">
@@ -58,29 +100,7 @@ const GalleryContent = ({ project, closeModal }: { project: Project; closeModal:
                     transition={{ duration: 0.4 }}
                     className="absolute inset-0 flex items-center justify-center bg-zinc-950"
                 >
-                    {currentSlide.type === 'video' ? (
-                        <iframe
-                            src={getEmbedUrl(currentSlide.src)}
-                            className="w-full h-full pointer-events-auto"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                        />
-                    ) : currentSlide.type === 'web' ? (
-                        <iframe
-                            src={currentSlide.src}
-                            className="w-full h-full pointer-events-auto bg-white"
-                            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                            loading="lazy"
-                        />
-                    ) : (
-                        <Image 
-                            src={getAssetPath(currentSlide.src)} 
-                            alt="" 
-                            fill 
-                            className="object-contain" 
-                            priority 
-                        />
-                    )}
+                    {renderContent()}
                 </motion.div>
             </AnimatePresence>
             
