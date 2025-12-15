@@ -1,572 +1,394 @@
 {
-    "profile": {
-        "name": "Bill The Dev",
-        "title": "Senior Unity Engineer & Technical Artist",
-        "quote": "Optimization is not just a phase; it is the architecture of immersion.",
-        "quoteAuthor": "Bill Truong",
-        "about": "Elite Unity Specialist and Technical Artist with a proven track record of shipping high-performance VR titles and industrial digital twins. Currently driving core development for 'Shmackle' (Live on Meta Quest 2/3/3s, 100k+ players), where I architect custom HLSL shader pipelines and optimize complex multiplayer infrastructures. My expertise bridges the gap between deep C# architecture and high-fidelity technical art, enabling me to build tools that accelerate production and games that define markets. Notable achievements include presenting real-time Omniverse solutions directly to NVIDIA CEO Jensen Huang at the AI Summit 2024 and achieving 300% threading performance gains in 'Animal Push Royale'. I am a 'Jack of all trades' in immersive tech—balancing the logic of a Senior Programmer with the creative vision of a Lead Technical Artist.",
-        "location": "Ho Chi Minh City, Vietnam (Open to Remote/Relocation)",
-        "contact": {
-            "email": "truongbill003@gmail.com",
-            "phone": "+84 37 497 6616"
-        }
+  "profile": {
+    "name": "Bill The Dev",
+    "title": "Senior Unity Engineer & Technical Artist",
+    "quote": "Optimization is not just a phase; it is the architecture of immersion.",
+    "quoteAuthor": "Bill Truong",
+    "about": "A resilient Senior Unity Specialist and Technical Artist who turned financial challenges into a catalyst for professional excellence. Starting with a 30% Talent Scholarship at FPT University, I pivoted to full-time industry development to support my career, rapidly evolving from a junior developer to a Senior Technical Artist. Currently driving core development for 'Shmackle' (Live on Meta Quest 2/3/3s), I bridge the gap between deep C# architecture and high-fidelity technical art. My journey includes shipping titles at Golden Sea, gaining Enterprise Scrum experience at Gameloft, and pioneering Digital Twins at FPT akaVerse. I specialize in building tools that accelerate production and optimizing complex rendering pipelines for VR/Mobile.",
+    "location": "Ho Chi Minh City, Vietnam (Open to Remote/Relocation)",
+    "contact": {
+      "email": "truongbill003@gmail.com",
+      "phone": "+84 37 497 6616"
+    }
+  },
+  "socials": [
+    {
+      "platform": "github",
+      "url": "https://github.com/billtruong003",
+      "priority": "xl",
+      "followers": "350+"
     },
-    "socials": [
-        {
-            "platform": "github",
-            "url": "https://github.com/billtruong003",
-            "priority": "xl",
-            "followers": "350+"
-        },
-        {
-            "platform": "linkedin",
-            "url": "https://www.linkedin.com/in/billtruong003/",
-            "priority": "lg",
-            "followers": "2.1k+"
-        },
-        {
-            "platform": "youtube",
-            "url": "https://www.youtube.com/@BillTheDev",
-            "priority": "md",
-            "subscribers": "1.5k+"
-        },
-        {
-            "platform": "facebook",
-            "url": "https://www.facebook.com/billthedev/",
-            "priority": "sm"
-        },
-        {
-            "platform": "twitter",
-            "url": "https://x.com/BillWorkaholic",
-            "priority": "sm"
-        },
-        {
-            "platform": "viblo",
-            "url": "https://viblo.asia/u/billtruong003",
-            "priority": "sm"
-        }
-    ],
-    "experience": {
-        "dev": [
-            {
-                "role": "Senior Unity Developer / Technical Artist",
-                "company": "CurlyBlue (Shmackle VR)",
-                "location": "Remote",
-                "period": "Apr 2025 - Present",
-                "desc": "Lead Developer and Technical Artist for 'Shmackle', a live service VR title on Meta Quest 2, 3, and 3s with hundreds of thousands of active players. Responsible for the entire technical art pipeline, core gameplay systems, and multiplayer optimization.",
-                "achievements": [
-                    "Architected the 'Shmackle Pad™' ecosystem: A complex, diegetic in-game tablet system handling player customization, social networking, real-time store transactions, and inventory management.",
-                    "Engineered a production-grade HLSL Shader Library defining the game's visual identity, including: 'Ghost Shader' (ethereal transparency), 'Xray Shader' (strategic wall-hacks), 'Stylized Metallic' (PBR approximation), and 'Fake Liquid' (optimized fluid dynamics).",
-                    "Implemented 'Swap Texture Effects' for the Shooting Range, enabling seamless, zero-latency scene transitions that immerse players in distinct environments without loading screens.",
-                    "Optimized the rendering pipeline for Meta Quest hardware using 'Additive Glass Optimization' and 'TextMeshPro Opaque' techniques, maintaining a stable 72+ FPS while reducing draw calls by 40%.",
-                    "Solved critical VR motion sickness issues by refining locomotion physics and implementing dynamic field-of-view tunneling during high-velocity gameplay.",
-                    "Developed 'Aura' and 'Hologram' shaders to provide clear visual feedback for interactive objects, significantly improving user experience (UX) in a noisy multiplayer environment.",
-                    "Collaborated with cross-functional teams to debug and resolve complex multiplayer synchronization issues, ensuring smooth physics replication for thousands of concurrent users."
-                ],
-                "tech_stack": [
-                    "Unity 2022 LTS",
-                    "HLSL",
-                    "Shader Graph",
-                    "Meta Quest SDK",
-                    "Photon Fusion",
-                    "Optimization",
-                    "Technical Art"
-                ]
-            },
-            {
-                "role": "Unity Developer & R&D Engineer",
-                "company": "FPT IS (akaVerse)",
-                "location": "Ho Chi Minh City, Vietnam",
-                "period": "Jul 2024 - Apr 2025",
-                "desc": "Key R&D Engineer for industrial-grade Digital Twin solutions and immersive automotive experiences. Selected as the technical representative to showcase Vietnam's innovation to global tech leaders.",
-                "achievements": [
-                    "Presented the 'Omniverse Digital Twin' solution directly to NVIDIA CEO Jensen Huang at the AI Summit 2024. Demonstrated real-time synchronization between Unity and NVIDIA Omniverse using Python to control conveyor belts and lighting systems.",
-                    "Spearheaded optimization for 'Animal Push Royale' (Top 6 Vietnam GameVerse Finalist), achieving a 300% performance increase by rewriting the threading model and implementing custom vertex-displacement shaders for Water and Lava.",
-                    "Developed the 'Honda VR' experience using Holoride technology. Engineered a 'Day-Night Synchronization' system and optimized FPS for in-car VR entertainment.",
-                    "Created 'Bill Utils', a proprietary internal toolset that automated asset import workflows and scene management, reducing the 3D team's manual setup time by approx. 40%.",
-                    "Conducted 'VR Motion Sickness Research', designing and testing physiological comfort algorithms that were subsequently adopted as best practices for all internal VR projects.",
-                    "Transitioned 'Animal Push Royale' UI from 2D to Dynamic 3D, and implemented a secure Single Sign-On (SSO) system for seamless user authentication.",
-                    "Designed an offline tutorial level with scripted events to improve player retention during the onboarding phase."
-                ],
-                "tech_stack": [
-                    "NVIDIA Omniverse",
-                    "Python Scripting",
-                    "Holoride SDK",
-                    "Multithreading",
-                    "Compute Shaders",
-                    "Performance Profiling"
-                ]
-            },
-            {
-                "role": "Unity Developer (Freelance)",
-                "company": "Golden Sea Studio",
-                "location": "Remote",
-                "period": "Jan 2024 - Mar 2024",
-                "desc": "End-to-end developer for mobile casual titles, responsible for refactoring legacy codebases and implementing scalable game architecture.",
-                "achievements": [
-                    "Shipped 'Merge Fruit', taking full ownership of the product lifecycle from prototype to release. Managed communication between game designers and artists to ensure vision alignment.",
-                    "Refactored the codebase for 'Drink Game', a social party app. Implemented a modular mini-game architecture that allowed for rapid addition of new content without breaking existing logic.",
-                    "Optimized mobile performance for iOS and Android, reducing build size and improving battery efficiency for casual gaming sessions."
-                ],
-                "tech_stack": [
-                    "Unity Mobile",
-                    "C#",
-                    "Game Architecture",
-                    "iOS/Android Deployment"
-                ]
-            },
-            {
-                "role": "Game Developer (Internship)",
-                "company": "Gameloft Vietnam",
-                "location": "Ho Chi Minh City",
-                "period": "Jun 2023 - Dec 2023",
-                "desc": "Gameplay Programmer for 'Applaydu', a high-profile edutainment application with millions of downloads.",
-                "achievements": [
-                    "Credited as the first intern to ship production code for 'Applaydu', specifically solving complex UI/Font fragmentation issues across hundreds of Android devices.",
-                    "Developed core mechanics for the 'Treasure Toss' and 'Animalody' mini-games, adhering to strict Enterprise Scrum/Agile workflows.",
-                    "Utilized Git flow and internal code review processes to maintain high code quality and prevent regression in a massive codebase."
-                ],
-                "tech_stack": [
-                    "Enterprise C#",
-                    "Scrum",
-                    "Jira",
-                    "Git Lab",
-                    "UI/UX Implementation"
-                ]
-            },
-            {
-                "role": "Game Developer (Internship)",
-                "company": "Golden Sea Studio",
-                "location": "Remote",
-                "period": "Apr 2023 - Jun 2023",
-                "desc": "Junior developer focusing on children's educational games.",
-                "achievements": [
-                    "Developed 'Biboo - Drawing Game for Kids', integrating touch-input smoothing algorithms and interactive animations to encourage artistic exploration.",
-                    "Collaborated with a small indie team to rapid-prototype gameplay mechanics, learning the fundamentals of game loops and state management."
-                ],
-                "tech_stack": [
-                    "Unity 2D",
-                    "Touch Input Handling",
-                    "Animation"
-                ]
-            }
+    {
+      "platform": "linkedin",
+      "url": "https://www.linkedin.com/in/billtruong003/",
+      "priority": "lg",
+      "followers": "2.1k+"
+    },
+    {
+      "platform": "youtube",
+      "url": "https://www.youtube.com/@BillTheDev",
+      "priority": "md",
+      "subscribers": "1.5k+"
+    },
+    {
+      "platform": "facebook",
+      "url": "https://www.facebook.com/billthedev/",
+      "priority": "sm"
+    },
+    {
+      "platform": "itch",
+      "url": "https://billtruong003.itch.io/",
+      "priority": "sm"
+    }
+  ],
+  "feed": [],
+  "experience": {
+    "dev": [
+      {
+        "role": "Senior Unity Developer / Technical Artist",
+        "company": "CurlyBlue (Shmackle VR)",
+        "location": "Remote",
+        "period": "Apr 2025 - Present",
+        "desc": "Lead Developer and Technical Artist for 'Shmackle', a live service VR title on Meta Quest. transitioned from Developer to Technical Lead due to ability to handle complex shader and visual tasks.",
+        "achievements": [
+          "Architected the 'Shmackle Pad™' ecosystem: A complex in-game tablet handling social networking, transactions, and inventory.",
+          "Engineered a production-grade HLSL Shader Library: 'Ghost Shader', 'Xray Shader', and 'Fake Liquid' for optimized Quest rendering.",
+          "Implemented 'Swap Texture Effects' for zero-latency scene transitions.",
+          "Optimized the rendering pipeline using 'Additive Glass Optimization', maintaining 72+ FPS.",
+          "Solved VR motion sickness with dynamic field-of-view tunneling."
         ],
-        "teaching": [
-            {
-                "role": "Game Development Instructor & Marketing Lead",
-                "company": "FullHouseDev",
-                "location": "Remote",
-                "period": "Sep 2024 - Present",
-                "desc": "Lead Instructor for advanced game development courses and strategic Marketing Lead driving brand growth.",
-                "achievements": [
-                    "Designed and delivered an advanced curriculum covering Shader Graph, VFX, and Optimization workflows, targeting aspiring technical artists.",
-                    "As Marketing Lead, spearheaded content strategies that integrated emerging tech trends (AI, VR), significantly increasing student engagement and course enrollment.",
-                    "Mentored students on portfolio development, code architecture, and industry best practices."
-                ],
-                "skills": [
-                    "Curriculum Design",
-                    "Technical Marketing",
-                    "Mentorship",
-                    "Public Speaking"
-                ]
-            },
-            {
-                "role": "Computer Science Education Counselor",
-                "company": "Marathon Education (YC W22)",
-                "location": "Remote",
-                "period": "Mar 2023 - Present",
-                "desc": "Educational consultant for a Y-Combinator backed EdTech startup.",
-                "achievements": [
-                    "Led 'Team Codi' to develop the 'Marathon Talent AR App', managing the technical roadmap and feature implementation.",
-                    "Provided expert guidance to learners, designing personalized Computer Science learning plans and helping them access relevant resources."
-                ]
-            },
-            {
-                "role": "Information Technology Teacher",
-                "company": "DigiUni Vietnam",
-                "location": "Ho Chi Minh City",
-                "period": "Sep 2022 - Jun 2024",
-                "desc": "Promoted from Teaching Assistant to Lead Teacher in just 2 months due to exceptional performance.",
-                "achievements": [
-                    "Taught over 2,500 hours of coding classes (Python, Game Design, Robotics).",
-                    "Mentored students to achieve top placements in international competitions: IKCC Top 10, HKICO Medals, and the Tech Award at Hanoi STEAM Hack Day.",
-                    "Developed dynamic learning environments that fostered creativity and critical thinking for students aged 8-16."
-                ]
-            }
+        "tech_stack": [
+          "Unity 2022 LTS",
+          "HLSL",
+          "Shader Graph",
+          "Meta Quest SDK",
+          "Photon Fusion",
+          "Technical Art"
         ]
-    },
-    "education": [
-        {
-            "degree": "Bachelor of Software Engineering",
-            "school": "FPT University",
-            "period": "2022 - 2025",
-            "desc": "Completed Computer Science fundamentals with a focus on Software Architecture and 3D Graphics. pivoted to full-time professional industry development during the final year.",
-            "achievements": [
-                "Talent Scholarship Winner: Awarded a 30% merit-based scholarship, selected from the top tier of 10,000+ candidates.",
-                "Specialized in Python and C# application development."
-            ]
-        },
-        {
-            "degree": "High School Diploma (Honors)",
-            "school": "EMASI Van Phuc International Bilingual School",
-            "period": "2019 - 2022",
-            "desc": "Graduated with a GPA of 9.2/10. Built a strong foundation in Bilingual STEM education and Robotics.",
-            "achievements": [
-                "President of Pacific House & Founder of Fitness and Healthy Club.",
-                "Won 2 Silver Medals in the Ivy Prep English Debate Championship.",
-                "1st Prize Winner: Christmas Game Coding Competition.",
-                "School Event MC for major ceremonies."
-            ]
-        }
-    ],
-    "skills": [
-        {
-            "name": "C# & .NET Architecture",
-            "level": "Expert",
-            "desc": "Advanced OOP, Design Patterns (Singleton, Observer, Factory), Multithreading, Memory Management, LINQ, Async/Await."
-        },
-        {
-            "name": "Unity Engine Mastery",
-            "level": "Expert",
-            "desc": "Unity 2021/2022/2023, DOTS (ECS/Jobs/Burst), Addressables, Asset Bundles, Custom Editor Scripting, URP/HDRP Pipelines."
-        },
-        {
-            "name": "HLSL & Technical Art",
-            "level": "Expert",
-            "desc": "Custom Surface/Vertex Shaders, Shader Graph, VFX Graph, Compute Shaders, Raymarching, Render Pipeline Customization."
-        },
-        {
-            "name": "VR/AR Development",
-            "level": "Expert",
-            "desc": "Meta Quest SDK (Interaction/Passthrough), Holoride SDK, AR Foundation, OpenXR, VR Performance Optimization (72/90/120Hz target)."
-        },
-        {
-            "name": "Multiplayer & Networking",
-            "level": "Advanced",
-            "desc": "Photon Fusion/PUN2, SmartFox Server, State Synchronization, Lag Compensation, Interpolation/Extrapolation, RPCs."
-        },
-        {
-            "name": "Performance Optimization",
-            "level": "Expert",
-            "desc": "Profiler/Frame Debugger analysis, Draw Call reduction (Batching/GPU Instancing), GC allocation reduction, Texture Compression/Atlasing."
-        },
-        {
-            "name": "Tool Development",
-            "level": "Advanced",
-            "desc": "Python Automation (Blender/Maya APIs), Unity Editor Windows, Build Pipelines (CI/CD), Automated Asset Processing."
-        },
-        {
-            "name": "NVIDIA Omniverse",
-            "level": "Advanced",
-            "desc": "USD Workflow, Python Connectors, Real-time Digital Twin Synchronization, Physics Simulation."
-        },
-        {
-            "name": "Web & Backend",
-            "level": "Intermediate",
-            "desc": "HTML5/CSS3, JavaScript/TypeScript, React Basics, Node.js Basics, REST APIs, Firebase."
-        },
-        {
-            "name": "3D Content Creation",
-            "level": "Intermediate",
-            "desc": "Blender (Modeling/UV/Rigging), Substance Painter (PBR Texturing), Photoshop."
-        }
-    ],
-    "portfolio": [
-        {
-            "id": 1,
-            "title": "Bill's DevSprint (SaaS)",
-            "category": "tool",
-            "type": "image",
-            "src": "https://billdevsprint.com/og-image.png",
-            "url": "https://billdevsprint.com/",
-            "tags": [
-                "SaaS",
-                "React",
-                "Node.js",
-                "Productivity Tool",
-                "Indie Dev"
-            ],
-            "description": "A comprehensive Project Management SaaS built specifically for indie game developers. Features include dynamic wallpaper themes, Google Drive deep-integration, drag-and-drop asset management, smart labeling systems, and cloud storage management. Designed and shipped in 48 hours to demonstrate rapid full-stack capability."
-        },
-        {
-            "id": 2,
-            "title": "Responsive WebGL Template",
-            "category": "tool",
-            "type": "image",
-            "src": "https://placehold.co/600x400/1a1a1a/ffae42?text=WebGL+Template",
-            "url": "https://github.com/billtruong003/Responsive-WebGL-Template",
-            "tags": [
-                "Unity WebGL",
-                "HTML5",
-                "CSS3",
-                "Open Source"
-            ],
-            "description": "The definitive open-source solution for Unity WebGL responsiveness. Solves the notorious full-window display issues on mobile and desktop browsers. Widely adopted by the itch.io developer community for its reliability and ease of use (simple drop-in installation)."
-        },
-        {
-            "id": 3,
-            "title": "Bill Biome Shader",
-            "category": "shader",
-            "type": "image",
-            "src": "https://raw.githubusercontent.com/billtruong003/Bill-Biome-Shader/main/Docs/preview.jpg",
-            "url": "https://github.com/billtruong003/Bill-Biome-Shader",
-            "tags": [
-                "HLSL",
-                "Terrain Rendering",
-                "Optimization",
-                "Mobile VR"
-            ],
-            "description": "A high-performance terrain shader supporting 4-layer texture blending, tessellation, and procedural noise texturing. Specifically optimized for Mobile and VR hardware constraints, offering AAA-quality terrain visuals at a fraction of the performance cost of standard terrain systems."
-        },
-        {
-            "id": 4,
-            "title": "Animal Push Royale",
-            "category": "game",
-            "type": "video",
-            "src": "https://www.youtube.com/embed/lxRwEPvL-mQ?autoplay=0",
-            "url": "https://vnexpress.net/cong-nghe/vgv-2024/du-an/animal-push-royale-106",
-            "tags": [
-                "GameVerse Finalist",
-                "Multiplayer",
-                "Optimization",
-                "300% Perf Boost"
-            ],
-            "description": "A physics-based multiplayer battle royale that ranked Top 6 in the Vietnam GameVerse 2024. I achieved a massive 300% performance boost by implementing a custom threading model and rewriting expensive shader logic. Features include a custom offline tutorial, dynamic 3D UI, and secure SSO login."
-        },
-        {
-            "id": 5,
-            "title": "Spaceship Modular System",
-            "category": "tool",
-            "type": "video",
-            "src": "https://www.youtube.com/embed/nvj0qp_HsVs?autoplay=0",
-            "url": "https://billthedevlab.com/",
-            "tags": [
-                "Editor Tool",
-                "Modular Design",
-                "System Architecture"
-            ],
-            "description": "A sophisticated Unity Editor tool allowing players and designers to construct modular spaceships part-by-part. Implements complex snap-point logic, serialization for saving/loading designs, and a user-friendly drag-and-drop interface. Demonstrates advanced Editor Scripting capabilities."
-        },
-        {
-            "id": 6,
-            "title": "Blender Texture Baker",
-            "category": "tool",
-            "type": "image",
-            "src": "https://placehold.co/600x400/1a1a1a/ffae42?text=Texture+Baker",
-            "url": "https://github.com/billtruong003/TextureBake",
-            "tags": [
-                "Python",
-                "Blender API",
-                "Automation",
-                "Pipeline Tool"
-            ],
-            "description": "Automated Python pipeline for Blender that bakes PBR textures (Albedo, Normal, Roughness, Metallic) from High-Poly to Low-Poly models in a single click. Drastically reduces manual UV unwrapping and baking time for asset production pipelines."
-        },
-        {
-            "id": 7,
-            "title": "Bill SSOutline (URP)",
-            "category": "shader",
-            "type": "image",
-            "src": "https://placehold.co/600x400/1a1a1a/ffae42?text=SSOutline+Shader",
-            "url": "https://github.com/billtruong003?tab=repositories",
-            "tags": [
-                "Post-Processing",
-                "URP",
-                "Stylized Rendering"
-            ],
-            "description": "A robust Screen-Space Outline shader for Unity URP. Features configurable depth and normal sensitivity, color control, and line thickness. This shader is the backbone of the stylized art direction in several of my projects."
-        },
-        {
-            "id": 8,
-            "title": "MemeCrawler AI",
-            "category": "tool",
-            "type": "image",
-            "src": "https://placehold.co/600x400/1a1a1a/ffae42?text=Meme+Crawler",
-            "url": "https://github.com/billtruong003/MemeCrawler",
-            "tags": [
-                "Python",
-                "AI/ML",
-                "Web Scraping",
-                "Automation"
-            ],
-            "description": "An AI-powered web scraper that autonomously fetches and categorizes internet memes for video editing workflows. Demonstrates strong skills in Python, API integration, and handling unstructured data."
-        },
-        {
-            "id": 9,
-            "title": "Sketchfab Gallery",
-            "category": "tool",
-            "type": "image",
-            "src": "https://placehold.co/600x400/1a1a1a/ffae42?text=Sketchfab+Gallery",
-            "url": "https://billtruong003.github.io/SketchFabGallery/",
-            "tags": [
-                "REST API",
-                "Web Tool",
-                "3D Visualization"
-            ],
-            "description": "A web-based tool that dynamically fetches and displays 3D models using the Sketchfab Public API. Allows users to browse and preview low-poly assets directly in the browser."
-        },
-        {
-            "id": 10,
-            "title": "Food Ping Pong",
-            "category": "game",
-            "type": "image",
-            "src": "https://placehold.co/600x400/1a1a1a/ffae42?text=Food+Ping+Pong",
-            "url": "https://github.com/billtruong003/Food-Ping-Pong",
-            "tags": [
-                "Korea Game Jam",
-                "Casual Physics",
-                "Rapid Prototyping"
-            ],
-            "description": "A fast-paced arcade game developed during the Korea Game Jam. Features custom physics interactions and a 'Juicy' game feel. Showcases the ability to deliver polished gameplay under tight 48-hour deadlines."
-        },
-        {
-            "id": 11,
-            "title": "Scene Switcher Tool",
-            "category": "tool",
-            "type": "image",
-            "src": "https://placehold.co/600x400/1a1a1a/ffae42?text=Scene+Switcher",
-            "url": "https://github.com/billtruong003/SceneSwitcherToolUnity",
-            "tags": [
-                "Editor Extension",
-                "Workflow Optimization"
-            ],
-            "description": "A Unity Editor extension that streamlines scene management. Allows developers to switch, load, and unload scenes instantly via a custom overlay, significantly reducing friction during large-scale project development."
-        },
-        {
-            "id": 12,
-            "title": "Auto Subtitle Tool",
-            "category": "tool",
-            "type": "image",
-            "src": "https://placehold.co/600x400/1a1a1a/ffae42?text=Auto+Subtitle",
-            "url": "https://github.com/billtruong003",
-            "tags": [
-                "Python",
-                "Audio Processing",
-                "SpeechRecognition"
-            ],
-            "description": "A Python-based utility that generates subtitles for videos automatically. Utilizes the SpeechRecognition library and Pytube to process audio tracks and export SRT files, automating a tedious part of the content creation pipeline."
-        },
-        {
-            "id": 13,
-            "title": "Chatbot API Integration",
-            "category": "web",
-            "type": "image",
-            "src": "https://placehold.co/600x400/1a1a1a/ffae42?text=Chatbot+API",
-            "url": "https://github.com/billtruong003",
-            "tags": [
-                "Gemini API",
-                "JavaScript",
-                "Frontend"
-            ],
-            "description": "A lightweight web application experimenting with the Gemini API. Demonstrates the ability to connect frontend interfaces with complex backend AI services, handling asynchronous requests and JSON responses."
-        },
-        {
-            "id": 14,
-            "title": "Puffy (GMTK Game Jam)",
-            "category": "game",
-            "type": "image",
-            "src": "https://placehold.co/600x400/1a1a1a/ffae42?text=Puffy",
-            "url": "",
-            "tags": [
-                "GMTK Jam",
-                "Puzzle",
-                "Indie"
-            ],
-            "description": "A creative puzzle platformer developed for the GMTK Game Jam alongside notable community developers. Features unique 'inflation' mechanics and soft-body physics simulations."
-        },
-        {
-            "id": 15,
-            "title": "DragSlice",
-            "category": "game",
-            "type": "image",
-            "src": "https://placehold.co/600x400/1a1a1a/ffae42?text=DragSlice",
-            "url": "",
-            "tags": [
-                "Korea-Viet Contest",
-                "Mobile Input",
-                "Mechanic Design"
-            ],
-            "description": "Featured entry in the Korea and Viet Game Contest. A mobile game focused on precision touch inputs and slicing mechanics, demonstrating expertise in touch-handling algorithms and mobile UX."
-        }
-    ],
-    "testimonials": [
-        {
-            "quote": "Bill is a force of nature. His persistence and energy are unmatched; he attacks complex game development challenges with a relentlessness that inspires the whole team.",
-            "author": "Duc Anh (Sora The Dev)",
-            "role": "Indie Game Developer"
-        },
-        {
-            "quote": "A true technical virtuoso. Bill possesses that rare combination of deep programming logic and artistic intuition. He is a pro in every sense of the word.",
-            "author": "Ngoc Thuan",
-            "role": "Unity Developer @ Garena"
-        },
-        {
-            "quote": "Flawless delivery. Bill is the engineer you want when deadlines are tight. He hits every milestone with precision and reliability.",
-            "author": "Quang Ngo",
-            "role": "CTO @ GTS Group"
-        },
-        {
-            "quote": "Rapid prototyping machine. Bill absorbs requirements and outputs high-quality, focused code faster than anyone I've worked with.",
-            "author": "Nguyen Hoang Cuong",
-            "role": "Senior Developer @ FPT akaVerse"
-        }
-    ],
-    "certifications": [
-        {
-            "name": "IELTS 6.5 Certification",
-            "issuer": "British Council",
-            "date": "Issued 2022",
-            "url": ""
-        },
-        {
-            "name": "Unity Development Certification",
-            "issuer": "3DVietPro",
-            "date": "Issued 2022",
-            "url": ""
-        },
-        {
-            "name": "Python Programming Advanced",
-            "issuer": "UNICA",
-            "date": "Issued 2022",
-            "url": ""
-        }
-    ],
-    "feed": [
-        "<iframe src='https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7363939251203305474?collapsed=1' height='541' width='100%' frameborder='0' allowfullscreen title='Embedded post'></iframe>",
-        "<iframe width='100%' height='250' src='https://www.youtube.com/embed/nvj0qp_HsVs' title='Devlog #1' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
-        "<iframe src='https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7355766374926880769?collapsed=1' height='541' width='100%' frameborder='0' allowfullscreen title='Embedded post'></iframe>",
-        "<iframe width='100%' height='250' src='https://www.youtube.com/embed/pHKPqSQAeHo' title='Animator Guide' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
-        "<iframe src='https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7247097126483058688?collapsed=1' height='541' width='100%' frameborder='0' allowfullscreen title='Embedded post'></iframe>",
-        "<iframe src='https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7356107727720386560?collapsed=1' height='499' width='100%' frameborder='0' allowfullscreen title='Embedded post'></iframe>",
-        "<iframe width='100%' height='250' src='https://www.youtube.com/embed/yz146ZGkUxg' title='Unity Combo Guide' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
-        "<iframe src='https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7366030027659862017?collapsed=1' height='541' width='100%' frameborder='0' allowfullscreen title='Embedded post'></iframe>",
-        "<iframe src='https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7370150773374111744?collapsed=1' height='520' width='100%' frameborder='0' allowfullscreen title='Embedded post'></iframe>",
-        "<iframe src='https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7345141773809197058?collapsed=1' height='541' width='100%' frameborder='0' allowfullscreen title='Embedded post'></iframe>"
-    ],
-    "tech_stack": {
-        "languages": [
-            "C# (Expert)",
-            "Python",
-            "HLSL/Cg",
-            "JavaScript",
-            "Swift"
+      },
+      {
+        "role": "Unity Developer & R&D Engineer",
+        "company": "FPT IS (akaVerse)",
+        "location": "Ho Chi Minh City, Vietnam",
+        "period": "Jul 2024 - Apr 2025",
+        "desc": "Key R&D Engineer for industrial Digital Twin solutions. Promoted from Fresher to Official Engineer in 3 months with double salary due to performance.",
+        "achievements": [
+          "Presented 'Omniverse Digital Twin' solution to NVIDIA CEO Jensen Huang at AI Summit 2024.",
+          "Optimized 'Animal Push Royale' (GameVerse Finalist) achieving 300% performance boost via custom threading models.",
+          "Created 'Bill Utils', an internal automation toolset reducing 3D team setup time by 40%.",
+          "Mentored by senior experts in Model and Shader optimization, deepening Technical Art skills."
         ],
-        "frameworks": [
-            "Unity 2023",
-            "NVIDIA Omniverse",
-            "React",
-            "AR Foundation",
-            "Photon Fusion"
-        ],
-        "tools": [
-            "Shader Graph",
-            "VFX Graph",
-            "Blender",
-            "Substance Painter",
-            "Git/GitHub/GitLab",
-            "RenderDoc",
-            "Jira"
+        "tech_stack": [
+          "NVIDIA Omniverse",
+          "Python",
+          "Compute Shaders",
+          "Multithreading"
         ]
+      },
+      {
+        "role": "Game Developer (Internship)",
+        "company": "Gameloft Vietnam",
+        "location": "Ho Chi Minh City",
+        "period": "Jun 2023 - Dec 2023",
+        "desc": "Gameplay Programmer for 'Applaydu' (Millions of users). Gained critical experience in Enterprise workflows.",
+        "achievements": [
+          "Learned and applied strict Enterprise Scrum/Agile workflows and Git Flow.",
+          "Contributed to UI/Font fragmentation solutions across Android devices.",
+          "Developed mechanics for 'Treasure Toss' and 'Animalody' mini-games.",
+          "Navigated personal challenges to complete the internship, gaining valuable lessons in professional resilience and code quality."
+        ],
+        "tech_stack": ["Enterprise C#", "Scrum", "Jira", "Git Lab"]
+      },
+      {
+        "role": "Unity Developer (Freelance)",
+        "company": "Golden Sea Studio",
+        "location": "Remote",
+        "period": "Jan 2024 - Mar 2024",
+        "desc": "End-to-end developer for mobile casual titles.",
+        "achievements": [
+          "Shipped 'Merge Fruit', managing product lifecycle from prototype to release.",
+          "Refactored 'Drink Game' codebase for modularity and scalability.",
+          "Optimized mobile performance for iOS/Android."
+        ],
+        "tech_stack": ["Unity Mobile", "C#", "Game Architecture"]
+      }
+    ],
+    "teaching": [
+      {
+        "role": "Game Development Instructor & Marketing Lead",
+        "company": "FullHouseDev",
+        "location": "Remote",
+        "period": "Sep 2024 - Present",
+        "desc": "Lead Instructor for advanced game development (Shader Graph, VFX, Optimization)."
+      },
+      {
+        "role": "Computer Science Education Counselor / Team Codi Member",
+        "company": "Marathon Education (YC W22)",
+        "location": "Remote",
+        "period": "Mar 2023 - Present",
+        "desc": "Member of 'Team Codi' developing the 'Marathon Talent AR App'. Provided expert guidance to learners."
+      },
+      {
+        "role": "Information Technology Teacher",
+        "company": "DigiUni Vietnam",
+        "location": "Ho Chi Minh City",
+        "period": "Sep 2022 - Jun 2024",
+        "desc": "Promoted from TA to Lead Teacher in 2 months. Taught Python, Game Design, and Robotics."
+      }
+    ]
+  },
+  "education": [
+    {
+      "degree": "Bachelor of Software Engineering (Incomplete)",
+      "school": "FPT University",
+      "period": "2022 - 2025",
+      "desc": "Awarded 30% Talent Scholarship (Top tier of candidates). Withdrew to pursue full-time professional career due to financial priorities.",
+      "achievements": [
+        "Talent Scholarship Winner (30%).",
+        "Specialized in Python and C# application development."
+      ]
     },
-    "last_updated": "2025-12-08"
+    {
+      "degree": "High School Diploma (Honors)",
+      "school": "EMASI Van Phuc International Bilingual School",
+      "period": "2019 - 2022",
+      "desc": "Graduated with GPA 9.2/10. Strong foundation in Bilingual STEM education.",
+      "achievements": [
+        "President of Pacific House & Founder of Fitness and Healthy Club.",
+        "2 Silver Medals: Ivy Prep English Debate Championship.",
+        "1st Prize: Christmas Game Coding Competition.",
+        "School Event MC."
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "name": "Languages",
+      "level": "Expert",
+      "desc": "C# (Expert), Python, HLSL/Cg, C++, JavaScript/TypeScript."
+    },
+    {
+      "name": "Unity Engine",
+      "level": "Expert",
+      "desc": "Unity 2021/2022/6, Editor Scripting (Custom Inspectors/Windows), DOTS (ECS/Jobs/Burst), Addressables, URP/HDRP."
+    },
+    {
+      "name": "Technical Art & Graphics",
+      "level": "Expert",
+      "desc": "Shader Graph, VFX Graph, Custom HLSL Shaders, Compute Shaders, Raymarching, Post-Processing, Render Pipelines."
+    },
+    {
+      "name": "Tools & DCC",
+      "level": "Advanced",
+      "desc": "Blender (Modeling/Python API), Substance Painter, Adobe Photoshop, Figma."
+    },
+    {
+      "name": "Networking & Backend",
+      "level": "Advanced",
+      "desc": "Photon Fusion/PUN2, Firebase, REST APIs, Node.js (Basic), React (Basic)."
+    },
+    {
+      "name": "Version Control & Management",
+      "level": "Expert",
+      "desc": "Git, GitHub, GitLab, Plastic SCM, Jira, Enterprise Scrum/Agile."
+    }
+  ],
+  "portfolio": [
+    {
+      "id": 1,
+      "title": "Bill's DevSprint (SaaS)",
+      "category": "tool",
+      "type": "video",
+      "src": "/image/proj/billdevsprint.jpg",
+      "url": "https://billdevsprint.com/",
+      "tags": ["SaaS", "React", "Project Management", "Productivity"],
+      "description": "A comprehensive Project Management SaaS built for indie devs in 48 hours. Features dynamic wallpaper themes, Google Drive deep-integration, drag-and-drop asset management, and smart labeling. 'From a developer, for developers'."
+    },
+    {
+      "id": 2,
+      "title": "Responsive WebGL Template",
+      "category": "tool",
+      "type": "image",
+      "src": "https://raw.githubusercontent.com/billtruong003/Responsive-WebGL-Template/main/BillTheDevSample/Visualize/show-case.gif",
+      "url": "https://github.com/billtruong003/Responsive-WebGL-Template",
+      "tags": ["Unity WebGL", "HTML5/CSS", "Open Source", "UI/UX"],
+      "description": "The definitive open-source solution for Unity WebGL responsiveness. Solves full-window display issues on mobile/desktop. Features a custom loading bar and easy drop-in installation via .unitypackage."
+    },
+    {
+      "id": 3,
+      "title": "Bill Biome Shader",
+      "category": "shader",
+      "type": "image",
+      "src": "https://raw.githubusercontent.com/billtruong003/Bill-Biome-Shader/main/Screenshots/biome.png",
+      "url": "https://github.com/billtruong003/Bill-Biome-Shader",
+      "tags": ["HLSL", "GPU Instancing", "Compute Shaders", "Stylized"],
+      "description": "A complete stylized environment suite featuring Indirect GPU Instancing for massive density, interactive foliage that bends away from players, wind simulation, and a custom in-editor foliage painting tool."
+    },
+    {
+      "id": 4,
+      "title": "Animal Push Royale",
+      "category": "game",
+      "type": "image",
+      "src": "https://vumbnail.com/1029371396.jpg",
+      "url": "https://vnexpress.net/cong-nghe/vgv-2024/du-an/animal-push-royale-106",
+      "tags": [
+        "GameVerse Finalist",
+        "Optimization",
+        "Multiplayer",
+        "Threading"
+      ],
+      "description": "Top 6 Vietnam GameVerse 2024 Finalist. Achieved a 300% performance boost by rewriting the threading model and implementing custom vertex-displacement shaders. Features dynamic 3D UI and secure SSO."
+    },
+    {
+      "id": 5,
+      "title": "Pro Atlas Baker",
+      "category": "tool",
+      "type": "image",
+      "src": "https://github.com/user-attachments/assets/99bdea15-5126-4bf2-b537-13dc8cdcf499",
+      "url": "https://github.com/billtruong003/TextureBake",
+      "tags": ["Python", "Blender API", "Automation", "Tech Art"],
+      "description": "A professional non-destructive texture atlas baking system for Blender. Features session management, automatic UV remapping, and layout optimization to combine multiple textures into a single optimized atlas."
+    },
+    {
+      "id": 6,
+      "title": "Bill SSOutline (URP)",
+      "category": "shader",
+      "type": "image",
+      "src": "https://raw.githubusercontent.com/billtruong003/Bill-SSOutline/main/Screenshots/biome.png",
+      "url": "https://github.com/billtruong003/Bill-SSOutline",
+      "tags": ["URP", "Render Feature", "Post-Processing", "HLSL"],
+      "description": "Robust Screen-Space Outline solution for URP using Render Graph. Supports Sobel/Roberts algorithms, occlusion masking (hiding behind water/glass), and selection masks for specific object highlighting."
+    },
+    {
+      "id": 7,
+      "title": "MemeCrawler AI",
+      "category": "tool",
+      "type": "web",
+      "src": "/image/proj/memecrawler.png",
+      "url": "http://billthedevlab.store/",
+      "tags": ["Python", "AI", "Web Scraping", "Automation"],
+      "description": "An AI-powered web scraper that autonomously fetches and categorizes internet memes for content creation workflows. Hosted live with source code available on GitHub."
+    },
+    {
+      "id": 8,
+      "title": "Sketchfab Gallery",
+      "category": "web",
+      "type": "web",
+      "src": "/image/proj/sketchfabgallery.png",
+      "url": "https://billtruong003.github.io/SketchFabGallery/",
+      "tags": ["REST API", "3D Web", "JavaScript"],
+      "description": "A web gallery integrating the Sketchfab API to fetch and display 3D models dynamically. allows users to search and preview assets directly in the browser."
+    },
+    {
+      "id": 9,
+      "title": "Food Ping Pong (DragSlice)",
+      "category": "game",
+      "type": "image",
+      "src": "https://raw.githubusercontent.com/billtruong003/Food-Ping-Pong/main/Assets/Scenes/Resources/IconGame/project.png",
+      "url": "https://billtruong003.itch.io/dragslice-culinary-journey",
+      "tags": ["Game Jam", "Mobile Input", "Physics", "Casual"],
+      "description": "A fast-paced arcade game developed for the Korea-Vietnam Game Contest. Features 'juicy' slicing mechanics, precision touch input handling, and polished physics interactions."
+    },
+    {
+      "id": 10,
+      "title": "Scene Switcher Tool",
+      "category": "tool",
+      "type": "image",
+      "src": "https://raw.githubusercontent.com/billtruong003/SceneSwitcherToolUnity/main/Editor/Resources/Image/UIPick.png",
+      "url": "https://github.com/billtruong003/SceneSwitcherToolUnity",
+      "tags": ["Editor Extension", "Productivity", "Unity Tool"],
+      "description": "A Unity Editor extension that streamlines scene management. Allows developers to switch, load, and unload scenes instantly via a visual overlay, reducing friction in large projects."
+    },
+    {
+      "id": 11,
+      "title": "Video to Subtitle Converter",
+      "category": "tool",
+      "type": "image",
+      "src": "https://media.licdn.com/dms/image/v2/D5622AQEYGOalzvPMVw/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1719090696657?e=1767225600&v=beta&t=GxctSs-7gjnqytuBEIg3VbPk1ijFfEg3GFzBzIa1oPE",
+      "url": "https://github.com/billtruong003/video-to-subtitle-converter",
+      "tags": ["Python", "Flask", "Whisper AI", "FFmpeg"],
+      "description": "Automated pipeline extracting audio from video, transcribing via OpenAI Whisper, and burning subtitles using FFmpeg. Built with a Flask web interface for easy usage."
+    },
+    {
+      "id": 12,
+      "title": "Chatbot Gemini API",
+      "category": "web",
+      "type": "image",
+      "src": "https://raw.githubusercontent.com/billtruong003/ChatBotGeminiAPIs/main/billGemini.png",
+      "url": "https://github.com/billtruong003/ChatBotGeminiAPIs",
+      "tags": ["Gemini API", "Generative AI", "Markdown", "Audio Processing"],
+      "description": "A rich chat application leveraging Google's Gemini API. Supports text messaging, markdown rendering, file uploads, and direct browser audio recording."
+    },
+    {
+      "id": 13,
+      "title": "Puffy (GMTK Jam 2024)",
+      "category": "game",
+      "type": "image",
+      "src": "https://img.itch.zone/aW1hZ2UvMjkxNDU2Ni8xNzQ3MzE3MS5naWY=/347x500/VMCmnV.gif",
+      "url": "https://soratheweeb.itch.io/puffy-gmtk-jam-2024",
+      "tags": ["GMTK Jam", "Puzzle Platformer", "Soft Body", "Indie"],
+      "description": "A creative puzzle platformer developed for GMTK Game Jam 2024. Features unique size-changing mechanics ('Scale' theme) and soft-body physics interactions."
+    }
+  ],
+  "testimonials": [
+    {
+      "quote": "Bill is a force of nature. His persistence and energy are unmatched; he attacks complex game development challenges with a relentlessness that inspires the whole team.",
+      "author": "Duc Anh (Sora The Dev)",
+      "role": "Indie Game Developer"
+    },
+    {
+      "quote": "A true technical virtuoso. Bill possesses that rare combination of deep programming logic and artistic intuition. He is a pro in every sense of the word.",
+      "author": "Ngoc Thuan",
+      "role": "Unity Developer @ Garena"
+    },
+    {
+      "quote": "Flawless delivery. Bill is the engineer you want when deadlines are tight. He hits every milestone with precision and reliability.",
+      "author": "Quang Ngo",
+      "role": "CTO @ GTS Group"
+    },
+    {
+      "quote": "Rapid prototyping machine. Bill absorbs requirements and outputs high-quality, focused code faster than anyone I've worked with.",
+      "author": "Nguyen Hoang Cuong",
+      "role": "Senior Developer @ FPT akaVerse"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "IELTS 6.5",
+      "issuer": "IDP Education",
+      "date": "Issued 2022",
+      "url": ""
+    },
+    {
+      "name": "Complete C# Unity Game Developer 2D",
+      "issuer": "Udemy (GameDev.tv)",
+      "date": "Issued Sep 2024",
+      "url": "https://www.udemy.com/certificate/UC-9f38c499-7dfd-4a6c-97fc-71c5bcde7920/"
+    },
+    {
+      "name": "Figma for Marketing Design",
+      "issuer": "Udemy",
+      "date": "Issued Sep 2024",
+      "url": ""
+    }
+  ],
+  "tech_stack": {
+    "languages": ["C# (Expert)", "Python", "HLSL/Cg", "JavaScript", "C++"],
+    "frameworks": [
+      "Unity 2023",
+      "DOTS (ECS)",
+      "NVIDIA Omniverse",
+      "React",
+      "Photon Fusion"
+    ],
+    "tools": [
+      "Shader Graph",
+      "VFX Graph",
+      "Blender",
+      "Substance Painter",
+      "RenderDoc",
+      "Git/GitLab"
+    ]
+  },
+  "last_updated": "2025-12-14"
 }

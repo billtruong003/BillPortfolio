@@ -20,7 +20,7 @@ export interface Project {
     id: number;
     title: string;
     category: string;
-    type: 'image' | 'video';
+    type: 'image' | 'video' | 'web'; 
     src: string;
     url: string;
     tags: string[];
