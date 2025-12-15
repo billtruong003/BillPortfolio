@@ -4,7 +4,7 @@ import { useStore } from '@/hooks/useStore';
 import { resumeData } from '@/data/resume';
 import { PlayCircle } from 'lucide-react';
 import Image from 'next/image';
-import { getYoutubeThumbnail, getAssetPath } from '@/lib/utils'; // Import helper
+import { getYoutubeThumbnail, getAssetPath } from '@/lib/utils';
 
 export const Portfolio = () => {
     const { activeFilter, setFilter, openModal } = useStore();
@@ -45,7 +45,6 @@ export const Portfolio = () => {
             <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <AnimatePresence>
                     {projects.map((project) => {
-                        // FIX: Xử lý đường dẫn ảnh nội bộ vs ảnh thumbnail video
                         const imageSrc = project.type === 'video' 
                             ? getYoutubeThumbnail(project.src) 
                             : getAssetPath(project.src);

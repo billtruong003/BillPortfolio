@@ -1,12 +1,10 @@
 /** @type {import('next').NextConfig} */
 
 const REPO_NAME = "BillPortfolio";
-const isProd = process.env.NODE_ENV === "production";
-const basePath = isProd ? `/${REPO_NAME}` : "";
+const basePath = process.env.NODE_ENV === "production" ? `/${REPO_NAME}` : "";
 
 const nextConfig = {
   output: "export",
-  basePath: basePath,
   images: {
     unoptimized: true,
     remotePatterns: [
@@ -28,19 +26,6 @@ const nextConfig = {
   },
   env: {
     NEXT_PUBLIC_BASE_PATH: basePath,
-  },
-  async headers() {
-    return [
-      {
-        source: "/:path*",
-        headers: [
-          {
-            key: "Content-Security-Policy",
-            value: "frame-src 'self' *;",
-          },
-        ],
-      },
-    ];
   },
   webpack: (config) => {
     config.externals = [...(config.externals || []), { canvas: "canvas" }];

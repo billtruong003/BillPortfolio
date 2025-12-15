@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/Badge';
 import Image from 'next/image';
 import { Project } from '@/types';
 import { useState, useEffect, useCallback } from 'react';
-import { getAssetPath } from '@/lib/utils'; // Import Helper
+import { getAssetPath } from '@/lib/utils';
 
 const GalleryContent = ({ project, closeModal }: { project: Project; closeModal: () => void }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -69,12 +69,10 @@ const GalleryContent = ({ project, closeModal }: { project: Project; closeModal:
                         <iframe
                             src={currentSlide.src}
                             className="w-full h-full pointer-events-auto bg-white"
-                            // FIX: Thêm sandbox attributes chặt chẽ hơn để tránh warning
                             sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                             loading="lazy"
                         />
                     ) : (
-                        // FIX: Wrap getAssetPath vào src
                         <Image 
                             src={getAssetPath(currentSlide.src)} 
                             alt="" 

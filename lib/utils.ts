@@ -5,15 +5,16 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function getAssetPath(path: string) {
+export function getAssetPath(src: string) {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
-  
-  if (path.startsWith("http") || path.startsWith("data:") || path.startsWith("blob:")) {
-      return path;
+
+  if (!src) return "";
+  if (src.startsWith("http") || src.startsWith("data:") || src.startsWith("blob:")) {
+      return src;
   }
 
-  const cleanPath = path.startsWith('/') ? path : `/${path}`;
-  return `${basePath}${cleanPath}`;
+  const normalizedSrc = src.startsWith('/') ? src : `/${src}`;
+  return `${basePath}${normalizedSrc}`;
 }
 
 export const getYoutubeThumbnail = (url: string) => {
