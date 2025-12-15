@@ -10,13 +10,18 @@ import { getAssetPath } from '@/lib/utils';
 
 const GalleryContent = ({ project, closeModal }: { project: Project; closeModal: () => void }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    // Nếu gallery không có, dùng src chính của project làm slide đầu tiên
     const slides = project.gallery ?? [{ type: project.type, src: project.src }];
     const currentSlide = slides[currentIndex];
 
-    // Helper kiểm tra file ảnh
-    const isImageFile = (src: string) => /\.(jpg|jpeg|png|gif|webp)$/i.test(src);
+    // Helper: Kiểm tra xem chuỗi có phải là file ảnh không
+    const isImageFile = (src: string) => {
+        // Kiểm tra đuôi file hoặc nếu là đường dẫn nội bộ bắt đầu bằng /
+        return /\.(jpg|jpeg|png|gif|webp)$/i.test(src) || src.startsWith('/');
+    };
 
     const getEmbedUrl = (url: string) => {
+        if (!url) return "";
         if (url.includes('vimeo.com')) {
             const id = url.split('/').pop();
             return `https://player.vimeo.com/video/${id}?autoplay=1&loop=1&muted=1`;
@@ -50,15 +55,31 @@ const GalleryContent = ({ project, closeModal }: { project: Project; closeModal:
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [closeModal, nextSlide, prevSlide, slides.length]);
 
-    // Logic Render nội dung:
-    // 1. Nếu type là video VÀ src là link online -> Iframe
-    // 2. Nếu type là web -> Iframe Web
-    // 3. Còn lại (Ảnh, hoặc Video type nhưng src là ảnh local) -> Render Image Component
+    // --- LOGIC RENDER QUAN TRỌNG ĐÃ SỬA ---
     const renderContent = () => {
-        if (currentSlide.type === 'video' && !isImageFile(currentSlide.src) && currentSlide.src.startsWith('http')) {
+        const src = currentSlide.src;
+        const type = currentSlide.type;
+
+        // ƯU TIÊN 1: Nếu là file ảnh (dù type trong JSON khai báo là web hay video)
+        // thì bắt buộc render bằng thẻ Image và dùng getAssetPath để fix lỗi 404
+        if (isImageFile(src)) {
+            return (
+                <Image 
+                    src={getAssetPath(src)} 
+                    alt="" 
+                    fill 
+                    className="object-contain" 
+                    priority 
+                    unoptimized // Thêm unoptimized để chắc chắn hiện ảnh trên Github Pages
+                />
+            );
+        }
+
+        // ƯU TIÊN 2: Nếu là Video Embed (Youtube/Vimeo)
+        if (type === 'video' && src.startsWith('http')) {
             return (
                 <iframe
-                    src={getEmbedUrl(currentSlide.src)}
+                    src={getEmbedUrl(src)}
                     className="w-full h-full pointer-events-auto"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
@@ -66,10 +87,11 @@ const GalleryContent = ({ project, closeModal }: { project: Project; closeModal:
             );
         }
 
-        if (currentSlide.type === 'web') {
+        // ƯU TIÊN 3: Nếu là Website (chỉ khi src là link http thực sự, không phải đường dẫn file)
+        if (type === 'web' && src.startsWith('http')) {
             return (
                 <iframe
-                    src={currentSlide.src}
+                    src={src}
                     className="w-full h-full pointer-events-auto bg-white"
                     sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                     loading="lazy"
@@ -77,20 +99,21 @@ const GalleryContent = ({ project, closeModal }: { project: Project; closeModal:
             );
         }
 
-        // Fallback về Image cho mọi trường hợp còn lại (bao gồm local image được gắn mác video)
+        // Fallback cuối cùng: Render Image
         return (
             <Image 
-                src={getAssetPath(currentSlide.src)} 
+                src={getAssetPath(src)} 
                 alt="" 
                 fill 
                 className="object-contain" 
                 priority 
+                unoptimized
             />
         );
     };
 
     return (
-        <div className="w-full lg:w-[65%] bg-black relative aspect-video lg:aspect-auto group overflow-hidden">
+        <div className="w-full lg:w-[65%] bg-black relative aspect-video lg:aspect-auto group overflow-hidden bg-zinc-950 flex items-center justify-center">
             <AnimatePresence mode="wait">
                 <motion.div
                     key={currentIndex}
@@ -98,7 +121,7 @@ const GalleryContent = ({ project, closeModal }: { project: Project; closeModal:
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.4 }}
-                    className="absolute inset-0 flex items-center justify-center bg-zinc-950"
+                    className="absolute inset-0 flex items-center justify-center w-full h-full"
                 >
                     {renderContent()}
                 </motion.div>
