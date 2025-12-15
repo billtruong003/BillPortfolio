@@ -12,6 +12,7 @@ import {
 } from '@react-three/drei';
 import { Suspense, useRef, useMemo, useEffect, useState } from 'react';
 import * as THREE from 'three';
+import { getAssetPath } from '@/lib/utils';
 
 const HologramShaderMaterial = shaderMaterial(
     {
@@ -74,14 +75,15 @@ declare global {
     }
 }
 
-const MODEL_PATH = '/models/hero-model.glb';
+// FIX: Sử dụng hàm getAssetPath để lấy đúng đường dẫn trên Github Pages
+const MODEL_PATH = 'models/hero-model.glb';
 
 const HologramModel = () => {
     const materialRef = useRef<THREE.ShaderMaterial>(null);
     const [useFallback, setUseFallback] = useState(false);
     
-    // Lazy loading model
-    const gltf = useGLTF(MODEL_PATH, true) as any;
+    // FIX: Prepend basePath
+    const gltf = useGLTF(getAssetPath(MODEL_PATH), true) as any;
 
     useFrame((state) => {
         if (materialRef.current) {
@@ -95,7 +97,6 @@ const HologramModel = () => {
 
     const scene = useMemo(() => gltf.scene.clone(), [gltf.scene]);
 
-    // Optimize: Dispose old materials properly
     useEffect(() => {
         scene.traverse((child: any) => {
             if (child.isMesh) {
@@ -192,7 +193,6 @@ export const Hero3D = () => {
                     <HologramModel />
                 </Suspense>
 
-                {/* OPTIMIZATION: frames={1} chỉ render bóng 1 lần rồi tĩnh */}
                 <ContactShadows 
                     position={[0, -1.6, 0]} 
                     opacity={0.4} 

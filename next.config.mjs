@@ -1,6 +1,12 @@
 /** @type {import('next').NextConfig} */
+
+const REPO_NAME = "BillPortfolio";
+const isProd = process.env.NODE_ENV === "production";
+
 const nextConfig = {
   output: "export",
+  basePath: isProd ? `/${REPO_NAME}` : "",
+  assetPrefix: isProd ? `/${REPO_NAME}/` : "",
   images: {
     unoptimized: true,
     remotePatterns: [
@@ -27,8 +33,7 @@ const nextConfig = {
         headers: [
           {
             key: "Content-Security-Policy",
-            value:
-              "frame-src 'self' *.youtube.com *.linkedin.com *.google.com *.vimeo.com https://ghbtns.com;",
+            value: "frame-src 'self' *;",
           },
         ],
       },

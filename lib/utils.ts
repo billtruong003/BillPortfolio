@@ -1,8 +1,22 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+// Cần khớp với REPO_NAME trong next.config.mjs
+const REPO_NAME = "BillPortfolio";
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
+}
+
+export function getAssetPath(path: string) {
+  const isProd = process.env.NODE_ENV === 'production';
+  // Xóa dấu / ở đầu nếu có để tránh double slash khi nối chuỗi
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  
+  if (isProd) {
+    return `/${REPO_NAME}/${cleanPath}`;
+  }
+  return `/${cleanPath}`;
 }
 
 export const getYoutubeThumbnail = (url: string) => {
