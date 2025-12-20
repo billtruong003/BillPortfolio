@@ -6,6 +6,8 @@ import { Experience } from '@/components/sections/Experience';
 import { Testimonials } from '@/components/sections/Testimonials';
 import { Certifications } from '@/components/sections/Certifications';
 import { Feed } from '@/components/sections/Feed';
+import { TrustedBy } from '@/components/sections/TrustedBy';
+import { BigProductions } from '@/components/sections/BigProductions';
 import { ProjectModal } from '@/components/overlay/ProjectModal';
 
 const ParticleBackground = dynamic(() => import('@/components/canvas/ParticleBackground').then(mod => mod.ParticleBackground), {
@@ -23,10 +25,16 @@ export default function Home() {
 
       <div className="relative z-10">
         <Hero />
-        <Certifications /> {/* Đưa lên gần đầu để tăng uy tín */}
+        
+        <div className="flex flex-col">
+            <TrustedBy />
+            <BigProductions />
+        </div>
+        
+        <Certifications />
         <Portfolio />
-        <Experience /> {/* Đã bao gồm cả Teaching */}
-        <Testimonials /> {/* Đã thêm References */}
+        <Experience />
+        <Testimonials />
         <Feed />
       </div>
       

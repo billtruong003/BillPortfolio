@@ -1,16 +1,129 @@
 {
   "profile": {
-    "name": "Bill The Dev",
+    "name": "Bill Truong",
     "title": "Senior Unity Engineer & Technical Artist",
-    "quote": "Optimization is not just a phase; it is the architecture of immersion.",
+    "quote": "Optimization is the foundation of immersive experiences.",
     "quoteAuthor": "Bill Truong",
-    "about": "A resilient Senior Unity Specialist and Technical Artist who turned financial challenges into a catalyst for professional excellence. Starting with a 30% Talent Scholarship at FPT University, I pivoted to full-time industry development to support my career, rapidly evolving from a junior developer to a Senior Technical Artist. Currently driving core development for 'Shmackle' (Live on Meta Quest 2/3/3s), I bridge the gap between deep C# architecture and high-fidelity technical art. My journey includes shipping titles at Golden Sea, gaining Enterprise Scrum experience at Gameloft, and pioneering Digital Twins at FPT akaVerse. I specialize in building tools that accelerate production and optimizing complex rendering pipelines for VR/Mobile.",
+    "about": "I'm a hands-on developer specializing in Unity optimization, shaders, and VR tools. Starting from junior roles, I've advanced to senior positions on projects like Shmackle, where I fix complex codebases, build efficient pipelines, and create features that drive user growth. My background has shaped a practical approach, allowing me to adapt fast and deliver in high-pressure environments. Though financial challenges led me to leave FPT University after earning a 30% Talent Scholarship, I've built my expertise through real-world projects and self-driven learning.",
     "location": "Ho Chi Minh City, Vietnam (Open to Remote/Relocation)",
     "contact": {
       "email": "truongbill003@gmail.com",
       "phone": "+84 37 497 6616"
     }
   },
+  "companies": [
+    {
+      "name": "GAMELOFT",
+      "logo": "/image/logos/gameloft.png",
+      "url": "https://www.gameloft.com/",
+      "role": "Gameplay Programmer",
+      "story": "Gameloft was where I built my technical foundation. Working on Applaydu, an app with millions of users, I learned to manage technical debt and apply clean code practices under tight deadlines. My mentor pushed me hard, which helped me develop the discipline to handle large-scale projects. I included a photo of my desk because it reminds me of that focused environment.",
+      "modal_img": "/image/life/gameloftdesk.jpg",
+      "gallery": [
+        { "type": "image", "src": "/image/life/gameloftscreen.jpg" },
+        { "type": "image", "src": "/image/life/gameloftdesk.jpg" }
+      ]
+    },
+    {
+      "name": "FPT IS (akaVerse)",
+      "logo": "/image/logos/FPTIS.webp",
+      "url": "https://fptsoftware.com/",
+      "role": "Software Engineer",
+      "story": "At akaVerse, I had the freedom to explore advanced ideas, from shaders to Omniverse integration. I developed an automation tool that streamlined heritage digitization, turning weeks of work into a single-click process and helping meet project deadlines. I presented to NVIDIA's CEO and collaborated on high-profile partnerships. Though I enjoyed the supportive team, I moved on when the focus shifted to industrial 3D outsourcing, as I wanted to stay in game development.",
+      "modal_img": "/image/life/akvdesk.jpg",
+      "gallery": [
+        { "type": "video", "src": "/image/life/akvgametest.mp4" },
+        { "type": "image", "src": "/image/life/akvdesk.jpg" },
+        { "type": "image", "src": "/image/life/fptevent.jpg" }
+      ]
+    },
+    {
+      "name": "CURLY BLUE",
+      "logo": "/image/logos/curlyblue.png",
+      "url": "https://curlyblue.io/",
+      "role": "Unity Developer & Technical Artist",
+      "story": "Shmackle was my most demanding project, with a complex codebase and heavy workload. I transitioned to technical artist after showing strong visual skills, writing 80% of the shaders. Key updates like the Shooting Range drove significant user growth. The team photo captures us working through a power outage, reflecting our commitment.",
+      "modal_img": "/image/life/cutoffmoment.jpg"
+    },
+    {
+      "name": "GOLDEN SEA STUDIO",
+      "logo": "/image/logos/goldensea.png",
+      "url": "https://goldenseastudio.com/",
+      "role": "Unity Developer",
+      "story": "This startup was my entry into professional development. We had differences on workflows, but I remained loyal and gave my full effort to help the studio succeed. It was a valuable starting point when I had limited experience.",
+      "modal_img": "/image/logos/goldensea.png"
+    },
+    {
+      "name": "MARATHON EDU",
+      "logo": "/image/logos/marathonedu.png",
+      "url": "https://marathon.edu.vn/",
+      "role": "Teacher",
+      "story": "In this freelance role, I taught while gaining exposure to a large EdTech company's infrastructure and operations.",
+      "modal_img": "/image/logos/marathonedu.png"
+    }
+  ],
+  "productions": [
+    {
+      "name": "SHMACKLE VR",
+      "logo": "https://i.ytimg.com/vi/VX84U8ii9qs/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLA1G5EckSJVb1e_IDbh9WaCL1nRGQ",
+      "url": "https://www.meta.com/experiences/shmackle-christmas/8557045787751880/",
+      "at_company": "Curly Blue",
+      "role": "Unity Developer & Tech Artist",
+      "desc": "VR Social Sandbox Game",
+      "story": "I handled networking for multi-user sessions and optimized for Quest standalone to maintain 72 FPS. The Shooting Range update, which I led, significantly increased player engagement.",
+      "modal_img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTxPGCqzf3NVcboPoaTrBGvtTBbuDu2Kj9DA&s"
+    },
+    {
+      "name": "ANIMAL PUSH ROYALE",
+      "logo": "https://vumbnail.com/1029371396.jpg",
+      "url": "https://vnexpress.net/cong-nghe/vgv-2024/du-an/animal-push-royale-106",
+      "at_company": "FPT akaVerse",
+      "role": "Core Developer",
+      "desc": "GameVerse 2024 Finalist",
+      "story": "As a top finalist in Vietnam GameVerse, I boosted performance by 300% through rewritten threading and custom shaders for mobile crowds.",
+      "modal_img": "https://vumbnail.com/1029371396.jpg"
+    },
+    {
+      "name": "BILL BIOME SHADER",
+      "logo": "https://raw.githubusercontent.com/billtruong003/Bill-Biome-Shader/main/Screenshots/biome.png",
+      "url": "https://github.com/billtruong003/Bill-Biome-Shader",
+      "at_company": "Personal R&D",
+      "role": "Technical Artist",
+      "desc": "Stylized Environment Suite",
+      "story": "This suite uses GPU instancing for dense environments, with interactive foliage and an in-editor painting tool.",
+      "modal_img": "https://raw.githubusercontent.com/billtruong003/Bill-Biome-Shader/main/Screenshots/biome.png"
+    },
+    {
+      "name": "BILL SSOUTLINE",
+      "logo": "https://raw.githubusercontent.com/billtruong003/Bill-SSOutline/main/Screenshots/biome.png",
+      "url": "https://github.com/billtruong003/Bill-SSOutline",
+      "at_company": "Personal R&D",
+      "role": "Graphics Engineer",
+      "desc": "URP Render Feature",
+      "story": "A screen-space outline solution using Render Graph, addressing occlusion issues with Sobel algorithms.",
+      "modal_img": "https://raw.githubusercontent.com/billtruong003/Bill-SSOutline/main/Screenshots/biome.png"
+    },
+    {
+      "name": "AKAVERSE TWIN",
+      "logo": "https://i.ytimg.com/vi/GHXS7tw5rLM/maxresdefault.jpg",
+      "url": "https://akaverse.net/",
+      "at_company": "FPT Software",
+      "role": "R&D Engineer",
+      "desc": "Industrial Digital Twin",
+      "story": "My automation tools optimized rendering for large CAD models in WebGL, reducing setup time dramatically.",
+      "modal_img": "/image/life/nvdiasummit.jpg"
+    },
+    {
+      "name": "APPLAYDU",
+      "logo": "https://www.globalbrandsmagazine.com/wp-content/uploads/2024/11/Applaydu.webp",
+      "url": "https://play.google.com/store/apps/details?id=com.ferrero.applayduGP&pcampaignid=web_share",
+      "at_company": "Gameloft",
+      "role": "Gameplay Dev",
+      "desc": "Edutainment App (50M+ DLs)",
+      "story": "I contributed to core mechanics like Treasure Toss, adapting to enterprise workflows and high standards.",
+      "modal_img": "https://i.ytimg.com/vi/XpQTVjcG3_E/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCl_Kby2umSCIYpumRRjzd7rsayWA"
+    }
+  ],
   "socials": [
     {
       "platform": "github",
@@ -41,21 +154,35 @@
       "priority": "sm"
     }
   ],
-  "feed": [],
+  "feed": [
+    "<iframe src=\"https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fbillthedev%2Fposts%2Fpfbid02kw7k8P36QMnUHbGzwzpzMhJBK3EaWQscPVHrtWyMScDWDw9PDVN8ituzDL4cyyAwl&show_text=true&width=500\" width=\"100%\" height=\"600\" style=\"border:none;overflow:hidden\" scrolling=\"no\" frameborder=\"0\" allowfullscreen=\"true\" allow=\"autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share\"></iframe>",
+    "<iframe src=\"https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fbillthedev%2Fposts%2Fpfbid06fkUEzDHWRpZpsXRZTsio8bmEDeYnPoCddGDed7dbBqcCdRE5FppeGwkAHkkoGNfl&show_text=true&width=500\" width=\"100%\" height=\"650\" style=\"border:none;overflow:hidden\" scrolling=\"no\" frameborder=\"0\" allowfullscreen=\"true\" allow=\"autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share\"></iframe>",
+    "<iframe src=\"https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fbillthedev%2Fposts%2Fpfbid025fRxMYHUL3w12mLrCJt2phQJaH5t9hR6n4VAqDe7qePdyNUZrNWWibwAveAgTWNYl&show_text=true&width=500\" width=\"100%\" height=\"550\" style=\"border:none;overflow:hidden\" scrolling=\"no\" frameborder=\"0\" allowfullscreen=\"true\" allow=\"autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share\"></iframe>",
+    "<iframe src='https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7363939251203305474?collapsed=1' height='541' width='100%' frameborder='0' allowfullscreen title='Embedded post'></iframe>",
+    "<iframe src='https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7355766374926880769?collapsed=1' height='541' width='100%' frameborder='0' allowfullscreen title='Embedded post'></iframe>",
+    "<iframe width='100%' height='250' src='https://www.youtube.com/embed/nvj0qp_HsVs' title='Devlog #1' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
+    "<iframe width='100%' height='250' src='https://www.youtube.com/embed/pHKPqSQAeHo' title='Animator Guide' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
+    "<iframe src='https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7247097126483058688?collapsed=1' height='541' width='100%' frameborder='0' allowfullscreen title='Embedded post'></iframe>",
+    "<iframe src='https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7356107727720386560?collapsed=1' height='499' width='100%' frameborder='0' allowfullscreen title='Embedded post'></iframe>",
+    "<iframe width='100%' height='250' src='https://www.youtube.com/embed/yz146ZGkUxg' title='Unity Combo Guide' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>",
+    "<iframe src='https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7366030027659862017?collapsed=1' height='541' width='100%' frameborder='0' allowfullscreen title='Embedded post'></iframe>",
+    "<iframe src='https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7370150773374111744?collapsed=1' height='520' width='100%' frameborder='0' allowfullscreen title='Embedded post'></iframe>",
+    "<iframe src='https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7345141773809197058?collapsed=1' height='541' width='100%' frameborder='0' allowfullscreen title='Embedded post'></iframe>"
+  ],
   "experience": {
     "dev": [
       {
-        "role": "Senior Unity Developer / Technical Artist",
+        "role": "Unity Developer & Technical Artist",
         "company": "CurlyBlue (Shmackle VR)",
         "location": "Remote",
         "period": "Apr 2025 - Present",
-        "desc": "Lead Developer and Technical Artist for 'Shmackle', a live service VR title on Meta Quest. transitioned from Developer to Technical Lead due to ability to handle complex shader and visual tasks.",
+        "desc": "Working as Unity Developer and got promote to technical art for Shmackle. I manage shaders, code optimization, and VR features.",
         "achievements": [
-          "Architected the 'Shmackle Pad™' ecosystem: A complex in-game tablet handling social networking, transactions, and inventory.",
-          "Engineered a production-grade HLSL Shader Library: 'Ghost Shader', 'Xray Shader', and 'Fake Liquid' for optimized Quest rendering.",
-          "Implemented 'Swap Texture Effects' for zero-latency scene transitions.",
-          "Optimized the rendering pipeline using 'Additive Glass Optimization', maintaining 72+ FPS.",
-          "Solved VR motion sickness with dynamic field-of-view tunneling."
+          "Led Shooting Range update, boosting user numbers.",
+          "Built Shmackle Pad ecosystem for social and inventory.",
+          "Created custom shaders: Ghost, Xray, Fake Liquid.",
+          "Optimized for 72+ FPS on Quest with additive techniques.",
+          "Implemented dynamic FOV to reduce motion sickness."
         ],
         "tech_stack": [
           "Unity 2022 LTS",
@@ -63,7 +190,7 @@
           "Shader Graph",
           "Meta Quest SDK",
           "Photon Fusion",
-          "Technical Art"
+          "Tech Art"
         ]
       },
       {
@@ -71,12 +198,12 @@
         "company": "FPT IS (akaVerse)",
         "location": "Ho Chi Minh City, Vietnam",
         "period": "Jul 2024 - Apr 2025",
-        "desc": "Key R&D Engineer for industrial Digital Twin solutions. Promoted from Fresher to Official Engineer in 3 months with double salary due to performance.",
+        "desc": "Explored new technologies in a collaborative setting.",
         "achievements": [
-          "Presented 'Omniverse Digital Twin' solution to NVIDIA CEO Jensen Huang at AI Summit 2024.",
-          "Optimized 'Animal Push Royale' (GameVerse Finalist) achieving 300% performance boost via custom threading models.",
-          "Created 'Bill Utils', an internal automation toolset reducing 3D team setup time by 40%.",
-          "Mentored by senior experts in Model and Shader optimization, deepening Technical Art skills."
+          "Developed Bill Utils tool, cutting 3D setup from weeks to one click.",
+          "Optimized Animal Push Royale with 300% performance gain.",
+          "Presented Omniverse solutions to NVIDIA CEO.",
+          "Departed as focus moved to industrial projects."
         ],
         "tech_stack": [
           "NVIDIA Omniverse",
@@ -90,12 +217,12 @@
         "company": "Gameloft Vietnam",
         "location": "Ho Chi Minh City",
         "period": "Jun 2023 - Dec 2023",
-        "desc": "Gameplay Programmer for 'Applaydu' (Millions of users). Gained critical experience in Enterprise workflows.",
+        "desc": "Gained experience in enterprise-level development.",
         "achievements": [
-          "Learned and applied strict Enterprise Scrum/Agile workflows and Git Flow.",
-          "Contributed to UI/Font fragmentation solutions across Android devices.",
-          "Developed mechanics for 'Treasure Toss' and 'Animalody' mini-games.",
-          "Navigated personal challenges to complete the internship, gaining valuable lessons in professional resilience and code quality."
+          "Adapted to Scrum and Agile processes.",
+          "Fixed UI issues on Android.",
+          "Developed features for Treasure Toss and Animalody.",
+          "Mastered clean code and debt management."
         ],
         "tech_stack": ["Enterprise C#", "Scrum", "Jira", "Git Lab"]
       },
@@ -104,11 +231,11 @@
         "company": "Golden Sea Studio",
         "location": "Remote",
         "period": "Jan 2024 - Mar 2024",
-        "desc": "End-to-end developer for mobile casual titles.",
+        "desc": "Supported startup projects with efficient development.",
         "achievements": [
-          "Shipped 'Merge Fruit', managing product lifecycle from prototype to release.",
-          "Refactored 'Drink Game' codebase for modularity and scalability.",
-          "Optimized mobile performance for iOS/Android."
+          "Released Merge Fruit from prototype.",
+          "Refactored Drink Game for better scalability.",
+          "Improved mobile performance."
         ],
         "tech_stack": ["Unity Mobile", "C#", "Game Architecture"]
       }
@@ -119,21 +246,21 @@
         "company": "FullHouseDev",
         "location": "Remote",
         "period": "Sep 2024 - Present",
-        "desc": "Lead Instructor for advanced game development (Shader Graph, VFX, Optimization)."
+        "desc": "Teaching Unity."
       },
       {
-        "role": "Computer Science Education Counselor / Team Codi Member",
-        "company": "Marathon Education (YC W22)",
+        "role": "Computer Science Education Counselor",
+        "company": "Marathon Education",
         "location": "Remote",
         "period": "Mar 2023 - Present",
-        "desc": "Member of 'Team Codi' developing the 'Marathon Talent AR App'. Provided expert guidance to learners."
+        "desc": "Contributed to AR app development and learned about EdTech systems."
       },
       {
         "role": "Information Technology Teacher",
         "company": "DigiUni Vietnam",
         "location": "Ho Chi Minh City",
         "period": "Sep 2022 - Jun 2024",
-        "desc": "Promoted from TA to Lead Teacher in 2 months. Taught Python, Game Design, and Robotics."
+        "desc": "Instructed in Python, game design, and robotics."
       }
     ]
   },
@@ -142,22 +269,21 @@
       "degree": "Bachelor of Software Engineering (Incomplete)",
       "school": "FPT University",
       "period": "2022 - 2025",
-      "desc": "Awarded 30% Talent Scholarship (Top tier of candidates). Withdrew to pursue full-time professional career due to financial priorities.",
+      "desc": "Financial constraints led me to prioritize full-time work over completing my degree.",
       "achievements": [
-        "Talent Scholarship Winner (30%).",
-        "Specialized in Python and C# application development."
+        "Earned 30% Talent Scholarship.",
+        "Focused on practical skills from day one."
       ]
     },
     {
       "degree": "High School Diploma (Honors)",
       "school": "EMASI Van Phuc International Bilingual School",
       "period": "2019 - 2022",
-      "desc": "Graduated with GPA 9.2/10. Strong foundation in Bilingual STEM education.",
+      "desc": "Graduated with GPA 9.2/10.",
       "achievements": [
-        "President of Pacific House & Founder of Fitness and Healthy Club.",
-        "2 Silver Medals: Ivy Prep English Debate Championship.",
-        "1st Prize: Christmas Game Coding Competition.",
-        "School Event MC."
+        "President of Pacific House.",
+        "Two Silver Medals in Ivy Prep English Debate.",
+        "First Prize in Christmas Game Coding Competition."
       ]
     }
   ],
@@ -165,32 +291,47 @@
     {
       "name": "Languages",
       "level": "Expert",
-      "desc": "C# (Expert), Python, HLSL/Cg, C++, JavaScript/TypeScript."
+      "desc": "C# (Expert), Python (Advanced), HLSL/Cg (Advanced), C++ (Knowledge), JavaScript (Familiar), C (Familiar), Swift (Familiar)."
     },
     {
       "name": "Unity Engine",
       "level": "Expert",
-      "desc": "Unity 2021/2022/6, Editor Scripting (Custom Inspectors/Windows), DOTS (ECS/Jobs/Burst), Addressables, URP/HDRP."
+      "desc": "Unity 2021/2022/6, Editor Scripting, DOTS (ECS/Jobs), Addressables, URP/HDRP, AR/VR Integration, Real-time Optimization, Multiplayer Systems (Photon Fusion, SmartFox Server), Tool Automation."
     },
     {
-      "name": "Technical Art & Graphics",
+      "name": "Technical Art",
       "level": "Expert",
-      "desc": "Shader Graph, VFX Graph, Custom HLSL Shaders, Compute Shaders, Raymarching, Post-Processing, Render Pipelines."
+      "desc": "Shader Graph, VFX Graph, Custom HLSL, Compute Shaders, Raymarching, Render Pipelines, 3D Modeling & Animation (Low-poly Assets), Usability Testing in VR/AR."
     },
     {
-      "name": "Tools & DCC",
+      "name": "Tools",
       "level": "Advanced",
-      "desc": "Blender (Modeling/Python API), Substance Painter, Adobe Photoshop, Figma."
+      "desc": "Blender (Python API, 3D Asset Creation), Substance Painter, Photoshop, Figma, Git/GitHub/GitLab, Confluence, Jira, Trello, RenderDoc, Google Console, Wwise (Audio Programming)."
     },
     {
-      "name": "Networking & Backend",
+      "name": "Backend",
       "level": "Advanced",
-      "desc": "Photon Fusion/PUN2, Firebase, REST APIs, Node.js (Basic), React (Basic)."
+      "desc": "Photon Fusion, Firebase, REST APIs, Real-time Data Sync, Networking & Synchronization."
     },
     {
-      "name": "Version Control & Management",
-      "level": "Expert",
-      "desc": "Git, GitHub, GitLab, Plastic SCM, Jira, Enterprise Scrum/Agile."
+      "name": "Web Development",
+      "level": "Familiar",
+      "desc": "HTML, CSS, JavaScript, GitHub Pages, Markdown, LaTeX."
+    },
+    {
+      "name": "Frameworks & Platforms",
+      "level": "Knowledge",
+      "desc": ".NET, NVIDIA Omniverse, SwiftUI, Agile & Scrum Methodologies."
+    },
+    {
+      "name": "Other Technical",
+      "level": "Fundamental",
+      "desc": "Data Structures & Algorithms, UX/UI Prototyping, Technical Writing & Documentation, Custom Tool Development (Unity Editor Tools)."
+    },
+    {
+      "name": "Soft Skills",
+      "level": "Advanced",
+      "desc": "Mentoring & Coaching, Presentation & Public Speaking, Client Engagement & Persuasion, Remote Support & Collaboration, Fluent English Communication, Cross-functional Teamwork, Teaching & Training, Project Documentation, Remote Work Adaptability, Basic Project Management."
     }
   ],
   "portfolio": [
@@ -202,7 +343,7 @@
       "src": "/image/proj/billdevsprint.jpg",
       "url": "https://billdevsprint.com/",
       "tags": ["SaaS", "React", "Project Management", "Productivity"],
-      "description": "A comprehensive Project Management SaaS built for indie devs in 48 hours. Features dynamic wallpaper themes, Google Drive deep-integration, drag-and-drop asset management, and smart labeling. 'From a developer, for developers'."
+      "description": "Built in 48 hours, with dynamic themes, Google Drive integration, and drag-and-drop features."
     },
     {
       "id": 2,
@@ -211,8 +352,8 @@
       "type": "image",
       "src": "https://raw.githubusercontent.com/billtruong003/Responsive-WebGL-Template/main/BillTheDevSample/Visualize/show-case.gif",
       "url": "https://github.com/billtruong003/Responsive-WebGL-Template",
-      "tags": ["Unity WebGL", "HTML5/CSS", "Open Source", "UI/UX"],
-      "description": "The definitive open-source solution for Unity WebGL responsiveness. Solves full-window display issues on mobile/desktop. Features a custom loading bar and easy drop-in installation via .unitypackage."
+      "tags": ["Unity WebGL", "Open Source", "UI/UX"],
+      "description": "Open-source fix for WebGL responsiveness across devices, including custom loading."
     },
     {
       "id": 3,
@@ -221,8 +362,8 @@
       "type": "image",
       "src": "https://raw.githubusercontent.com/billtruong003/Bill-Biome-Shader/main/Screenshots/biome.png",
       "url": "https://github.com/billtruong003/Bill-Biome-Shader",
-      "tags": ["HLSL", "GPU Instancing", "Compute Shaders", "Stylized"],
-      "description": "A complete stylized environment suite featuring Indirect GPU Instancing for massive density, interactive foliage that bends away from players, wind simulation, and a custom in-editor foliage painting tool."
+      "tags": ["HLSL", "GPU Instancing", "Stylized"],
+      "description": "Environment suite with instancing, interactive elements, and painting tools."
     },
     {
       "id": 4,
@@ -231,13 +372,8 @@
       "type": "image",
       "src": "https://vumbnail.com/1029371396.jpg",
       "url": "https://vnexpress.net/cong-nghe/vgv-2024/du-an/animal-push-royale-106",
-      "tags": [
-        "GameVerse Finalist",
-        "Optimization",
-        "Multiplayer",
-        "Threading"
-      ],
-      "description": "Top 6 Vietnam GameVerse 2024 Finalist. Achieved a 300% performance boost by rewriting the threading model and implementing custom vertex-displacement shaders. Features dynamic 3D UI and secure SSO."
+      "tags": ["GameVerse Finalist", "Optimization", "Threading"],
+      "description": "Finalist project with 300% performance improvement via threading and shaders."
     },
     {
       "id": 5,
@@ -246,8 +382,8 @@
       "type": "image",
       "src": "https://github.com/user-attachments/assets/99bdea15-5126-4bf2-b537-13dc8cdcf499",
       "url": "https://github.com/billtruong003/TextureBake",
-      "tags": ["Python", "Blender API", "Automation", "Tech Art"],
-      "description": "A professional non-destructive texture atlas baking system for Blender. Features session management, automatic UV remapping, and layout optimization to combine multiple textures into a single optimized atlas."
+      "tags": ["Python", "Blender API", "Automation"],
+      "description": "Blender tool for texture atlasing with UV optimization."
     },
     {
       "id": 6,
@@ -256,8 +392,8 @@
       "type": "image",
       "src": "https://raw.githubusercontent.com/billtruong003/Bill-SSOutline/main/Screenshots/biome.png",
       "url": "https://github.com/billtruong003/Bill-SSOutline",
-      "tags": ["URP", "Render Feature", "Post-Processing", "HLSL"],
-      "description": "Robust Screen-Space Outline solution for URP using Render Graph. Supports Sobel/Roberts algorithms, occlusion masking (hiding behind water/glass), and selection masks for specific object highlighting."
+      "tags": ["URP", "Render Feature", "HLSL"],
+      "description": "Outline feature handling occlusions with advanced algorithms."
     },
     {
       "id": 7,
@@ -266,8 +402,8 @@
       "type": "web",
       "src": "/image/proj/memecrawler.png",
       "url": "http://billthedevlab.store/",
-      "tags": ["Python", "AI", "Web Scraping", "Automation"],
-      "description": "An AI-powered web scraper that autonomously fetches and categorizes internet memes for content creation workflows. Hosted live with source code available on GitHub."
+      "tags": ["Python", "AI", "Web Scraping"],
+      "description": "AI scraper for meme collection and categorization."
     },
     {
       "id": 8,
@@ -277,17 +413,17 @@
       "src": "/image/proj/sketchfabgallery.png",
       "url": "https://billtruong003.github.io/SketchFabGallery/",
       "tags": ["REST API", "3D Web", "JavaScript"],
-      "description": "A web gallery integrating the Sketchfab API to fetch and display 3D models dynamically. allows users to search and preview assets directly in the browser."
+      "description": "Dynamic 3D model gallery using Sketchfab API."
     },
     {
       "id": 9,
-      "title": "Food Ping Pong (DragSlice)",
+      "title": "Food Ping Pong",
       "category": "game",
       "type": "image",
       "src": "https://raw.githubusercontent.com/billtruong003/Food-Ping-Pong/main/Assets/Scenes/Resources/IconGame/project.png",
       "url": "https://billtruong003.itch.io/dragslice-culinary-journey",
-      "tags": ["Game Jam", "Mobile Input", "Physics", "Casual"],
-      "description": "A fast-paced arcade game developed for the Korea-Vietnam Game Contest. Features 'juicy' slicing mechanics, precision touch input handling, and polished physics interactions."
+      "tags": ["Game Jam", "Mobile Input", "Physics"],
+      "description": "Arcade game with slicing mechanics for contests."
     },
     {
       "id": 10,
@@ -296,18 +432,18 @@
       "type": "image",
       "src": "https://raw.githubusercontent.com/billtruong003/SceneSwitcherToolUnity/main/Editor/Resources/Image/UIPick.png",
       "url": "https://github.com/billtruong003/SceneSwitcherToolUnity",
-      "tags": ["Editor Extension", "Productivity", "Unity Tool"],
-      "description": "A Unity Editor extension that streamlines scene management. Allows developers to switch, load, and unload scenes instantly via a visual overlay, reducing friction in large projects."
+      "tags": ["Editor Extension", "Productivity"],
+      "description": "Unity extension for quick scene management."
     },
     {
       "id": 11,
-      "title": "Video to Subtitle Converter",
+      "title": "Video to Subtitle",
       "category": "tool",
       "type": "image",
       "src": "https://media.licdn.com/dms/image/v2/D5622AQEYGOalzvPMVw/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1719090696657?e=1767225600&v=beta&t=GxctSs-7gjnqytuBEIg3VbPk1ijFfEg3GFzBzIa1oPE",
       "url": "https://github.com/billtruong003/video-to-subtitle-converter",
-      "tags": ["Python", "Flask", "Whisper AI", "FFmpeg"],
-      "description": "Automated pipeline extracting audio from video, transcribing via OpenAI Whisper, and burning subtitles using FFmpeg. Built with a Flask web interface for easy usage."
+      "tags": ["Python", "Whisper AI", "FFmpeg"],
+      "description": "Pipeline for transcription and subtitle integration."
     },
     {
       "id": 12,
@@ -316,8 +452,8 @@
       "type": "image",
       "src": "https://raw.githubusercontent.com/billtruong003/ChatBotGeminiAPIs/main/billGemini.png",
       "url": "https://github.com/billtruong003/ChatBotGeminiAPIs",
-      "tags": ["Gemini API", "Generative AI", "Markdown", "Audio Processing"],
-      "description": "A rich chat application leveraging Google's Gemini API. Supports text messaging, markdown rendering, file uploads, and direct browser audio recording."
+      "tags": ["Gemini API", "Generative AI"],
+      "description": "Chat app with markdown and audio support."
     },
     {
       "id": 13,
@@ -326,28 +462,28 @@
       "type": "image",
       "src": "https://img.itch.zone/aW1hZ2UvMjkxNDU2Ni8xNzQ3MzE3MS5naWY=/347x500/VMCmnV.gif",
       "url": "https://soratheweeb.itch.io/puffy-gmtk-jam-2024",
-      "tags": ["GMTK Jam", "Puzzle Platformer", "Soft Body", "Indie"],
-      "description": "A creative puzzle platformer developed for GMTK Game Jam 2024. Features unique size-changing mechanics ('Scale' theme) and soft-body physics interactions."
+      "tags": ["GMTK Jam", "Puzzle", "Soft Body"],
+      "description": "Platformer with size mechanics and physics."
     }
   ],
   "testimonials": [
     {
-      "quote": "Bill is a force of nature. His persistence and energy are unmatched; he attacks complex game development challenges with a relentlessness that inspires the whole team.",
+      "quote": "Bill tackles complex challenges with unmatched energy and persistence, motivating everyone around him.",
       "author": "Duc Anh (Sora The Dev)",
       "role": "Indie Game Developer"
     },
     {
-      "quote": "A true technical virtuoso. Bill possesses that rare combination of deep programming logic and artistic intuition. He is a pro in every sense of the word.",
+      "quote": "He combines strong programming skills with artistic insight, making him a standout professional.",
       "author": "Ngoc Thuan",
       "role": "Unity Developer @ Garena"
     },
     {
-      "quote": "Flawless delivery. Bill is the engineer you want when deadlines are tight. He hits every milestone with precision and reliability.",
+      "quote": "Bill delivers reliably, meeting tight deadlines with consistent quality.",
       "author": "Quang Ngo",
       "role": "CTO @ GTS Group"
     },
     {
-      "quote": "Rapid prototyping machine. Bill absorbs requirements and outputs high-quality, focused code faster than anyone I've worked with.",
+      "quote": "He's exceptional at rapid prototyping, turning ideas into solid code quickly.",
       "author": "Nguyen Hoang Cuong",
       "role": "Senior Developer @ FPT akaVerse"
     }
@@ -373,22 +509,52 @@
     }
   ],
   "tech_stack": {
-    "languages": ["C# (Expert)", "Python", "HLSL/Cg", "JavaScript", "C++"],
+    "languages": [
+      "C#",
+      "Python",
+      "HLSL/Cg ",
+      "JavaScript",
+      "C++ ",
+      "C ",
+      "Swift"
+    ],
     "frameworks": [
       "Unity 2023",
       "DOTS (ECS)",
       "NVIDIA Omniverse",
       "React",
-      "Photon Fusion"
+      "Photon Fusion",
+      ".NET",
+      "SwiftUI",
+      "SmartFox Server"
     ],
-    "tools": [
+    "others": [
+      "Agile & Scrum",
+      "CI/CD",
+      "Optimization",
+      "AR/VR Integration",
+      "Real-time Multiplayer Systems",
+      "Custom Tool Development",
+      "Data Structures & Algorithms",
+      "Usability Testing in VR/AR",
+      "UX/UI Prototyping",
+      "Technical Writing & Documentation",
       "Shader Graph",
       "VFX Graph",
-      "Blender",
+      "Blender (3D Asset Creation)",
       "Substance Painter",
       "RenderDoc",
-      "Git/GitLab"
+      "Git/GitHub/GitLab",
+      "Confluence",
+      "Jira",
+      "Trello",
+      "GitHub Pages",
+      "Firebase",
+      "Markdown",
+      "LaTeX",
+      "Wwise (Audio Programming)",
+      "Google Console"
     ]
   },
-  "last_updated": "2025-12-14"
+  "last_updated": "2025-12-21"
 }

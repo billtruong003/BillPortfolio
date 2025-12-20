@@ -1,20 +1,39 @@
 'use client';
+import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '@/hooks/useStore';
 import { resumeData } from '@/data/resume';
 import { PlayCircle } from 'lucide-react';
 import Image from 'next/image';
 import { getYoutubeThumbnail, getAssetPath } from '@/lib/utils';
+import { SciFiLoadBtn } from '@/components/ui/SciFiLoadBtn';
+
+const INITIAL_COUNT = 6;
+const LOAD_INCREMENT = 6;
 
 export const Portfolio = () => {
     const { activeFilter, setFilter, openModal } = useStore();
-    
-    const projects = activeFilter === 'all' 
-        ? resumeData.portfolio 
-        : resumeData.portfolio.filter(p => p.category === activeFilter);
+    const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
+
+    const filteredProjects = useMemo(() => {
+        return activeFilter === 'all' 
+            ? resumeData.portfolio 
+            : resumeData.portfolio.filter(p => p.category === activeFilter);
+    }, [activeFilter]);
+
+    useEffect(() => {
+        setVisibleCount(INITIAL_COUNT);
+    }, [activeFilter]);
+
+    const visibleProjects = filteredProjects.slice(0, visibleCount);
+    const hasMore = visibleCount < filteredProjects.length;
+
+    const handleLoadMore = () => {
+        setVisibleCount(prev => Math.min(prev + LOAD_INCREMENT, filteredProjects.length));
+    };
 
     return (
-        <section className="py-32 px-6 container mx-auto">
+        <section id="portfolio" className="py-32 px-6 container mx-auto scroll-mt-20">
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
                 <div>
                     <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
@@ -32,7 +51,7 @@ export const Portfolio = () => {
                             onClick={() => setFilter(filter)}
                             className={`px-4 py-2 text-sm font-mono uppercase tracking-wider transition-all border ${
                                 activeFilter === filter 
-                                ? 'border-primary text-primary bg-primary/10' 
+                                ? 'border-primary text-primary bg-primary/10 shadow-[0_0_10px_rgba(255,184,77,0.2)]' 
                                 : 'border-zinc-800 text-zinc-500 hover:border-zinc-700 hover:text-zinc-300'
                             }`}
                         >
@@ -43,19 +62,16 @@ export const Portfolio = () => {
             </div>
 
             <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <AnimatePresence>
-                    {projects.map((project) => {
-                        // FIX LOGIC:
-                        // 1. Nếu là video ONLINE (http/https) -> lấy thumbnail Youtube/Vimeo
-                        // 2. Còn lại (ảnh local hoặc video local) -> dùng getAssetPath để thêm prefix Repo
+                <AnimatePresence mode="popLayout">
+                    {visibleProjects.map((project) => {
                         const isOnlineVideo = project.type === 'video' && project.src.startsWith('http');
-                        
                         const imageSrc = isOnlineVideo
                             ? getYoutubeThumbnail(project.src) 
                             : getAssetPath(project.src);
 
                         return (
                             <motion.div
+                                layout
                                 layoutId={`card-${project.id}`}
                                 key={project.id}
                                 initial={{ opacity: 0, scale: 0.9 }}
@@ -75,7 +91,6 @@ export const Portfolio = () => {
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-40" />
                                     
-                                    {/* Chỉ hiện nút Play nếu đúng là video */}
                                     {project.type === 'video' && (
                                         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <PlayCircle className="w-12 h-12 text-primary drop-shadow-[0_0_15px_rgba(255,184,77,0.5)]" />
@@ -102,6 +117,8 @@ export const Portfolio = () => {
                     })}
                 </AnimatePresence>
             </motion.div>
+
+            {hasMore && <SciFiLoadBtn onClick={handleLoadMore} label="ACCESS_ARCHIVED_PROJECTS" />}
         </section>
     );
 };

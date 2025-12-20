@@ -1,10 +1,33 @@
-// types/index.ts
-
-// 1. Khai báo các Interface con trước
 export interface Social {
     platform: string;
     url: string;
     priority: string;
+}
+
+export interface Company {
+    name: string;
+    logo?: string;
+    url: string;
+    color?: string;
+    textColor?: string;
+    story?: string;
+    role?: string;
+    modal_img?: string;
+    gallery?: {
+        type: 'image' | 'video';
+        src: string;
+    }[];
+}
+
+export interface Production {
+    name: string;
+    logo?: string;
+    url: string;
+    desc?: string;
+    story?: string;
+    at_company?: string;
+    role?: string;
+    modal_img?: string;
 }
 
 export interface ExperienceItem {
@@ -31,7 +54,6 @@ export interface Project {
     }[];
 }
 
-// 2. Interface cha dùng các interface con
 export interface ResumeData {
     profile: {
         name: string;
@@ -43,10 +65,12 @@ export interface ResumeData {
         contact: { email: string };
     };
     socials: Social[];
+    companies?: Company[];
+    productions?: Production[];
     feed: string[];
     experience: {
-        dev: ExperienceItem[];      // Đã có ExperienceItem ở trên
-        teaching: ExperienceItem[]; // Đã có ExperienceItem ở trên
+        dev: ExperienceItem[];
+        teaching: ExperienceItem[];
     };
     skills: { name: string; level: string }[];
     portfolio: Project[];
