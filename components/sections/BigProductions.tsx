@@ -27,7 +27,7 @@ export const BigProductions = () => {
             type: "image",
             src: prod.modal_img || prod.logo || "",
             url: prod.url,
-            tags: [prod.at_company || "Indie", "Product Owner"],
+            tags: [prod.at_company || "Indie"],
             description: prod.story || prod.desc || "No details available.",
         });
     };

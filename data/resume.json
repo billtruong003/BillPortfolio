@@ -1,10 +1,10 @@
 {
   "profile": {
     "name": "Bill Truong",
-    "title": "Senior Unity Engineer & Technical Artist",
-    "quote": "Optimization is the foundation of immersive experiences.",
+    "title": "Unity Developer & Technical Artist",
+    "quote": "Robust code architecture meets high-performance rendering.",
     "quoteAuthor": "Bill Truong",
-    "about": "I'm a hands-on developer specializing in Unity optimization, shaders, and VR tools. Starting from junior roles, I've advanced to senior positions on projects like Shmackle, where I fix complex codebases, build efficient pipelines, and create features that drive user growth. My background has shaped a practical approach, allowing me to adapt fast and deliver in high-pressure environments. Though financial challenges led me to leave FPT University after earning a 30% Talent Scholarship, I've built my expertise through real-world projects and self-driven learning.",
+    "about": "I am a Unity Engineer with a rare edge: I dominate both the Codebase and the Render Pipeline. My core expertise is Advanced C# Programming and System Architecture, but unlike typical developers, I don't rely on others to optimize the visuals. I build complex gameplay systems, write the shaders to support them, and engineer the tools to make them performant. I am the 'Full-Stack' Game Developer who ensures the game logic is solid, the tools are efficient, and the final frame renders at 90 FPS.",
     "location": "Ho Chi Minh City, Vietnam (Open to Remote/Relocation)",
     "contact": {
       "email": "truongbill003@gmail.com",
@@ -41,8 +41,8 @@
       "name": "CURLY BLUE",
       "logo": "/image/logos/curlyblue.png",
       "url": "https://curlyblue.io/",
-      "role": "Unity Developer & Technical Artist",
-      "story": "Shmackle was my most demanding project, with a complex codebase and heavy workload. I transitioned to technical artist after showing strong visual skills, writing 80% of the shaders. Key updates like the Shooting Range drove significant user growth. The team photo captures us working through a power outage, reflecting our commitment.",
+      "role": "Technical Artist (Promoted) & Unity Dev",
+      "story": "Shmackle was visually flat and struggling to hold 72 FPS using basic Unlit shaders when I joined. I took ownership of the visual overhaul, writing custom HLSL shaders for Toon Shading, Outlines, and Dissolve effects. This 'Graphics Update' not only modernized the game's look but, through aggressive optimization, actually increased performance to a stable 90 FPS on Meta Quest. My ability to bridge art and engineering led to my promotion to Technical Artist.",
       "modal_img": "/image/life/cutoffmoment.jpg"
     },
     {
@@ -50,7 +50,7 @@
       "logo": "/image/logos/goldensea.png",
       "url": "https://goldenseastudio.com/",
       "role": "Unity Developer",
-      "story": "This startup was my entry into professional development. We had differences on workflows, but I remained loyal and gave my full effort to help the studio succeed. It was a valuable starting point when I had limited experience.",
+      "story": "This was a high-velocity production environment. I handled full-cycle development for outsourced Hyper Casual titles, typically shipping a complete game every 1-2 months. This role trained me to code for speed, adapt instantly to client feedback, and deliver polished core loops under strict deadlines.",
       "modal_img": "/image/logos/goldensea.png"
     },
     {
@@ -63,6 +63,16 @@
     }
   ],
   "productions": [
+    {
+      "name": "KINDLY'S PROMISE",
+      "logo": "/image/life/kindlypromise.png",
+      "url": "https://github.com/billtruong003/Kindly-Project",
+      "at_company": "Personal Indie Product",
+      "role": "Solo Developer & Technical Artist",
+      "desc": "Narrative Sci-Fi Adventure | Advanced URP Rendering",
+      "story": "This project is my technical playground a proof of concept for high-fidelity stylized rendering on Unity URP. Developing solo, I architected the entire codebase, including a modular Interaction System and non-linear Dialogue Engine. Visually, I engineered a custom render pipeline featuring a 'See-Through Dissolve' mechanic (using Stencil Buffers), dynamic Cel-Shading, and interactive foliage. It represents my ability to marry complex C# systems with artistic direction.",
+      "modal_img": "/image/life/kindlypromise.mp4"
+    },
     {
       "name": "SHMACKLE VR",
       "logo": "https://i.ytimg.com/vi/VX84U8ii9qs/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLA1G5EckSJVb1e_IDbh9WaCL1nRGQ",
@@ -81,7 +91,7 @@
       "role": "Core Developer",
       "desc": "GameVerse 2024 Finalist",
       "story": "As a top finalist in Vietnam GameVerse, I boosted performance by 300% through rewritten threading and custom shaders for mobile crowds.",
-      "modal_img": "https://vumbnail.com/1029371396.jpg"
+      "modal_img": "/image/life/APR.mp4"
     },
     {
       "name": "BILL BIOME SHADER",
@@ -121,7 +131,7 @@
       "role": "Gameplay Dev",
       "desc": "Edutainment App (50M+ DLs)",
       "story": "I contributed to core mechanics like Treasure Toss, adapting to enterprise workflows and high standards.",
-      "modal_img": "https://i.ytimg.com/vi/XpQTVjcG3_E/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCl_Kby2umSCIYpumRRjzd7rsayWA"
+      "modal_img": "/image/life/APD.mp4"
     }
   ],
   "socials": [
@@ -172,25 +182,24 @@
   "experience": {
     "dev": [
       {
-        "role": "Unity Developer & Technical Artist",
+        "role": "Technical Artist & Unity Developer",
         "company": "CurlyBlue (Shmackle VR)",
         "location": "Remote",
         "period": "Apr 2025 - Present",
-        "desc": "Working as Unity Developer and got promote to technical art for Shmackle. I manage shaders, code optimization, and VR features.",
+        "desc": "Responsible for the visual pipeline and performance optimization of Shmackle VR.",
         "achievements": [
-          "Led Shooting Range update, boosting user numbers.",
-          "Built Shmackle Pad ecosystem for social and inventory.",
-          "Created custom shaders: Ghost, Xray, Fake Liquid.",
-          "Optimized for 72+ FPS on Quest with additive techniques.",
-          "Implemented dynamic FOV to reduce motion sickness."
+          "Executed a major visual overhaul, replacing legacy assets with custom Toon, Outline, and Dissolve shaders (HLSL/Shader Graph).",
+          "Optimized render pipeline to achieve a locked 90 FPS on Quest standalone (up from unstable ~70 FPS).",
+          "Promoted to Technical Artist role to focus on bridging the gap between gameplay code and visual fidelity.",
+          "Developed core networking features for the 'Shooting Range' update using Photon Fusion.",
+          "Implemented technical solutions for dynamic FOV to minimize VR motion sickness."
         ],
         "tech_stack": [
           "Unity 2022 LTS",
           "HLSL",
-          "Shader Graph",
           "Meta Quest SDK",
-          "Photon Fusion",
-          "Tech Art"
+          "Optimization",
+          "Photon Fusion"
         ]
       },
       {
@@ -198,22 +207,23 @@
         "company": "FPT IS (akaVerse)",
         "location": "Ho Chi Minh City, Vietnam",
         "period": "Jul 2024 - Apr 2025",
-        "desc": "Explored new technologies in a collaborative setting.",
+        "desc": "Worked within the R&D team to develop Digital Twin solutions using NVIDIA Omniverse.",
         "achievements": [
-          "Developed Bill Utils tool, cutting 3D setup from weeks to one click.",
-          "Optimized Animal Push Royale with 300% performance gain.",
-          "Presented Omniverse solutions to NVIDIA CEO.",
-          "Departed as focus moved to industrial projects."
+          "Developed 'Bill Utils' (Python), an automation tool that significantly reduced manual 3D asset setup time.",
+          "Assisted in preparing technical demonstrations presented to NVIDIA's executive leadership.",
+          "Optimized 'Animal Push Royale' (GameVerse 2024 Finalist), achieving substantial performance gains via Multithreading.",
+          "Collaborated closely with the team to integrate Unity with industrial simulation data."
         ],
         "tech_stack": [
           "NVIDIA Omniverse",
-          "Python",
+          "Python Automation",
           "Compute Shaders",
-          "Multithreading"
+          "Multithreading",
+          "Unity DOTS"
         ]
       },
       {
-        "role": "Game Developer (Internship)",
+        "role": "Game Developer",
         "company": "Gameloft Vietnam",
         "location": "Ho Chi Minh City",
         "period": "Jun 2023 - Dec 2023",
@@ -227,40 +237,46 @@
         "tech_stack": ["Enterprise C#", "Scrum", "Jira", "Git Lab"]
       },
       {
-        "role": "Unity Developer (Freelance)",
+        "role": "Unity Developer",
         "company": "Golden Sea Studio",
         "location": "Remote",
         "period": "Jan 2024 - Mar 2024",
-        "desc": "Supported startup projects with efficient development.",
+        "desc": "Full-cycle developer for Hyper Casual titles.",
         "achievements": [
-          "Released Merge Fruit from prototype.",
-          "Refactored Drink Game for better scalability.",
-          "Improved mobile performance."
+          "Shipped multiple Hyper Casual games with 1-2 month development cycles.",
+          "Handled rapid prototyping and implementation based on client specifications.",
+          "Optimized mobile performance for low-end Android devices.",
+          "Released 'Merge Fruit' and refactored 'Drink Game' codebases."
         ],
-        "tech_stack": ["Unity Mobile", "C#", "Game Architecture"]
+        "tech_stack": ["Unity Mobile", "Rapid Prototyping", "C#"]
       }
     ],
     "teaching": [
       {
-        "role": "Game Development Instructor & Marketing Lead",
+        "role": "Game Development Instructor",
         "company": "FullHouseDev",
         "location": "Remote",
         "period": "Sep 2024 - Present",
-        "desc": "Teaching Unity."
+        "desc": "Translating complex Unity concepts into digestible lessons. Teaching reinforces my understanding of the engine's core architecture."
       },
       {
-        "role": "Computer Science Education Counselor",
+        "role": "Computer Science Counselor",
         "company": "Marathon Education",
         "location": "Remote",
         "period": "Mar 2023 - Present",
-        "desc": "Contributed to AR app development and learned about EdTech systems."
+        "desc": "Gained insight into large-scale EdTech infrastructure while advising on curriculum."
       },
       {
         "role": "Information Technology Teacher",
         "company": "DigiUni Vietnam",
         "location": "Ho Chi Minh City",
         "period": "Sep 2022 - Jun 2024",
-        "desc": "Instructed in Python, game design, and robotics."
+        "desc": "This role was crucial in funding my first two years of university. Beyond financial independence, it was a practical training ground for my soft skills.",
+        "achievements": [
+          "Financed my own education by working part-time as an instructor.",
+          "Mastered the art of technical communication by simplifying complex coding concepts (Python, Game Logic) for students.",
+          "Leveraged the teaching environment to self-study and reinforce my own programming foundations."
+        ]
       }
     ]
   },
@@ -269,10 +285,10 @@
       "degree": "Bachelor of Software Engineering (Incomplete)",
       "school": "FPT University",
       "period": "2022 - 2025",
-      "desc": "Financial constraints led me to prioritize full-time work over completing my degree.",
+      "desc": "Earned a 30% Talent Scholarship. Although financial constraints required me to pause my degree to work full-time, this decision accelerated my practical industry experience and technical maturity.",
       "achievements": [
-        "Earned 30% Talent Scholarship.",
-        "Focused on practical skills from day one."
+        "30% Talent Scholarship Winner.",
+        "Prioritized real-world project delivery and career advancement."
       ]
     },
     {
@@ -490,7 +506,7 @@
   ],
   "certifications": [
     {
-      "name": "IELTS 6.5",
+      "name": "IELTS 6.0",
       "issuer": "IDP Education",
       "date": "Issued 2022",
       "url": ""
@@ -505,7 +521,7 @@
       "name": "Figma for Marketing Design",
       "issuer": "Udemy",
       "date": "Issued Sep 2024",
-      "url": ""
+      "url": "https://www.udemy.com/certificate/UC-9f38c499-7dfd-4a6c-97fc-71c5bcde7920/"
     }
   ],
   "tech_stack": {
