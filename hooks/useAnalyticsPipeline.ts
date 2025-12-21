@@ -74,10 +74,11 @@ export const useAnalyticsPipeline = () => {
                 // 4. Gửi về Google Sheet (Dùng no-cors để tránh lỗi CORS từ Google)
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors', 
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    mode: 'no-cors', // Giữ nguyên no-cors
+                    // XÓA DÒNG HEADERS Content-Type ĐI
+                    // headers: { 'Content-Type': 'application/json' }, 
+                    
+                    // Gửi chuỗi JSON thô, Google Script sẽ tự parse được
                     body: JSON.stringify(payload)
                 });
 
