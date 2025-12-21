@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 
-const REPO_NAME = "BillPortfolio";
-const basePath = process.env.NODE_ENV === "production" ? `/${REPO_NAME}` : "";
+const basePath = "";
 
 const nextConfig = {
   output: "export",
+  basePath: basePath,
   images: {
     unoptimized: true,
     remotePatterns: [
