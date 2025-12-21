@@ -22,7 +22,7 @@ export const useAnalyticsPipeline = () => {
         if (isTracked.current || sessionStorage.getItem(sessionKey)) return;
 
         const executePipeline = async () => {
-            console.log("🚀 Starting Analytics Pipeline...");
+            // console.log("🚀 Starting Analytics Pipeline...");
 
             // 1. Khởi tạo data mặc định (Phòng trường hợp API lấy IP bị lỗi)
             let ipInfo = {
@@ -74,15 +74,11 @@ export const useAnalyticsPipeline = () => {
                 // 4. Gửi về Google Sheet (Dùng no-cors để tránh lỗi CORS từ Google)
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors', // Giữ nguyên no-cors
-                    // XÓA DÒNG HEADERS Content-Type ĐI
-                    // headers: { 'Content-Type': 'application/json' }, 
-                    
-                    // Gửi chuỗi JSON thô, Google Script sẽ tự parse được
+                    mode: 'no-cors', 
                     body: JSON.stringify(payload)
                 });
 
-                console.log("✅ Data sent to Google Sheet!");
+                // console.log("✅ Data sent to Google Sheet!");
                 
                 // Đánh dấu đã track để không gửi lại khi F5
                 sessionStorage.setItem(sessionKey, 'true');
