@@ -15,7 +15,7 @@ export const useAnalyticsPipeline = () => {
     const isTracked = useRef(false);
 
     useEffect(() => {
-        if (isTracked.current || process.env.NODE_ENV === 'development') return;
+        // if (isTracked.current || process.env.NODE_ENV === 'development') return;
 
         const executePipeline = async () => {
             try {
