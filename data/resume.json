@@ -246,7 +246,7 @@
           "Shipped multiple Hyper Casual games with 1-2 month development cycles.",
           "Handled rapid prototyping and implementation based on client specifications.",
           "Optimized mobile performance for low-end Android devices.",
-          "Released 'Merge Fruit' and refactored 'Drink Game' codebases."
+          "Shipped 'Merge Fruit' (Suika-style), 'Brush Hit', and refactored 'Drink Game' codebases."
         ],
         "tech_stack": ["Unity Mobile", "Rapid Prototyping", "C#"]
       }
@@ -438,8 +438,8 @@
       "type": "image",
       "src": "https://raw.githubusercontent.com/billtruong003/Food-Ping-Pong/main/Assets/Scenes/Resources/IconGame/project.png",
       "url": "https://billtruong003.itch.io/dragslice-culinary-journey",
-      "tags": ["Game Jam", "Mobile Input", "Physics"],
-      "description": "Arcade game with slicing mechanics for contests."
+      "tags": ["Hyper Casual", "Touch Input", "Physics", "2D"],
+      "description": "A food-themed arcade game with drag-and-slice touch mechanics and physics-driven gameplay. Built with responsive mobile input, juicy feedback effects, and an addictive core loop."
     },
     {
       "id": 10,
@@ -480,6 +480,26 @@
       "url": "https://soratheweeb.itch.io/puffy-gmtk-jam-2024",
       "tags": ["GMTK Jam", "Puzzle", "Soft Body"],
       "description": "Platformer with size mechanics and physics."
+    },
+    {
+      "id": 14,
+      "title": "Merge Fruit",
+      "category": "game",
+      "type": "image",
+      "src": "/image/proj/mergefruit.png",
+      "url": "",
+      "tags": ["Hyper Casual", "Suika-like", "Mobile", "Shipped"],
+      "description": "A Suika-style merge puzzle game shipped at Golden Sea Studio. Players drop and combine fruits to create bigger ones, featuring satisfying physics-based merging and polished mobile UX."
+    },
+    {
+      "id": 15,
+      "title": "Brush Hit",
+      "category": "game",
+      "type": "image",
+      "src": "/image/proj/brushhit.png",
+      "url": "",
+      "tags": ["Hyper Casual", "Arcade", "Mobile", "Shipped"],
+      "description": "A hyper casual arcade game built for rapid iteration at Golden Sea Studio. Features satisfying one-tap mechanics with tight core loop design optimized for mobile engagement."
     }
   ],
   "testimonials": [
