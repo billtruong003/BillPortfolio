@@ -3,7 +3,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '@/hooks/useStore';
 import { resumeData } from '@/data/resume';
-import { PlayCircle } from 'lucide-react';
+import { PlayCircle, Gamepad2 } from 'lucide-react';
 import Image from 'next/image';
 import { getYoutubeThumbnail, getAssetPath } from '@/lib/utils';
 import { SciFiLoadBtn } from '@/components/ui/SciFiLoadBtn';
@@ -78,7 +78,14 @@ export const Portfolio = () => {
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.9 }}
                                 transition={{ duration: 0.3 }}
-                                onClick={() => openModal(project)}
+                                onClick={() => {
+                                    // WebGL games -> navigate to arcade
+                                    if ((project as any).gameId) {
+                                        window.location.href = `/arcade?game=${(project as any).gameId}`;
+                                        return;
+                                    }
+                                    openModal(project);
+                                }}
                                 className="group cursor-pointer"
                             >
                                 <div className="relative aspect-video bg-zinc-900 border border-zinc-800 overflow-hidden rounded-sm transition-all duration-500 group-hover:border-primary/50">
@@ -94,6 +101,14 @@ export const Portfolio = () => {
                                     {project.type === 'video' && (
                                         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                             <PlayCircle className="w-12 h-12 text-primary drop-shadow-[0_0_15px_rgba(255,184,77,0.5)]" />
+                                        </div>
+                                    )}
+
+                                    {project.type === 'webgl' && (
+                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            <div className="p-3 bg-primary/90 rounded-full shadow-lg shadow-primary/30">
+                                                <Gamepad2 className="w-8 h-8 text-black" />
+                                            </div>
                                         </div>
                                     )}
 

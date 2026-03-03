@@ -1,0 +1,35 @@
+{
+    "games":[
+        {
+            "id": "merge-fruit",
+            "title": "Merge Fruit",
+            "description": "A Suika-style merge puzzle game shipped at Golden Sea Studio.",
+            "thumbnail": "webgl-games/mushroom-game/mushroom.jpg",
+            "tags": ["Hyper Casual", "Suika-like", "Mobile", "Shipped"],
+            "genre": "puzzle",
+            "releaseDate": "2024-03-01",
+            "buildSize": "25MB",
+            "status": "playable",
+            "build": {
+                "buildPath": "/webgl-games/mushroom-game/Build",
+                "buildName": "MergeFruitBuild",
+                "compression": "none",
+                "hasStreamingAssets": true,
+                "companyName": "GoldenSea",
+                "productName": "MergeFruit",
+                "productVersion": "1.0"
+            },
+            "display": {
+                "fixedRatio": true,
+                "ratioWidth": 9,
+                "ratioHeight": 16
+            },
+            "controls": {
+                "mouse": ["Left Click/Drag — Drop Fruit"],
+                "touch": true
+            },
+            "preferredOrientation": "portrait"
+        }
+    ],
+    "lastUpdated": "2026-03-03T00:00:00Z"
+}

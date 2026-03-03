@@ -33,6 +33,24 @@ export default function Home() {
         
         <Certifications />
         <Portfolio />
+        
+        {/* === ARCADE CTA SECTION === */}
+        <section className="py-16 px-6 border-y border-white/5 bg-[#080808] relative z-20">
+          <div className="container mx-auto flex flex-col items-center text-center gap-6">
+            <span className="font-mono text-primary text-xs tracking-[0.4em] uppercase">Interactive Lab</span>
+            <h2 className="text-3xl font-bold text-zinc-100">Want to play some games?</h2>
+            <p className="text-zinc-500 text-sm max-w-lg">
+              Explore my WebGL game builds — playable directly in your browser. No downloads needed.
+            </p>
+            <a 
+              href="/arcade" 
+              className="group flex items-center gap-3 px-8 py-4 bg-primary/10 hover:bg-primary text-primary hover:text-black font-mono text-sm font-bold uppercase tracking-widest border border-primary/30 hover:border-primary rounded-lg transition-all duration-300 shadow-lg hover:shadow-primary/20"
+            >
+              🎮 ENTER GAME ARCADE
+            </a>
+          </div>
+        </section>
+
         <Experience />
         <Testimonials />
         <Feed />

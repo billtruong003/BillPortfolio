@@ -43,7 +43,7 @@ export interface Project {
     id: number;
     title: string;
     category: string;
-    type: 'image' | 'video' | 'web'; 
+    type: 'image' | 'video' | 'web' | 'webgl'; 
     src: string;
     url: string;
     tags: string[];
@@ -52,6 +52,50 @@ export interface Project {
         type: 'image' | 'video';
         src: string;
     }[];
+    gameId?: string;
+}
+
+export interface WebGLGame {
+    id: string;
+    title: string;
+    description: string;
+    thumbnail: string;
+    banner?: string;
+    screenshots?: string[];
+    tags: string[];
+    genre: 'action' | 'puzzle' | 'platformer' | 'shooter' | 'rpg' | 'simulation' | 'other';
+    releaseDate: string;
+    buildSize: string;
+    status: 'playable' | 'demo' | 'wip' | 'archived';
+    build: {
+        buildPath: string;
+        buildName: string;
+        compression: 'gzip' | 'brotli' | 'none';
+        hasStreamingAssets?: boolean;
+        companyName?: string;
+        productName?: string;
+        productVersion?: string;
+    };
+    display?: {
+        fixedRatio: boolean;
+        ratioWidth: number;
+        ratioHeight: number;
+    };
+    controls?: {
+        keyboard?: string[];
+        mouse?: string[];
+        touch?: boolean;
+    };
+    unityVersion?: string;
+    sourceUrl?: string;
+    externalUrl?: string;
+    preferredOrientation?: 'landscape' | 'portrait' | 'any';
+    preferredAspectRatio?: string;
+}
+
+export interface WebGLGameRegistry {
+    games: WebGLGame[];
+    lastUpdated: string;
 }
 
 export interface ResumeData {

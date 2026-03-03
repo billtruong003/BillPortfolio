@@ -38,3 +38,37 @@ export const getYoutubeThumbnail = (url: string) => {
     return "https://placehold.co/1920x1080/1a1a1a/ffae42?text=Error";
   }
 };
+
+// ===== Optimized Asset Helpers =====
+
+let _supportsWebP: boolean | null = null;
+let _supportsWebM: boolean | null = null;
+
+export function supportsWebP(): boolean {
+    if (typeof window === 'undefined') return true;
+    if (_supportsWebP !== null) return _supportsWebP;
+    const canvas = document.createElement('canvas');
+    canvas.width = 1; canvas.height = 1;
+    _supportsWebP = canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+    return _supportsWebP;
+}
+
+export function supportsWebM(): boolean {
+    if (typeof window === 'undefined') return true;
+    if (_supportsWebM !== null) return _supportsWebM;
+    const video = document.createElement('video');
+    _supportsWebM = video.canPlayType('video/webm; codecs="vp9"') !== '';
+    return _supportsWebM;
+}
+
+/** Auto-selects WebP/WebM when optimized variants exist (after `npm run optimize`) */
+export function getOptimizedAsset(src: string): string {
+    if (!src || src.startsWith('http') || src.startsWith('data:')) return getAssetPath(src);
+    if (/\.(png|jpg|jpeg)$/i.test(src) && supportsWebP()) {
+        return getAssetPath(src.replace(/\.(png|jpg|jpeg)$/i, '.webp'));
+    }
+    if (/\.mp4$/i.test(src) && supportsWebM()) {
+        return getAssetPath(src.replace(/\.mp4$/i, '.webm'));
+    }
+    return getAssetPath(src);
+}

@@ -53,3 +53,15 @@ body {
 .clip-glitch {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
+
+/* Custom Scrollbar for modal/panels */
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 184, 77, 0.3); border-radius: 2px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255, 184, 77, 0.6); }
+
+/* Unity WebGL Canvas */
+#unity-canvas, [id^="unity-canvas-"] { outline: none !important; cursor: default; }
+
+/* Framer Motion layout animation fix */
+[data-framer-layout-id] { will-change: transform; }
