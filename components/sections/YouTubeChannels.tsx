@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Youtube, Eye, Users, Video, ExternalLink, Loader2, Gamepad2, Code2 } from "lucide-react";
-import { fetchYouTubeStats } from "@/app/actions/youtube";
 
 interface ChannelStats {
     title: string;
@@ -36,7 +35,7 @@ const CHANNELS: ChannelConfig[] = [
         label: "Unity Dev & Shader Tutorials",
     },
     {
-        id: "UCodHIrwfVJfHen6ljDfFbzA",
+        id: "UCxxx_BillVRGamer",
         handle: "@BillVRGamer",
         fallbackTitle: "Bill VR Gamer",
         icon: <Gamepad2 size={16} />,
@@ -142,13 +141,24 @@ export const YouTubeChannels = () => {
 
     const fetchStats = useCallback(async () => {
         try {
-            const channelIds = CHANNELS.map(c => c.id);
-            const items = await fetchYouTubeStats(channelIds);
+            const channelIds = CHANNELS.map(c => c.id).filter(id => !id.includes("xxx"));
+            const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
 
-            if (!items || items.length === 0) {
+            if (channelIds.length === 0 || !apiKey) {
                 setLoading(false);
                 return;
             }
+
+            const url = `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${channelIds.join(",")}&key=${apiKey}`;
+            const res = await fetch(url);
+
+            if (!res.ok) {
+                setLoading(false);
+                return;
+            }
+
+            const data = await res.json();
+            const items = data.items || [];
 
             const map: Record<string, ChannelStats> = {};
             for (const item of items) {
@@ -209,7 +219,7 @@ export const YouTubeChannels = () => {
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500/50 opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500/50"></span>
                     </span>
-                    DATA_REFRESHES_EVERY_5_MIN • SECURE_SERVER_ACTION
+                    DATA_REFRESHES_EVERY_5_MIN • SECURED_BY_CORS
                 </div>
             </div>
         </section>

@@ -3,27 +3,27 @@
 import { useState, useEffect } from "react";
 import { AdminAuth } from "@/components/admin/AdminAuth";
 import { AdminDashboard } from "@/components/admin/AdminDashboard";
-import { checkAuthStatus, logoutAdmin } from "@/app/actions/auth";
-import { useRouter } from "next/navigation";
 
 export default function CmdCenterPage() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isChecking, setIsChecking] = useState(true);
-    const router = useRouter();
 
     useEffect(() => {
-        const verifySession = async () => {
-            const status = await checkAuthStatus();
-            setIsAuthenticated(status);
-            setIsChecking(false);
-        };
-        verifySession();
+        const token = sessionStorage.getItem("admin_auth");
+        if (token) {
+            const elapsed = Date.now() - parseInt(token, 10);
+            if (elapsed < 4 * 60 * 60 * 1000) {
+                setIsAuthenticated(true);
+            } else {
+                sessionStorage.removeItem("admin_auth");
+            }
+        }
+        setIsChecking(false);
     }, []);
 
-    const handleLogout = async () => {
-        await logoutAdmin();
+    const handleLogout = () => {
+        sessionStorage.removeItem("admin_auth");
         setIsAuthenticated(false);
-        router.push("/");
     };
 
     if (isChecking) {

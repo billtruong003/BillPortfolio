@@ -8,7 +8,6 @@ import {
     Activity, BarChart3, Zap, ArrowUpRight
 } from "lucide-react";
 import { resumeData } from "@/data/resume";
-import { fetchYouTubeStats } from "@/app/actions/youtube";
 
 interface ChannelData {
     id: string;
@@ -40,7 +39,7 @@ const formatCompact = (n: string | number): string => {
 
 const CHANNEL_IDS = [
     { id: "UCdRe_4FG7JhOERlfcyeNhnw", handle: "@BillTheDev", color: "primary" },
-    { id: "UCodHIrwfVJfHen6ljDfFbzA", handle: "@BillVRGamer", color: "red-400" },
+    { id: "UCxxx_BillVRGamer", handle: "@BillVRGamer", color: "red-400" },
 ];
 
 const StatCell = ({ icon, label, value, compact }: { icon: React.ReactNode; label: string; value: string; compact: string }) => (
@@ -88,10 +87,20 @@ export const AdminDashboard = ({ onLogout }: DashboardProps) => {
     const fetchYouTubeData = useCallback(async () => {
         setLoading(true);
         try {
-            const ids = CHANNEL_IDS.map(c => c.id);
-            const items = await fetchYouTubeStats(ids);
+            const ids = CHANNEL_IDS.map(c => c.id).filter(id => !id.includes("xxx"));
+            const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
 
-            if (items) {
+            if (ids.length === 0 || !apiKey) {
+                setLoading(false);
+                return;
+            }
+
+            const url = `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${ids.join(",")}&key=${apiKey}`;
+            const res = await fetch(url);
+
+            if (res.ok) {
+                const data = await res.json();
+                const items = data.items || [];
                 const parsed: ChannelData[] = items.map((item: any) => ({
                     id: item.id,
                     title: item.snippet.title,
@@ -161,7 +170,7 @@ export const AdminDashboard = ({ onLogout }: DashboardProps) => {
                     <div className="flex items-center gap-3 mb-6">
                         <Youtube size={20} className="text-red-500" />
                         <h2 className="text-xl font-bold font-mono">YouTube Analytics</h2>
-                        <span className="text-[10px] font-mono text-zinc-600">SERVER_SYNCED</span>
+                        <span className="text-[10px] font-mono text-zinc-600">CLIENT_SYNCED</span>
                     </div>
 
                     {channels.length === 0 && !loading ? (
@@ -169,7 +178,7 @@ export const AdminDashboard = ({ onLogout }: DashboardProps) => {
                             <Youtube size={32} className="text-zinc-700 mx-auto mb-3" />
                             <p className="text-sm text-zinc-500 font-mono">No YouTube data available.</p>
                             <p className="text-xs text-zinc-600 mt-2">
-                                Set <code className="text-primary">YOUTUBE_API_KEY</code> in .env.local
+                                Set <code className="text-primary">NEXT_PUBLIC_YOUTUBE_API_KEY</code> in Secrets
                             </p>
                         </div>
                     ) : (
@@ -265,7 +274,7 @@ export const AdminDashboard = ({ onLogout }: DashboardProps) => {
                 </section>
 
                 <div className="pt-8 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-zinc-700">
-                    <span>CMD_CENTER v1.0 • SERVER-SIDE ACTIONS</span>
+                    <span>CMD_CENTER v1.0 • CLIENT-SIDE SECURED</span>
                     <span className="flex items-center gap-2">
                         <Clock size={10} />
                         {new Date().toLocaleDateString("en", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}

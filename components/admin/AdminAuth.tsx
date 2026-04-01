@@ -3,10 +3,16 @@
 import { useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Shield, Lock, AlertTriangle, Eye, EyeOff, Terminal } from "lucide-react";
-import { authenticateAdmin } from "@/app/actions/auth";
 
 interface AdminAuthProps {
     onAuthenticated: () => void;
+}
+
+async function sha256(message: string): Promise<string> {
+    const msgBuffer = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
 }
 
 export const AdminAuth = ({ onAuthenticated }: AdminAuthProps) => {
@@ -28,17 +34,27 @@ export const AdminAuth = ({ onAuthenticated }: AdminAuthProps) => {
         setError("");
 
         try {
-            const result = await authenticateAdmin(password);
+            const hash = await sha256(password);
+            const expectedHash = process.env.NEXT_PUBLIC_ADMIN_HASH;
 
-            if (result.success) {
+            if (!expectedHash) {
+                setError("SYSTEM_ERROR // Admin hash not configured in ENV");
+                setIsChecking(false);
+                return;
+            }
+
+            await new Promise(r => setTimeout(r, 500 + Math.random() * 500));
+
+            if (hash === expectedHash.toLowerCase()) {
+                sessionStorage.setItem("admin_auth", Date.now().toString());
                 onAuthenticated();
             } else {
                 setAttempts(prev => prev + 1);
-                setError(`${result.error} [${attempts + 1}/5]`);
+                setError(`AUTH_FAILED // Invalid credentials [${attempts + 1}/5]`);
                 setPassword("");
             }
         } catch {
-            setError("NETWORK_ERROR // Connection failed");
+            setError("CRYPTO_ERROR // Hash computation failed");
         } finally {
             setIsChecking(false);
         }
@@ -135,7 +151,7 @@ export const AdminAuth = ({ onAuthenticated }: AdminAuthProps) => {
 
                 <div className="mt-6 text-center">
                     <p className="text-[9px] font-mono text-zinc-700 leading-relaxed">
-                        SERVER-SIDE SECURE VERIFICATION • HTTP-ONLY COOKIE AUTH<br />
+                        SHA-256 CLIENT-SIDE VERIFICATION • SESSION-BASED AUTH<br />
                         ALL ACCESS ATTEMPTS ARE LOGGED
                     </p>
                 </div>
