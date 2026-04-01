@@ -27,11 +27,12 @@ export default function Home() {
         <Hero />
 
         <div className="flex flex-col">
+          <YouTubeChannels />
           <TrustedBy />
           <BigProductions />
         </div>
 
-        <YouTubeChannels />
+
         <Certifications />
         <Portfolio />
 

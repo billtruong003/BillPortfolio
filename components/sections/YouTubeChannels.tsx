@@ -35,7 +35,7 @@ const CHANNELS: ChannelConfig[] = [
         label: "Unity Dev & Shader Tutorials",
     },
     {
-        id: "UCxxx_BillVRGamer",
+        id: "UCodHIrwfVJfHen6ljDfFbzA",
         handle: "@BillVRGamer",
         fallbackTitle: "Bill VR Gamer",
         icon: <Gamepad2 size={16} />,
