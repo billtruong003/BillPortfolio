@@ -1,60 +1,59 @@
-'use client';
+"use client";
 
-import { Canvas, useFrame, extend, ReactThreeFiber } from '@react-three/fiber';
-import { 
-    OrbitControls, 
+import { Canvas, useFrame, extend, ReactThreeFiber } from "@react-three/fiber";
+import {
+    OrbitControls,
     Center,
     shaderMaterial,
     useGLTF,
     ContactShadows,
-    Environment,
     Float
-} from '@react-three/drei';
-import { Suspense, useRef, useMemo, useEffect, useState } from 'react';
-import * as THREE from 'three';
-import { getAssetPath } from '@/lib/utils';
+} from "@react-three/drei";
+import { Suspense, useRef, useMemo, useEffect, useState } from "react";
+import * as THREE from "three";
+import { getAssetPath } from "@/lib/utils";
 
 const HologramShaderMaterial = shaderMaterial(
     {
         uTime: 0,
-        uColor: new THREE.Color('#332008'),
-        uRimColor: new THREE.Color('#FFB84D'),
+        uColor: new THREE.Color("#332008"),
+        uRimColor: new THREE.Color("#FFB84D"),
     },
     `
-    varying vec2 vUv;
-    varying vec3 vNormal;
-    varying vec3 vViewPosition;
-    void main() {
-        vUv = uv;
-        vNormal = normalize(normalMatrix * normal);
-        vec4 modelPosition = modelMatrix * vec4(position, 1.0);
-        vec4 viewPosition = viewMatrix * modelPosition;
-        vViewPosition = -viewPosition.xyz;
-        gl_Position = projectionMatrix * viewPosition;
-    }
-    `,
+  varying vec2 vUv;
+  varying vec3 vNormal;
+  varying vec3 vViewPosition;
+  void main() {
+      vUv = uv;
+      vNormal = normalize(normalMatrix * normal);
+      vec4 modelPosition = modelMatrix * vec4(position, 1.0);
+      vec4 viewPosition = viewMatrix * modelPosition;
+      vViewPosition = -viewPosition.xyz;
+      gl_Position = projectionMatrix * viewPosition;
+  }
+  `,
     `
-    uniform float uTime;
-    uniform vec3 uColor;
-    uniform vec3 uRimColor;
-    varying vec3 vNormal;
-    varying vec3 vViewPosition;
-    void main() {
-        vec3 normal = normalize(vNormal);
-        vec3 viewDir = normalize(vViewPosition);
-        float scanline = sin(gl_FragCoord.y * 0.1 - uTime * 2.0);
-        scanline = smoothstep(0.4, 0.6, scanline);
-        float fresnel = dot(viewDir, normal);
-        fresnel = clamp(1.0 - fresnel, 0.0, 1.0);
-        fresnel = pow(fresnel, 2.5);
-        vec3 finalColor = mix(uColor, uRimColor, fresnel);
-        finalColor += uRimColor * scanline * 0.05;
-        float alpha = 0.85 + (fresnel * 0.15);
-        gl_FragColor = vec4(finalColor, alpha);
-        #include <tonemapping_fragment>
-        #include <colorspace_fragment>
-    }
-    `
+  uniform float uTime;
+  uniform vec3 uColor;
+  uniform vec3 uRimColor;
+  varying vec3 vNormal;
+  varying vec3 vViewPosition;
+  void main() {
+      vec3 normal = normalize(vNormal);
+      vec3 viewDir = normalize(vViewPosition);
+      float scanline = sin(gl_FragCoord.y * 0.1 - uTime * 2.0);
+      scanline = smoothstep(0.4, 0.6, scanline);
+      float fresnel = dot(viewDir, normal);
+      fresnel = clamp(1.0 - fresnel, 0.0, 1.0);
+      fresnel = pow(fresnel, 2.5);
+      vec3 finalColor = mix(uColor, uRimColor, fresnel);
+      finalColor += uRimColor * scanline * 0.05;
+      float alpha = 0.85 + (fresnel * 0.15);
+      gl_FragColor = vec4(finalColor, alpha);
+      #include <tonemapping_fragment>
+      #include <colorspace_fragment>
+  }
+  `
 );
 
 extend({ HologramShaderMaterial });
@@ -78,7 +77,7 @@ declare global {
 const HologramModel = () => {
     const materialRef = useRef<THREE.ShaderMaterial>(null);
     const [useFallback, setUseFallback] = useState(false);
-    
+
     const gltf = useGLTF(getAssetPath("/models/hero-model.glb"), true) as any;
 
     useFrame((state) => {
@@ -100,12 +99,12 @@ const HologramModel = () => {
             }
         });
         return () => {
-             scene.traverse((child: any) => {
+            scene.traverse((child: any) => {
                 if (child.isMesh) {
                     child.geometry.dispose();
                 }
             });
-        }
+        };
     }, [scene]);
 
     const meshes = useMemo(() => {
@@ -118,15 +117,10 @@ const HologramModel = () => {
 
     return (
         <Center>
-            <Float 
-                speed={2} 
-                rotationIntensity={0.2} 
-                floatIntensity={0.5} 
-                floatingRange={[-0.1, 0.1]}
-            >
+            <Float speed={2} rotationIntensity={0.2} floatIntensity={0.5} floatingRange={[-0.1, 0.1]}>
                 <group dispose={null}>
                     {meshes.map((mesh, i) => (
-                        <mesh 
+                        <mesh
                             key={i}
                             geometry={mesh.geometry}
                             position={mesh.position}
@@ -139,8 +133,8 @@ const HologramModel = () => {
                                 side={THREE.FrontSide}
                                 depthWrite={true}
                                 blending={THREE.NormalBlending}
-                                uColor={new THREE.Color('#2A1805')} 
-                                uRimColor={new THREE.Color('#FFB84D')}
+                                uColor={new THREE.Color("#2A1805")}
+                                uRimColor={new THREE.Color("#FFB84D")}
                             />
                         </mesh>
                     ))}
@@ -161,8 +155,8 @@ const FallbackShape = ({ materialRef }: { materialRef: any }) => (
                     side={THREE.FrontSide}
                     depthWrite={true}
                     blending={THREE.NormalBlending}
-                    uColor={new THREE.Color('#2A1805')}
-                    uRimColor={new THREE.Color('#FFB84D')}
+                    uColor={new THREE.Color("#2A1805")}
+                    uRimColor={new THREE.Color("#FFB84D")}
                 />
             </mesh>
         </Float>
@@ -172,36 +166,34 @@ const FallbackShape = ({ materialRef }: { materialRef: any }) => (
 export const Hero3D = () => {
     return (
         <div className="w-full h-full min-h-[500px] lg:min-h-[600px] cursor-grab active:cursor-grabbing relative z-10">
-            <Canvas 
-                camera={{ position: [0, 0, 5], fov: 30 }} 
-                dpr={[1, 2]} 
-                gl={{ 
-                    alpha: true, 
-                    antialias: true, 
+            <Canvas
+                camera={{ position: [0, 0, 5], fov: 30 }}
+                dpr={[1, 2]}
+                gl={{
+                    alpha: true,
+                    antialias: true,
                     powerPreference: "high-performance",
                     stencil: false,
-                    depth: true
+                    depth: true,
                 }}
             >
-                <Environment preset="studio" />
-                
                 <Suspense fallback={null}>
                     <HologramModel />
                 </Suspense>
 
-                <ContactShadows 
-                    position={[0, -1.6, 0]} 
-                    opacity={0.4} 
-                    scale={12} 
-                    blur={2.5} 
+                <ContactShadows
+                    position={[0, -1.6, 0]}
+                    opacity={0.4}
+                    scale={12}
+                    blur={2.5}
                     far={2}
                     color="#1a1005"
-                    frames={1} 
+                    frames={1}
                 />
 
-                <OrbitControls 
-                    enableZoom={false} 
-                    autoRotate 
+                <OrbitControls
+                    enableZoom={false}
+                    autoRotate
                     autoRotateSpeed={0.8}
                     enablePan={false}
                     minPolarAngle={Math.PI / 3}
@@ -211,3 +203,5 @@ export const Hero3D = () => {
         </div>
     );
 };
+
+useGLTF.preload(getAssetPath("/models/hero-model.glb"));

@@ -21,6 +21,8 @@ const nextConfig = {
       { protocol: "https", hostname: "i.vimeocdn.com" },
       { protocol: "https", hostname: "img.itch.zone" },
       { protocol: "https", hostname: "vumbnail.com" },
+      { protocol: "https", hostname: "yt3.googleusercontent.com" },
+      { protocol: "https", hostname: "i.ytimg.com" },
     ],
     dangerouslyAllowSVG: true,
   },
@@ -33,10 +35,41 @@ const nextConfig = {
     config.module.rules.push({ test: /\.(glb|gltf)$/, type: 'asset/resource' });
     return config;
   },
-  // Headers for Unity WebGL builds (used when deploying to Vercel/similar)
-  // For static export (GitHub Pages), configure via _headers file or server config
   async headers() {
     return [
+      // ===== SECURITY HEADERS (prevents "suspicious site" warnings) =====
+      {
+        source: '/(.*)',
+        headers: [
+          // Prevents MIME-type sniffing attacks
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          // Controls iframe embedding
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          // Strict referrer policy
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          // Permissions policy — declare we don't use suspicious APIs
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=(), payment=()'
+          },
+          // Content Security Policy — whitelist trusted sources only
+          {
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.youtube.com https://www.facebook.com https://platform.linkedin.com https://www.googleapis.com",
+              "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+              "font-src 'self' https://fonts.gstatic.com",
+              "img-src 'self' data: blob: https: http:",
+              "media-src 'self' blob: https:",
+              "frame-src https://www.youtube.com https://www.facebook.com https://www.linkedin.com https://player.vimeo.com",
+              "connect-src 'self' https://www.googleapis.com https://ipwho.is https://*.google.com",
+              "worker-src 'self' blob:",
+            ].join('; ')
+          },
+        ],
+      },
+      // Unity WebGL build headers
       {
         source: '/webgl-games/:path*.gz',
         headers: [

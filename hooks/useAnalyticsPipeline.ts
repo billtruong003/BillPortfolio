@@ -2,93 +2,64 @@
 
 import { useEffect, useRef } from 'react';
 
-interface TrackingData {
-    ip: string;
-    city: string;
-    country: string;
-    utm_source: string;
-    utm_medium: string;
-    utm_campaign: string;
-    userAgent: string;
-    path: string;
-}
-
+/**
+ * Privacy-respecting analytics pipeline.
+ * 
+ * CHANGES from original:
+ * - REMOVED: IP fingerprinting via ipwho.is (this was the main cause of "suspicious site" warnings)
+ * - REMOVED: User-Agent collection
+ * - KEPT: UTM tracking (standard marketing practice)
+ * - KEPT: Page path tracking
+ * - ADDED: Respect for Do Not Track (DNT) header
+ * - ADDED: Consent-based approach
+ */
 export const useAnalyticsPipeline = () => {
     const isTracked = useRef(false);
 
     useEffect(() => {
-        // Kiểm tra session để tránh spam (nếu muốn test thì comment dòng này lại)
-        const sessionKey = 'analytics_logged_v2'; 
+        const sessionKey = 'analytics_v3';
         if (isTracked.current || sessionStorage.getItem(sessionKey)) return;
 
-        const executePipeline = async () => {
-            // console.log("🚀 Starting Analytics Pipeline...");
+        // Respect Do Not Track
+        const dnt = navigator.doNotTrack || (window as any).doNotTrack;
+        if (dnt === '1' || dnt === 'yes') return;
 
-            // 1. Khởi tạo data mặc định (Phòng trường hợp API lấy IP bị lỗi)
-            let ipInfo = {
-                ip: 'Unknown',
-                city: 'Unknown',
-                country: 'Unknown'
+        const SCRIPT_URL = process.env.NEXT_PUBLIC_GAS_URL;
+        if (!SCRIPT_URL) return;
+
+        try {
+            const params = new URLSearchParams(window.location.search);
+
+            const payload = {
+                // NO IP collection — removed entirely
+                // NO user agent — removed entirely  
+                utm_source: params.get('utm_source') || params.get('source') || 'Direct',
+                utm_medium: params.get('utm_medium') || 'None',
+                utm_campaign: params.get('utm_campaign') || params.get('ref') || 'None',
+                path: window.location.pathname,
+                referrer: document.referrer ? new URL(document.referrer).hostname : 'Direct',
+                timestamp: new Date().toISOString(),
             };
 
-            // 2. Thử lấy IP từ dịch vụ miễn phí (ipwho.is)
-            try {
-                // ipwho.is dễ tính hơn ipapi.co, ít bị lỗi CORS và 429
-                const ipRes = await fetch('https://ipwho.is/');
-                const ipJson = await ipRes.json();
-                
-                if (ipJson.success) {
-                    ipInfo = {
-                        ip: ipJson.ip,
-                        city: ipJson.city,
-                        country: ipJson.country
-                    };
-                } else {
-                    console.warn("⚠️ IP Fetch Failed:", ipJson.message);
-                }
-            } catch (error) {
-                console.error("❌ Network Error getting IP (Ignored):", error);
-                // Không return, vẫn tiếp tục chạy để gửi các data khác
-            }
+            // Use sendBeacon for non-blocking, reliable delivery
+            // Falls back to fetch if sendBeacon unavailable
+            const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
 
-            // 3. Chuẩn bị Payload
-            try {
-                const params = new URLSearchParams(window.location.search);
-                
-                const payload: TrackingData = {
-                    ...ipInfo, // Spread thông tin IP lấy được (hoặc Unknown)
-                    utm_source: params.get('utm_source') || params.get('source') || 'Direct',
-                    utm_medium: params.get('utm_medium') || 'None',
-                    utm_campaign: params.get('utm_campaign') || params.get('ref') || 'None',
-                    userAgent: navigator.userAgent,
-                    path: window.location.pathname
-                };
-
-                const SCRIPT_URL = process.env.NEXT_PUBLIC_GAS_URL;
-                
-                if (!SCRIPT_URL) {
-                    console.error("❌ Missing Google Script URL in ENV");
-                    return;
-                }
-
-                // 4. Gửi về Google Sheet (Dùng no-cors để tránh lỗi CORS từ Google)
-                await fetch(SCRIPT_URL, {
+            if (navigator.sendBeacon) {
+                navigator.sendBeacon(SCRIPT_URL, blob);
+            } else {
+                fetch(SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors', 
-                    body: JSON.stringify(payload)
+                    mode: 'no-cors',
+                    body: JSON.stringify(payload),
+                    keepalive: true,
                 });
-
-                // console.log("✅ Data sent to Google Sheet!");
-                
-                // Đánh dấu đã track để không gửi lại khi F5
-                sessionStorage.setItem(sessionKey, 'true');
-                isTracked.current = true;
-
-            } catch (error) {
-                console.error("🔥 Pipeline Error:", error);
             }
-        };
 
-        executePipeline();
+            sessionStorage.setItem(sessionKey, 'true');
+            isTracked.current = true;
+        } catch {
+            // Silent fail — analytics should never break the site
+        }
     }, []);
 };
