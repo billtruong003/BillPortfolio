@@ -103,7 +103,7 @@ export const UnityPlayer = ({ game, onClose, mode = 'fullpage' }: UnityPlayerPro
             setLoadState('loading-data');
 
             const config: any = {
-                dataUrl: (game.build as any).externalDataUrl || `${buildPath}/${buildName}.data${ext}`,
+                dataUrl: game.build.externalDataUrl || `${buildPath}/${buildName}.data${ext}`,
                 frameworkUrl: `${buildPath}/${buildName}.framework.js${ext}`,
                 codeUrl: `${buildPath}/${buildName}.wasm${ext}`,
                 companyName: game.build.companyName || 'DefaultCompany',

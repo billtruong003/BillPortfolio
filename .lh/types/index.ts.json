@@ -1,0 +1,18 @@
+{
+    "sourceFile": "types/index.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1775755104802,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1775755104802,
+            "name": "Commit-0",
+            "content": "export interface Social {\r\n    platform: string;\r\n    url: string;\r\n    priority: string;\r\n}\r\n\r\nexport interface Company {\r\n    name: string;\r\n    logo?: string;\r\n    url: string;\r\n    color?: string;\r\n    textColor?: string;\r\n    story?: string;\r\n    role?: string;\r\n    modal_img?: string;\r\n    gallery?: {\r\n        type: 'image' | 'video';\r\n        src: string;\r\n    }[];\r\n}\r\n\r\nexport interface Production {\r\n    name: string;\r\n    logo?: string;\r\n    url: string;\r\n    desc?: string;\r\n    story?: string;\r\n    at_company?: string;\r\n    role?: string;\r\n    modal_img?: string;\r\n}\r\n\r\nexport interface ExperienceItem {\r\n    role: string;\r\n    company: string;\r\n    period: string;\r\n    desc?: string;\r\n    achievements?: string[];\r\n    skills?: string[];\r\n}\r\n\r\nexport interface Project {\r\n    id: number;\r\n    title: string;\r\n    category: string;\r\n    type: 'image' | 'video' | 'web' | 'webgl'; \r\n    src: string;\r\n    url: string;\r\n    tags: string[];\r\n    description: string;\r\n    gallery?: {\r\n        type: 'image' | 'video';\r\n        src: string;\r\n    }[];\r\n    gameId?: string;\r\n}\r\n\r\nexport interface WebGLGame {\r\n    id: string;\r\n    title: string;\r\n    description: string;\r\n    thumbnail: string;\r\n    banner?: string;\r\n    screenshots?: string[];\r\n    tags: string[];\r\n    genre: 'action' | 'puzzle' | 'platformer' | 'shooter' | 'rpg' | 'simulation' | 'other';\r\n    releaseDate: string;\r\n    buildSize: string;\r\n    status: 'playable' | 'demo' | 'wip' | 'archived';\r\n    build: {\r\n        buildPath: string;\r\n        buildName: string;\r\n        compression: 'gzip' | 'brotli' | 'none';\r\n        hasStreamingAssets?: boolean;\r\n        externalDataUrl?: string;\r\n        companyName?: string;\r\n        productName?: string;\r\n        productVersion?: string;\r\n    };\r\n    display?: {\r\n        fixedRatio: boolean;\r\n        ratioWidth: number;\r\n        ratioHeight: number;\r\n    };\r\n    controls?: {\r\n        keyboard?: string[];\r\n        mouse?: string[];\r\n        touch?: boolean;\r\n    };\r\n    unityVersion?: string;\r\n    sourceUrl?: string;\r\n    externalUrl?: string;\r\n    preferredOrientation?: 'landscape' | 'portrait' | 'any';\r\n    preferredAspectRatio?: string;\r\n}\r\n\r\nexport interface WebGLGameRegistry {\r\n    games: WebGLGame[];\r\n    lastUpdated: string;\r\n}\r\n\r\nexport interface ResumeData {\r\n    profile: {\r\n        name: string;\r\n        title: string;\r\n        quote: string;\r\n        quoteAuthor: string;\r\n        about: string;\r\n        location: string;\r\n        contact: { email: string };\r\n    };\r\n    socials: Social[];\r\n    companies?: Company[];\r\n    productions?: Production[];\r\n    feed: string[];\r\n    experience: {\r\n        dev: ExperienceItem[];\r\n        teaching: ExperienceItem[];\r\n    };\r\n    skills: { name: string; level: string }[];\r\n    portfolio: Project[];\r\n    certifications: { name: string; issuer: string; date: string; url: string }[];\r\n    testimonials: { quote: string; author: string; role: string }[];\r\n    tech_stack: { languages: string[]; frameworks: string[]; others: string[] };\r\n}"
+        }
+    ]
+}
