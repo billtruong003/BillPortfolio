@@ -1,237 +1,204 @@
 {
-    "games": [
-        {
-            "id": "merge-fruit",
-            "title": "Merge Fruit",
-            "description": "A Suika-style merge puzzle game shipped at Golden Sea Studio.",
-            "thumbnail": "webgl-games/mushroom-game/mushroom.jpg",
-            "tags": [
-                "Hyper Casual",
-                "Suika-like",
-                "Mobile",
-                "Shipped"
-            ],
-            "genre": "puzzle",
-            "releaseDate": "2024-03-01",
-            "buildSize": "129 MB",
-            "status": "playable",
-            "build": {
-                "buildPath": "/webgl-games/mushroom-game/Build",
-                "buildName": "MergeFruitBuild",
-                "compression": "none",
-                "hasStreamingAssets": true,
-                "companyName": "GoldenSea",
-                "productName": "MergeFruit",
-                "productVersion": "1.0"
-            },
-            "display": {
-                "fixedRatio": true,
-                "ratioWidth": 9,
-                "ratioHeight": 16
-            },
-            "controls": {
-                "mouse": [
-                    "Left Click/Drag — Drop Fruit"
-                ],
-                "touch": true
-            },
-            "preferredOrientation": "portrait"
-        },
-        {
-            "id": "food-ping-pong",
-            "title": "Drag & Slice: Culinary Journey",
-            "description": "A dynamic fusion of drag-and-shoot action with culinary simulation. Gather ingredients, engage in combat, and master the kitchen.",
-            "thumbnail": "webgl-games/food-ping-pong/thumbnail.png",
-            "tags": [
-                "Action",
-                "Adventure",
-                "Culinary Simulation",
-                "Strategy",
-                "Casual"
-            ],
-            "genre": "action",
-            "releaseDate": "2026-03-11",
-            "buildSize": "34.6 MB",
-            "status": "playable",
-            "build": {
-                "buildPath": "/webgl-games/food-ping-pong/Build",
-                "buildName": "foodpingpont",
-                "compression": "none",
-                "hasStreamingAssets": false,
-                "companyName": "BillTruong",
-                "productName": "DragAndSlice",
-                "productVersion": "1.0"
-            },
-            "display": {
-                "fixedRatio": true,
-                "ratioWidth": 9,
-                "ratioHeight": 16
-            },
-            "controls": {
-                "mouse": [
-                    "Drag & Release — Shoot/Slice"
-                ],
-                "touch": true
-            },
-            "preferredOrientation": "portrait"
-        },
-        {
-            "id": "typing-fight",
-            "title": "Typing Fight",
-            "description": "An educational combat game where kids practice typing skills to defeat enemies in an epic arena.",
-            "thumbnail": "webgl-games/typing-fight/thumbnail.png",
-            "tags": [
-                "Educational",
-                "Typing",
-                "Kids",
-                "Action"
-            ],
-            "genre": "education",
-            "releaseDate": "2026-03-11",
-            "buildSize": "38.9 MB",
-            "status": "playable",
-            "build": {
-                "buildPath": "/webgl-games/typing-fight/Build",
-                "buildName": "typing-fight",
-                "compression": "none",
-                "hasStreamingAssets": true,
-                "companyName": "BillTruong",
-                "productName": "TypingFight",
-                "productVersion": "1.0"
-            },
-            "display": {
-                "fixedRatio": true,
-                "ratioWidth": 16,
-                "ratioHeight": 9
-            },
-            "controls": {
-                "keyboard": [
-                    "A-Z — Type words to attack"
-                ],
-                "touch": false
-            },
-            "preferredOrientation": "landscape"
-        },
-        {
-            "id": "brush-hit",
-            "title": "Brush Hit (Clone)",
-            "description": "A hyper-casual coloring puzzle game cloned from Voodoo's hit title. Developed as a showcase project for a Gameloft application.",
-            "thumbnail": "webgl-games/brush-hit/thumbnail.png",
-            "tags": [
-                "Hyper Casual",
-                "Puzzle",
-                "Coloring",
-                "Clone",
-                "Gameloft"
-            ],
-            "genre": "casual",
-            "releaseDate": "2026-03-11",
-            "buildSize": "117 MB",
-            "status": "playable",
-            "build": {
-                "buildPath": "/webgl-games/brush-hit/Build",
-                "buildName": "BrushHit",
-                "compression": "none",
-                "hasStreamingAssets": false,
-                "companyName": "BillTruong",
-                "productName": "BrushHit",
-                "productVersion": "1.0"
-            },
-            "display": {
-                "fixedRatio": true,
-                "ratioWidth": 9,
-                "ratioHeight": 16
-            },
-            "controls": {
-                "mouse": [
-                    "Left Click & Drag — Swipe to paint"
-                ],
-                "touch": true
-            },
-            "preferredOrientation": "portrait"
-        },
-        {
-            "id": "smulie-cat-ninja",
-            "title": "Smulie Cat Ninja",
-            "description": "A rhythm-based music game combining fast-paced ninja slicing action with catchy beats. Developed as a technical test for Smulie.",
-            "thumbnail": "webgl-games/SmulieCatNinja/thumbnail.png",
-            "tags": [
-                "Music",
-                "Rhythm",
-                "Action",
-                "Test Project",
-                "Smulie"
-            ],
-            "genre": "music",
-            "releaseDate": "2026-03-11",
-            "buildSize": "12.2 MB",
-            "status": "playable",
-            "build": {
-                "buildPath": "/webgl-games/SmulieCatNinja/Build",
-                "buildName": "SmulieCatNinja",
-                "compression": "none",
-                "hasStreamingAssets": false,
-                "companyName": "BillTruong",
-                "productName": "SmulieCatNinja",
-                "productVersion": "1.0"
-            },
-            "display": {
-                "fixedRatio": true,
-                "ratioWidth": 9,
-                "ratioHeight": 16
-            },
-            "controls": {
-                "mouse": [
-                    "Click & Drag — Slice to the rhythm"
-                ],
-                "touch": true
-            },
-            "preferredOrientation": "portrait"
-        },
-        {
-            "id": "zeno",
-            "title": "Timeless Soul",
-            "description": "A roguelite horde-survival top-down shooter built for Unity Jam 2025. Play as an immortal Dark Mage cursed to fight across infinite lifetimes — each death leaves a Soul Grave that becomes a permanent ally or explosive power-up in the next reincarnation. Features occlusion map baking, vertex animation textures, and kaiju boss fights.",
-            "thumbnail": "webgl-games/zeno/thumbnail.png",
-            "tags": [
-                "Roguelite",
-                "Horde Survival",
-                "Top-down Shooter",
-                "Game Jam",
-                "Unity Jam 2025",
-                "PC",
-                "Boss Fight"
-            ],
-            "genre": "action",
-            "releaseDate": "2025-01-01",
-            "buildSize": "240mb",
-            "status": "playable",
-            "build": {
-                "buildPath": "/webgl-games/zeno/Build",
-                "buildName": "Game",
-                "compression": "none",
-                "hasStreamingAssets": true,
-                "companyName": "BillTruong",
-                "productName": "TimelessSoul",
-                "productVersion": "1.0"
-            },
-            "display": {
-                "fixedRatio": true,
-                "ratioWidth": 16,
-                "ratioHeight": 9
-            },
-            "controls": {
-                "keyboard": [
-                    "WASD — Move"
-                ],
-                "mouse": [
-                    "Left Click — Fire piercing magic bolts",
-                    "Right Click — Dash"
-                ],
-                "touch": false
-            },
-            "preferredOrientation": "landscape"
-        }
-    ],
-    "lastUpdated": "2026-04-09T09:00:00Z"
+  "games": [
+    {
+      "id": "merge-fruit",
+      "title": "Merge Fruit",
+      "description": "A Suika-style merge puzzle game shipped at Golden Sea Studio.",
+      "thumbnail": "webgl-games/mushroom-game/mushroom.jpg",
+      "tags": ["Hyper Casual", "Suika-like", "Mobile", "Shipped"],
+      "genre": "puzzle",
+      "releaseDate": "2024-03-01",
+      "buildSize": "129 MB",
+      "status": "playable",
+      "build": {
+        "buildPath": "/webgl-games/mushroom-game/Build",
+        "buildName": "MergeFruitBuild",
+        "compression": "none",
+        "hasStreamingAssets": true,
+        "companyName": "GoldenSea",
+        "productName": "MergeFruit",
+        "productVersion": "1.0"
+      },
+      "display": {
+        "fixedRatio": true,
+        "ratioWidth": 9,
+        "ratioHeight": 16
+      },
+      "controls": {
+        "mouse": ["Left Click/Drag — Drop Fruit"],
+        "touch": true
+      },
+      "preferredOrientation": "portrait"
+    },
+    {
+      "id": "food-ping-pong",
+      "title": "Drag & Slice: Culinary Journey",
+      "description": "A dynamic fusion of drag-and-shoot action with culinary simulation. Gather ingredients, engage in combat, and master the kitchen.",
+      "thumbnail": "webgl-games/food-ping-pong/thumbnail.png",
+      "tags": [
+        "Action",
+        "Adventure",
+        "Culinary Simulation",
+        "Strategy",
+        "Casual"
+      ],
+      "genre": "action",
+      "releaseDate": "2026-03-11",
+      "buildSize": "34.6 MB",
+      "status": "playable",
+      "build": {
+        "buildPath": "/webgl-games/food-ping-pong/Build",
+        "buildName": "foodpingpont",
+        "compression": "none",
+        "hasStreamingAssets": false,
+        "companyName": "BillTruong",
+        "productName": "DragAndSlice",
+        "productVersion": "1.0"
+      },
+      "display": {
+        "fixedRatio": true,
+        "ratioWidth": 9,
+        "ratioHeight": 16
+      },
+      "controls": {
+        "mouse": ["Drag & Release — Shoot/Slice"],
+        "touch": true
+      },
+      "preferredOrientation": "portrait"
+    },
+    {
+      "id": "typing-fight",
+      "title": "Typing Fight",
+      "description": "An educational combat game where kids practice typing skills to defeat enemies in an epic arena.",
+      "thumbnail": "webgl-games/typing-fight/thumbnail.png",
+      "tags": ["Educational", "Typing", "Kids", "Action"],
+      "genre": "education",
+      "releaseDate": "2026-03-11",
+      "buildSize": "38.9 MB",
+      "status": "playable",
+      "build": {
+        "buildPath": "/webgl-games/typing-fight/Build",
+        "buildName": "typing-fight",
+        "compression": "none",
+        "hasStreamingAssets": true,
+        "companyName": "BillTruong",
+        "productName": "TypingFight",
+        "productVersion": "1.0"
+      },
+      "display": {
+        "fixedRatio": true,
+        "ratioWidth": 16,
+        "ratioHeight": 9
+      },
+      "controls": {
+        "keyboard": ["A-Z — Type words to attack"],
+        "touch": false
+      },
+      "preferredOrientation": "landscape"
+    },
+    {
+      "id": "brush-hit",
+      "title": "Brush Hit (Clone)",
+      "description": "A hyper-casual coloring puzzle game cloned from Voodoo's hit title. Developed as a showcase project for a Gameloft application.",
+      "thumbnail": "webgl-games/brush-hit/thumbnail.png",
+      "tags": ["Hyper Casual", "Puzzle", "Coloring", "Clone", "Gameloft"],
+      "genre": "casual",
+      "releaseDate": "2026-03-11",
+      "buildSize": "117 MB",
+      "status": "playable",
+      "build": {
+        "buildPath": "/webgl-games/brush-hit/Build",
+        "buildName": "BrushHit",
+        "compression": "none",
+        "hasStreamingAssets": false,
+        "companyName": "BillTruong",
+        "productName": "BrushHit",
+        "productVersion": "1.0"
+      },
+      "display": {
+        "fixedRatio": true,
+        "ratioWidth": 9,
+        "ratioHeight": 16
+      },
+      "controls": {
+        "mouse": ["Left Click & Drag — Swipe to paint"],
+        "touch": true
+      },
+      "preferredOrientation": "portrait"
+    },
+    {
+      "id": "smulie-cat-ninja",
+      "title": "Smulie Cat Ninja",
+      "description": "A rhythm-based music game combining fast-paced ninja slicing action with catchy beats. Developed as a technical test for Smulie.",
+      "thumbnail": "webgl-games/SmulieCatNinja/thumbnail.png",
+      "tags": ["Music", "Rhythm", "Action", "Test Project", "Smulie"],
+      "genre": "music",
+      "releaseDate": "2026-03-11",
+      "buildSize": "12.2 MB",
+      "status": "playable",
+      "build": {
+        "buildPath": "/webgl-games/SmulieCatNinja/Build",
+        "buildName": "SmulieCatNinja",
+        "compression": "none",
+        "hasStreamingAssets": false,
+        "companyName": "BillTruong",
+        "productName": "SmulieCatNinja",
+        "productVersion": "1.0"
+      },
+      "display": {
+        "fixedRatio": true,
+        "ratioWidth": 9,
+        "ratioHeight": 16
+      },
+      "controls": {
+        "mouse": ["Click & Drag — Slice to the rhythm"],
+        "touch": true
+      },
+      "preferredOrientation": "portrait"
+    },
+    {
+      "id": "zeno",
+      "title": "Timeless Soul",
+      "description": "A roguelite horde-survival top-down shooter built for Unity Jam 2025. Play as an immortal Dark Mage cursed to fight across infinite lifetimes — each death leaves a Soul Grave that becomes a permanent ally or explosive power-up in the next reincarnation. Features occlusion map baking, vertex animation textures, and kaiju boss fights.",
+      "thumbnail": "webgl-games/zeno/thumbnail.png",
+      "tags": [
+        "Roguelite",
+        "Horde Survival",
+        "Top-down Shooter",
+        "Game Jam",
+        "Unity Jam 2025",
+        "PC",
+        "Boss Fight"
+      ],
+      "genre": "action",
+      "releaseDate": "2025-01-01",
+      "buildSize": "240 MB",
+      "status": "playable",
+      "build": {
+        "buildPath": "/webgl-games/zeno/Build",
+        "buildName": "Game",
+        "compression": "none",
+        "hasStreamingAssets": true,
+        "externalDataUrl": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/zeno/Game.data",
+        "companyName": "BillTruong",
+        "productName": "TimelessSoul",
+        "productVersion": "1.0"
+      },
+      "display": {
+        "fixedRatio": true,
+        "ratioWidth": 16,
+        "ratioHeight": 9
+      },
+      "controls": {
+        "keyboard": ["WASD — Move"],
+        "mouse": [
+          "Left Click — Fire piercing magic bolts",
+          "Right Click — Dash"
+        ],
+        "touch": false
+      },
+      "preferredOrientation": "landscape"
+    }
+  ],
+  "lastUpdated": "2026-04-09T09:00:00Z"
 }
