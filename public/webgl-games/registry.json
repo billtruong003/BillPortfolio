@@ -176,7 +176,7 @@
       "status": "playable",
       "build": {
         "buildPath": "/webgl-games/zeno/Build",
-        "buildName": "Game",
+        "buildName": "WebGL",
         "compression": "none",
         "hasStreamingAssets": true,
         "externalDataUrl": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/zeno/WebGL.data",
