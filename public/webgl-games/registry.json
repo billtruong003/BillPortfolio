@@ -179,7 +179,7 @@
         "buildName": "Game",
         "compression": "none",
         "hasStreamingAssets": true,
-        "externalDataUrl": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/zeno/Game.data",
+        "externalDataUrl": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/zeno/WebGL.data",
         "companyName": "BillTruong",
         "productName": "TimelessSoul",
         "productVersion": "1.0"
