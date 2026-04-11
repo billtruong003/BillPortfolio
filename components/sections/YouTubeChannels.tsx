@@ -43,6 +43,15 @@ const CHANNELS: ChannelConfig[] = [
         accentBg: "bg-red-500/10 border-red-500/30",
         label: "VR Gaming & Reviews",
     },
+    {
+        id: "UC9E61azlbreSfShsGuSSDnw",
+        handle: "@BillAITrainer",
+        fallbackTitle: "Bill AI Trainer",
+        icon: <Code2 size={16} />,
+        accent: "text-violet-400",
+        accentBg: "bg-violet-500/10 border-violet-500/30",
+        label: "AI Training & Experiments",
+    },
 ];
 
 const formatCount = (num: string | number): string => {
@@ -198,12 +207,24 @@ export const YouTubeChannels = () => {
                     <h2 className="text-3xl font-bold text-zinc-100 mb-2">
                         YouTube <span className="text-red-400">Presence</span>
                     </h2>
+
+                    {!loading && Object.keys(statsMap).length > 0 && (() => {
+                        const totalViews = Object.values(statsMap).reduce((sum, s) => sum + parseInt(s.viewCount || '0', 10), 0);
+                        return (
+                            <div className="mt-2 mb-3 flex items-center gap-3 px-5 py-2.5 bg-red-500/10 border border-red-500/20 rounded-full">
+                                <Eye size={16} className="text-red-400" />
+                                <span className="text-xl md:text-2xl font-black text-red-400 font-mono tracking-tight">{formatCount(totalViews)}</span>
+                                <span className="text-xs text-zinc-400 font-mono uppercase tracking-wider">Total Views</span>
+                            </div>
+                        );
+                    })()}
+
                     <p className="text-zinc-500 text-sm max-w-md">
                         Real-time stats from my channels. Subscribe to stay updated on dev content and VR gaming.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {CHANNELS.map((config) => (
                         <ChannelCard
                             key={config.id}

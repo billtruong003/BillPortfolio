@@ -99,6 +99,48 @@ export interface WebGLGameRegistry {
     lastUpdated: string;
 }
 
+// ===== Blog / Lab Types =====
+
+export type BlogCategory = 'shader-breakdown' | 'tech-art' | 'unity-dev' | 'tools' | 'devlog' | 'tutorial';
+
+export interface PostHeading {
+    id: string;
+    text: string;
+    level: 2 | 3;
+}
+
+export interface BlogPost {
+    slug: string;
+    title: string;
+    date: string;
+    updated?: string;
+    excerpt: string;
+    coverImage?: string;
+    category: BlogCategory;
+    tags: string[];
+    readingTime: number;
+    published: boolean;
+    featured?: boolean;
+    body: string;
+    headings: PostHeading[];
+}
+
+export interface PostManifest {
+    posts: BlogPost[];
+    categories: { name: BlogCategory; count: number }[];
+    tags: { name: string; count: number }[];
+    lastCompiled: string;
+}
+
+export interface PostAnalyticsEvent {
+    type: 'post_view' | 'post_scroll' | 'post_read_complete';
+    slug: string;
+    path: string;
+    scrollDepth?: number;
+    readTime?: number;
+    timestamp: string;
+}
+
 export interface ResumeData {
     profile: {
         name: string;
@@ -112,7 +154,7 @@ export interface ResumeData {
     socials: Social[];
     companies?: Company[];
     productions?: Production[];
-    feed: string[];
+    feed: { html: string; date: string }[];
     experience: {
         dev: ExperienceItem[];
         teaching: ExperienceItem[];

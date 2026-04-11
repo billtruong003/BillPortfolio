@@ -5,8 +5,41 @@ import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { SciFiLoadBtn } from '@/components/ui/SciFiLoadBtn';
 import { Loader2 } from 'lucide-react';
 
-const INITIAL_COUNT = 6;
-const LOAD_INCREMENT = 4;
+const INITIAL_COUNT = 3;
+const LOAD_INCREMENT = 3;
+
+/** Strip all tags except iframe/blockquote/div and only allow safe attributes */
+function sanitizeFeedHtml(html: string): string {
+    const ALLOWED_DOMAINS = [
+        'www.facebook.com',
+        'www.linkedin.com',
+        'www.youtube.com',
+        'player.vimeo.com',
+    ];
+
+    const parser = typeof DOMParser !== 'undefined' ? new DOMParser() : null;
+    if (!parser) return html;
+
+    const doc = parser.parseFromString(html, 'text/html');
+    const iframes = doc.querySelectorAll('iframe');
+
+    for (const iframe of iframes) {
+        const src = iframe.getAttribute('src') || '';
+        try {
+            const url = new URL(src);
+            if (!ALLOWED_DOMAINS.includes(url.hostname)) {
+                iframe.remove();
+            }
+        } catch {
+            iframe.remove();
+        }
+    }
+
+    // Remove script tags entirely
+    doc.querySelectorAll('script').forEach(el => el.remove());
+
+    return doc.body.innerHTML;
+}
 
 // FIX LỖI REF: Dùng forwardRef để Framer Motion có thể tương tác với DOM element
 const FeedItem = forwardRef<HTMLDivElement, { html: string; index: number }>(({ html, index }, ref) => {
@@ -56,10 +89,10 @@ const FeedItem = forwardRef<HTMLDivElement, { html: string; index: number }>(({ 
             
             {/* Chỉ render HTML thật sự khi đã đến lượt (shouldLoad = true) */}
             {shouldLoad ? (
-                <div 
+                <div
                     className={`transition-opacity duration-700 w-full ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
-                    dangerouslySetInnerHTML={{ __html: html }}
-                    onLoadCapture={() => setIsLoaded(true)} 
+                    dangerouslySetInnerHTML={{ __html: sanitizeFeedHtml(html) }}
+                    onLoadCapture={() => setIsLoaded(true)}
                 />
             ) : null}
 
@@ -82,11 +115,12 @@ export const Feed = () => {
 
     if (!resumeData.feed || resumeData.feed.length === 0) return null;
 
-    const visibleFeed = resumeData.feed.slice(0, visibleCount);
-    const hasMore = visibleCount < resumeData.feed.length;
+    const sortedFeed = [...resumeData.feed].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    const visibleFeed = sortedFeed.slice(0, visibleCount);
+    const hasMore = visibleCount < sortedFeed.length;
 
     const handleLoadMore = () => {
-        setVisibleCount(prev => Math.min(prev + LOAD_INCREMENT, resumeData.feed.length));
+        setVisibleCount(prev => Math.min(prev + LOAD_INCREMENT, sortedFeed.length));
     };
 
     return (
@@ -105,7 +139,7 @@ export const Feed = () => {
                 <div className="flex items-center gap-3 px-4 py-2 bg-zinc-900/50 rounded-full border border-white/10">
                     <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                     <span className="font-mono text-[10px] text-zinc-400">
-                        DISPLAYING: [{visibleFeed.length}/{resumeData.feed.length}]
+                        DISPLAYING: [{visibleFeed.length}/{sortedFeed.length}]
                     </span>
                 </div>
             </div>
@@ -114,8 +148,8 @@ export const Feed = () => {
             <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
                 {/* FIX LỖI ANIMATE PRESENCE: Dùng mode='popLayout' cho list items thay vì 'wait' */}
                 <AnimatePresence mode='popLayout'>
-                    {visibleFeed.map((embedHtml, idx) => (
-                        <FeedItem key={`feed-${idx}`} html={embedHtml} index={idx} />
+                    {visibleFeed.map((item, idx) => (
+                        <FeedItem key={`feed-${item.date}-${idx}`} html={item.html} index={idx} />
                     ))}
                 </AnimatePresence>
             </div>

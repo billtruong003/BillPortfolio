@@ -8,6 +8,7 @@ import {
     Activity, BarChart3, Zap, ArrowUpRight
 } from "lucide-react";
 import { resumeData } from "@/data/resume";
+import { BlogAdmin } from "./BlogAdmin";
 
 interface ChannelData {
     id: string;
@@ -257,6 +258,8 @@ export const AdminDashboard = ({ onLogout }: DashboardProps) => {
                     </div>
                 </section>
 
+                <BlogAdmin />
+
                 <section>
                     <div className="flex items-center gap-3 mb-6">
                         <Zap size={20} className="text-emerald-400" />
@@ -266,6 +269,7 @@ export const AdminDashboard = ({ onLogout }: DashboardProps) => {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         <QuickLink href="/" label="View Portfolio" desc="Main public site" icon={<Globe size={18} />} />
                         <QuickLink href="/arcade" label="Game Arcade" desc="WebGL game library" icon={<Gamepad2 size={18} />} />
+                        <QuickLink href="/lab" label="Dev Lab" desc="Blog & tutorials" icon={<Code2 size={18} />} />
                         <QuickLink href="https://github.com/billtruong003" label="GitHub Profile" desc="Open source repos" icon={<Code2 size={18} />} external />
                         <QuickLink href="https://www.youtube.com/@BillTheDev" label="BillTheDev Channel" desc="Dev tutorials" icon={<Youtube size={18} />} external />
                         <QuickLink href="https://www.youtube.com/@BillVRGamer" label="BillVRGamer Channel" desc="VR gaming content" icon={<Youtube size={18} />} external />

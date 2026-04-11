@@ -11,9 +11,9 @@ export const TrustedBy = () => {
 
     if (companies.length === 0) return null;
 
-    const handleCompanyClick = (company: any) => {
+    const handleCompanyClick = (company: any, idx: number) => {
         openModal({
-            id: Math.random(),
+            id: 20000 + idx,
             title: `Working at ${company.name}`,
             category: "Professional Experience",
             type: "image",
@@ -45,7 +45,7 @@ export const TrustedBy = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.1 }}
-                            onClick={() => handleCompanyClick(company)}
+                            onClick={() => handleCompanyClick(company, idx)}
                             className="group cursor-pointer relative"
                         >
                             <div className="relative w-36 h-20 md:w-44 md:h-24 transition-transform duration-300 group-hover:scale-110 filter drop-shadow-[0_0_15px_rgba(255,255,255,0.05)]">

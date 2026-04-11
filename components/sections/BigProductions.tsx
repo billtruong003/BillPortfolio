@@ -19,9 +19,9 @@ export const BigProductions = () => {
 
     if (productions.length === 0) return null;
 
-    const handleProductClick = (prod: any) => {
+    const handleProductClick = (prod: any, idx: number) => {
         openModal({
-            id: Math.random(),
+            id: 10000 + idx,
             title: prod.name,
             category: "Key Production",
             type: "image",
@@ -55,7 +55,7 @@ export const BigProductions = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: idx * 0.1 }}
-                            onClick={() => handleProductClick(prod)}
+                            onClick={() => handleProductClick(prod, idx)}
                             className="group relative bg-zinc-900 border border-white/10 hover:border-primary/50 hover:bg-zinc-800 rounded-xl p-5 cursor-pointer transition-all duration-300 flex flex-col sm:flex-row items-start gap-6 shadow-lg"
                         >
                             <div className="relative w-24 h-24 shrink-0 bg-black rounded-xl border border-white/10 overflow-hidden shadow-inner group-hover:scale-105 transition-transform duration-300">

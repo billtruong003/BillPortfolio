@@ -4,10 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { GlitchText } from '@/components/ui/GlitchText';
 import { DownloadBtn } from '@/components/ui/DownloadBtn';
 import { resumeData } from '@/data/resume';
-import { 
-    Github, Linkedin, Mail, Facebook, Youtube, Twitter, 
-    LucideIcon, ExternalLink, ChevronDown, 
-    Terminal, Cpu, Network, ChevronRight
+import {
+    Github, Linkedin, Mail, Facebook, Youtube, Twitter,
+    LucideIcon, ExternalLink, ChevronDown,
+    Terminal, Cpu, Network, ChevronRight, Gamepad2
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import dynamic from 'next/dynamic';
@@ -152,13 +152,26 @@ const MainContent = () => (
 
         <div className="mb-10 max-w-lg relative pl-6 border-l-[2px] border-l-primary/50">
             <p className="text-zinc-400 text-base leading-relaxed font-light">
-                {resumeData.profile.about}
+                Unity Engineer who ships the gameplay systems, writes the shaders,
+                <span className="text-zinc-200 font-medium"> AND </span>
+                builds the tools. 6 shipped titles. 8+ open-source repos.
             </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-6 items-start sm:items-center">
-            <DownloadBtn href="/Bill_Resume.pdf" text="Access Data" />
-            
+        <div className="flex flex-col gap-6">
+            <div className="flex flex-wrap gap-4 items-center">
+                <DownloadBtn href="/Bill_Resume.pdf" text="Download CV" />
+                <a
+                    href="/arcade"
+                    className="group relative inline-flex items-center gap-3 px-8 py-4 bg-primary overflow-hidden border border-primary hover:bg-white transition-colors duration-300"
+                >
+                    <span className="relative z-10 font-mono font-bold tracking-wider text-black uppercase flex items-center gap-2">
+                        <Gamepad2 size={18} className="group-hover:animate-bounce" />
+                        Play My Games
+                    </span>
+                </a>
+            </div>
+
             <div className="flex items-center gap-4">
                 {resumeData.socials.map((social) => {
                     const Icon = SOCIAL_ICONS[social.platform] || ExternalLink;

@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Hero } from "@/components/sections/Hero";
+import { ImpactNumbers } from "@/components/sections/ImpactNumbers";
 import { TrustedBy } from "@/components/sections/TrustedBy";
 import { BigProductions } from "@/components/sections/BigProductions";
 import { YouTubeChannels } from "@/components/sections/YouTubeChannels";
@@ -9,6 +10,7 @@ import { Portfolio } from "@/components/sections/Portfolio";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Feed } from "@/components/sections/Feed";
 import { Certifications } from "@/components/sections/Certifications";
+import { ContactCTA } from "@/components/sections/ContactCTA";
 import { ProjectModal } from "@/components/overlay/ProjectModal";
 
 const ParticleBackground = dynamic(
@@ -25,15 +27,16 @@ export default function Home() {
 
       <div className="relative z-10">
         <Hero />
+        <ImpactNumbers />
 
         <div className="flex flex-col">
-          <YouTubeChannels />
           <TrustedBy />
+          <Experience />
           <BigProductions />
         </div>
 
-
-        <Certifications />
+        <Testimonials />
+        <YouTubeChannels />
         <Portfolio />
 
         <section className="py-16 px-6 border-y border-white/5 bg-[#080808] relative z-20">
@@ -43,18 +46,26 @@ export default function Home() {
             <p className="text-zinc-500 text-sm max-w-lg">
               Explore my WebGL game builds — playable directly in your browser. No downloads needed.
             </p>
-            <Link
-              href="/arcade"
-              className="group flex items-center gap-3 px-8 py-4 bg-primary/10 hover:bg-primary text-primary hover:text-black font-mono text-sm font-bold uppercase tracking-widest border border-primary/30 hover:border-primary rounded-lg transition-all duration-300 shadow-lg hover:shadow-primary/20"
-            >
-              🎮 ENTER GAME ARCADE
-            </Link>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link
+                href="/arcade"
+                className="group flex items-center gap-3 px-8 py-4 bg-primary/10 hover:bg-primary text-primary hover:text-black font-mono text-sm font-bold uppercase tracking-widest border border-primary/30 hover:border-primary rounded-lg transition-all duration-300 shadow-lg hover:shadow-primary/20"
+              >
+                🎮 ENTER GAME ARCADE
+              </Link>
+              <Link
+                href="/lab"
+                className="group flex items-center gap-3 px-8 py-4 bg-white/5 hover:bg-white/10 text-zinc-300 hover:text-white font-mono text-sm font-bold uppercase tracking-widest border border-white/10 hover:border-primary/50 rounded-lg transition-all duration-300"
+              >
+                🧪 READ DEV LAB
+              </Link>
+            </div>
           </div>
         </section>
 
-        <Experience />
-        <Testimonials />
+        <Certifications />
         <Feed />
+        <ContactCTA />
       </div>
 
       <ProjectModal />
