@@ -198,7 +198,37 @@
         "touch": false
       },
       "preferredOrientation": "landscape"
+    },
+    {
+      "id": "spirit-war",
+      "title": "Spirit War",
+      "description": "A strategy action game by Page Mèo Sen. Founded by Hit, with feature development and gameplay systems support by Bill.",
+      "thumbnail": "webgl-games/spirit-war/thumbnail.png",
+      "tags": ["Strategy", "Action", "Collab", "Page Mèo Sen"],
+      "genre": "strategy",
+      "releaseDate": "2026-04-11",
+      "buildSize": "138 MB",
+      "status": "playable",
+      "build": {
+        "buildPath": "/webgl-games/spirit-war/Build",
+        "buildName": "SpiritWarBill",
+        "compression": "none",
+        "hasStreamingAssets": true,
+        "companyName": "PageMeoSen",
+        "productName": "SpiritWar",
+        "productVersion": "1.0"
+      },
+      "display": {
+        "fixedRatio": true,
+        "ratioWidth": 9,
+        "ratioHeight": 16
+      },
+      "controls": {
+        "mouse": ["Left Click — Select & Command"],
+        "touch": false
+      },
+      "preferredOrientation": "landscape"
     }
   ],
-  "lastUpdated": "2026-04-09T09:00:00Z"
+  "lastUpdated": "2026-04-11T00:00:00Z"
 }
