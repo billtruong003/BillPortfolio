@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 600" font-family="Segoe UI, system-ui, sans-serif">
+  <defs>
+    <filter id="sh" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#89B4FA"/>
+    </marker>
+    <marker id="arrowG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#A6E3A1"/>
+    </marker>
+    <marker id="arrowR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#F38BA8"/>
+    </marker>
+  </defs>
+
+  <rect width="720" height="600" rx="12" fill="#1E1E2E"/>
+  <text x="360" y="36" text-anchor="middle" fill="#CDD6F4" font-size="18" font-weight="700">MonoBehaviour Lifecycle</text>
+
+  <!-- Initialization Phase -->
+  <rect x="30" y="52" width="660" height="110" rx="8" fill="#31324433" stroke="#45475A" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="48" y="72" fill="#9399B2" font-size="11" font-weight="600" letter-spacing="1">INITIALIZATION (1 lần)</text>
+
+  <rect x="180" y="82" width="160" height="36" rx="6" fill="#6C5CE7" filter="url(#sh)"/>
+  <text x="260" y="106" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Awake()</text>
+  <text x="355" y="106" fill="#B4BEFE" font-size="11">← Sớm nhất, kể cả disabled</text>
+
+  <line x1="260" y1="118" x2="260" y2="130" stroke="#89B4FA" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="180" y="130" width="160" height="36" rx="6" fill="#6C5CE7" opacity="0.8" filter="url(#sh)"/>
+  <text x="260" y="154" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">OnEnable()</text>
+
+  <!-- Start -->
+  <line x1="260" y1="166" x2="260" y2="184" stroke="#89B4FA" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="30" y="184" width="660" height="48" rx="8" fill="#31324433" stroke="#45475A" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="48" y="202" fill="#9399B2" font-size="11" font-weight="600" letter-spacing="1">FIRST FRAME</text>
+  <rect x="180" y="192" width="160" height="36" rx="6" fill="#0984E3" filter="url(#sh)"/>
+  <text x="260" y="216" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Start()</text>
+  <text x="355" y="216" fill="#74B9FF" font-size="11">← Setup sau mọi Awake</text>
+
+  <!-- Game Loop -->
+  <line x1="260" y1="228" x2="260" y2="250" stroke="#89B4FA" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <rect x="30" y="250" width="660" height="210" rx="8" fill="#A6E3A120" stroke="#A6E3A1" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="48" y="270" fill="#A6E3A1" font-size="11" font-weight="700" letter-spacing="1">🔄 GAME LOOP (mỗi frame)</text>
+
+  <!-- FixedUpdate -->
+  <rect x="180" y="282" width="200" height="36" rx="6" fill="#00B894" filter="url(#sh)"/>
+  <text x="280" y="306" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">FixedUpdate()</text>
+  <text x="395" y="306" fill="#55EFC4" font-size="11">← Physics (50fps cố định)</text>
+
+  <line x1="280" y1="318" x2="280" y2="336" stroke="#A6E3A1" stroke-width="2" marker-end="url(#arrowG)"/>
+
+  <!-- Update -->
+  <rect x="180" y="336" width="200" height="36" rx="6" fill="#00CEC9" filter="url(#sh)"/>
+  <text x="280" y="360" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Update()</text>
+  <text x="395" y="360" fill="#81ECEC" font-size="11">← Game logic, Input</text>
+
+  <line x1="280" y1="372" x2="280" y2="390" stroke="#A6E3A1" stroke-width="2" marker-end="url(#arrowG)"/>
+
+  <!-- LateUpdate -->
+  <rect x="180" y="390" width="200" height="36" rx="6" fill="#0AB4A0" filter="url(#sh)"/>
+  <text x="280" y="414" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">LateUpdate()</text>
+  <text x="395" y="414" fill="#81ECEC" font-size="11">← Camera follow</text>
+
+  <!-- Loop arrow -->
+  <path d="M 130 414 Q 100 414, 100 348 Q 100 282, 130 282" fill="none" stroke="#A6E3A1" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrowG)"/>
+  <text x="70" y="352" fill="#A6E3A1" font-size="10" font-weight="600" text-anchor="middle" transform="rotate(-90, 70, 352)">REPEAT</text>
+
+  <!-- Decommission -->
+  <line x1="280" y1="460" x2="280" y2="484" stroke="#F38BA8" stroke-width="2" marker-end="url(#arrowR)"/>
+
+  <rect x="30" y="484" width="660" height="100" rx="8" fill="#F38BA810" stroke="#F38BA8" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="48" y="504" fill="#F38BA8" font-size="11" font-weight="600" letter-spacing="1">DECOMMISSION</text>
+
+  <rect x="180" y="512" width="160" height="32" rx="6" fill="#E17055" filter="url(#sh)"/>
+  <text x="260" y="534" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">OnDisable()</text>
+
+  <line x1="260" y1="544" x2="260" y2="556" stroke="#F38BA8" stroke-width="2" marker-end="url(#arrowR)"/>
+
+  <rect x="180" y="554" width="160" height="32" rx="6" fill="#D63031" filter="url(#sh)"/>
+  <text x="260" y="576" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">OnDestroy()</text>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" font-family="Segoe UI, system-ui, sans-serif">
+  <defs>
+    <filter id="ds2" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+    <marker id="as" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#89B4FA"/>
+    </marker>
+  </defs>
+
+  <rect width="720" height="300" rx="12" fill="#1E1E2E"/>
+  <text x="360" y="30" text-anchor="middle" fill="#CDD6F4" font-size="18" font-weight="700">Singleton Pattern — Chỉ 1 Instance Duy Nhất</text>
+
+  <!-- Central Singleton -->
+  <rect x="260" y="60" width="200" height="100" rx="12" fill="#6C5CE7" filter="url(#ds2)"/>
+  <text x="360" y="88" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">🎮 GameManager</text>
+  <text x="360" y="108" text-anchor="middle" fill="#D6BCFA" font-size="11">static Instance</text>
+  <line x1="290" y1="118" x2="430" y2="118" stroke="#D6BCFA" stroke-width="0.5" opacity="0.5"/>
+  <text x="360" y="135" text-anchor="middle" fill="#D6BCFA" font-size="10">Score | IsGameOver | AddScore()</text>
+  <text x="360" y="150" text-anchor="middle" fill="#D6BCFA" font-size="10">DontDestroyOnLoad</text>
+
+  <!-- Scripts accessing it -->
+  <rect x="30" y="70" width="140" height="40" rx="6" fill="#313244" stroke="#89B4FA" stroke-width="1.5" filter="url(#ds2)"/>
+  <text x="100" y="96" text-anchor="middle" fill="#CDD6F4" font-size="12" font-weight="600">PlayerController</text>
+  <line x1="170" y1="90" x2="256" y2="100" stroke="#89B4FA" stroke-width="1.5" marker-end="url(#as)"/>
+
+  <rect x="30" y="130" width="140" height="40" rx="6" fill="#313244" stroke="#89B4FA" stroke-width="1.5" filter="url(#ds2)"/>
+  <text x="100" y="156" text-anchor="middle" fill="#CDD6F4" font-size="12" font-weight="600">EnemyAI</text>
+  <line x1="170" y1="150" x2="256" y2="130" stroke="#89B4FA" stroke-width="1.5" marker-end="url(#as)"/>
+
+  <rect x="550" y="70" width="140" height="40" rx="6" fill="#313244" stroke="#89B4FA" stroke-width="1.5" filter="url(#ds2)"/>
+  <text x="620" y="96" text-anchor="middle" fill="#CDD6F4" font-size="12" font-weight="600">UIManager</text>
+  <line x1="550" y1="90" x2="464" y2="100" stroke="#89B4FA" stroke-width="1.5" marker-end="url(#as)"/>
+
+  <rect x="550" y="130" width="140" height="40" rx="6" fill="#313244" stroke="#89B4FA" stroke-width="1.5" filter="url(#ds2)"/>
+  <text x="620" y="156" text-anchor="middle" fill="#CDD6F4" font-size="12" font-weight="600">ScorePopup</text>
+  <line x1="550" y1="150" x2="464" y2="130" stroke="#89B4FA" stroke-width="1.5" marker-end="url(#as)"/>
+
+  <!-- Access pattern -->
+  <rect x="170" y="185" width="380" height="28" rx="6" fill="#45475A"/>
+  <text x="360" y="204" text-anchor="middle" fill="#FDCB6E" font-size="12" font-weight="600" font-style="italic">GameManager.Instance.AddScore(100);</text>
+
+  <!-- Pros and cons -->
+  <rect x="30" y="228" width="320" height="58" rx="8" fill="#313244" filter="url(#ds2)"/>
+  <text x="48" y="248" fill="#A6E3A1" font-size="11" font-weight="600">✅ OK cho:</text>
+  <text x="48" y="266" fill="#CDD6F4" font-size="11">GameManager, AudioManager, InputManager</text>
+  <text x="48" y="280" fill="#9399B2" font-size="10">→ Hệ thống thực sự global, chỉ cần 1</text>
+
+  <rect x="370" y="228" width="320" height="58" rx="8" fill="#313244" filter="url(#ds2)"/>
+  <text x="388" y="248" fill="#F38BA8" font-size="11" font-weight="600">❌ KHÔNG cho:</text>
+  <text x="388" y="266" fill="#CDD6F4" font-size="11">Player, Enemy, Weapon, Items</text>
+  <text x="388" y="280" fill="#9399B2" font-size="10">→ Dùng references / dependency injection</text>
+</svg>

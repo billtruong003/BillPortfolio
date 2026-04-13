@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" font-family="Segoe UI, system-ui, sans-serif">
+  <defs>
+    <filter id="dan" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="720" height="320" rx="12" fill="#1E1E2E"/>
+  <text x="360" y="30" text-anchor="middle" fill="#CDD6F4" font-size="18" font-weight="700">Anchor Presets — UI Responsive Positioning</text>
+
+  <!-- Screen frame -->
+  <rect x="40" y="50" width="420" height="250" rx="8" fill="#313244" stroke="#45475A" stroke-width="2" filter="url(#dan)"/>
+  <text x="250" y="72" text-anchor="middle" fill="#585B70" font-size="11">Canvas (Screen)</text>
+
+  <!-- Top-Left: HP Bar -->
+  <rect x="56" y="82" width="120" height="24" rx="4" fill="#A6E3A1" opacity="0.8"/>
+  <rect x="56" y="82" width="84" height="24" rx="4" fill="#00B894"/>
+  <text x="64" y="99" fill="#fff" font-size="10" font-weight="600">❤️ HP: 70/100</text>
+  <!-- Anchor indicator -->
+  <circle cx="56" cy="82" r="4" fill="#F38BA8"/>
+  <text x="58" y="120" fill="#89B4FA" font-size="9">anchor: top-left</text>
+
+  <!-- Top-Right: Minimap -->
+  <rect x="360" y="82" width="84" height="70" rx="4" fill="#45475A" stroke="#89B4FA" stroke-width="1"/>
+  <circle cx="402" cy="117" r="20" fill="#1E1E2E"/>
+  <circle cx="402" cy="117" r="2" fill="#A6E3A1"/>
+  <circle cx="396" cy="110" r="1.5" fill="#E17055"/>
+  <circle cx="410" cy="122" r="1.5" fill="#E17055"/>
+  <text x="402" y="95" text-anchor="middle" fill="#89B4FA" font-size="8">Minimap</text>
+  <circle cx="444" cy="82" r="4" fill="#F38BA8"/>
+  <text x="386" y="166" fill="#89B4FA" font-size="9">anchor: top-right</text>
+
+  <!-- Center: Popup -->
+  <rect x="170" y="145" width="160" height="60" rx="6" fill="#6C5CE7" opacity="0.8" filter="url(#dan)"/>
+  <text x="250" y="170" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">⚠️ GAME PAUSED</text>
+  <text x="250" y="188" text-anchor="middle" fill="#D6BCFA" font-size="10">Press ESC to resume</text>
+  <circle cx="250" cy="175" r="4" fill="#F38BA8" opacity="0"/>
+  <text x="254" y="218" text-anchor="middle" fill="#89B4FA" font-size="9">anchor: center</text>
+
+  <!-- Bottom-Center: Action Bar -->
+  <rect x="140" y="258" width="220" height="30" rx="4" fill="#45475A"/>
+  <rect x="150" y="262" width="24" height="22" rx="3" fill="#FDCB6E" opacity="0.7"/>
+  <text x="162" y="278" text-anchor="middle" fill="#1E1E2E" font-size="9">Q</text>
+  <rect x="180" y="262" width="24" height="22" rx="3" fill="#FDCB6E" opacity="0.7"/>
+  <text x="192" y="278" text-anchor="middle" fill="#1E1E2E" font-size="9">W</text>
+  <rect x="210" y="262" width="24" height="22" rx="3" fill="#FDCB6E" opacity="0.7"/>
+  <text x="222" y="278" text-anchor="middle" fill="#1E1E2E" font-size="9">E</text>
+  <rect x="240" y="262" width="24" height="22" rx="3" fill="#FDCB6E" opacity="0.7"/>
+  <text x="252" y="278" text-anchor="middle" fill="#1E1E2E" font-size="9">R</text>
+  <rect x="270" y="262" width="24" height="22" rx="3" fill="#E17055" opacity="0.7"/>
+  <text x="282" y="278" text-anchor="middle" fill="#fff" font-size="9">🗡</text>
+  <rect x="300" y="262" width="24" height="22" rx="3" fill="#E17055" opacity="0.7"/>
+  <text x="312" y="278" text-anchor="middle" fill="#fff" font-size="9">🛡</text>
+  <rect x="330" y="262" width="24" height="22" rx="3" fill="#E17055" opacity="0.7"/>
+  <text x="342" y="278" text-anchor="middle" fill="#fff" font-size="9">🧪</text>
+  <circle cx="250" cy="288" r="4" fill="#F38BA8"/>
+  <text x="250" y="304" text-anchor="middle" fill="#89B4FA" font-size="9">anchor: bottom-center</text>
+
+  <!-- Legend -->
+  <rect x="480" y="56" width="220" height="244" rx="8" fill="#313244" filter="url(#dan)"/>
+  <text x="590" y="80" text-anchor="middle" fill="#CDD6F4" font-size="12" font-weight="700">Anchor Presets</text>
+
+  <circle cx="500" cy="104" r="4" fill="#F38BA8"/>
+  <text x="512" y="108" fill="#CDD6F4" font-size="11">= Điểm neo (anchor point)</text>
+
+  <rect x="496" y="126" width="16" height="12" rx="2" fill="#A6E3A1" opacity="0.6"/>
+  <text x="520" y="136" fill="#CDD6F4" font-size="11">Top-Left → HP bar</text>
+
+  <rect x="496" y="150" width="16" height="12" rx="2" fill="#89B4FA" opacity="0.6"/>
+  <text x="520" y="160" fill="#CDD6F4" font-size="11">Top-Right → Minimap</text>
+
+  <rect x="496" y="174" width="16" height="12" rx="2" fill="#6C5CE7" opacity="0.6"/>
+  <text x="520" y="184" fill="#CDD6F4" font-size="11">Center → Popup, dialog</text>
+
+  <rect x="496" y="198" width="16" height="12" rx="2" fill="#FDCB6E" opacity="0.6"/>
+  <text x="520" y="208" fill="#CDD6F4" font-size="11">Bottom-Center → Skill bar</text>
+
+  <rect x="496" y="222" width="16" height="12" rx="2" fill="#E17055" opacity="0.6"/>
+  <text x="520" y="232" fill="#CDD6F4" font-size="11">Stretch → Background</text>
+
+  <rect x="490" y="252" width="200" height="36" rx="6" fill="#45475A"/>
+  <text x="590" y="268" text-anchor="middle" fill="#FDCB6E" font-size="10" font-weight="600">💡 Tip: Giữ Alt khi click</text>
+  <text x="590" y="282" text-anchor="middle" fill="#9399B2" font-size="10">preset để set position cùng lúc</text>
+</svg>

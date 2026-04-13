@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" font-family="Segoe UI, system-ui, sans-serif">
+  <defs>
+    <filter id="dc" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="720" height="300" rx="12" fill="#1E1E2E"/>
+  <text x="360" y="30" text-anchor="middle" fill="#CDD6F4" font-size="18" font-weight="700">Canvas Render Modes</text>
+
+  <!-- Mode 1: Screen Space Overlay -->
+  <rect x="20" y="50" width="220" height="236" rx="10" fill="#313244" filter="url(#dc)"/>
+  <rect x="20" y="50" width="220" height="34" rx="10" fill="#6C5CE7"/>
+  <rect x="20" y="72" width="220" height="12" fill="#6C5CE7"/>
+  <text x="130" y="74" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Screen Space - Overlay</text>
+
+  <!-- Scene illustration -->
+  <rect x="38" y="96" width="184" height="110" rx="6" fill="#1E1E2E" stroke="#45475A" stroke-width="1"/>
+  <!-- 3D content -->
+  <rect x="80" y="130" width="40" height="50" rx="2" fill="#45475A"/>
+  <rect x="140" y="140" width="30" height="40" rx="2" fill="#585B70"/>
+  <!-- UI overlay on top -->
+  <rect x="44" y="100" width="60" height="14" rx="2" fill="#A6E3A1" opacity="0.7"/>
+  <text x="74" y="111" text-anchor="middle" fill="#1E1E2E" font-size="8" font-weight="600">HP Bar</text>
+  <rect x="148" y="100" width="68" height="14" rx="2" fill="#FDCB6E" opacity="0.7"/>
+  <text x="182" y="111" text-anchor="middle" fill="#1E1E2E" font-size="8" font-weight="600">Score: 100</text>
+
+  <text x="130" y="226" text-anchor="middle" fill="#A6E3A1" font-size="10" font-weight="600">UI luôn trên cùng</text>
+  <text x="130" y="242" text-anchor="middle" fill="#9399B2" font-size="10">Không bị 3D che</text>
+  <rect x="50" y="256" width="160" height="20" rx="4" fill="#45475A"/>
+  <text x="130" y="270" text-anchor="middle" fill="#89B4FA" font-size="10">HUD, Menu, Dialog</text>
+
+  <!-- Mode 2: Screen Space Camera -->
+  <rect x="250" y="50" width="220" height="236" rx="10" fill="#313244" filter="url(#dc)"/>
+  <rect x="250" y="50" width="220" height="34" rx="10" fill="#0984E3"/>
+  <rect x="250" y="72" width="220" height="12" fill="#0984E3"/>
+  <text x="360" y="74" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Screen Space - Camera</text>
+
+  <!-- Scene illustration -->
+  <rect x="268" y="96" width="184" height="110" rx="6" fill="#1E1E2E" stroke="#45475A" stroke-width="1"/>
+  <!-- Camera icon -->
+  <rect x="335" y="170" width="24" height="16" rx="2" fill="#89B4FA"/>
+  <polygon points="359,172 372,166 372,192 359,186" fill="#89B4FA"/>
+  <text x="355" y="196" text-anchor="middle" fill="#89B4FA" font-size="7">Camera</text>
+  <!-- UI rendered by camera -->
+  <rect x="290" y="110" width="140" height="44" rx="4" fill="none" stroke="#FDCB6E" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <rect x="296" y="116" width="80" height="12" rx="2" fill="#FDCB6E" opacity="0.5"/>
+  <rect x="296" y="132" width="50" height="12" rx="2" fill="#FDCB6E" opacity="0.3"/>
+  <text x="395" y="128" fill="#FDCB6E" font-size="8">Post-</text>
+  <text x="395" y="140" fill="#FDCB6E" font-size="8">process</text>
+
+  <text x="360" y="226" text-anchor="middle" fill="#89B4FA" font-size="10" font-weight="600">Camera renders UI</text>
+  <text x="360" y="242" text-anchor="middle" fill="#9399B2" font-size="10">Hỗ trợ post-processing</text>
+  <rect x="280" y="256" width="160" height="20" rx="4" fill="#45475A"/>
+  <text x="360" y="270" text-anchor="middle" fill="#89B4FA" font-size="10">UI có hiệu ứng, blur</text>
+
+  <!-- Mode 3: World Space -->
+  <rect x="480" y="50" width="220" height="236" rx="10" fill="#313244" filter="url(#dc)"/>
+  <rect x="480" y="50" width="220" height="34" rx="10" fill="#00B894"/>
+  <rect x="480" y="72" width="220" height="12" fill="#00B894"/>
+  <text x="590" y="74" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">World Space</text>
+
+  <!-- Scene illustration -->
+  <rect x="498" y="96" width="184" height="110" rx="6" fill="#1E1E2E" stroke="#45475A" stroke-width="1"/>
+  <!-- 3D characters with HP bars -->
+  <rect x="528" y="140" width="24" height="40" rx="2" fill="#E17055"/>
+  <rect x="518" y="130" width="44" height="8" rx="2" fill="#A6E3A1" opacity="0.8"/>
+  <text x="540" y="137" text-anchor="middle" fill="#1E1E2E" font-size="6" font-weight="600">HP</text>
+
+  <rect x="598" y="130" width="24" height="50" rx="2" fill="#6C5CE7"/>
+  <rect x="588" y="120" width="44" height="8" rx="2" fill="#A6E3A1" opacity="0.8"/>
+  <text x="610" y="127" text-anchor="middle" fill="#1E1E2E" font-size="6" font-weight="600">HP</text>
+
+  <!-- Signpost -->
+  <rect x="646" y="148" width="24" height="30" rx="2" fill="#FDCB6E" opacity="0.6"/>
+  <rect x="654" y="178" width="8" height="14" fill="#FDCB6E" opacity="0.4"/>
+  <text x="658" y="166" text-anchor="middle" fill="#1E1E2E" font-size="6">!</text>
+
+  <text x="590" y="226" text-anchor="middle" fill="#A6E3A1" font-size="10" font-weight="600">UI trong 3D world</text>
+  <text x="590" y="242" text-anchor="middle" fill="#9399B2" font-size="10">Bị phối cảnh, có thể bị che</text>
+  <rect x="510" y="256" width="160" height="20" rx="4" fill="#45475A"/>
+  <text x="590" y="270" text-anchor="middle" fill="#89B4FA" font-size="10">HP bar, bảng hiệu, tooltip</text>
+</svg>

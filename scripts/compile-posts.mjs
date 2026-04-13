@@ -14,6 +14,19 @@ import readingTime from 'reading-time';
 const POSTS_DIR = path.resolve('content/posts');
 const OUTPUT_FILE = path.resolve('data/posts.json');
 
+function getMarkdownFiles(dir) {
+    const results = [];
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+            results.push(...getMarkdownFiles(fullPath));
+        } else if (entry.name.endsWith('.md')) {
+            results.push(fullPath);
+        }
+    }
+    return results;
+}
+
 function extractHeadings(html) {
     const headings = [];
     const regex = /<h([23])\s+id="([^"]*)"[^>]*>(.*?)<\/h[23]>/gi;
@@ -69,7 +82,7 @@ async function main() {
         fs.mkdirSync(POSTS_DIR, { recursive: true });
     }
 
-    const files = fs.readdirSync(POSTS_DIR).filter(f => f.endsWith('.md'));
+    const files = getMarkdownFiles(POSTS_DIR);
 
     if (files.length === 0) {
         const empty = { posts: [], categories: [], tags: [], lastCompiled: new Date().toISOString() };
@@ -81,17 +94,19 @@ async function main() {
     console.log(`📝 Compiling ${files.length} post(s)...`);
 
     const allPosts = [];
-    for (const file of files) {
+    for (const filePath of files) {
         try {
-            const post = await compilePost(path.join(POSTS_DIR, file));
+            const post = await compilePost(filePath);
+            const rel = path.relative(POSTS_DIR, filePath);
             if (post.published) {
                 allPosts.push(post);
-                console.log(`  ✓ ${post.slug} (${post.readingTime} min read)`);
+                console.log(`  ✓ ${rel} → ${post.slug} (${post.readingTime} min read)`);
             } else {
-                console.log(`  ⊘ ${post.slug} (draft, skipped)`);
+                console.log(`  ⊘ ${rel} (draft, skipped)`);
             }
         } catch (err) {
-            console.error(`  ✗ ${file}: ${err.message}`);
+            const rel = path.relative(POSTS_DIR, filePath);
+            console.error(`  ✗ ${rel}: ${err.message}`);
         }
     }
 

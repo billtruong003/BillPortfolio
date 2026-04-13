@@ -1,5 +1,6 @@
 import { postManifest } from '@/data/posts';
 import { PostGrid } from '@/components/lab/PostGrid';
+import { LabNav } from '@/components/lab/LabNav';
 import { FlaskConical } from 'lucide-react';
 
 export const metadata = {
@@ -10,9 +11,10 @@ export const metadata = {
 export default function LabPage() {
     return (
         <main className="relative min-h-screen w-full bg-[#050505]">
+            <LabNav />
             <div className="relative z-10">
                 {/* Hero */}
-                <section className="pt-32 pb-16 px-6">
+                <section className="pt-20 pb-16 px-6">
                     <div className="container mx-auto max-w-5xl">
                         <div className="flex items-center gap-3 mb-6">
                             <div className="p-2.5 bg-primary/10 border border-primary/20 rounded-lg">

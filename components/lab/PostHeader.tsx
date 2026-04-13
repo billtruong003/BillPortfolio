@@ -1,21 +1,12 @@
 'use client';
 import { BlogPost } from '@/types';
-import { Calendar, Clock, ArrowLeft } from 'lucide-react';
+import { Calendar, Clock } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { getAssetPath } from '@/lib/utils';
 
 export const PostHeader = ({ post }: { post: BlogPost }) => {
     return (
         <header className="mb-12">
-            <Link
-                href="/lab"
-                className="inline-flex items-center gap-2 text-xs font-mono text-zinc-500 hover:text-primary transition-colors mb-8"
-            >
-                <ArrowLeft size={14} />
-                BACK_TO_LAB
-            </Link>
-
             {post.coverImage && (
                 <div className="relative aspect-[21/9] rounded-xl overflow-hidden mb-8 border border-zinc-800">
                     <Image

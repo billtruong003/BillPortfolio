@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" font-family="Segoe UI, system-ui, sans-serif">
+  <defs>
+    <filter id="dsh" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#FDCB6E"/>
+    </marker>
+  </defs>
+
+  <rect width="720" height="380" rx="12" fill="#1E1E2E"/>
+  <text x="360" y="32" text-anchor="middle" fill="#CDD6F4" font-size="18" font-weight="700">Observer Pattern — Event System</text>
+
+  <!-- BAD WAY -->
+  <rect x="20" y="50" width="330" height="310" rx="10" fill="#313244" filter="url(#dsh)"/>
+  <rect x="20" y="50" width="330" height="36" rx="10" fill="#E17055"/>
+  <rect x="20" y="74" width="330" height="12" fill="#E17055"/>
+  <text x="185" y="76" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">❌ Tight Coupling (BAD)</text>
+
+  <!-- Player box bad -->
+  <rect x="50" y="102" width="130" height="50" rx="6" fill="#6C5CE7" filter="url(#dsh)"/>
+  <text x="115" y="124" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Player</text>
+  <text x="115" y="142" text-anchor="middle" fill="#D6BCFA" font-size="10">Die()</text>
+
+  <!-- Direct arrows -->
+  <line x1="180" y1="112" x2="218" y2="106" stroke="#F38BA8" stroke-width="1.5"/>
+  <line x1="180" y1="122" x2="218" y2="152" stroke="#F38BA8" stroke-width="1.5"/>
+  <line x1="180" y1="132" x2="218" y2="200" stroke="#F38BA8" stroke-width="1.5"/>
+  <line x1="180" y1="142" x2="218" y2="248" stroke="#F38BA8" stroke-width="1.5"/>
+
+  <!-- Targets bad -->
+  <rect x="220" y="92" width="110" height="28" rx="4" fill="#45475A" stroke="#F38BA8" stroke-width="1"/>
+  <text x="275" y="111" text-anchor="middle" fill="#CDD6F4" font-size="11">UIManager</text>
+
+  <rect x="220" y="138" width="110" height="28" rx="4" fill="#45475A" stroke="#F38BA8" stroke-width="1"/>
+  <text x="275" y="157" text-anchor="middle" fill="#CDD6F4" font-size="11">AudioManager</text>
+
+  <rect x="220" y="184" width="110" height="28" rx="4" fill="#45475A" stroke="#F38BA8" stroke-width="1"/>
+  <text x="275" y="203" text-anchor="middle" fill="#CDD6F4" font-size="11">EnemyManager</text>
+
+  <rect x="220" y="230" width="110" height="28" rx="4" fill="#45475A" stroke="#F38BA8" stroke-width="1"/>
+  <text x="275" y="249" text-anchor="middle" fill="#CDD6F4" font-size="11">CameraShake</text>
+
+  <!-- Problem text -->
+  <text x="50" y="290" fill="#F38BA8" font-size="11">⚠ Player biết mọi hệ thống</text>
+  <text x="50" y="308" fill="#F38BA8" font-size="11">⚠ Thêm system → sửa Player</text>
+  <text x="50" y="326" fill="#F38BA8" font-size="11">⚠ Xóa system → Player lỗi</text>
+  <text x="50" y="344" fill="#F38BA8" font-size="11">⚠ Impossible to reuse</text>
+
+  <!-- GOOD WAY -->
+  <rect x="370" y="50" width="330" height="310" rx="10" fill="#313244" filter="url(#dsh)"/>
+  <rect x="370" y="50" width="330" height="36" rx="10" fill="#00B894"/>
+  <rect x="370" y="74" width="330" height="12" fill="#00B894"/>
+  <text x="535" y="76" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">✅ Event System (GOOD)</text>
+
+  <!-- Player box good -->
+  <rect x="400" y="102" width="130" height="50" rx="6" fill="#6C5CE7" filter="url(#dsh)"/>
+  <text x="465" y="124" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Player</text>
+  <text x="465" y="142" text-anchor="middle" fill="#D6BCFA" font-size="10">OnDeath?.Invoke()</text>
+
+  <!-- Event broadcast -->
+  <line x1="465" y1="152" x2="465" y2="176" stroke="#FDCB6E" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- Event hub -->
+  <rect x="418" y="178" width="96" height="30" rx="15" fill="#FDCB6E" filter="url(#dsh)"/>
+  <text x="466" y="198" text-anchor="middle" fill="#1E1E2E" font-size="12" font-weight="700">🔔 Event</text>
+
+  <!-- Broadcast arrows -->
+  <line x1="465" y1="208" x2="422" y2="240" stroke="#FDCB6E" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#ar)"/>
+  <line x1="465" y1="208" x2="465" y2="240" stroke="#FDCB6E" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#ar)"/>
+  <line x1="465" y1="208" x2="508" y2="240" stroke="#FDCB6E" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#ar)"/>
+  <line x1="465" y1="208" x2="550" y2="240" stroke="#FDCB6E" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#ar)"/>
+
+  <!-- Subscribers -->
+  <rect x="390" y="242" width="60" height="24" rx="4" fill="#45475A" stroke="#A6E3A1" stroke-width="1"/>
+  <text x="420" y="259" text-anchor="middle" fill="#A6E3A1" font-size="10">UI</text>
+
+  <rect x="456" y="242" width="60" height="24" rx="4" fill="#45475A" stroke="#A6E3A1" stroke-width="1"/>
+  <text x="486" y="259" text-anchor="middle" fill="#A6E3A1" font-size="10">Audio</text>
+
+  <rect x="522" y="242" width="60" height="24" rx="4" fill="#45475A" stroke="#A6E3A1" stroke-width="1"/>
+  <text x="552" y="259" text-anchor="middle" fill="#A6E3A1" font-size="10">Enemy</text>
+
+  <rect x="588" y="242" width="60" height="24" rx="4" fill="#45475A" stroke="#A6E3A1" stroke-width="1"/>
+  <text x="618" y="259" text-anchor="middle" fill="#A6E3A1" font-size="10">Camera</text>
+
+  <!-- Benefits text -->
+  <text x="400" y="294" fill="#A6E3A1" font-size="11">✓ Player không biết ai lắng nghe</text>
+  <text x="400" y="312" fill="#A6E3A1" font-size="11">✓ Thêm/xóa subscriber = 0 thay đổi</text>
+  <text x="400" y="330" fill="#A6E3A1" font-size="11">✓ Loose coupling, dễ test</text>
+  <text x="400" y="348" fill="#A6E3A1" font-size="11">✓ Reusable components</text>
+</svg>

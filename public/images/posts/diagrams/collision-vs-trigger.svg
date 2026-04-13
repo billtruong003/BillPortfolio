@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 340" font-family="Segoe UI, system-ui, sans-serif">
+  <defs>
+    <filter id="ds" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="720" height="340" rx="12" fill="#1E1E2E"/>
+  <text x="360" y="32" text-anchor="middle" fill="#CDD6F4" font-size="18" font-weight="700">Collision vs Trigger</text>
+
+  <!-- COLLISION SIDE -->
+  <rect x="20" y="50" width="330" height="275" rx="10" fill="#313244" filter="url(#ds)"/>
+  <rect x="20" y="50" width="330" height="40" rx="10" fill="#E17055"/>
+  <rect x="20" y="78" width="330" height="12" fill="#E17055"/>
+  <text x="185" y="78" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">⛔ Collision</text>
+
+  <!-- Collision illustration -->
+  <rect x="55" y="104" width="60" height="60" rx="6" fill="#74B9FF" opacity="0.8"/>
+  <text x="85" y="140" text-anchor="middle" fill="#fff" font-size="12" font-weight="600">A</text>
+  <text x="130" y="140" fill="#F38BA8" font-size="20" font-weight="700">→ ✋ ←</text>
+  <rect x="185" y="104" width="60" height="60" rx="6" fill="#FDCB6E" opacity="0.8"/>
+  <text x="215" y="140" text-anchor="middle" fill="#1E1E2E" font-size="12" font-weight="600">B</text>
+  <text x="270" y="134" fill="#F38BA8" font-size="11" font-weight="600">BLOCKED!</text>
+
+  <!-- Collision info -->
+  <text x="40" y="190" fill="#A6E3A1" font-size="12">✓</text>
+  <text x="58" y="190" fill="#CDD6F4" font-size="12">Chặn di chuyển</text>
+  <text x="40" y="214" fill="#A6E3A1" font-size="12">✓</text>
+  <text x="58" y="214" fill="#CDD6F4" font-size="12">Cả 2 cần Collider</text>
+  <text x="40" y="238" fill="#A6E3A1" font-size="12">✓</text>
+  <text x="58" y="238" fill="#CDD6F4" font-size="12">Ít nhất 1 Rigidbody</text>
+
+  <rect x="40" y="254" width="290" height="28" rx="6" fill="#45475A"/>
+  <text x="185" y="273" text-anchor="middle" fill="#89B4FA" font-size="12" font-weight="600">OnCollisionEnter / Stay / Exit</text>
+
+  <rect x="40" y="290" width="290" height="24" rx="6" fill="#45475A"/>
+  <text x="185" y="307" text-anchor="middle" fill="#9399B2" font-size="11">Ví dụ: Tường, Sàn, Vật cản, Va chạm xe</text>
+
+  <!-- TRIGGER SIDE -->
+  <rect x="370" y="50" width="330" height="275" rx="10" fill="#313244" filter="url(#ds)"/>
+  <rect x="370" y="50" width="330" height="40" rx="10" fill="#00B894"/>
+  <rect x="370" y="78" width="330" height="12" fill="#00B894"/>
+  <text x="535" y="78" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">✅ Trigger</text>
+
+  <!-- Trigger illustration -->
+  <rect x="415" y="100" width="70" height="70" rx="35" fill="#00B894" opacity="0.2" stroke="#00B894" stroke-width="2" stroke-dasharray="5,3"/>
+  <rect x="430" y="114" width="40" height="40" rx="4" fill="#74B9FF" opacity="0.8"/>
+  <text x="450" y="140" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">A</text>
+  <text x="500" y="134" fill="#A6E3A1" font-size="16" font-weight="700">→→→</text>
+  <rect x="555" y="100" width="70" height="70" rx="35" fill="#FDCB6E" opacity="0.2" stroke="#FDCB6E" stroke-width="2" stroke-dasharray="5,3"/>
+  <rect x="570" y="114" width="40" height="40" rx="4" fill="#74B9FF" opacity="0.8"/>
+  <text x="590" y="140" text-anchor="middle" fill="#fff" font-size="11" font-weight="600">A</text>
+  <text x="612" y="120" fill="#A6E3A1" font-size="11" font-weight="600">PASS!</text>
+
+  <!-- Trigger info -->
+  <text x="390" y="190" fill="#F38BA8" font-size="12">✗</text>
+  <text x="408" y="190" fill="#CDD6F4" font-size="12">Không chặn — đi xuyên qua</text>
+  <text x="390" y="214" fill="#A6E3A1" font-size="12">✓</text>
+  <text x="408" y="214" fill="#CDD6F4" font-size="12">Collider có isTrigger = true</text>
+  <text x="390" y="238" fill="#A6E3A1" font-size="12">✓</text>
+  <text x="408" y="238" fill="#CDD6F4" font-size="12">Ít nhất 1 Rigidbody</text>
+
+  <rect x="390" y="254" width="290" height="28" rx="6" fill="#45475A"/>
+  <text x="535" y="273" text-anchor="middle" fill="#89B4FA" font-size="12" font-weight="600">OnTriggerEnter / Stay / Exit</text>
+
+  <rect x="390" y="290" width="290" height="24" rx="6" fill="#45475A"/>
+  <text x="535" y="307" text-anchor="middle" fill="#9399B2" font-size="11">Ví dụ: Pickup, Zone detect, Checkpoint</text>
+</svg>

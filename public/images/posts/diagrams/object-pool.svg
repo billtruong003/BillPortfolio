@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" font-family="Segoe UI, system-ui, sans-serif">
+  <defs>
+    <filter id="dp" x="-2%" y="-2%" width="104%" height="108%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.12"/>
+    </filter>
+    <marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#89B4FA"/>
+    </marker>
+    <marker id="apG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#A6E3A1"/>
+    </marker>
+    <marker id="apR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#F38BA8"/>
+    </marker>
+  </defs>
+
+  <rect width="720" height="320" rx="12" fill="#1E1E2E"/>
+  <text x="360" y="32" text-anchor="middle" fill="#CDD6F4" font-size="18" font-weight="700">Object Pooling — Tái sử dụng thay vì tạo/hủy</text>
+
+  <!-- Pool Container -->
+  <rect x="230" y="55" width="260" height="120" rx="10" fill="#313244" stroke="#89B4FA" stroke-width="2" filter="url(#dp)"/>
+  <text x="360" y="78" text-anchor="middle" fill="#89B4FA" font-size="14" font-weight="700">🏊 Object Pool (Queue)</text>
+
+  <!-- Pool objects - inactive (gray) -->
+  <rect x="252" y="92" width="36" height="36" rx="6" fill="#45475A" stroke="#585B70" stroke-width="1.5"/>
+  <text x="270" y="116" text-anchor="middle" fill="#585B70" font-size="18">💤</text>
+
+  <rect x="298" y="92" width="36" height="36" rx="6" fill="#45475A" stroke="#585B70" stroke-width="1.5"/>
+  <text x="316" y="116" text-anchor="middle" fill="#585B70" font-size="18">💤</text>
+
+  <rect x="344" y="92" width="36" height="36" rx="6" fill="#45475A" stroke="#585B70" stroke-width="1.5"/>
+  <text x="362" y="116" text-anchor="middle" fill="#585B70" font-size="18">💤</text>
+
+  <rect x="390" y="92" width="36" height="36" rx="6" fill="#45475A" stroke="#585B70" stroke-width="1.5"/>
+  <text x="408" y="116" text-anchor="middle" fill="#585B70" font-size="18">💤</text>
+
+  <rect x="436" y="92" width="36" height="36" rx="6" fill="#45475A" stroke="#585B70" stroke-width="1.5"/>
+  <text x="454" y="116" text-anchor="middle" fill="#585B70" font-size="18">💤</text>
+
+  <text x="360" y="155" text-anchor="middle" fill="#9399B2" font-size="11">SetActive(false) — Sẵn sàng tái sử dụng</text>
+
+  <!-- GET arrow (left side - out from pool) -->
+  <path d="M 230 100 Q 180 100, 130 140 Q 80 180, 80 200" fill="none" stroke="#A6E3A1" stroke-width="2.5" marker-end="url(#apG)"/>
+  <rect x="28" y="130" width="90" height="24" rx="5" fill="#00B894"/>
+  <text x="73" y="147" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Get()</text>
+  <text x="73" y="170" text-anchor="middle" fill="#A6E3A1" font-size="10">SetActive(true)</text>
+
+  <!-- Active bullets in scene -->
+  <rect x="30" y="208" width="160" height="90" rx="8" fill="#313244" stroke="#A6E3A1" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="110" y="228" text-anchor="middle" fill="#A6E3A1" font-size="11" font-weight="600">🎮 Active in Scene</text>
+
+  <rect x="44" y="240" width="30" height="30" rx="4" fill="#FDCB6E"/>
+  <text x="59" y="260" text-anchor="middle" fill="#1E1E2E" font-size="14">🔫</text>
+
+  <rect x="82" y="240" width="30" height="30" rx="4" fill="#FDCB6E"/>
+  <text x="97" y="260" text-anchor="middle" fill="#1E1E2E" font-size="14">🔫</text>
+
+  <rect x="120" y="240" width="30" height="30" rx="4" fill="#FDCB6E"/>
+  <text x="135" y="260" text-anchor="middle" fill="#1E1E2E" font-size="14">🔫</text>
+
+  <text x="110" y="287" text-anchor="middle" fill="#9399B2" font-size="10">Đang bay, đang hoạt động</text>
+
+  <!-- RETURN arrow (right side - back to pool) -->
+  <path d="M 490 100 Q 540 100, 590 140 Q 640 180, 640 200" fill="none" stroke="#F38BA8" stroke-width="2.5" marker-start="url(#apR)"/>
+  <rect x="600" y="130" width="100" height="24" rx="5" fill="#E17055"/>
+  <text x="650" y="147" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Return()</text>
+  <text x="650" y="170" text-anchor="middle" fill="#F38BA8" font-size="10">SetActive(false)</text>
+
+  <!-- Done conditions -->
+  <rect x="530" y="208" width="170" height="90" rx="8" fill="#313244" stroke="#F38BA8" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="615" y="228" text-anchor="middle" fill="#F38BA8" font-size="11" font-weight="600">🏁 Done Conditions</text>
+  <text x="545" y="252" fill="#CDD6F4" font-size="11">• Hit enemy/wall</text>
+  <text x="545" y="270" fill="#CDD6F4" font-size="11">• Lifetime expired</text>
+  <text x="545" y="288" fill="#CDD6F4" font-size="11">• Out of bounds</text>
+
+  <!-- VS comparison at bottom -->
+  <rect x="220" y="195" width="280" height="60" rx="8" fill="#45475A" filter="url(#dp)"/>
+  <text x="360" y="214" text-anchor="middle" fill="#F38BA8" font-size="11">❌ Instantiate + Destroy = GC spikes, lag</text>
+  <line x1="240" y1="222" x2="480" y2="222" stroke="#585B70" stroke-width="1"/>
+  <text x="360" y="240" text-anchor="middle" fill="#A6E3A1" font-size="11">✅ Get + Return = Zero allocation, smooth 60fps</text>
+
+  <!-- Bottom note -->
+  <text x="360" y="305" text-anchor="middle" fill="#9399B2" font-size="11">200+ bullets cùng lúc? Không vấn đề với Object Pool!</text>
+</svg>
