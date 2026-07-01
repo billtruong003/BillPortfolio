@@ -499,7 +499,7 @@
       "category": "tool",
       "type": "web",
       "src": "/image/proj/lucy.webp",
-      "url": "https://github.com/billtruong003/lucy-showcase",
+      "url": "https://billtruong003.github.io/lucy-showcase/",
       "tags": ["AI Agent", "Claude Agent SDK", "Long-term Memory", "Automation"],
       "description": "A personal AI agent running 24/7 on a VPS with real long-term memory. It talks over Telegram, executes tasks with real tools (file, web, shell), writes its own reports, and carries context across sessions instead of forgetting. Built solo on top of the Claude Agent SDK."
     },
