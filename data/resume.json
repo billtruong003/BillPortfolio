@@ -319,7 +319,7 @@
     {
       "name": "Unity Engine",
       "level": "Expert",
-      "desc": "Unity 2021/2022/6, Editor Scripting, DOTS (ECS/Jobs), Addressables, URP/HDRP, AR/VR Integration, Real-time Optimization, Multiplayer Systems (Photon Fusion, SmartFox Server), Tool Automation."
+      "desc": "Unity 2021/2022/6, Editor Scripting, DOTS (ECS/Jobs), Addressables, URP/HDRP, AR/VR Integration, Real-time Optimization, Multiplayer (Photon Fusion), Tool Automation."
     },
     {
       "name": "Technical Art",
@@ -333,8 +333,8 @@
     },
     {
       "name": "Backend",
-      "level": "Advanced",
-      "desc": "Photon Fusion, Firebase, REST APIs, Real-time Data Sync, Networking & Synchronization."
+      "level": "Familiar",
+      "desc": "Photon Fusion, Firebase, REST APIs, Real-time Data Sync (in game/multiplayer contexts)."
     },
     {
       "name": "Web Development",
@@ -403,7 +403,7 @@
       "title": "Pro Atlas Baker",
       "category": "tool",
       "type": "image",
-      "src": "https://github.com/user-attachments/assets/99bdea15-5126-4bf2-b537-13dc8cdcf499",
+      "src": "/image/proj/atlasbaker.webp",
       "url": "https://github.com/billtruong003/TextureBake",
       "tags": ["Python", "Blender API", "Automation"],
       "description": "Blender tool for texture atlasing with UV optimization."
@@ -463,7 +463,7 @@
       "title": "Video to Subtitle",
       "category": "tool",
       "type": "image",
-      "src": "https://media.licdn.com/dms/image/v2/D5622AQEYGOalzvPMVw/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1719090696657?e=1767225600&v=beta&t=GxctSs-7gjnqytuBEIg3VbPk1ijFfEg3GFzBzIa1oPE",
+      "src": "/image/proj/video-to-subtitle.webp",
       "url": "https://github.com/billtruong003/video-to-subtitle-converter",
       "tags": ["Python", "Whisper AI", "FFmpeg"],
       "description": "Pipeline for transcription and subtitle integration."
@@ -493,7 +493,7 @@
       "title": "Merge Fruit",
       "category": "game",
       "type": "image",
-      "src": "/image/proj/mergefruit.png",
+      "src": "/webgl-games/mushroom-game/mushroom.webp",
       "url": "",
       "tags": ["Hyper Casual", "Suika-like", "Mobile", "Shipped"],
       "description": "A Suika-style merge puzzle game shipped at Golden Sea Studio. Players drop and combine fruits to create bigger ones, featuring satisfying physics-based merging and polished mobile UX."
@@ -503,10 +503,30 @@
       "title": "Brush Hit",
       "category": "game",
       "type": "image",
-      "src": "/image/proj/brushhit.png",
+      "src": "/image/proj/brushhit.webp",
       "url": "",
       "tags": ["Hyper Casual", "Arcade", "Mobile", "Shipped"],
       "description": "A hyper casual arcade game built for rapid iteration at Golden Sea Studio. Features satisfying one-tap mechanics with tight core loop design optimized for mobile engagement."
+    },
+    {
+      "id": 16,
+      "title": "Lucy — Personal AI Agent",
+      "category": "tool",
+      "type": "web",
+      "src": "/image/proj/lucy.webp",
+      "url": "https://github.com/billtruong003/lucy-showcase",
+      "tags": ["AI Agent", "Claude Agent SDK", "Long-term Memory", "Automation"],
+      "description": "A personal AI agent running 24/7 on a VPS with real long-term memory. It talks over Telegram, executes tasks with real tools (file, web, shell), writes its own reports, and carries context across sessions instead of forgetting. Built solo on top of the Claude Agent SDK."
+    },
+    {
+      "id": 17,
+      "title": "Stylized Toon World Kit",
+      "category": "shader",
+      "type": "image",
+      "src": "/image/proj/toonkit.webp",
+      "url": "https://github.com/billtruong003/stylized-toon-world-kit",
+      "tags": ["URP", "HLSL", "Toon", "In Development"],
+      "description": "A modular URP toon and stylized shader kit (lighting, outline, rim, environment) built as a sellable Unity asset. Currently in active development."
     }
   ],
   "testimonials": [
