@@ -401,7 +401,7 @@
       "src": "/image/proj/origin-tools.webp",
       "url": "https://superhivemarket.com/products/pro-origin-tools",
       "tags": ["Blender", "Python", "Add-on", "SuperHive"],
-      "description": "A Blender add-on for setting object origins and pivots quickly and precisely, sold on SuperHive (formerly Blender Market)."
+      "description": "A commercial Blender add-on for smart origin handling: it detects separate mesh islands (each leg of a joined chair gets its own candidate origin), adds a one-click hinge tool for doors and lids, runs every mode in batch across a selection, and exposes a headless bpy.ops API. Ships Unity/Unreal/Godot ground presets; pure Python across Blender 4.2–5.1, no dependencies."
     },
     {
       "id": 6,
