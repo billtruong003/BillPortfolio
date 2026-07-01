@@ -42,7 +42,7 @@
       "logo": "/image/logos/curlyblue.png",
       "url": "https://curlyblue.io/",
       "role": "Technical Artist (Promoted) & Unity Dev",
-      "story": "Shmackle was visually flat and struggling to hold 72 FPS using basic Unlit shaders when I joined. I took ownership of the visual overhaul, writing custom HLSL shaders for Toon Shading, Outlines, and Dissolve effects. This 'Graphics Update' not only modernized the game's look but, through aggressive optimization, actually increased performance to a stable 90 FPS on Meta Quest. My ability to bridge art and engineering led to my promotion to Technical Artist.",
+      "story": "Shmackle was visually flat and struggling to hold 72 FPS using basic Unlit shaders when I joined. I took ownership of the visual overhaul, writing custom HLSL shaders for Toon Shading, Outlines, and Dissolve effects. This 'Graphics Update' not only modernized the game's look but, through aggressive optimization (draw-call reduction, GPU instancing, texture atlasing), held the 72 FPS baseline on Quest 2 and reached roughly 80 to 90 FPS on Quest 3. My ability to bridge art and engineering led to my promotion to Technical Artist.",
       "modal_img": "/image/life/cutoffmoment.jpg"
     },
     {
@@ -196,7 +196,7 @@
         "desc": "Responsible for the visual pipeline and performance optimization of Shmackle VR.",
         "achievements": [
           "Executed a major visual overhaul, replacing legacy assets with custom Toon, Outline, and Dissolve shaders (HLSL/Shader Graph).",
-          "Optimized render pipeline to achieve a locked 90 FPS on Quest standalone (up from unstable ~70 FPS).",
+          "Optimized the render pipeline to hold the 72 FPS baseline on Quest 2 and reach ~80 to 90 FPS on Quest 3 (draw-call reduction, GPU instancing, texture atlasing).",
           "Promoted to Technical Artist role to focus on bridging the gap between gameplay code and visual fidelity.",
           "Developed core networking features for the 'Shooting Range' update using Photon Fusion.",
           "Implemented technical solutions for dynamic FOV to minimize VR motion sickness."
@@ -313,48 +313,33 @@
   "skills": [
     {
       "name": "Languages",
-      "level": "Expert",
-      "desc": "C# (Expert), Python (Advanced), HLSL/Cg (Advanced), C++ (Knowledge), JavaScript (Familiar), C (Familiar), Swift (Familiar)."
+      "level": "Advanced",
+      "desc": "C# (Advanced), Python (tooling/automation), HLSL/Cg (Advanced), C++, JavaScript, SQL."
     },
     {
       "name": "Unity Engine",
       "level": "Expert",
-      "desc": "Unity 2021/2022/6, Editor Scripting, DOTS (ECS/Jobs), Addressables, URP/HDRP, AR/VR Integration, Real-time Optimization, Multiplayer (Photon Fusion), Tool Automation."
+      "desc": "Unity 2022/6 LTS, DOTS (ECS/Jobs), URP, HDRP, Editor Scripting, Addressables, Profiling (Deep Profile, Memory Profiler)."
     },
     {
-      "name": "Technical Art",
+      "name": "Graphics & Tech Art",
       "level": "Expert",
-      "desc": "Shader Graph, VFX Graph, Custom HLSL, Compute Shaders, Raymarching, Render Pipelines, 3D Modeling & Animation (Low-poly Assets), Usability Testing in VR/AR."
+      "desc": "Custom Shaders (HLSL/Shader Graph), VFX Graph, Compute Shaders, GPU Instancing, Render Graph API, Raymarching, Post-Processing Stack."
     },
     {
-      "name": "Tools",
+      "name": "Backend & Networking",
       "level": "Advanced",
-      "desc": "Blender (Python API, 3D Asset Creation), Substance Painter, Photoshop, Figma, Git/GitHub/GitLab, Confluence, Jira, Trello, RenderDoc, Google Console, Wwise (Audio Programming)."
+      "desc": "Photon Fusion, SmartFox Server, RESTful APIs, Firebase, Real-time Replication, Multi-threading."
     },
     {
-      "name": "Backend",
-      "level": "Familiar",
-      "desc": "Photon Fusion, Firebase, REST APIs, Real-time Data Sync (in game/multiplayer contexts)."
-    },
-    {
-      "name": "Web Development",
-      "level": "Familiar",
-      "desc": "HTML, CSS, JavaScript, GitHub Pages, Markdown, LaTeX."
-    },
-    {
-      "name": "Frameworks & Platforms",
-      "level": "Knowledge",
-      "desc": ".NET, NVIDIA Omniverse, SwiftUI, Agile & Scrum Methodologies."
-    },
-    {
-      "name": "Other Technical",
-      "level": "Fundamental",
-      "desc": "Data Structures & Algorithms, UX/UI Prototyping, Technical Writing & Documentation, Custom Tool Development (Unity Editor Tools)."
+      "name": "Tools & Platforms",
+      "level": "Advanced",
+      "desc": "NVIDIA Omniverse, Meta Quest SDK, Blender (Python API), RenderDoc, Git/GitLab, Jira, Confluence, Figma, Adobe Substance Painter."
     },
     {
       "name": "Soft Skills",
       "level": "Advanced",
-      "desc": "Mentoring & Coaching, Presentation & Public Speaking, Client Engagement & Persuasion, Remote Support & Collaboration, Fluent English Communication, Cross-functional Teamwork, Teaching & Training, Project Documentation, Remote Work Adaptability, Basic Project Management."
+      "desc": "Mentoring & Coaching, Presentation & Public Speaking, Client Engagement, Cross-functional Teamwork, Teaching & Training, Fluent English Communication."
     }
   ],
   "portfolio": [
