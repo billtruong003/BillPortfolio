@@ -503,7 +503,7 @@
       "title": "Brush Hit",
       "category": "game",
       "type": "image",
-      "src": "/image/proj/brushhit.webp",
+      "src": "/webgl-games/brush-hit/thumbnail.webp",
       "url": "",
       "tags": ["Hyper Casual", "Arcade", "Mobile", "Shipped"],
       "description": "A hyper casual arcade game built for rapid iteration at Golden Sea Studio. Features satisfying one-tap mechanics with tight core loop design optimized for mobile engagement."
