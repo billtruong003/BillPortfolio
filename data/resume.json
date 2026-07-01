@@ -394,6 +394,16 @@
       "description": "Blender tool for texture atlasing with UV optimization."
     },
     {
+      "id": 18,
+      "title": "Pro Origin Tools",
+      "category": "tool",
+      "type": "image",
+      "src": "/image/proj/origin-tools.webp",
+      "url": "https://superhivemarket.com/products/pro-origin-tools",
+      "tags": ["Blender", "Python", "Add-on", "SuperHive"],
+      "description": "A Blender add-on for setting object origins and pivots quickly and precisely, sold on SuperHive (formerly Blender Market)."
+    },
+    {
       "id": 6,
       "title": "Bill SSOutline (URP)",
       "category": "shader",
