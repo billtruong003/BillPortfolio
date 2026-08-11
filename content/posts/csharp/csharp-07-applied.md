@@ -2,7 +2,7 @@
 title: "C# Cho Game Dev #7: Ứng Dụng — Exception, LINQ & Delegate"
 date: "2024-11-01"
 excerpt: "Bài cuối series C#: xử lý lỗi với Exception, truy vấn dữ liệu với LINQ, và Delegate/Event — cầu nối trực tiếp sang Unity scripting."
-coverImage: "/images/posts/csharp-cover.png"
+coverImage: "/images/posts/csharp-cover.webp"
 category: "tutorial"
 tags: ["CSharp", "LINQ", "Game Development", "Course"]
 published: true

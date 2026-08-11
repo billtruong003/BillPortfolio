@@ -32,7 +32,7 @@
       "story": "At akaVerse, I had the freedom to explore advanced ideas, from shaders to Omniverse integration. I developed an automation tool that streamlined heritage digitization, turning weeks of work into a single-click process and helping meet project deadlines. I presented to NVIDIA's CEO and collaborated on high-profile partnerships. Though I enjoyed the supportive team, I moved on when the focus shifted to industrial 3D outsourcing, as I wanted to stay in game development.",
       "modal_img": "/image/life/akvdesk.jpg",
       "gallery": [
-        { "type": "video", "src": "/image/life/akvgametest.mp4" },
+        { "type": "video", "src": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/portfolio-assets/image/life/akvgametest.mp4" },
         { "type": "image", "src": "/image/life/akvdesk.jpg" },
         { "type": "image", "src": "/image/life/fptevent.jpg" }
       ]
@@ -71,7 +71,7 @@
       "role": "Solo Developer & Technical Artist",
       "desc": "Narrative Sci-Fi Adventure | Advanced URP Rendering",
       "story": "This project is my technical playground a proof of concept for high-fidelity stylized rendering on Unity URP. Developing solo, I architected the entire codebase, including a modular Interaction System and non-linear Dialogue Engine. Visually, I engineered a custom render pipeline featuring a 'See-Through Dissolve' mechanic (using Stencil Buffers), dynamic Cel-Shading, and interactive foliage. It represents my ability to marry complex C# systems with artistic direction.",
-      "modal_img": "/image/life/kindlypromise.mp4"
+      "modal_img": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/portfolio-assets/image/life/kindlypromise.mp4"
     },
     {
       "name": "SHMACKLE VR",
@@ -91,7 +91,7 @@
       "role": "Core Developer",
       "desc": "GameVerse 2024 Finalist",
       "story": "As a top finalist in Vietnam GameVerse, I boosted performance by 300% through rewritten threading and custom shaders for mobile crowds.",
-      "modal_img": "/image/life/APR.mp4"
+      "modal_img": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/portfolio-assets/image/life/APR.mp4"
     },
     {
       "name": "BILL BIOME SHADER",
@@ -131,7 +131,7 @@
       "role": "Gameplay Dev",
       "desc": "Edutainment App (50M+ DLs)",
       "story": "I contributed to core mechanics like Treasure Toss, adapting to enterprise workflows and high standards.",
-      "modal_img": "/image/life/APD.mp4"
+      "modal_img": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/portfolio-assets/image/life/APD.mp4"
     }
   ],
   "socials": [

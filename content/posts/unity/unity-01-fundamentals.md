@@ -2,7 +2,7 @@
 title: "Unity Cho Người Mới #1: GameObject, Component & Scene"
 date: "2024-11-05"
 excerpt: "Hiểu về kiến trúc cốt lõi của Unity: GameObject-Component model, Transform, Hierarchy, Inspector và cách tổ chức Scene đầu tiên."
-coverImage: "/images/posts/unity-fundamental.png"
+coverImage: "/images/posts/unity-fundamental.webp"
 category: "unity-dev"
 tags: ["Unity", "Game Development", "Tutorial", "Beginner"]
 published: true

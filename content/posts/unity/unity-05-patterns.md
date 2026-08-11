@@ -2,7 +2,7 @@
 title: "Unity Cho Người Mới #5: Design Patterns — Singleton, Observer & Object Pool"
 date: "2024-11-17"
 excerpt: "Bài cuối series Unity: các design patterns phổ biến nhất trong game dev — Singleton, Observer/Event, Object Pooling và ScriptableObject."
-coverImage: "/images/posts/unity-fundamental.png"
+coverImage: "/images/posts/unity-fundamental.webp"
 category: "unity-dev"
 tags: ["Unity", "Design Patterns", "Game Development", "Tutorial"]
 published: true

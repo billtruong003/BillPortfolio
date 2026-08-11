@@ -73,6 +73,10 @@ export interface WebGLGame {
         compression: 'gzip' | 'brotli' | 'none';
         hasStreamingAssets?: boolean;
         externalDataUrl?: string;
+        dataFile?: string;
+        frameworkFile?: string;
+        codeFile?: string;
+        streamingAssetsUrl?: string;
         companyName?: string;
         productName?: string;
         productVersion?: string;

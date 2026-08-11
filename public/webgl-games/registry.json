@@ -11,10 +11,10 @@
       "buildSize": "129 MB",
       "status": "playable",
       "build": {
-        "buildPath": "/webgl-games/mushroom-game/Build",
+        "buildPath": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/mushroom-game/Build",
         "buildName": "MergeFruitBuild",
         "compression": "none",
-        "hasStreamingAssets": true,
+        "hasStreamingAssets": false,
         "companyName": "GoldenSea",
         "productName": "MergeFruit",
         "productVersion": "1.0"
@@ -47,7 +47,7 @@
       "buildSize": "34.6 MB",
       "status": "playable",
       "build": {
-        "buildPath": "/webgl-games/food-ping-pong/Build",
+        "buildPath": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/food-ping-pong/Build",
         "buildName": "foodpingpont",
         "compression": "none",
         "hasStreamingAssets": false,
@@ -77,10 +77,11 @@
       "buildSize": "38.9 MB",
       "status": "playable",
       "build": {
-        "buildPath": "/webgl-games/typing-fight/Build",
+        "buildPath": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/typing-fight/Build",
         "buildName": "typing-fight",
         "compression": "none",
         "hasStreamingAssets": true,
+        "streamingAssetsUrl": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/typing-fight/StreamingAssets",
         "companyName": "BillTruong",
         "productName": "TypingFight",
         "productVersion": "1.0"
@@ -107,10 +108,11 @@
       "buildSize": "117 MB",
       "status": "playable",
       "build": {
-        "buildPath": "/webgl-games/brush-hit/Build",
+        "buildPath": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/brush-hit/Build",
         "buildName": "BrushHit",
         "compression": "none",
-        "hasStreamingAssets": false,
+        "hasStreamingAssets": true,
+        "streamingAssetsUrl": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/brush-hit/StreamingAssets",
         "companyName": "BillTruong",
         "productName": "BrushHit",
         "productVersion": "1.0"
@@ -137,7 +139,7 @@
       "buildSize": "12.2 MB",
       "status": "playable",
       "build": {
-        "buildPath": "/webgl-games/SmulieCatNinja/Build",
+        "buildPath": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/SmulieCatNinja/Build",
         "buildName": "SmulieCatNinja",
         "compression": "none",
         "hasStreamingAssets": false,
@@ -175,11 +177,10 @@
       "buildSize": "240 MB",
       "status": "playable",
       "build": {
-        "buildPath": "/webgl-games/zeno/Build",
+        "buildPath": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/zeno/Build",
         "buildName": "WebGL",
         "compression": "none",
-        "hasStreamingAssets": true,
-        "externalDataUrl": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/zeno/WebGL.data",
+        "hasStreamingAssets": false,
         "companyName": "BillTruong",
         "productName": "TimelessSoul",
         "productVersion": "1.0"
@@ -200,6 +201,42 @@
       "preferredOrientation": "landscape"
     },
     {
+      "id": "zombie-war",
+      "title": "Zombie War",
+      "description": "A stylized top-down zombie survival shooter with campaign progression, modular weapons, hordes, bosses, and WebGL-ready gameplay.",
+      "thumbnail": "",
+      "tags": ["Zombie", "Horde Survival", "Top-down Shooter", "Campaign", "Unity 6", "WebGL"],
+      "genre": "shooter",
+      "releaseDate": "2026-08-11",
+      "buildSize": "150.4 MB",
+      "status": "playable",
+      "build": {
+        "buildPath": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/zombie-war/Build",
+        "buildName": "zombie-war",
+        "compression": "none",
+        "hasStreamingAssets": true,
+        "dataFile": "zombie-war.data.unityweb?v=20260811-portrait-cheats",
+        "frameworkFile": "zombie-war.framework.js.unityweb?v=20260811-portrait-cheats",
+        "codeFile": "zombie-war.wasm.unityweb?v=20260811-portrait-cheats",
+        "streamingAssetsUrl": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/zombie-war/StreamingAssets",
+        "companyName": "BillTheDev",
+        "productName": "Zombie War",
+        "productVersion": "1.0.2"
+      },
+      "display": {
+        "fixedRatio": true,
+        "ratioWidth": 9,
+        "ratioHeight": 16
+      },
+      "controls": {
+        "keyboard": ["WASD — Move", "Number keys — Switch weapon"],
+        "mouse": ["Aim — Move pointer", "Left Click — Fire"],
+        "touch": false
+      },
+      "unityVersion": "6000.3.10f1",
+      "preferredOrientation": "portrait"
+    },
+    {
       "id": "spirit-war",
       "title": "Spirit War",
       "description": "A strategy action game by Page Mèo Sen. Founded by Hit, with feature development and gameplay systems support by Bill.",
@@ -210,10 +247,11 @@
       "buildSize": "138 MB",
       "status": "playable",
       "build": {
-        "buildPath": "/webgl-games/spirit-war/Build",
+        "buildPath": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/spirit-war/Build",
         "buildName": "SpiritWarBill",
         "compression": "none",
         "hasStreamingAssets": true,
+        "streamingAssetsUrl": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/spirit-war/StreamingAssets",
         "companyName": "PageMeoSen",
         "productName": "SpiritWar",
         "productVersion": "1.0"
@@ -230,5 +268,5 @@
       "preferredOrientation": "landscape"
     }
   ],
-  "lastUpdated": "2026-04-11T00:00:00Z"
+  "lastUpdated": "2026-08-11T00:00:00Z"
 }

@@ -103,16 +103,16 @@ export const UnityPlayer = ({ game, onClose, mode = 'fullpage' }: UnityPlayerPro
             setLoadState('loading-data');
 
             const config: any = {
-                dataUrl: game.build.externalDataUrl || `${buildPath}/${buildName}.data${ext}`,
-                frameworkUrl: `${buildPath}/${buildName}.framework.js${ext}`,
-                codeUrl: `${buildPath}/${buildName}.wasm${ext}`,
+                dataUrl: game.build.externalDataUrl || `${buildPath}/${game.build.dataFile || `${buildName}.data${ext}`}`,
+                frameworkUrl: `${buildPath}/${game.build.frameworkFile || `${buildName}.framework.js${ext}`}`,
+                codeUrl: `${buildPath}/${game.build.codeFile || `${buildName}.wasm${ext}`}`,
                 companyName: game.build.companyName || 'DefaultCompany',
                 productName: game.build.productName || game.title,
                 productVersion: game.build.productVersion || '1.0',
             };
             
             if (game.build.hasStreamingAssets) {
-                config.streamingAssetsUrl = `${buildPath}/StreamingAssets`;
+                config.streamingAssetsUrl = game.build.streamingAssetsUrl || `${buildPath}/StreamingAssets`;
             }
 
             const createUnityInstance = (window as any).createUnityInstance;

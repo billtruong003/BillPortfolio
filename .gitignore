@@ -40,3 +40,17 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 "public/webgl-games/zeno/Build/Game.data" 
+
+# Unity WebGL output is deployed to Cloudflare R2.
+/public/webgl-games/*/Build/
+/public/webgl-games/*/StreamingAssets/
+/public/webgl-games/zombie-war/Build/
+/public/webgl-games/zombie-war/StreamingAssets/
+/public/webgl-games/zombie-war/TemplateData/
+/public/webgl-games/zombie-war/index.html
+
+# Large media is deployed to Cloudflare R2; optimized WebP covers stay in Git.
+/public/image/life/*.mp4
+/public/images/posts/shader-background.gif
+/public/images/posts/csharp-cover.png
+/public/images/posts/unity-fundamental.png

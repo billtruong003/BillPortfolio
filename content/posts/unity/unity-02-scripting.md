@@ -2,7 +2,7 @@
 title: "Unity Cho Người Mới #2: Scripting — MonoBehaviour, Lifecycle & Input"
 date: "2024-11-08"
 excerpt: "Viết script C# đầu tiên trong Unity. Hiểu MonoBehaviour lifecycle, xử lý input, di chuyển object, và các API Unity cơ bản."
-coverImage: "/images/posts/unity-fundamental.png"
+coverImage: "/images/posts/unity-fundamental.webp"
 category: "unity-dev"
 tags: ["Unity", "CSharp", "Scripting", "Game Development"]
 published: true
