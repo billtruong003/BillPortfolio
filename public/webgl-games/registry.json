@@ -204,7 +204,7 @@
       "id": "zombie-war",
       "title": "Zombie War",
       "description": "A stylized top-down zombie survival shooter with campaign progression, modular weapons, hordes, bosses, and WebGL-ready gameplay.",
-      "thumbnail": "",
+      "thumbnail": "webgl-games/zombie-war/thumbnail.webp",
       "tags": ["Zombie", "Horde Survival", "Top-down Shooter", "Campaign", "Unity 6", "WebGL"],
       "genre": "shooter",
       "releaseDate": "2026-08-11",
