@@ -31,6 +31,13 @@ export const SERIES_CONFIG: Series[] = [
         color: '#F05138',
     },
     {
+        id: 'shmup',
+        name: 'Làm game bắn máy bay với Unity 6',
+        icon: '🚀',
+        description: 'Dựng một game shoot \'em up từ scene trống tới build WebGL: Input System, pool, ScriptableObject, HUD, shader',
+        color: '#4C6EF5',
+    },
+    {
         id: 'shader',
         name: 'Shader & Rendering',
         icon: '🎨',

@@ -3,7 +3,7 @@ import path from 'path';
 
 const POSTS_DIR = path.resolve('content/posts');
 const CATEGORIES = ['shader-breakdown', 'tech-art', 'unity-dev', 'tools', 'devlog', 'tutorial'];
-const SERIES = ['csharp', 'unity', 'swift', 'shader'];
+const SERIES = ['csharp', 'unity', 'swift', 'shader', 'shmup'];
 const LANGS = ['vi', 'en'];
 
 const title = process.argv[2];
