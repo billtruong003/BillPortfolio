@@ -1,6 +1,7 @@
 'use client';
 import { ReactNode, useEffect, useRef } from 'react';
 import Lenis from 'lenis';
+import { MotionConfig } from 'framer-motion';
 import { useStore } from '@/hooks/useStore';
 
 export const SmoothScroll = ({ children }: { children: ReactNode }) => {
@@ -9,6 +10,8 @@ export const SmoothScroll = ({ children }: { children: ReactNode }) => {
     const lenisRef = useRef<Lenis | null>(null);
 
     useEffect(() => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -42,5 +45,5 @@ export const SmoothScroll = ({ children }: { children: ReactNode }) => {
         }
     }, [isModalOpen]);
 
-    return <>{children}</>;
+    return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
 };

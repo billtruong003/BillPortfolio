@@ -51,7 +51,7 @@ export default function ArcadePage() {
             <div className="relative z-10">
                 {/* Navigation */}
                 <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 bg-black/60 backdrop-blur-md border-b border-white/5">
-                    <a href="/" className="flex items-center gap-2 text-zinc-400 hover:text-primary transition-colors font-mono text-sm">
+                    <a href="/" aria-label="Back to homepage" className="flex items-center gap-2 text-zinc-400 hover:text-primary transition-colors font-mono text-sm">
                         <ArrowLeft size={16} />
                         <span className="hidden sm:inline">BACK_TO_BASE</span>
                     </a>

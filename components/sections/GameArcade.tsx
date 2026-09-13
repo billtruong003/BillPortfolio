@@ -89,9 +89,9 @@ export const GameArcade = ({ games, autoPlayGameId }: GameArcadeProps) => {
                             </div>
                             <span className="font-mono text-primary text-xs tracking-[0.4em] uppercase">Interactive Lab</span>
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
+                        <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
                             Game <span className="text-primary">Arcade</span>
-                        </h2>
+                        </h1>
                         <p className="text-zinc-500 mt-3 max-w-lg text-sm">
                             Playable WebGL builds — chạy trực tiếp trên browser. Click vào game để chơi ngay.
                         </p>
@@ -185,7 +185,7 @@ export const GameArcade = ({ games, autoPlayGameId }: GameArcadeProps) => {
                                                     <Gamepad2 size={14} />Play Now
                                                 </button>
                                                 {game.externalUrl && (
-                                                    <a href={game.externalUrl} target="_blank" rel="noopener noreferrer"
+                                                    <a href={game.externalUrl} target="_blank" rel="noopener noreferrer" aria-label={`Open ${game.title} in a new tab`}
                                                         className="p-2.5 text-zinc-500 hover:text-white border border-white/10 hover:border-white/30 rounded-lg transition-colors">
                                                         <ExternalLink size={14} />
                                                     </a>

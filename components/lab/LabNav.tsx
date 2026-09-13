@@ -12,6 +12,7 @@ export const LabNav = ({ postTitle }: LabNavProps) => {
             <div className="container mx-auto max-w-5xl px-6 h-12 flex items-center gap-2 text-xs font-mono">
                 <Link
                     href="/"
+                    aria-label="Home"
                     className="text-zinc-400 hover:text-primary transition-colors flex items-center gap-1.5 shrink-0"
                 >
                     <Home size={14} />

@@ -204,7 +204,7 @@ export const PostGrid = ({ posts }: { posts: BlogPost[] }) => {
                             className="w-full pl-11 pr-4 py-3 bg-zinc-900/60 border border-zinc-800 rounded-lg text-sm text-zinc-200 placeholder:text-zinc-600 font-mono focus:border-primary/50 focus:outline-none transition-colors"
                         />
                         {searchQuery && (
-                            <button onClick={() => setSearch('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white">
+                            <button onClick={() => setSearch('')} aria-label="Clear search" className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white">
                                 <X size={14} />
                             </button>
                         )}

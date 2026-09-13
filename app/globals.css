@@ -106,3 +106,14 @@ code[class*="language-"], pre[class*="language-"] { color: #d4d4d8; text-shadow:
 .token.important, .token.bold { font-weight: bold; }
 .token.italic { font-style: italic; }
 code[class*="language-"] .linenumber { color: #333; margin-right: 1em; user-select: none; }
+/* Anchor targets clear the fixed 48px lab nav */
+.lab-prose h2, .lab-prose h3 { scroll-margin-top: 4.5rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
