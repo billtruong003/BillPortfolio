@@ -2,9 +2,11 @@
 title: "Tạo Shader Trong Unity với HLSL: Hướng Dẫn Chi Tiết Cho Người Mới Bắt Đầu"
 date: "2024-12-06"
 lang: "vi"
+series: "shader"
+order: 1
 excerpt: "Hướng dẫn chi tiết cách xây dựng shader trong Unity từ cơ bản đến nâng cao, bao gồm các tính năng như color, metallic, smoothness và base map."
 coverImage: "/images/posts/shader-basic-cover.png"
-category: "tutorial"
+category: "shader-breakdown"
 tags: ["Unity", "Shader", "Game Development", "Graphics", "HLSL"]
 published: true
 featured: true

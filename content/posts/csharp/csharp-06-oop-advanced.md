@@ -2,6 +2,8 @@
 title: "C# Cho Game Dev #6: OOP Nâng Cao — Inheritance, Interface & Polymorphism"
 date: "2024-10-30"
 lang: "vi"
+series: "csharp"
+order: 6
 excerpt: "Inheritance, abstract class, interface và polymorphism — những công cụ mạnh mẽ giúp bạn xây dựng hệ thống game linh hoạt và mở rộng được."
 coverImage: "/images/posts/csharp-cover.webp"
 category: "tutorial"

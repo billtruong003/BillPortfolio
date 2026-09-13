@@ -61,7 +61,7 @@ const SeriesCard = ({
 };
 
 /* ── Series Expanded List ── */
-const SeriesList = ({ posts, seriesName }: { posts: BlogPost[]; seriesName: string }) => (
+const SeriesList = ({ posts, series }: { posts: BlogPost[]; series: (typeof SERIES_CONFIG)[0] }) => (
     <motion.div
         initial={{ opacity: 0, height: 0 }}
         animate={{ opacity: 1, height: 'auto' }}
@@ -71,8 +71,11 @@ const SeriesList = ({ posts, seriesName }: { posts: BlogPost[]; seriesName: stri
     >
         <div className="pt-2 pb-4">
             <div className="flex items-center gap-2 mb-4">
-                <h3 className="text-sm font-bold text-zinc-200">{seriesName}</h3>
+                <h3 className="text-sm font-bold text-zinc-200">{series.name}</h3>
                 <span className="text-[10px] font-mono text-zinc-600">— Theo thứ tự học</span>
+                <Link href={`/lab/series/${series.id}`} className="ml-auto text-[10px] font-mono text-primary hover:underline">
+                    Trang series →
+                </Link>
             </div>
             <div className="space-y-2">
                 {posts.map((post, idx) => (
@@ -127,14 +130,7 @@ export const PostGrid = ({ posts }: { posts: BlogPost[] }) => {
     }, [posts]);
 
     const filtered = useMemo(() => {
-        if (activeSeries) {
-            const series = SERIES_CONFIG.find(s => s.id === activeSeries);
-            if (series) {
-                return posts
-                    .filter(p => series.pattern.test(p.slug))
-                    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-            }
-        }
+        if (activeSeries) return getSeriesPosts(posts, activeSeries);
 
         let result = posts;
         if (activeCategory !== 'all') {
@@ -182,7 +178,7 @@ export const PostGrid = ({ posts }: { posts: BlogPost[] }) => {
                     <AnimatePresence>
                         {activeSeries && (() => {
                             const s = seriesData.find(s => s.id === activeSeries);
-                            return s ? <SeriesList posts={s.posts} seriesName={s.name} /> : null;
+                            return s ? <SeriesList posts={s.posts} series={s} /> : null;
                         })()}
                     </AnimatePresence>
                 </div>

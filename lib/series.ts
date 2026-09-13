@@ -6,7 +6,6 @@ export interface Series {
     icon: string;
     description: string;
     color: string;
-    pattern: RegExp;
 }
 
 export const SERIES_CONFIG: Series[] = [
@@ -16,7 +15,6 @@ export const SERIES_CONFIG: Series[] = [
         icon: '💻',
         description: 'Từ zero đến OOP — nền tảng C# cho game developer',
         color: '#68217A',
-        pattern: /^csharp-\d/,
     },
     {
         id: 'unity',
@@ -24,7 +22,6 @@ export const SERIES_CONFIG: Series[] = [
         icon: '🎮',
         description: 'GameObject, Scripting, Physics, UI và Design Patterns',
         color: '#00B894',
-        pattern: /^unity-\d/,
     },
     {
         id: 'swift',
@@ -32,30 +29,36 @@ export const SERIES_CONFIG: Series[] = [
         icon: '🍎',
         description: 'Lập trình iOS với Swift và SwiftUI framework',
         color: '#F05138',
-        pattern: /^(swiftui-|introduction-to-swiftui|pet-project-tictactoe)/,
+    },
+    {
+        id: 'shader',
+        name: 'Shader & Rendering',
+        icon: '🎨',
+        description: 'HLSL, URP và các kỹ thuật shader dùng trong game thật',
+        color: '#FFB84D',
     },
 ];
 
-export function getSeriesForPost(post: BlogPost): Series | null {
-    return SERIES_CONFIG.find(s => s.pattern.test(post.slug)) ?? null;
-}
+export const getSeries = (id: string): Series | undefined =>
+    SERIES_CONFIG.find(s => s.id === id);
+
+export const getSeriesForPost = (post: BlogPost): Series | null =>
+    post.series ? getSeries(post.series) ?? null : null;
+
+const byOrderThenDate = (a: BlogPost, b: BlogPost) =>
+    (a.order ?? Infinity) - (b.order ?? Infinity) ||
+    new Date(a.date).getTime() - new Date(b.date).getTime();
 
 export function getSeriesPosts(posts: BlogPost[], seriesId: string): BlogPost[] {
-    const series = SERIES_CONFIG.find(s => s.id === seriesId);
-    if (!series) return [];
-    return posts
-        .filter(p => series.pattern.test(p.slug))
-        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    return posts.filter(p => p.series === seriesId).sort(byOrderThenDate);
 }
 
 export function getSeriesNav(posts: BlogPost[], currentSlug: string) {
-    const series = SERIES_CONFIG.find(s => s.pattern.test(currentSlug));
+    const current = posts.find(p => p.slug === currentSlug);
+    const series = current ? getSeriesForPost(current) : null;
     if (!series) return null;
 
-    const ordered = posts
-        .filter(p => series.pattern.test(p.slug))
-        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-
+    const ordered = getSeriesPosts(posts, series.id);
     const idx = ordered.findIndex(p => p.slug === currentSlug);
     if (idx === -1) return null;
 

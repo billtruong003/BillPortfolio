@@ -2,6 +2,8 @@
 title: "C# Cho Game Dev #5: OOP — Class, Object & Constructor"
 date: "2024-10-28"
 lang: "vi"
+series: "csharp"
+order: 5
 excerpt: "Bước vào lập trình hướng đối tượng. Tạo class, object, constructor, property và access modifiers — nền tảng để viết script trong Unity."
 coverImage: "/images/posts/csharp-cover.webp"
 category: "tutorial"

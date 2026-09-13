@@ -2,6 +2,8 @@
 title: "Speedrun Swift UI Lesson 1 - Part II"
 date: "2024-01-13"
 lang: "en"
+series: "swift"
+order: 3
 excerpt: "Explore loops, functions, and complex data types in Swift. Learn for/while loops, function definitions, and work with arrays, dictionaries, and sets."
 coverImage: "/images/posts/swiftui-learn-cover.png"
 category: "tutorial"

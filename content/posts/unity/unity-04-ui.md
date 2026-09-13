@@ -2,6 +2,8 @@
 title: "Unity Cho Người Mới #4: UI — Canvas, Layout & Event System"
 date: "2024-11-14"
 lang: "vi"
+series: "unity"
+order: 4
 excerpt: "Xây dựng giao diện game với Unity UI: Canvas, Text, Button, Image, Slider, Layout Groups và Event System."
 coverImage: "/images/posts/unity-fundamental.webp"
 category: "unity-dev"

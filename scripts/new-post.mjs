@@ -3,39 +3,48 @@ import path from 'path';
 
 const POSTS_DIR = path.resolve('content/posts');
 const CATEGORIES = ['shader-breakdown', 'tech-art', 'unity-dev', 'tools', 'devlog', 'tutorial'];
+const SERIES = ['csharp', 'unity', 'swift', 'shader'];
+const LANGS = ['vi', 'en'];
 
 const title = process.argv[2];
 if (!title) {
-    console.log('Usage: node scripts/new-post.mjs "Post Title" [--category shader-breakdown] [--tags "HLSL,Unity"]');
+    console.log('Usage: node scripts/new-post.mjs "Post Title" [--category shader-breakdown] [--tags "HLSL,Unity"] [--lang vi|en] [--series shader] [--order 4] [--dir shader]');
     process.exit(1);
 }
 
-const categoryFlag = process.argv.indexOf('--category');
-const category = categoryFlag !== -1 ? process.argv[categoryFlag + 1] : 'tutorial';
-const tagsFlag = process.argv.indexOf('--tags');
-const tags = tagsFlag !== -1 ? process.argv[tagsFlag + 1].split(',').map(t => t.trim()) : [];
+const flag = (name, fallback) => {
+    const i = process.argv.indexOf(name);
+    return i !== -1 ? process.argv[i + 1] : fallback;
+};
 
-if (!CATEGORIES.includes(category)) {
-    console.error(`Invalid category "${category}". Choose from: ${CATEGORIES.join(', ')}`);
-    process.exit(1);
-}
+const category = flag('--category', 'tutorial');
+const tags = flag('--tags', '').split(',').map(t => t.trim()).filter(Boolean);
+const lang = flag('--lang', 'vi');
+const series = flag('--series', '');
+const order = Number(flag('--order', '1'));
+const dir = flag('--dir', series);
+
+const fail = (msg) => { console.error(msg); process.exit(1); };
+if (!CATEGORIES.includes(category)) fail(`Invalid category "${category}". Choose from: ${CATEGORIES.join(', ')}`);
+if (!LANGS.includes(lang)) fail(`Invalid lang "${lang}". Choose from: ${LANGS.join(', ')}`);
+if (series && !SERIES.includes(series)) fail(`Invalid series "${series}". Choose from: ${SERIES.join(', ')}`);
 
 const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-const filePath = path.join(POSTS_DIR, `${slug}.md`);
+const postDir = path.join(POSTS_DIR, dir);
+const filePath = path.join(postDir, `${slug}.md`);
 
-if (fs.existsSync(filePath)) {
-    console.error(`Post already exists: ${filePath}`);
-    process.exit(1);
-}
+if (fs.existsSync(filePath)) fail(`Post already exists: ${filePath}`);
 
 const date = new Date().toISOString().split('T')[0];
-const tagYaml = tags.length > 0 ? `[${tags.map(t => `"${t}"`).join(', ')}]` : '[]';
+const tagYaml = `[${tags.map(t => `"${t}"`).join(', ')}]`;
+const seriesYaml = series ? `series: "${series}"\norder: ${order}\n` : '';
 
 const template = `---
 title: "${title}"
 date: "${date}"
-excerpt: ""
-coverImage: ""
+lang: "${lang}"
+${seriesYaml}excerpt: ""
+coverImage: "/images/posts/${slug}/cover.webp"
 category: "${category}"
 tags: ${tagYaml}
 published: false
@@ -60,9 +69,11 @@ float4 frag(v2f i) : SV_Target {
 Wrap up your post here.
 `;
 
-fs.mkdirSync(POSTS_DIR, { recursive: true });
+fs.mkdirSync(postDir, { recursive: true });
 fs.writeFileSync(filePath, template);
 console.log(`✅ Created: ${filePath}`);
 console.log(`   Category: ${category}`);
 console.log(`   Tags: ${tags.join(', ') || '(none)'}`);
-console.log(`\n   Edit the file, then run: node scripts/compile-posts.mjs`);
+console.log(`   Lang: ${lang}${series ? `, series: ${series} #${order}` : ''}`);
+console.log(`   Cover: add public/images/posts/${slug}/cover.webp — the build fails while it is missing`);
+console.log(`\n   Edit the file, then run: npm run compile-posts`);

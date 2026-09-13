@@ -2,6 +2,8 @@
 title: "C# Cho Game Dev #2: Control Flow — Điều Kiện & Vòng Lặp"
 date: "2024-10-22"
 lang: "vi"
+series: "csharp"
+order: 2
 excerpt: "Điều khiển luồng chương trình với if/else, switch và vòng lặp for/while. Học cách ra quyết định và lặp lại hành động — nền tảng của mọi game logic."
 coverImage: "/images/posts/csharp-cover.webp"
 category: "tutorial"

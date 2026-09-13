@@ -2,6 +2,8 @@
 title: "C# Cho Game Dev #1: Syntax, Biến & Kiểu Dữ Liệu"
 date: "2024-10-20"
 lang: "vi"
+series: "csharp"
+order: 1
 excerpt: "Bắt đầu hành trình C# từ con số 0. Tìm hiểu cấu trúc chương trình, kiểu dữ liệu, biến, hằng, toán tử và nhập/xuất dữ liệu — tất cả với context game development."
 coverImage: "/images/posts/csharp-cover.webp"
 category: "tutorial"

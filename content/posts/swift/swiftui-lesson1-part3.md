@@ -2,6 +2,8 @@
 title: "Speedrun Swift UI Lesson 1 - Part III"
 date: "2024-01-14"
 lang: "en"
+series: "swift"
+order: 4
 excerpt: "Dive into Object-Oriented Programming in Swift. Learn about classes, structures, inheritance, and protocols to build organized and reusable code."
 coverImage: "/images/posts/swiftui-learn-cover.png"
 category: "tutorial"
