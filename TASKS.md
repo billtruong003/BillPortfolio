@@ -26,16 +26,17 @@ Cập nhật: 2026-09-13. Tick `[x]` khi xong. Thứ tự phase là thứ tự l
 ### 1.3 Pipeline nội dung
 - [x] Quyết định `data/posts.json`: gitignore (khuyến nghị, vì prebuild sinh lại) HOẶC bỏ khỏi prebuild. Hiện commit + sinh lại → drift mỗi build
 - [x] `scripts/compile-posts.mjs`: fail build nếu `coverImage` local không tồn tại, warn nếu ảnh hotlink
-- [ ] Thêm field frontmatter `series` + `order` thay cho regex slug trong `lib/series.ts`
-- [ ] Trang danh sách series `/lab/series/<id>` (C#, Unity, Swift, Shader)
-- [ ] Bài mới: template `scripts/new-post.mjs` thêm sẵn `lang`, `series`, `coverImage`
-- [ ] Chuẩn hoá category: `shader-breakdown` cho toàn bộ bài shader (bài `shader-basic-unity-hlsl` đang là `tutorial`)
+- [x] Thêm field frontmatter `series` + `order` thay cho regex slug trong `lib/series.ts`
+- [x] Trang danh sách series `/lab/series/<id>` (C#, Unity, Swift, Shader)
+- [x] Bài mới: template `scripts/new-post.mjs` thêm sẵn `lang`, `series`, `coverImage`
+- [x] Chuẩn hoá category: `shader-breakdown` cho toàn bộ bài shader (bài `shader-basic-unity-hlsl` đang là `tutorial`)
 
 ### 1.4 UX Lab
-- [ ] Trang arcade và `/lab` thiếu `h1`
-- [ ] Nút / link chỉ có icon → thêm `aria-label` (LabNav, PostHeader back link)
-- [ ] `prefers-reduced-motion`: tắt Lenis + Framer animation khi user bật
-- [ ] TOC: highlight heading đang đọc (kiểm tra `TableOfContents.tsx` + `ScrollTracker.tsx` hoạt động sau khi bật `trailingSlash`)
+- [x] Trang arcade và `/lab` thiếu `h1`
+- [x] Nút / link chỉ có icon → thêm `aria-label` (LabNav, PostHeader back link)
+- [x] `prefers-reduced-motion`: tắt Lenis + Framer animation khi user bật
+- [x] TOC: highlight heading đang đọc (kiểm tra `TableOfContents.tsx` + `ScrollTracker.tsx` hoạt động sau khi bật `trailingSlash`)
+  - Logic IntersectionObserver giữ nguyên, thêm `scroll-margin-top` cho h2/h3. Chưa xem được bằng mắt vì Browser pane ẩn → Bill mở /lab/csharp-01-basics/ cuộn thử
 
 ---
 
