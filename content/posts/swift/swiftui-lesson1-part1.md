@@ -1,6 +1,7 @@
 ---
 title: "Speedrun Swift UI Lesson 1 - Part I"
 date: "2024-01-12"
+lang: "en"
 excerpt: "Start your Swift journey with the basics! Learn about variables, constants, data types, conditional structures, and get hands-on exercises."
 coverImage: "/images/posts/swiftui-learn-cover.png"
 category: "tutorial"

@@ -1,6 +1,7 @@
 ---
 title: "Những Bí Mật Đằng Sau Gameplay: Tính Năng Ẩn Trong Các Trò Chơi Nổi Tiếng"
 date: "2024-12-04"
+lang: "vi"
 excerpt: "Khám phá những tính năng ẩn trong các trò chơi nổi tiếng mà ít người chơi nhận ra, từ AI enemy đến các khu vực bí mật."
 coverImage: "/images/posts/hidden-features-in-games/cover.webp"
 category: "devlog"

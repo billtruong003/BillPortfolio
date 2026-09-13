@@ -1,6 +1,7 @@
 ---
 title: "Hành Trình Trở Thành Game Developer"
 date: "2024-12-01"
+lang: "vi"
 excerpt: "Khám phá hành trình trở thành một game developer, từ việc học lập trình đến những thử thách, cơ hội nghề nghiệp và mức lương trong ngành tại TP.HCM."
 coverImage: "/images/posts/game-dev-journey/cover.webp"
 category: "devlog"

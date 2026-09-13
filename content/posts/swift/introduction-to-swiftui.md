@@ -1,6 +1,7 @@
 ---
 title: "Introduction to SwiftUI"
 date: "2024-01-11"
+lang: "en"
 excerpt: "A complete guide to learning SwiftUI from scratch. This series covers everything from Swift basics to advanced SwiftUI concepts."
 coverImage: "/images/posts/swiftui-cover.jpeg"
 category: "tutorial"

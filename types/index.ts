@@ -122,6 +122,9 @@ export interface BlogPost {
     coverImage?: string;
     category: BlogCategory;
     tags: string[];
+    lang: string;
+    series?: string;
+    order?: number;
     readingTime: number;
     published: boolean;
     featured?: boolean;

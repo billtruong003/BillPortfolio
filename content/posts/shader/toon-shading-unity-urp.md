@@ -1,6 +1,7 @@
 ---
 title: "Toon Shading in Unity URP: A Complete Breakdown"
 date: "2026-04-10"
+lang: "en"
 excerpt: "How I built a multi-pass toon shader with custom outlines for Shmackle VR, achieving 90 FPS on Meta Quest."
 coverImage: "/images/posts/toon-shader-cover.jpg"
 category: "shader-breakdown"

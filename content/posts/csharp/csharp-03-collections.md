@@ -1,6 +1,7 @@
 ---
 title: "C# Cho Game Dev #3: Collections — Array, List & Dictionary"
 date: "2024-10-24"
+lang: "vi"
 excerpt: "Quản lý dữ liệu với Array, List và Dictionary. Từ inventory system đến enemy tracking — mọi game đều cần collections."
 coverImage: "/images/posts/csharp-cover.webp"
 category: "tutorial"

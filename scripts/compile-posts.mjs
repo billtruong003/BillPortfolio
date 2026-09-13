@@ -12,7 +12,12 @@ import rehypeStringify from 'rehype-stringify';
 import readingTime from 'reading-time';
 
 const POSTS_DIR = path.resolve('content/posts');
+const PUBLIC_DIR = path.resolve('public');
 const OUTPUT_FILE = path.resolve('data/posts.json');
+const FEED_FILE = path.resolve('public/lab/feed.xml');
+const SITE = JSON.parse(fs.readFileSync(path.resolve('data/site.json'), 'utf-8'));
+
+const VI_DIACRITICS = /[àáảãạăằắẳẵặâầấẩẫậèéẻẽẹêềếểễệìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵđ]/i;
 
 function getMarkdownFiles(dir) {
     const results = [];
@@ -39,6 +44,25 @@ function extractHeadings(html) {
         });
     }
     return headings;
+}
+
+function detectLang(frontmatter, content) {
+    if (frontmatter.lang) return frontmatter.lang;
+    return VI_DIACRITICS.test(content) ? 'vi' : 'en';
+}
+
+function checkImages(rel, frontmatter, body) {
+    const problems = [];
+    const cover = frontmatter.coverImage;
+    if (cover && /^https?:\/\//.test(cover)) {
+        console.warn(`  ⚠ ${rel}: coverImage is hotlinked (${cover})`);
+    } else if (cover && !fs.existsSync(path.join(PUBLIC_DIR, cover))) {
+        problems.push(`coverImage not found: public${cover}`);
+    }
+    for (const m of body.matchAll(/<img[^>]+src="(https?:\/\/[^"]+)"/g)) {
+        console.warn(`  ⚠ ${rel}: hotlinked image ${m[1]}`);
+    }
+    return problems;
 }
 
 async function compilePost(filePath) {
@@ -69,12 +93,62 @@ async function compilePost(filePath) {
         coverImage: frontmatter.coverImage || undefined,
         category: frontmatter.category || 'tutorial',
         tags: frontmatter.tags || [],
+        lang: detectLang(frontmatter, content),
+        series: frontmatter.series || undefined,
+        order: frontmatter.order ?? undefined,
         readingTime: Math.ceil(stats.minutes),
         published: frontmatter.published !== false,
         featured: frontmatter.featured || false,
         body,
         headings,
+        problems: checkImages(path.relative(POSTS_DIR, filePath), frontmatter, body),
     };
+}
+
+const XML_ESCAPES = { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' };
+const escapeXml = (s) => String(s).replace(/[<>&"]/g, c => XML_ESCAPES[c]);
+
+function feedItem(p) {
+    const url = `${SITE.url}/lab/${p.slug}/`;
+    const lines = [
+        '    <item>',
+        `      <title>${escapeXml(p.title)}</title>`,
+        `      <link>${url}</link>`,
+        `      <guid isPermaLink="true">${url}</guid>`,
+        `      <pubDate>${new Date(p.date).toUTCString()}</pubDate>`,
+        `      <description>${escapeXml(p.excerpt)}</description>`,
+        ...p.tags.map(t => `      <category>${escapeXml(t)}</category>`),
+    ];
+    if (p.coverImage) {
+        lines.push(`      <enclosure url="${SITE.url}${p.coverImage}" type="image/webp" length="0" />`);
+    }
+    lines.push('    </item>');
+    return lines.join('\n');
+}
+
+function writeFeed(posts) {
+    const items = posts
+        .slice()
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        .map(feedItem)
+        .join('\n');
+
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>${escapeXml(SITE.name)} — Dev Lab</title>
+    <link>${SITE.url}/lab/</link>
+    <atom:link href="${SITE.url}/lab/feed.xml" rel="self" type="application/rss+xml" />
+    <description>Shader breakdowns, Unity tutorials, and tech art experiments by ${escapeXml(SITE.author)}.</description>
+    <language>vi</language>
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+${items}
+  </channel>
+</rss>
+`;
+    fs.mkdirSync(path.dirname(FEED_FILE), { recursive: true });
+    fs.writeFileSync(FEED_FILE, xml);
+    console.log(`📡 RSS feed → public/lab/feed.xml (${posts.length} items)`);
 }
 
 async function main() {
@@ -87,6 +161,7 @@ async function main() {
     if (files.length === 0) {
         const empty = { posts: [], categories: [], tags: [], lastCompiled: new Date().toISOString() };
         fs.writeFileSync(OUTPUT_FILE, JSON.stringify(empty, null, 2));
+        writeFeed([]);
         console.log('📝 No posts found. Created empty posts.json');
         return;
     }
@@ -94,20 +169,27 @@ async function main() {
     console.log(`📝 Compiling ${files.length} post(s)...`);
 
     const allPosts = [];
+    const errors = [];
     for (const filePath of files) {
+        const rel = path.relative(POSTS_DIR, filePath);
         try {
-            const post = await compilePost(filePath);
-            const rel = path.relative(POSTS_DIR, filePath);
-            if (post.published) {
-                allPosts.push(post);
-                console.log(`  ✓ ${rel} → ${post.slug} (${post.readingTime} min read)`);
-            } else {
+            const { problems, ...post } = await compilePost(filePath);
+            if (!post.published) {
                 console.log(`  ⊘ ${rel} (draft, skipped)`);
+                continue;
             }
+            errors.push(...problems.map(p => `${rel}: ${p}`));
+            allPosts.push(post);
+            console.log(`  ✓ ${rel} → ${post.slug} [${post.lang}] (${post.readingTime} min read)`);
         } catch (err) {
-            const rel = path.relative(POSTS_DIR, filePath);
-            console.error(`  ✗ ${rel}: ${err.message}`);
+            errors.push(`${rel}: ${err.message}`);
         }
+    }
+
+    if (errors.length > 0) {
+        console.error('\n❌ Post compilation failed:');
+        for (const e of errors) console.error(`  ✗ ${e}`);
+        process.exit(1);
     }
 
     // Sort: featured first, then by date descending
@@ -143,6 +225,7 @@ async function main() {
 
     fs.writeFileSync(OUTPUT_FILE, JSON.stringify(manifest, null, 2));
     console.log(`\n✅ Compiled ${allPosts.length} post(s) → data/posts.json`);
+    writeFeed(allPosts);
 }
 
 main().catch(err => {

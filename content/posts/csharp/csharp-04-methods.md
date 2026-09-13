@@ -1,6 +1,7 @@
 ---
 title: "C# Cho Game Dev #4: Methods, Parameters & Enum"
 date: "2024-10-26"
+lang: "vi"
 excerpt: "Tổ chức code bằng hàm (methods), hiểu về parameters, return values, overloading và enum — bước quan trọng trước khi vào OOP."
 coverImage: "/images/posts/csharp-cover.webp"
 category: "tutorial"

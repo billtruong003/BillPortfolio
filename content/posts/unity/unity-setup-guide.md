@@ -1,6 +1,7 @@
 ---
 title: "Hướng Dẫn Cài Unity, Cấu Hình Visual Studio và VSCode Cho Game Development"
 date: "2024-12-02"
+lang: "vi"
 excerpt: "Hướng dẫn chi tiết cách cài đặt Unity, lấy license và cấu hình môi trường lập trình với Visual Studio và VSCode."
 coverImage: "/images/posts/unity-setup-guide/cover.webp"
 category: "tutorial"

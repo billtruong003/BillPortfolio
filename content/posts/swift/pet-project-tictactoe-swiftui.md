@@ -1,6 +1,7 @@
 ---
 title: "Pet Project: TicTacToe - Xây Dựng Trò Chơi Đơn Giản Với SwiftUI"
 date: "2024-12-13"
+lang: "vi"
 excerpt: "Hướng dẫn chi tiết tạo trò chơi TicTacToe đơn giản với SwiftUI, học cách sử dụng @State, LazyVGrid, ForEach và xử lý logic trò chơi."
 coverImage: "/images/posts/tictactoe-cover.png"
 category: "devlog"

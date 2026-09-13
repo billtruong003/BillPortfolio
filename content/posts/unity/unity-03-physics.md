@@ -1,6 +1,7 @@
 ---
 title: "Unity Cho Người Mới #3: Physics — Rigidbody, Collider & Raycast"
 date: "2024-11-11"
+lang: "vi"
 excerpt: "Hệ thống vật lý của Unity: Rigidbody cho trọng lực và lực, Collider cho va chạm, Trigger cho vùng phát hiện, và Raycast cho tia bắn."
 coverImage: "/images/posts/unity-fundamental.webp"
 category: "unity-dev"

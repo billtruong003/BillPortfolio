@@ -1,6 +1,7 @@
 ---
 title: "GPU Instancing for Interactive Foliage in Unity"
 date: "2026-03-28"
+lang: "en"
 excerpt: "Building a stylized environment system with GPU-instanced grass, flowers, and trees that react to player movement."
 coverImage: "/images/posts/biome-shader-cover.jpg"
 category: "shader-breakdown"
