@@ -138,10 +138,10 @@ const GalleryContent = ({ project, closeModal }: { project: Project; closeModal:
             {/* Navigation Buttons (Chỉ hiện khi có > 1 slide) */}
             {slides.length > 1 && (
                 <>
-                    <button onClick={(e) => { e.stopPropagation(); prevSlide(); }} className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-primary text-white rounded-full backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all z-20 hover:scale-110 border border-white/10">
+                    <button aria-label="Previous image" onClick={(e) => { e.stopPropagation(); prevSlide(); }} className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-primary text-white rounded-full backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all z-20 hover:scale-110 border border-white/10">
                         <ChevronLeft size={24} />
                     </button>
-                    <button onClick={(e) => { e.stopPropagation(); nextSlide(); }} className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-primary text-white rounded-full backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all z-20 hover:scale-110 border border-white/10">
+                    <button aria-label="Next image" onClick={(e) => { e.stopPropagation(); nextSlide(); }} className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-primary text-white rounded-full backdrop-blur-md opacity-0 group-hover:opacity-100 transition-all z-20 hover:scale-110 border border-white/10">
                         <ChevronRight size={24} />
                     </button>
                     
@@ -194,7 +194,7 @@ export const ProjectModal = () => {
                                             ))}
                                         </div>
                                     </div>
-                                    <button onClick={closeModal} className="p-2 hover:bg-white/10 rounded-full transition-colors text-zinc-400 hover:text-white">
+                                    <button aria-label="Close project details" onClick={closeModal} className="p-2 hover:bg-white/10 rounded-full transition-colors text-zinc-400 hover:text-white">
                                         <X size={20} />
                                     </button>
                                 </div>

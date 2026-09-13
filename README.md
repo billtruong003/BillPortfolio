@@ -39,6 +39,10 @@ NEXT_PUBLIC_ADMIN_HASH=your_hash
 
 # Google Apps Script URL (analytics endpoint)
 NEXT_PUBLIC_GAS_URL=your_gas_url
+
+# Cloudflare Web Analytics beacon token (Dashboard → Web Analytics → your site)
+# Optional: without it the beacon simply is not rendered.
+NEXT_PUBLIC_CF_BEACON_TOKEN=your_token
 ```
 
 ### How to get YouTube API Key
@@ -76,7 +80,7 @@ The main landing page — designed for recruiters scanning in 10-15 seconds. Sec
 | 9 | Interactive Lab CTA | *(inline in page.tsx)* | Links to `/arcade` (Game Arcade) and `/lab` (Dev Lab) |
 | 10 | Certifications | `components/sections/Certifications.tsx` | Credential badges with external verification links |
 | 11 | Feed | `components/sections/Feed.tsx` | Social media embeds (Facebook, YouTube, LinkedIn) — date-sorted, iframe sanitized |
-| 12 | Contact CTA | `components/sections/ContactCTA.tsx` | Email, LinkedIn, GitHub, phone — direct contact actions |
+| 12 | Contact CTA | `components/sections/ContactCTA.tsx` | Email, LinkedIn, GitHub — direct contact actions |
 
 **Background:** `ParticleBackground` (Three.js animated particle sphere) renders behind all content via a fixed layer.
 
@@ -97,17 +101,16 @@ WebGL game library — Unity games playable directly in the browser.
 3. Clicking a game loads the Unity WebGL player (`components/webgl/UnityPlayer.tsx`)
 4. Player supports: fullscreen, mute/unmute, reload, loading progress bar, error handling
 
-**Available games** (in `public/webgl-games/`):
-- SmulieCatNinja — Ninja platformer
-- brush-hit — Paint/drawing game
-- food-ping-pong — Pong variant
-- mushroom-game — Merge puzzle
-- typing-fight — Typing fighter
-- zeno — Additional game
+**Available games** — the real list lives in `public/webgl-games/registry.json`; this is a snapshot:
+Merge Fruit, Drag & Slice: Culinary Journey, Typing Fight, Brush Hit (Clone), Smulie Cat Ninja,
+Timeless Soul, Zombie War, Spirit War, Shoot 'em up (Dev Lab).
+
+Build payloads are not committed: `public/webgl-games/*/Build/` is gitignored and each entry's
+`build.buildPath` points at Cloudflare R2.
 
 **Adding a new game:**
 ```bash
-node scripts/add-game.mjs --name "Game Name" --slug game-slug --path public/webgl-games/game-slug
+node scripts/add-game.mjs <game-id> --title "Game Name" --genre shooter --desc "One line about it"
 ```
 This parses Unity build files, detects loader/data/framework/wasm, and updates `registry.json`.
 

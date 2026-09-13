@@ -270,7 +270,7 @@ export const UnityPlayer = ({ game, onClose, mode = 'fullpage' }: UnityPlayerPro
                         </div>
 
                         {onClose && loadState === 'idle' && (
-                            <button onClick={onClose} className="absolute top-4 right-4 p-2 text-zinc-500 hover:text-white transition-colors"><X size={24} /></button>
+                            <button aria-label="Close game" onClick={onClose} className="absolute top-4 right-4 p-2 text-zinc-500 hover:text-white transition-colors"><X size={24} /></button>
                         )}
                     </motion.div>
                 )}
@@ -303,10 +303,10 @@ export const UnityPlayer = ({ game, onClose, mode = 'fullpage' }: UnityPlayerPro
                             {game.status !== 'playable' && <span className="px-2 py-0.5 text-[9px] font-mono bg-amber-500/20 text-amber-400 rounded border border-amber-500/30 uppercase">{game.status}</span>}
                         </div>
                         <div className="flex items-center gap-1 pointer-events-auto">
-                            <button onClick={() => setShowInfo(!showInfo)} className="p-2 text-zinc-400 hover:text-white transition-colors rounded hover:bg-white/10" title="Info"><Info size={16} /></button>
-                            <button onClick={toggleMute} className="p-2 text-zinc-400 hover:text-white transition-colors rounded hover:bg-white/10">{isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}</button>
-                            <button onClick={toggleFullscreen} className="p-2 text-zinc-400 hover:text-white transition-colors rounded hover:bg-white/10">{isFullscreen ? <Minimize size={16} /> : <Maximize size={16} />}</button>
-                            {onClose && <button onClick={() => { if (unityInstanceRef.current) { try { unityInstanceRef.current.Quit(); } catch {} } onClose(); }} className="p-2 text-zinc-400 hover:text-red-400 transition-colors rounded hover:bg-white/10 ml-2"><X size={16} /></button>}
+                            <button aria-label="Game info" onClick={() => setShowInfo(!showInfo)} className="p-2 text-zinc-400 hover:text-white transition-colors rounded hover:bg-white/10" title="Info"><Info size={16} /></button>
+                            <button aria-label={isMuted ? "Unmute" : "Mute"} onClick={toggleMute} className="p-2 text-zinc-400 hover:text-white transition-colors rounded hover:bg-white/10">{isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}</button>
+                            <button aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"} onClick={toggleFullscreen} className="p-2 text-zinc-400 hover:text-white transition-colors rounded hover:bg-white/10">{isFullscreen ? <Minimize size={16} /> : <Maximize size={16} />}</button>
+                            {onClose && <button aria-label="Close game" onClick={() => { if (unityInstanceRef.current) { try { unityInstanceRef.current.Quit(); } catch {} } onClose(); }} className="p-2 text-zinc-400 hover:text-red-400 transition-colors rounded hover:bg-white/10 ml-2"><X size={16} /></button>}
                         </div>
                     </motion.div>
                 )}

@@ -8,6 +8,7 @@ import {
     Activity, BarChart3, Zap, ArrowUpRight
 } from "lucide-react";
 import { resumeData } from "@/data/resume";
+import { CHANNELS } from "@/data/channels";
 import { BlogAdmin } from "./BlogAdmin";
 
 interface ChannelData {
@@ -38,10 +39,15 @@ const formatCompact = (n: string | number): string => {
     return num.toString();
 };
 
-const CHANNEL_IDS = [
-    { id: "UCdRe_4FG7JhOERlfcyeNhnw", handle: "@BillTheDev", color: "primary" },
-    { id: "UCxxx_BillVRGamer", handle: "@BillVRGamer", color: "red-400" },
-];
+// Colour per channel, keyed by handle; identity lives in data/channels.ts so the dashboard can
+// never drift from the public site again (it used to carry a placeholder id and miss a channel).
+const CHANNEL_COLORS: Record<string, string> = {
+    "@BillTheDev": "primary",
+    "@BillVRGamer": "red-400",
+    "@BillAITrainer": "violet-400",
+};
+
+const CHANNEL_IDS = CHANNELS.map(c => ({ ...c, color: CHANNEL_COLORS[c.handle] ?? "zinc-400" }));
 
 const StatCell = ({ icon, label, value, compact }: { icon: React.ReactNode; label: string; value: string; compact: string }) => (
     <div className="p-4 text-center group hover:bg-white/5 transition-colors">

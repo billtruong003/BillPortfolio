@@ -45,11 +45,14 @@ export const Hero = () => {
             <div className="container mx-auto px-6 relative z-10 h-full">
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-0 h-full">
                     
-                    <div className="w-full lg:w-1/2 flex gap-8 h-full relative order-2 lg:order-1">
+                    {/* Name and CTAs come first on phones so they land above the fold; the 3D
+                        model moves below and shrinks. On lg+ the original two-column order returns. */}
+                    <div className="w-full lg:w-1/2 flex gap-8 h-full relative order-1">
                         <div className="hidden md:flex flex-col gap-6 py-8 border-r border-white/5 pr-6 z-20">
                             {SECTIONS.map((section) => (
                                 <button
                                     key={section.id}
+                                    aria-label={section.label ?? section.id}
                                     onClick={() => setActiveSection(section.id)}
                                     className="group relative flex items-center justify-center w-10 h-10 outline-none"
                                 >
@@ -93,11 +96,11 @@ export const Hero = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 1.5, delay: 0.2 }}
-                        className="w-full lg:w-1/2 h-[500px] lg:h-[700px] relative order-1 lg:order-2 flex items-center justify-center"
+                        className="w-full lg:w-1/2 h-[40vh] min-h-[260px] lg:h-[700px] relative order-2 flex items-center justify-center"
                     >
                          <div className="absolute inset-0 z-10 pointer-events-none select-none">
                             <div className="absolute top-10 right-0 font-mono text-[9px] text-zinc-500/50 flex flex-col items-end gap-1">
-                                <span>COORD: 34.0522° N, 118.2437° W</span>
+                                <span>COORD: 10.7769° N, 106.7009° E</span>
                                 <span>ALTITUDE: 1200FT</span>
                             </div>
                         </div>
@@ -181,6 +184,7 @@ const MainContent = () => (
                             href={social.url}
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label={`${social.platform} profile`}
                             className="text-zinc-500 hover:text-primary transition-colors duration-300 transform hover:scale-110"
                         >
                             <Icon size={22} strokeWidth={1.5} />

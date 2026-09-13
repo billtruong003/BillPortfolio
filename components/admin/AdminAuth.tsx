@@ -150,9 +150,12 @@ export const AdminAuth = ({ onAuthenticated }: AdminAuthProps) => {
                 </form>
 
                 <div className="mt-6 text-center">
+                    {/* This is a personal dashboard on a static site: the check is a client-side
+                        hash compare and nothing is recorded anywhere. Saying attempts are logged
+                        would be a lie, so the copy states what actually happens. */}
                     <p className="text-[9px] font-mono text-zinc-700 leading-relaxed">
-                        SHA-256 CLIENT-SIDE VERIFICATION • SESSION-BASED AUTH<br />
-                        ALL ACCESS ATTEMPTS ARE LOGGED
+                        PERSONAL DASHBOARD • SHA-256 CLIENT-SIDE CHECK<br />
+                        SESSION-ONLY, NOTHING IS RECORDED
                     </p>
                 </div>
 

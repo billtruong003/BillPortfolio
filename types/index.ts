@@ -168,7 +168,9 @@ export interface ResumeData {
     };
     skills: { name: string; level: string }[];
     portfolio: Project[];
-    certifications: { name: string; issuer: string; date: string; url: string }[];
+    certifications: { name: string; issuer: string; date: string; url?: string }[];
+    /** Headline numbers shown by ImpactNumbers. Edited here, not hard-coded in the component. */
+    stats: { shippedTitles: number; openSourceRepos: number };
     testimonials: { quote: string; author: string; role: string }[];
     tech_stack: { languages: string[]; frameworks: string[]; others: string[] };
 }

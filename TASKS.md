@@ -40,55 +40,60 @@ Cập nhật: 2026-09-13. Tick `[x]` khi xong. Thứ tự phase là thứ tự l
 
 ---
 
-## Phase 2 — Analytics / traffic 📊
+## Phase 2 — Analytics / traffic ✅ code xong 13/09/2026, chờ token
 
-Chọn 1 trong 2 (khuyến nghị A, đã có tài khoản Cloudflare từ R2):
+Chọn **A. Cloudflare Web Analytics** (free, không cookie, không cần banner).
 
-- [ ] **A. Cloudflare Web Analytics** (free, không cookie, không cần banner)
-  - [ ] Tạo site trên CF Dashboard → Web Analytics → lấy beacon token
-  - [ ] Thêm secret `NEXT_PUBLIC_CF_BEACON_TOKEN` vào GitHub repo Settings → Secrets, và vào `.github/workflows/deploy.yml`
-  - [ ] Component `components/logic/Analytics.tsx` chèn `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"..."}'>` khi có token
-  - [ ] Gắn vào `app/layout.tsx`
-- [ ] **B. Google Analytics 4** (nếu muốn quen tay): `NEXT_PUBLIC_GA_ID` + `@next/third-parties/google` `<GoogleAnalytics/>`
-- [ ] Bỏ pipeline Google Apps Script (`hooks/useAnalyticsPipeline.ts`, `components/logic/PipelineTrigger.tsx`, `NEXT_PUBLIC_GAS_URL`) sau khi A/B chạy ổn, hoặc giữ song song 1 tuần rồi bỏ
-- [ ] Event tuỳ chọn: `game_play` (arcade), `cv_download`, `post_read_complete` (ScrollTracker đang gửi về GAS → chuyển sang provider mới)
+- [x] `components/logic/Analytics.tsx`: chèn beacon Cloudflare, **chỉ render khi có** `NEXT_PUBLIC_CF_BEACON_TOKEN` → local/fork không dính gì
+- [x] Gắn vào `app/layout.tsx`
+- [x] `deploy.yml` truyền `NEXT_PUBLIC_CF_BEACON_TOKEN` vào bước build
+- [x] `lib/analytics.ts`: một `track()`/`trackOnce()` cho mọi custom event, tôn trọng Do Not Track, không có endpoint thì im lặng bỏ qua
+- [x] Event mới: `game_play` (UnityPlayer), `cv_download` (DownloadBtn). `post_view`/`post_scroll`/`post_read_complete` chuyển từ code lặp trong ScrollTracker sang dùng chung
+- [ ] **Bill làm**: Cloudflare Dashboard → Web Analytics → Add site `www.billthedev.com` → copy beacon token → GitHub repo Settings → Secrets → thêm `NEXT_PUBLIC_CF_BEACON_TOKEN`. Không cần đụng code.
+
+**Lưu ý đổi so với kế hoạch cũ**: Cloudflare Web Analytics **không có API custom event** (chỉ page view + Core Web Vitals). Nên pipeline Google Apps Script **giữ lại** để nhận 5 event tuỳ chọn, không bỏ như dự định ban đầu. Muốn bỏ hẳn GAS thì phải đổi sang GA4 hoặc Cloudflare Zaraz — quyết định sau khi xem CF chạy một tuần.
+
 - [ ] Ghi nhớ: GitHub repo → Insights → Traffic chỉ giữ 14 ngày, chỉ tính clone/visit repo, KHÔNG phải traffic của site
 
 ---
 
-## Phase 3 — Dọn toàn site 🧹
+## Phase 3 — Dọn toàn site ✅ xong 13/09/2026 (trừ mục cần tài khoản của Bill)
 
 ### 3.1 Repo / tooling
-- [ ] `.gitignore`: thêm `.lh/` rồi `git rm -r --cached .lh`
-- [ ] Xoá `public/models/hero-model.glb.original` và các PNG/JPG gốc đã có `.webp` (memecrawler, sketchfabgallery, kindly*, life/*.jpg...)
-- [ ] Xoá `postcss.config.mjs` (trùng, gọi `@tailwindcss/postcss` không được cài)
-- [ ] Xoá `app/actions/auth.ts`, `app/actions/youtube.ts` (server action chết, không chạy với `output: export`)
-- [ ] Xoá rule LFS stale trong `.gitattributes`
-- [ ] Sửa lint: hạ `eslint.config.mjs` về `.eslintrc.json` (ESLint 8) HOẶC nâng ESLint 9 + eslint-config-next 15 (`npm run lint` hiện hỏi interactive rồi thoát)
-- [ ] `deploy.yml`: thêm step `npx tsc --noEmit` + `npm run lint` trước build; thêm workflow `ci.yml` chạy trên PR
-- [ ] Dependabot (`.github/dependabot.yml`, weekly, group minor/patch)
-- [ ] `npm audit fix` (20 vuln, chủ yếu picomatch, sharp/libvips)
-- [ ] Kế hoạch upgrade major: Next 14→15/16, React 18→19, Tailwind 3→4, drei 9→10, ESLint 8→9 (làm sau Phase 1–2, branch riêng)
+- [x] `.gitignore`: thêm `.lh/`, `git rm -r --cached .lh`, bỏ 4 dòng trỏ file đã xoá
+- [x] Xoá 29 PNG/JPG gốc đã có `.webp` + `hero-model.glb.original` → **13.9 MB**. 31 tham chiếu trong `content/` và `resume.json` đổi sang `.webp`
+- [x] Xoá `postcss.config.mjs` (trùng, gọi package không cài)
+- [x] Xoá `app/actions/auth.ts`, `app/actions/youtube.ts` (server action chết với `output: export`)
+- [x] `.gitattributes` viết lại (rule LFS cũ trỏ file không còn tồn tại)
+- [x] Sửa lint: bỏ `eslint.config.mjs` (flat config của ESLint 9) → `.eslintrc.json` cho ESLint 8 đang cài. Sửa hết **7 lỗi**, đáng chú ý là hook gọi sau early-return trong `Hero3D` — sẽ crash React khi GLB load xong giữa chừng
+- [x] `deploy.yml` thêm `tsc --noEmit` + `lint` trước build; thêm `ci.yml` chạy trên PR và mọi branch (build không cần secret)
+- [x] `.github/dependabot.yml`: npm weekly gộp minor/patch, chặn major của next/react/tailwind/eslint; github-actions monthly
+- [x] `npm audit`: sharp 0.34 → 0.35.4 hết CVE libvips (9 → 8)
+- [ ] Còn 8 advisory, **không cái nào khai thác được ở đây**, đều cần major:
+  - `next` (critical, DoS qua Image Optimizer): site dùng `output: export` + `images.unoptimized` → **không có Image Optimizer để tấn công**. Cần Next 16.
+  - `postcss` XSS: chỉ chạy lúc build, không chạy ở runtime người dùng.
+  - `glob`/`minimatch`/`@typescript-eslint`: devDependency của eslint, chỉ ảnh hưởng khi chạy glob CLI.
+- [ ] Kế hoạch upgrade major (branch riêng): Next 14→16, React 18→19, Tailwind 3→4, ESLint 8→9. Làm gọn được luôn 8 advisory trên.
 
 ### 3.2 Data / nội dung
-- [ ] Đưa "6 shipped titles", "8+ repos" vào `data/resume.json` (đang hard-code ở Hero + ImpactNumbers, lệch với 8 game trong registry)
-- [ ] Hero coords `34.0522° N, 118.2437° W` là Los Angeles → đổi sang HCMC `10.7769° N, 106.7009° E`
-- [ ] Cert IELTS `url: ""` → bỏ link hoặc render `<span>` khi không có url
-- [ ] `AdminDashboard.tsx`: channel id placeholder `UCxxx_BillVRGamer`, thiếu kênh thứ 3 → dùng chung 1 const `CHANNELS` với `YouTubeChannels.tsx` / `ImpactNumbers.tsx`
-- [ ] README: cập nhật danh sách game (8), bỏ mục phone nếu không hiển thị
+- [x] `data/resume.json` thêm khối `stats` (shippedTitles, openSourceRepos); `ImpactNumbers` đọc từ đó thay vì hard-code, số kênh lấy từ `CHANNELS.length`
+- [x] Hero coords `34.0522° N, 118.2437° W` (Los Angeles) → `10.7769° N, 106.7009° E` (HCMC)
+- [x] Cert không có `url` render `<div>` thay vì `<a href="">` (IELTS)
+- [x] `data/channels.ts` là nguồn duy nhất cho 3 kênh YouTube; `AdminDashboard` hết channel id giả `UCxxx_BillVRGamer` và hết thiếu kênh thứ ba; `YouTubeChannels` và `ImpactNumbers` dùng chung
+- [x] README: danh sách game theo registry (9), sửa cú pháp `add-game.mjs`, bỏ "phone" khỏi mô tả Contact CTA, thêm biến `NEXT_PUBLIC_CF_BEACON_TOKEN`
 
 ### 3.3 Hạ tầng
-- [ ] YouTube API key: kiểm tra restrict HTTP referrer `*.billthedev.com/*` trên Google Cloud Console
-- [ ] (Tuỳ chọn) Fetch YouTube stats lúc build trong GitHub Action + cron redeploy hằng ngày → client không cần key, không lo quota
-- [ ] R2: gắn custom domain (`cdn.billthedev.com`) thay `pub-*.r2.dev`; cập nhật `registry.json`
-- [ ] Unity WebGL: build Brotli + set `Content-Encoding: br` metadata trên R2, đổi `compression: "brotli"` trong registry (Merge Fruit đang 129 MB uncompressed)
-- [ ] Icon: đổi tên `app/apple-touch-icon.png` → `app/apple-icon.png`, `site.webmanifest` → `manifest.webmanifest` (hoặc khai `metadata.icons` / `metadata.manifest`)
+- [x] Icon theo convention Next: `apple-touch-icon.png` → `app/apple-icon.png`, `site.webmanifest` → `app/manifest.webmanifest` (điền name/theme/background, trước đó name rỗng và icon trỏ 404). 4 PNG còn lại chuyển sang `public/`. Trước đó **5 file icon không hề ra được build**; giờ `<link rel="manifest">` và `<link rel="apple-touch-icon">` đã xuất hiện
+- [ ] **Bill làm**: YouTube API key → Google Cloud Console → restrict HTTP referrer `*.billthedev.com/*`
+- [ ] **Bill làm**: R2 gắn custom domain `cdn.billthedev.com` thay `pub-*.r2.dev`, cập nhật `registry.json`
+- [ ] **Bill làm**: build Brotli + set `Content-Encoding: br` trên R2 (Merge Fruit 129 MB, shmup 49 MB)
+- [ ] (Tuỳ chọn) Fetch YouTube stats lúc build trong GitHub Action + cron redeploy → client không cần key
 
 ### 3.4 UX / a11y
-- [ ] Hero mobile: tên + CTA lên trên fold (thu nhỏ khung 3D còn ~40vh hoặc đảo order trên mobile)
-- [ ] 8 link/button icon-only ở trang chủ thiếu `aria-label` (social, side nav)
-- [ ] `cmd-center`: quyết định giữ (sửa copy "ALL ACCESS ATTEMPTS ARE LOGGED", ghi rõ là dashboard cá nhân) hoặc bỏ (tiết kiệm 137 kB)
-- [ ] Form liên hệ (Formspree / Web3Forms) thay `mailto:`
+- [x] Hero mobile: tên + CTA lên trên fold. Trước đó khung 3D `order-1 h-[500px]` đẩy hết chữ xuống dưới; giờ chữ `order-1`, model `order-2 h-[40vh]`. Đo trên 375×812: nút Download CV ở y 481–539, trong màn hình
+- [x] 8 link/button icon-only đã có `aria-label` (side nav Hero, social, ProjectModal prev/next/close, UnityPlayer info/mute/fullscreen/close)
+- [x] `cmd-center`: **giữ**, sửa copy sai sự thật "ALL ACCESS ATTEMPTS ARE LOGGED" → "PERSONAL DASHBOARD • SHA-256 CLIENT-SIDE CHECK / SESSION-ONLY, NOTHING IS RECORDED". Bỏ hẳn trang thì tiết kiệm 137 kB, để Bill quyết
+- [ ] **Bill quyết**: form liên hệ (Formspree / Web3Forms) thay `mailto:` — cần tạo tài khoản lấy endpoint
 
 ---
 
@@ -111,7 +116,7 @@ Project Unity riêng: `D:\Projects\Tutorial` (Unity 6000.3.10f1, URP, Input Syst
 - [ ] Chụp tay các ảnh ghi "chụp tay" trong journal (Hub, Package Manager, menu Create, Build Profiles, frame nổ)
 - [ ] Ảnh Input Actions editor với Move mở rộng (bản MCP đang gập)
 - [ ] Biên tập ảnh (khoanh/mũi tên) theo cột "Edit" trong từng journal
-- [ ] Viết 12 bài vào `content/posts/unity-shmup/` theo khung: hôm nay học gì → xong có gì → từng bước → chú ý → code
+- [x] Viết 12 bài vào `content/posts/unity-shmup/` (series `shmup`, 62 phút đọc, 80 ảnh WebP)
 - [ ] Sau khi series mới lên: unpublish 5 bài "Unity Cho Người Mới" cũ (hoặc giữ, thêm banner link sang series mới)
 - [ ] Đổi tên prefab `Enemy_Insect` → `Enemy_Generic` (giờ đóng vai cả thiên thạch)
 - [ ] Bật Brotli cho build + header trên R2 (Phase 3.3) để 49 MB → ~12 MB tải xuống

@@ -2,8 +2,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Eye, Rocket, GitBranch, Layers } from 'lucide-react';
-
-const CHANNEL_IDS = ['UCdRe_4FG7JhOERlfcyeNhnw', 'UCodHIrwfVJfHen6ljDfFbzA', 'UC9E61azlbreSfShsGuSSDnw'];
+import { CHANNELS, CHANNEL_IDS } from '@/data/channels';
+import { resumeData } from '@/data/resume';
 
 function formatViews(n: number): string {
     if (n >= 1_000_000) {
@@ -41,9 +41,9 @@ export const ImpactNumbers = () => {
     useEffect(() => { fetchViews(); }, [fetchViews]);
 
     const stats = [
-        { value: totalViews || '—', label: 'YouTube Views', sub: 'Across 3 Channels', icon: Eye },
-        { value: '8+', label: 'Open Source', sub: 'GitHub Repositories', icon: GitBranch },
-        { value: '6', label: 'Shipped Titles', sub: 'Mobile · VR · WebGL', icon: Rocket },
+        { value: totalViews || '—', label: 'YouTube Views', sub: `Across ${CHANNELS.length} Channels`, icon: Eye },
+        { value: `${resumeData.stats.openSourceRepos}+`, label: 'Open Source', sub: 'GitHub Repositories', icon: GitBranch },
+        { value: String(resumeData.stats.shippedTitles), label: 'Shipped Titles', sub: 'Mobile · VR · WebGL', icon: Rocket },
         { value: '3-in-1', label: 'Code · Shaders · Tools', sub: 'Rare Skill Combo', icon: Layers },
     ];
 

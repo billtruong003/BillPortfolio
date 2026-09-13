@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Youtube, Eye, Users, Video, ExternalLink, Loader2, Gamepad2, Code2 } from "lucide-react";
+import { CHANNELS as CHANNEL_SOURCE } from "@/data/channels";
 
 interface ChannelStats {
     title: string;
@@ -24,35 +25,38 @@ interface ChannelConfig {
     label: string;
 }
 
-const CHANNELS: ChannelConfig[] = [
-    {
-        id: "UCdRe_4FG7JhOERlfcyeNhnw",
-        handle: "@BillTheDev",
-        fallbackTitle: "Bill The Dev",
+// Identity comes from data/channels.ts; only the look lives here.
+const STYLES: Record<string, Pick<ChannelConfig, "icon" | "accent" | "accentBg">> = {
+    "@BillTheDev": {
         icon: <Code2 size={16} />,
         accent: "text-primary",
         accentBg: "bg-primary/10 border-primary/30",
-        label: "Unity Dev & Shader Tutorials",
     },
-    {
-        id: "UCodHIrwfVJfHen6ljDfFbzA",
-        handle: "@BillVRGamer",
-        fallbackTitle: "Bill VR Gamer",
+    "@BillVRGamer": {
         icon: <Gamepad2 size={16} />,
         accent: "text-red-400",
         accentBg: "bg-red-500/10 border-red-500/30",
-        label: "VR Gaming & Reviews",
     },
-    {
-        id: "UC9E61azlbreSfShsGuSSDnw",
-        handle: "@BillAITrainer",
-        fallbackTitle: "Bill AI Trainer",
+    "@BillAITrainer": {
         icon: <Code2 size={16} />,
         accent: "text-violet-400",
         accentBg: "bg-violet-500/10 border-violet-500/30",
-        label: "AI Training & Experiments",
     },
-];
+};
+
+const DEFAULT_STYLE: Pick<ChannelConfig, "icon" | "accent" | "accentBg"> = {
+    icon: <Youtube size={16} />,
+    accent: "text-zinc-400",
+    accentBg: "bg-white/5 border-white/10",
+};
+
+const CHANNELS: ChannelConfig[] = CHANNEL_SOURCE.map(channel => ({
+    id: channel.id,
+    handle: channel.handle,
+    label: channel.label,
+    fallbackTitle: channel.title,
+    ...(STYLES[channel.handle] ?? DEFAULT_STYLE),
+}));
 
 const formatCount = (num: string | number): string => {
     const n = typeof num === "string" ? parseInt(num, 10) : num;
