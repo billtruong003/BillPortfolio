@@ -65,7 +65,7 @@ Sau khi cài đặt Unity Hub, bạn cần đăng nhập vào tài khoản **Uni
    
 #### 5. **Kiểm Tra License**
    - Để kiểm tra xem license đã được kích hoạt chưa, bạn có thể vào **Account Settings** (Cài đặt tài khoản) trong Unity Hub và xem phần **License**. Nếu bạn thấy “Personal” hoặc “Pro” ở đó, điều này có nghĩa là license đã được áp dụng thành công.
-![Unity License](https://support.unity.com/hc/article_attachments/23277362458004)
+![Unity License](/images/posts/unity-setup-guide/unity-license.webp)
 
 ## **2. Cài Đặt và Cấu Hình Unity Editor**
 

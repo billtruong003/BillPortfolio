@@ -131,7 +131,7 @@ Game development yêu cầu sử dụng nhiều công cụ khác nhau để phá
 
 ### **6. Thử Thách Trong Ngành Game**  
 Mặc dù ngành game có nhiều cơ hội phát triển, nhưng cũng đầy thử thách. Các game developer sẽ phải đối mặt với những vấn đề như:
-![Anime Game Developer](https://media.licdn.com/dms/image/v2/D4D12AQFf-Rce5lWwqA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1700373572299?e=2147483647&v=beta&t=Osn1yVCsOP3SZP4oHxoyhoHELdg7z7fOZQVeIGHofNc)
+![Anime Game Developer](/images/posts/game-dev-journey/anime-game-developer.webp)
 - **Áp lực về thời gian:** Các dự án game thường có thời hạn ngắn và yêu cầu sản phẩm hoàn thiện trong thời gian rất gấp. Điều này đòi hỏi sự làm việc hiệu quả và khả năng làm việc dưới áp lực.
 - **Tối ưu hóa hiệu suất:** Việc tạo ra một game chạy mượt mà trên nhiều nền tảng, đặc biệt là mobile và VR, là một thách thức lớn. Game developer cần phải làm việc rất chặt chẽ với các kỹ thuật tối ưu hóa để game không gặp phải sự cố hoặc giật lag.
 - **Vấn đề tương thích nền tảng:** Các tựa game hiện nay yêu cầu tương thích trên nhiều nền tảng khác nhau (PC, console, mobile). Điều này tạo ra thách thức trong việc phát triển và duy trì tính ổn định trên tất cả các thiết bị.
