@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/compile-posts.mjs",
     "dev": "next dev",
     "optimize": "node scripts/optimize-assets.mjs",
     "compile-posts": "node scripts/compile-posts.mjs",

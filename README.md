@@ -219,7 +219,7 @@ Write markdown with:
 ### 3. Preview locally
 
 ```bash
-npm run compile-posts && npm run dev
+npm run dev   # predev tự compile posts
 ```
 
 Visit `http://localhost:3000/lab/your-post-title` to preview.
@@ -308,6 +308,7 @@ BillPortfolio/
 |--------|---------|-------------|
 | `dev` | `next dev` | Start development server |
 | `build` | `next build` | Production build (prebuild runs automatically) |
+| `predev` | `compile-posts` | Regenerate `data/posts.json` before `next dev` |
 | `prebuild` | `optimize-assets + compile-posts` | Optimize images and compile blog posts before build |
 | `compile-posts` | `node scripts/compile-posts.mjs` | Compile markdown posts to `data/posts.json` |
 | `optimize` | `node scripts/optimize-assets.mjs` | Convert images to WebP, videos to WebM |
