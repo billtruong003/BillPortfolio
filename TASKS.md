@@ -7,23 +7,25 @@ Cập nhật: 2026-09-13. Tick `[x]` khi xong. Thứ tự phase là thứ tự l
 ## Phase 1 — Dọn Lab (`/lab`) 🔥 đang làm
 
 ### 1.1 Lỗi thấy được ngay
-- [ ] Bổ sung 2 ảnh cover bị thiếu: `public/images/posts/toon-shader-cover.jpg`, `public/images/posts/biome-shader-cover.jpg` (2 bài featured đang vỡ ảnh, live 404)
-- [ ] Kéo ảnh cover hotlink về local (pinimg, vnexpress, m2h.nl) → `public/images/posts/`, đổi frontmatter `coverImage`
-- [ ] Quét ảnh trong body các bài (reddit, discourse-cdn, britannica, futurecdn...) → tải về local hoặc bỏ
-- [ ] `next.config.mjs`: thêm `trailingSlash: true` (hiện `/lab/`, `/lab/<slug>/` 404 trên GitHub Pages)
-- [ ] `app/not-found.tsx` theo theme (đang dùng 404 mặc định của Next)
+- [x] Bổ sung 2 ảnh cover bị thiếu: `public/images/posts/toon-shader-cover.jpg`, `public/images/posts/biome-shader-cover.jpg` (2 bài featured đang vỡ ảnh, live 404)
+  - ⚠ Đang dùng placeholder theme (sinh bằng sharp). Thay bằng screenshot thật khi có Unity shader lab (Phase 4)
+- [x] Kéo ảnh cover hotlink về local (pinimg, vnexpress, m2h.nl) → `public/images/posts/`, đổi frontmatter `coverImage`
+- [x] Quét ảnh trong body các bài (reddit, discourse-cdn, britannica, futurecdn...) → tải về local hoặc bỏ
+  - Đã bỏ 6 ảnh không tải được bằng script: 4 ảnh reddit (403 với curl/node, browser vẫn xem được), m2h.nl Profiler.png (410 Gone), docs.unity3d InstallWindow.png (trả HTML)
+- [x] `next.config.mjs`: thêm `trailingSlash: true` (hiện `/lab/`, `/lab/<slug>/` 404 trên GitHub Pages)
+- [x] `app/not-found.tsx` theo theme (đang dùng 404 mặc định của Next)
 
 ### 1.2 SEO / share
-- [ ] `generateMetadata` từng bài: `openGraph` (title, description, type=article, publishedTime, tags) + `twitter.card=summary_large_image` + `alternates.canonical`
-- [ ] OG image mặc định cho site (`app/opengraph-image.png` 1200×630) và cho `/lab`
-- [ ] `app/sitemap.ts` + `app/robots.ts` (static export hỗ trợ, live đang 404)
-- [ ] RSS feed `/lab/feed.xml` sinh tĩnh lúc build (thêm vào `scripts/compile-posts.mjs` hoặc route handler static)
-- [ ] JSON-LD `Article` cho bài viết, `Person` cho trang chủ
-- [ ] `lang`: bài tiếng Việt set `lang="vi"` ở `<article>` (hoặc thêm field `lang` vào frontmatter)
+- [x] `generateMetadata` từng bài: `openGraph` (title, description, type=article, publishedTime, tags) + `twitter.card=summary_large_image` + `alternates.canonical`
+- [x] OG image mặc định cho site (`app/opengraph-image.png` 1200×630) và cho `/lab`
+- [x] `app/sitemap.ts` + `app/robots.ts` (static export hỗ trợ, live đang 404)
+- [x] RSS feed `/lab/feed.xml` sinh tĩnh lúc build (thêm vào `scripts/compile-posts.mjs` hoặc route handler static)
+- [x] JSON-LD `Article` cho bài viết, `Person` cho trang chủ
+- [x] `lang`: bài tiếng Việt set `lang="vi"` ở `<article>` (hoặc thêm field `lang` vào frontmatter)
 
 ### 1.3 Pipeline nội dung
-- [ ] Quyết định `data/posts.json`: gitignore (khuyến nghị, vì prebuild sinh lại) HOẶC bỏ khỏi prebuild. Hiện commit + sinh lại → drift mỗi build
-- [ ] `scripts/compile-posts.mjs`: fail build nếu `coverImage` local không tồn tại, warn nếu ảnh hotlink
+- [x] Quyết định `data/posts.json`: gitignore (khuyến nghị, vì prebuild sinh lại) HOẶC bỏ khỏi prebuild. Hiện commit + sinh lại → drift mỗi build
+- [x] `scripts/compile-posts.mjs`: fail build nếu `coverImage` local không tồn tại, warn nếu ảnh hotlink
 - [ ] Thêm field frontmatter `series` + `order` thay cho regex slug trong `lib/series.ts`
 - [ ] Trang danh sách series `/lab/series/<id>` (C#, Unity, Swift, Shader)
 - [ ] Bài mới: template `scripts/new-post.mjs` thêm sẵn `lang`, `series`, `coverImage`
