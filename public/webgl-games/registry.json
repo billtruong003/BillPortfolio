@@ -5,7 +5,12 @@
       "title": "Merge Fruit",
       "description": "A Suika-style merge puzzle game shipped at Golden Sea Studio.",
       "thumbnail": "webgl-games/mushroom-game/mushroom.jpg",
-      "tags": ["Hyper Casual", "Suika-like", "Mobile", "Shipped"],
+      "tags": [
+        "Hyper Casual",
+        "Suika-like",
+        "Mobile",
+        "Shipped"
+      ],
       "genre": "puzzle",
       "releaseDate": "2024-03-01",
       "buildSize": "129 MB",
@@ -25,7 +30,9 @@
         "ratioHeight": 16
       },
       "controls": {
-        "mouse": ["Left Click/Drag — Drop Fruit"],
+        "mouse": [
+          "Left Click/Drag — Drop Fruit"
+        ],
         "touch": true
       },
       "preferredOrientation": "portrait"
@@ -61,7 +68,9 @@
         "ratioHeight": 16
       },
       "controls": {
-        "mouse": ["Drag & Release — Shoot/Slice"],
+        "mouse": [
+          "Drag & Release — Shoot/Slice"
+        ],
         "touch": true
       },
       "preferredOrientation": "portrait"
@@ -71,7 +80,12 @@
       "title": "Typing Fight",
       "description": "An educational combat game where kids practice typing skills to defeat enemies in an epic arena.",
       "thumbnail": "webgl-games/typing-fight/thumbnail.png",
-      "tags": ["Educational", "Typing", "Kids", "Action"],
+      "tags": [
+        "Educational",
+        "Typing",
+        "Kids",
+        "Action"
+      ],
       "genre": "education",
       "releaseDate": "2026-03-11",
       "buildSize": "38.9 MB",
@@ -92,7 +106,9 @@
         "ratioHeight": 9
       },
       "controls": {
-        "keyboard": ["A-Z — Type words to attack"],
+        "keyboard": [
+          "A-Z — Type words to attack"
+        ],
         "touch": false
       },
       "preferredOrientation": "landscape"
@@ -102,7 +118,13 @@
       "title": "Brush Hit (Clone)",
       "description": "A hyper-casual coloring puzzle game cloned from Voodoo's hit title. Developed as a showcase project for a Gameloft application.",
       "thumbnail": "webgl-games/brush-hit/thumbnail.png",
-      "tags": ["Hyper Casual", "Puzzle", "Coloring", "Clone", "Gameloft"],
+      "tags": [
+        "Hyper Casual",
+        "Puzzle",
+        "Coloring",
+        "Clone",
+        "Gameloft"
+      ],
       "genre": "casual",
       "releaseDate": "2026-03-11",
       "buildSize": "117 MB",
@@ -123,7 +145,9 @@
         "ratioHeight": 16
       },
       "controls": {
-        "mouse": ["Left Click & Drag — Swipe to paint"],
+        "mouse": [
+          "Left Click & Drag — Swipe to paint"
+        ],
         "touch": true
       },
       "preferredOrientation": "portrait"
@@ -133,7 +157,13 @@
       "title": "Smulie Cat Ninja",
       "description": "A rhythm-based music game combining fast-paced ninja slicing action with catchy beats. Developed as a technical test for Smulie.",
       "thumbnail": "webgl-games/SmulieCatNinja/thumbnail.png",
-      "tags": ["Music", "Rhythm", "Action", "Test Project", "Smulie"],
+      "tags": [
+        "Music",
+        "Rhythm",
+        "Action",
+        "Test Project",
+        "Smulie"
+      ],
       "genre": "music",
       "releaseDate": "2026-03-11",
       "buildSize": "12.2 MB",
@@ -153,7 +183,9 @@
         "ratioHeight": 16
       },
       "controls": {
-        "mouse": ["Click & Drag — Slice to the rhythm"],
+        "mouse": [
+          "Click & Drag — Slice to the rhythm"
+        ],
         "touch": true
       },
       "preferredOrientation": "portrait"
@@ -191,7 +223,9 @@
         "ratioHeight": 9
       },
       "controls": {
-        "keyboard": ["WASD — Move"],
+        "keyboard": [
+          "WASD — Move"
+        ],
         "mouse": [
           "Left Click — Fire piercing magic bolts",
           "Right Click — Dash"
@@ -205,7 +239,14 @@
       "title": "Zombie War",
       "description": "A stylized top-down zombie survival shooter with campaign progression, modular weapons, hordes, bosses, and WebGL-ready gameplay.",
       "thumbnail": "webgl-games/zombie-war/thumbnail.webp",
-      "tags": ["Zombie", "Horde Survival", "Top-down Shooter", "Campaign", "Unity 6", "WebGL"],
+      "tags": [
+        "Zombie",
+        "Horde Survival",
+        "Top-down Shooter",
+        "Campaign",
+        "Unity 6",
+        "WebGL"
+      ],
       "genre": "shooter",
       "releaseDate": "2026-08-11",
       "buildSize": "255.6 MB",
@@ -229,8 +270,14 @@
         "ratioHeight": 16
       },
       "controls": {
-        "keyboard": ["WASD — Move", "Number keys — Switch weapon"],
-        "mouse": ["Aim — Move pointer", "Left Click — Fire"],
+        "keyboard": [
+          "WASD — Move",
+          "Number keys — Switch weapon"
+        ],
+        "mouse": [
+          "Aim — Move pointer",
+          "Left Click — Fire"
+        ],
         "touch": false
       },
       "unityVersion": "6000.3.10f1",
@@ -241,7 +288,12 @@
       "title": "Spirit War",
       "description": "A strategy action game by Page Mèo Sen. Founded by Hit, with feature development and gameplay systems support by Bill.",
       "thumbnail": "webgl-games/spirit-war/thumbnail.png",
-      "tags": ["Strategy", "Action", "Collab", "Page Mèo Sen"],
+      "tags": [
+        "Strategy",
+        "Action",
+        "Collab",
+        "Page Mèo Sen"
+      ],
       "genre": "strategy",
       "releaseDate": "2026-04-11",
       "buildSize": "138 MB",
@@ -262,11 +314,61 @@
         "ratioHeight": 16
       },
       "controls": {
-        "mouse": ["Left Click — Select & Command"],
+        "mouse": [
+          "Left Click — Select & Command"
+        ],
         "touch": false
       },
       "preferredOrientation": "landscape"
+    },
+    {
+      "id": "shmup",
+      "title": "Shoot 'em up (Dev Lab)",
+      "description": "Vertical shooter built step by step in the Dev Lab Unity series: Input System, object pooling, ScriptableObject data, waves, pickups, HLSL sprite flash.",
+      "thumbnail": "webgl-games/shmup/thumbnail.webp",
+      "tags": [
+        "Unity 6",
+        "URP",
+        "Tutorial Series",
+        "Shmup"
+      ],
+      "genre": "shooter",
+      "releaseDate": "2026-09-13",
+      "buildSize": "49 MB",
+      "status": "playable",
+      "build": {
+        "buildPath": "/webgl-games/shmup/Build",
+        "buildName": "ShootEmUp",
+        "compression": "none",
+        "hasStreamingAssets": false,
+        "companyName": "BillTheDev",
+        "productName": "ShootEmUp",
+        "productVersion": "1.0"
+      },
+      "controls": {
+        "keyboard": [
+          "WASD / Arrow Keys — Move",
+          "Space — Fire"
+        ],
+        "gamepad": [
+          "Left Stick — Move",
+          "A — Fire"
+        ],
+        "mouse": [
+          "Left Click — Fire"
+        ],
+        "touch": false
+      },
+      "unityVersion": "6000.3 (Unity 6)",
+      "display": {
+        "fixedRatio": true,
+        "ratioWidth": 9,
+        "ratioHeight": 16
+      },
+      "preferredOrientation": "portrait",
+      "sourceUrl": "https://github.com/billtruong003/BillUnityLab",
+      "labSeries": "shmup"
     }
   ],
-  "lastUpdated": "2026-08-11T00:00:00Z"
+  "lastUpdated": "2026-09-13T03:54:32.489Z"
 }

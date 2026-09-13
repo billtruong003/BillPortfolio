@@ -92,33 +92,37 @@ Chọn 1 trong 2 (khuyến nghị A, đã có tài khoản Cloudflare từ R2):
 
 ---
 
-## Phase 4 — Shader Lab + content bằng Unity MCP 🎮
+## Phase 4 — Unity Lab: series bài viết có dự án thật 🎮
 
-### 4.1 Setup
-- [ ] Tạo repo riêng `BillShaderLab` (Unity 6 LTS, URP) — KHÔNG đặt trong repo portfolio
-- [ ] Cấu trúc `Assets/_Project/Shaders/<TenBai>/` mỗi bài 1 folder: shader, material, scene demo, script hỗ trợ
-- [ ] `.gitignore` Unity + Git LFS cho texture/model
-- [ ] Cài MCP for Unity (CoplayDev) vào project, kết nối Claude Code **chạy local** trên máy (session cloud không thấy Unity Editor)
-- [ ] Scene template `Demo_Template.unity`: camera cố định, lighting chuẩn, turntable, backdrop tối hợp theme web
-- [ ] Script `Editor/CaptureTool.cs`: chụp PNG 1600×900 + sequence frame → ffmpeg thành WebP/MP4 cho bài viết
+Project Unity riêng: `D:\Projects\Tutorial` (Unity 6000.3.10f1, URP, Input System, MCP AnkleBreaker). Một project chứa nhiều mini game, mỗi game một folder `Assets/_<Game>/`, code chung ở `Assets/_Common/`. Tư liệu viết bài nằm ở `Docs/<Game>/` (plan, features, journal từng bài, captures). Mỗi bài xong đánh git tag `lesson-NN`.
 
-### 4.2 Quy trình 1 bài (lặp lại)
-1. Chốt đề tài + outline (trong repo portfolio: `content/posts/shader/<slug>.md` với `published: false`)
-2. Dùng Unity MCP dựng scene + viết shader theo từng bước, screenshot mỗi bước
-3. Xuất ảnh/GIF → `public/images/posts/<slug>/`, chạy `npm run optimize`
-4. Viết bài, `published: true`, build local kiểm tra, push
+### 4.1 Roadmap series (chốt 13/09/2026)
+| # | Series | Game | Trạng thái |
+|---|--------|------|-----------|
+| 1 | Unity cơ bản | (bài setup đã có) | viết lại theo Unity 6 khi biên tập |
+| 2 | 2D Shoot 'em up | `_ShootEmUp` | ✅ **12/12 bài dựng xong** (00–11), journal + ảnh + clip đầy đủ, build WebGL chạy trên /arcade |
+| 3 | 2D Platformer | `_Platformer2D` | ⬜ |
+| 4 | 3D Movement (kiểu Catlike) | `_Movement3D` | ⬜ |
+| 5 | 3D Game nhỏ | `_Arena3D` | ⬜ |
+| 6 | Shader (URP) | `_Shader` | ⬜ (bài 10 shmup đã có shader HLSL đầu tiên: SpriteFlash) |
 
-### 4.3 Đề tài đợt đầu (mỗi bài 1 demo playable/screenshot)
-- [ ] Toon shading URP (viết lại bài hiện có với ảnh thật + code đầy đủ)
-- [ ] Outline: inverted hull vs screen-space (nối với Bill SSOutline)
-- [ ] Vertex displacement: cỏ/lá gió (nối với Bill Biome Shader)
-- [ ] Dissolve / hologram (tái tạo hiệu ứng mascot ở Hero)
-- [ ] Triplanar + world-space texturing
-- [ ] Shader Graph → HLSL: đọc code Graph sinh ra
-- [ ] Custom lighting URP (`Lighting.hlsl`, additional lights, shadows)
-- [ ] Mobile/VR shader budget: đo bằng Frame Debugger, Quest profiling
+### 4.2 Shoot 'em up — việc còn lại trước khi viết bài
+- [ ] Upload `D:\Projects\Tutorial\Builds\WebGL\ShootEmUp\Build` lên R2: `node scripts/upload-r2-assets.mjs <folder> shmup/Build` (cần env R2), rồi đổi `buildPath` trong `registry.json` từ `/webgl-games/shmup/Build` sang URL R2 — Bill làm (hiện chỉ chạy local vì `Build/` gitignore)
+- [ ] Chụp tay các ảnh ghi "chụp tay" trong journal (Hub, Package Manager, menu Create, Build Profiles, frame nổ)
+- [ ] Ảnh Input Actions editor với Move mở rộng (bản MCP đang gập)
+- [ ] Biên tập ảnh (khoanh/mũi tên) theo cột "Edit" trong từng journal
+- [ ] Viết 12 bài vào `content/posts/unity-shmup/` theo khung: hôm nay học gì → xong có gì → từng bước → chú ý → code
+- [ ] Sau khi series mới lên: unpublish 5 bài "Unity Cho Người Mới" cũ (hoặc giữ, thêm banner link sang series mới)
+- [ ] Đổi tên prefab `Enemy_Insect` → `Enemy_Generic` (giờ đóng vai cả thiên thạch)
+- [ ] Bật Brotli cho build + header trên R2 (Phase 3.3) để 49 MB → ~12 MB tải xuống
 
----
+### 4.3 Quy trình 1 bài (đã chạy 12 lần, giữ nguyên)
+1. Journal-first: mục tiêu + tính năng khi xong
+2. Dựng qua MCP từng bước, chụp Inspector **trước/sau** mỗi lần gắn reference, chụp Hierarchy, Game view (`screenshot/game` để có UI)
+3. Play test bằng input tiêm (`InputSystem.QueueStateEvent`), đọc số liệu bằng `editor/execute-code`, ghi bảng vào journal
+4. Frame → WebP động bằng sharp (xem `Docs/README.md` trong project Unity)
+5. Lỗi gặp ghi nguyên văn + nguyên nhân + sửa
+6. Commit + tag
 
 ## Icebox ❄️
 - Trang `/lab/tags/<tag>`
