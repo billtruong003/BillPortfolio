@@ -2,7 +2,7 @@
 title: "5 Essential Tips for Optimizing Game Performance"
 date: "2024-12-30"
 excerpt: "As a game developer, optimizing your game is crucial for a smooth player experience. This article shares 5 performance optimization tips you can implement today."
-coverImage: "https://www.m2h.nl/wp-content/uploads/2021/07/Profiler.png"
+coverImage: "/images/posts/perf-comparison.webp"
 category: "tutorial"
 tags: ["Game Development", "Optimization", "Performance", "Unity", "Unreal Engine"]
 published: true

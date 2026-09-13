@@ -19,7 +19,6 @@ Khi bạn chơi game và bắt đầu đắm chìm trong một thế giới châ
 Nếu coi nhà phát triển game như những phù thủy tài ba, thì shader chính là phép thuật kỳ diệu mà chúng ta dùng để thổi hồn vào những thế giới ảo mà mình tạo ra. Qua từng dòng mã tinh tế, đầy logic, shader cho phép ta khắc họa mọi thứ, từ ánh sáng rực rỡ, bóng đổ mềm mại, cho đến những bề mặt kim loại phản chiếu hoàn hảo, hay những yếu tố thiên nhiên khó có thể tái hiện như mặt nước, dung nham… 
 
 Shader là công cụ giúp biến những chi tiết tưởng chừng như nhỏ nhặt, như những làn sóng biển, mặt cỏ, thành những yếu tố sống động, có hồn trong thế giới ảo. Nó không chỉ cho phép người chơi nhìn thấy, mà còn cảm nhận được sự chân thật của mỗi khoảnh khắc trong trò chơi. Đó chính là phép màu thực sự của shader, nếu bạn đã từng chơi game, chắc chắn chúng ít nhất một lần đã mang đến những trải nghiệm khó quên cho chúng ta. 
-![Portal Shader](https://preview.redd.it/the-portals-arent-working-is-this-supposed-to-happen-v0-rbhjla7538n91.jpg?width=1080&crop=smart&auto=webp&s=1693647b804f32aae58992dbc37f650e72e0d82b)
 
 ### **Tại sao game developer nên biết về shader?**
 
@@ -28,10 +27,10 @@ Shader không chỉ là công cụ giúp tạo ra những hiệu ứng đẹp m�
 Bằng cách hiểu và sử dụng shader, game developer có thể nâng cao khả năng sáng tạo, từ việc tạo ra những hiệu ứng đơn giản như thay đổi màu sắc, cho đến những hiệu ứng phức tạp như mô phỏng nước, gió, hay các hiệu ứng vật lý khác. Shader không chỉ làm cho game trở nên đẹp hơn mà còn giúp tối ưu hóa hiệu suất, khiến trò chơi chạy mượt mà hơn trên mọi nền tảng.
 
 Một ví dụ điển hình là việc sử dụng **interior mapping** trong thiết kế game. Nếu như phải mô hình hóa từng đối tượng nội thất trong một tòa nhà, điều này sẽ ngốn rất nhiều tài nguyên để render chỉ một cảnh duy nhất. Thay vì vậy, người ta đã phát triển kỹ thuật mapping các tấm **texture 2D** lên bề mặt kính, tạo cảm giác như người chơi có thể nhìn vào bên trong, trong khi thực tế, không có gì bên trong cả. Đây là một ví dụ về việc sử dụng shader để tối ưu hóa việc render và giảm tải cho hệ thống, mà vẫn mang đến trải nghiệm thị giác tuyệt vời. 
-![Iterior Mapping](https://cdn.80.lv/api/upload/content/81/images/5d28ad591b758/widen_1840x0.jpg)
+![Iterior Mapping](/images/posts/shader-basic-unity-hlsl/interior-mapping.webp)
 
 Điển hình, kỹ thuật này cũng đã được sử dụng trong game **Spider-Man 4**, nơi mà game developer đã khéo léo áp dụng phương pháp này để tạo ra những cảnh quan chân thực, đồng thời tối ưu hóa hiệu suất. 
-![Spider Man 4](https://automaton-media.com/en/wp-content/uploads/2023/12/20231201-23558-001.jpeg) 
+![Spider Man 4](/images/posts/shader-basic-unity-hlsl/spider-man.webp) 
 
 Nhờ shader, game không chỉ trở nên đẹp mắt mà còn có thể vận hành mượt mà hơn, tạo nên trải nghiệm người chơi tuyệt vời trên nhiều nền tảng.
 ### **Tạo shader trong Unity: Khởi đầu từ cơ bản**

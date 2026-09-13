@@ -2,7 +2,7 @@
 title: "Hướng Dẫn Cài Unity, Cấu Hình Visual Studio và VSCode Cho Game Development"
 date: "2024-12-02"
 excerpt: "Hướng dẫn chi tiết cách cài đặt Unity, lấy license và cấu hình môi trường lập trình với Visual Studio và VSCode."
-coverImage: "https://i.pinimg.com/736x/3e/3d/00/3e3d004a4405934a2db2abaae86e10bd.jpg"
+coverImage: "/images/posts/unity-setup-guide/cover.webp"
 category: "tutorial"
 tags: ["Unity", "Game Development", "Visual Studio", "VSCode"]
 published: true
@@ -78,16 +78,15 @@ Với Unity Hub, bạn có thể dễ dàng cài đặt các phiên bản Unity 
 2. **Chọn Tab “Installs”**
    - Vào tab **Installs** để xem các phiên bản Unity đã cài đặt hoặc thêm phiên bản mới.
 
-   ![Tab Installs](https://docs.unity3d.com/hub/images/InstallWindow.png) <!-- Hình ảnh minh họa cho tab Installs -->
 
 3. **Nhấn “Install Editor” để Cài Đặt Phiên Bản Unity Mới**
    - Nhấn nút **Install Editor** ở góc trên bên phải của tab **Installs** trong Unity Hub để mở cửa sổ chọn phiên bản Unity.
    - Bạn sẽ thấy danh sách các phiên bản Unity. Chọn một trong các tùy chọn dưới đây:
      - **LTS (Long Term Support)**: Phiên bản ổn định, được hỗ trợ lâu dài, thích hợp cho các dự án dài hạn.
      - **Latest Release**: Phiên bản mới nhất có tính năng cập nhật nhanh nhưng có thể không ổn định như LTS.
-![Add Version](https://europe1.discourse-cdn.com/unity/original/3X/c/6/c678847d0c16ee9ff830489999535cfef8d470a1.png)
+![Add Version](/images/posts/unity-setup-guide/add-version-1.webp)
    - Để chọn một phiên bản khác(truờng hợp muốn lấy chính xác phiên bản), nhấn vào **Add from Archive** để truy cập kho lưu trữ các phiên bản Unity cũ.
-![Add Version](https://europe1.discourse-cdn.com/unity/original/4X/7/3/7/7371f15272f00382b105add72ecd214997ba6936.jpeg) <!-- Hình ảnh minh họa cho chọn phiên bản Unity -->
+![Add Version](/images/posts/unity-setup-guide/add-version-2.webp) <!-- Hình ảnh minh họa cho chọn phiên bản Unity -->
 
 4. **Tiếp Tục Cài Đặt**
    - Sau khi chọn phiên bản Unity, Unity Hub sẽ tự động tải xuống và cài đặt Unity Editor. Bạn sẽ được yêu cầu chọn vị trí cài đặt và các tính năng bổ sung (chẳng hạn như hỗ trợ cho Android, iOS, hoặc WebGL).
@@ -113,7 +112,7 @@ Với Unity Hub, bạn có thể dễ dàng cài đặt các phiên bản Unity 
 
    - Chọn các tùy chọn phù hợp với dự án của bạn và nhấn **Next**. Quá trình cài đặt sẽ bắt đầu và bạn cần đợi cho đến khi hoàn tất.
 
-   ![Installing Unity](https://styly.cc/wp-content/uploads/2022/11/Tomo_UnityIn_E20_Resized.png) <!-- Hình ảnh minh họa cho quá trình cài đặt -->
+   ![Installing Unity](/images/posts/unity-setup-guide/installing-unity.webp) <!-- Hình ảnh minh họa cho quá trình cài đặt -->
 
 ### **Lưu Ý Quan Trọng**
 - **Đảm bảo phiên bản Unity bạn cài là phiên bản LTS** nếu bạn muốn sự ổn định trong suốt quá trình phát triển, đặc biệt nếu bạn đang làm một dự án dài hạn.

@@ -21,7 +21,7 @@ SwiftUI is designed to work seamlessly with Swift and offers several advantages:
 - **Cross-platform**: Write code once and run it on multiple platforms (iOS, macOS, watchOS, and tvOS).
 - **Real-time Preview**: See live previews of your UI as you code.
 
-![SwiftUI Example](https://developer.apple.com/assets/elements/icons/swiftui/swiftui-96x96_2x.png)
+![SwiftUI Example](/images/posts/introduction-to-swiftui/swiftui-icon.webp)
 
 ## Installation and Setup
 
@@ -83,7 +83,7 @@ In the upcoming lessons, we'll dive deeper into the following topics:
 
 Each lesson will build on your knowledge and provide hands-on examples to help you master SwiftUI.
 
-![SwiftUI Preview](https://devimages-cdn.apple.com/wwdc-services/articles/images/4C086A3B-E1E3-4F77-AD6A-C3D00F14A2C3/2048.jpeg)
+![SwiftUI Preview](/images/posts/introduction-to-swiftui/swiftui-preview.webp)
 
 Start your journey with SwiftUI now, and you’ll be creating beautiful, responsive UIs in no time!
 

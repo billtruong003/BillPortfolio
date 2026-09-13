@@ -2,7 +2,7 @@
 title: "Những Bí Mật Đằng Sau Gameplay: Tính Năng Ẩn Trong Các Trò Chơi Nổi Tiếng"
 date: "2024-12-04"
 excerpt: "Khám phá những tính năng ẩn trong các trò chơi nổi tiếng mà ít người chơi nhận ra, từ AI enemy đến các khu vực bí mật."
-coverImage: "https://i.pinimg.com/736x/97/b4/d4/97b4d4ac104cea52943f8f8a659dd99a.jpg"
+coverImage: "/images/posts/hidden-features-in-games/cover.webp"
 category: "devlog"
 tags: ["AI", "Game Mechanics", "Hidden Features", "Easter Eggs", "Game Design"]
 published: true
@@ -17,7 +17,7 @@ Trong thế giới game, không phải tất cả các tính năng đều hiển
 
 Trong *Bioshock*, một trong những tính năng AI đáng chú ý là cách các kẻ thù, đặc biệt là những splicers, được lập trình để tạo ra cơ hội cho người chơi phản ứng tốt hơn trong các trận chiến. Cơ chế này thực hiện bằng cách cho phép kẻ thù bắn trượt trong pha tấn công đầu tiên của họ. Điều này không chỉ giảm thiểu sự căng thẳng của người chơi mà còn tạo ra một cơ hội cho họ lên kế hoạch và phản ứng trước khi tình huống trở nên căng thẳng hơn.
 
-![AI Đối Thủ Trong Bioshock](https://static1.thegamerimages.com/wordpress/wp-content/uploads/2022/06/0-Feat-1.jpg)
+![AI Đối Thủ Trong Bioshock](/images/posts/hidden-features-in-games/bioshock-ai.webp)
 
 ### **Giải Thích Chi Tiết:**
 - **Tác động đến Gameplay**: Việc để kẻ thù bắn trượt ở pha đầu tiên cho phép người chơi có thêm thời gian để đánh giá tình huống, lựa chọn vũ khí hoặc chiến thuật tấn công, thay vì bị cuốn vào những cuộc giao tranh ngay lập tức. Điều này làm giảm sự cảm giác “khó chịu” khi bắt đầu một trận đấu căng thẳng.
@@ -27,7 +27,7 @@ Trong *Bioshock*, một trong những tính năng AI đáng chú ý là cách c�
 
 Hệ thống thị trường chứng khoán trong *Grand Theft Auto V* là một tính năng phức tạp mà nhiều người chơi bỏ qua, nhưng nó lại có thể giúp người chơi kiếm được một khoản tiền lớn nếu biết khai thác đúng cách. Người chơi có thể tác động đến giá cổ phiếu thông qua các nhiệm vụ ám sát. Mỗi lần thực hiện một nhiệm vụ ám sát, một số công ty sẽ bị ảnh hưởng, khiến giá cổ phiếu của họ tăng hoặc giảm mạnh.
 
-![Thị Trường Chứng Khoán GTA V](https://www.destructoid.com/wp-content/uploads/2024/06/gta-5-stock-market-cash-up.jpg?fit=1200%2C675)
+![Thị Trường Chứng Khoán GTA V](/images/posts/hidden-features-in-games/gta5-stock-market.webp)
 
 ### **Giải Thích Chi Tiết:**
 - **Cách Hoạt Động**: Mỗi nhiệm vụ ám sát trong GTA V sẽ tạo ra những biến động nhỏ trong giá cổ phiếu của các công ty trong trò chơi. Người chơi có thể đầu tư vào các cổ phiếu này trước khi thực hiện nhiệm vụ, và sau đó bán ra khi giá tăng lên sau sự kiện.
@@ -37,7 +37,6 @@ Hệ thống thị trường chứng khoán trong *Grand Theft Auto V* là một
 
 Trong *Battlefield 1*, người chơi có thể tương tác trực tiếp với môi trường để thay đổi cuộc chiến theo cách chiến thuật. Một ví dụ nổi bật là khi người chơi ném lựu đạn vào một đám khói, đám khói sẽ vỡ ra và tạo ra một khu vực quan sát rõ hơn. Điều này cho phép người chơi có thể nhìn rõ đối thủ hoặc thực hiện các hành động tấn công chính xác hơn.
 
-![Tương Tác Môi Trường Battlefield 1](https://i.redd.it/passchendaele-may-just-be-the-most-immersive-environment-in-v0-gsrnlr4vtmmc1.jpg?width=1872&format=pjpg&auto=webp&s=3b97cef3081dee95b805af74a38db1c93be2ec6a)
 
 ### **Giải Thích Chi Tiết:**
 - **Tính Tương Tác Môi Trường**: Khói và lửa không chỉ là yếu tố thẩm mỹ trong *Battlefield 1*. Chúng có thể thay đổi cách người chơi chiến đấu, chẳng hạn như làm giảm khả năng quan sát của đối phương hoặc giúp người chơi ẩn mình trong những tình huống nguy hiểm.
@@ -46,12 +45,7 @@ Trong *Battlefield 1*, người chơi có thể tương tác trực tiếp với
 ## 4. Cơ Chế Độ khó Dynamic Trong *Resident Evil 4*
 
 Một trong những cơ chế thú vị trong *Resident Evil 4* là hệ thống điều chỉnh độ khó dynamic. Trò chơi sẽ tự động thay đổi độ khó dựa trên hiệu suất của người chơi. Nếu người chơi đang chiến thắng dễ dàng, kẻ thù sẽ trở nên mạnh mẽ và nguy hiểm hơn. Ngược lại, nếu người chơi gặp khó khăn, trò chơi sẽ giảm độ khó, giúp họ tiếp tục tiến bộ mà không cảm thấy bị "kẹt" trong một tình huống khó.
-<div style="display: inline-block; margin-right: 10px;">
-  <img src="https://i.pinimg.com/736x/2d/d7/bb/2dd7bb0533e2b9c363160a38d9527039.jpg" style="max-height: 600px;" />
-</div>
-<div style="display: inline-block;">
-  <img src="https://preview.redd.it/for-those-wondering-about-the-differences-from-varying-v0-l4lf79pm0bqa1.png?auto=webp&s=31ab0f27f9b556975bdc8605c5a53597afb20dbf" style="height: 600px; width: auto;" />
-</div>
+<img src="/images/posts/hidden-features-in-games/re4-dynamic-difficulty.webp" alt="Resident Evil 4 dynamic difficulty" style="max-height: 600px;" />
 
 ### **Giải Thích Chi Tiết:**
 - **Cân Bằng Gameplay**: Cơ chế này giúp trò chơi luôn giữ được mức độ thử thách mà không làm người chơi cảm thấy quá khó khăn. Nó cũng tạo ra một cảm giác kịch tính, giúp người chơi luôn phải đối diện với những thử thách mới, nhưng không cảm thấy bị áp đảo.
@@ -61,7 +55,7 @@ Một trong những cơ chế thú vị trong *Resident Evil 4* là hệ thống
 
 *Dark Souls* nổi tiếng với các khu vực bí mật mà rất ít người chơi phát hiện ra. Những khu vực này được giấu rất tinh vi và thường yêu cầu người chơi phải có kỹ năng cao hoặc sự kiên nhẫn để tìm kiếm. Ví dụ, The Great Hollow là một trong những khu vực khó tìm, nhưng lại ẩn chứa nhiều phần thưởng giá trị.
 
-![Khu Vực Bí Mật Dark Souls](https://origin.mos.cms.futurecdn.net/vEqW2CZnBDEfsgiPNEpVYT.jpg)
+![Khu Vực Bí Mật Dark Souls](/images/posts/hidden-features-in-games/dark-souls-secret-area.webp)
 
 ### **Giải Thích Chi Tiết:**
 - **Khám Phá và Phần Thưởng**: Những khu vực bí mật trong *Dark Souls* không chỉ mang đến phần thưởng về vật phẩm, mà còn tạo ra sự hào hứng và cảm giác thành tựu khi người chơi khám phá ra chúng. Điều này khuyến khích người chơi tìm hiểu và khám phá tất cả các ngóc ngách trong thế giới game.
@@ -71,7 +65,6 @@ Một trong những cơ chế thú vị trong *Resident Evil 4* là hệ thống
 
 Trong *Batman: Arkham City*, có nhiều hành động ngẫu nhiên mà người chơi có thể thực hiện để khám phá các căn phòng bí mật hoặc những phần thưởng bất ngờ. Chẳng hạn, người chơi có thể đá vào các bức tường hoặc tương tác với môi trường xung quanh để tìm ra các yếu tố ẩn. 
 
-![Tính Năng Tương Tác Batman Arkham City](https://i.redd.it/the-arkham-series-had-countless-of-easter-eggs-and-v0-6410souoyylb1.jpg?width=1887&format=pjpg&auto=webp&s=6c031857aec3bf64864cf2716bb2179b7ec760ab)
 
 ### **Giải Thích Chi Tiết:**
 - **Tính Tương Tác Ngẫu Nhiên**: Khả năng tương tác với môi trường xung quanh giúp người chơi cảm thấy như họ thực sự là Batman, nơi mọi vật dụng và yếu tố trong thế giới game đều có thể có mục đích

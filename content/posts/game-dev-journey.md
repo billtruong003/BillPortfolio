@@ -2,7 +2,7 @@
 title: "Hành Trình Trở Thành Game Developer"
 date: "2024-12-01"
 excerpt: "Khám phá hành trình trở thành một game developer, từ việc học lập trình đến những thử thách, cơ hội nghề nghiệp và mức lương trong ngành tại TP.HCM."
-coverImage: "https://i1-vnexpress.vnecdn.net/2024/04/12/1712826988443-1712826994-1712889276.png?w=680&h=408&q=100&dpr=1&fit=crop&s=5JjtbbwyA18a_5rezeYpgg"
+coverImage: "/images/posts/game-dev-journey/cover.webp"
 category: "devlog"
 tags: ["Game Development", "Career Journey", "Game Developer", "Unity"]
 published: true
@@ -44,7 +44,7 @@ Một game developer không thể thiếu kiến thức vững về đồ họa 
 - **Performance Optimization:** Tối ưu hóa các yếu tố đồ họa để game chạy mượt mà trên nhiều nền tảng.
 
 ### **Case Study: Doom và Unreal Engine**  
-![Doom Screenshot](https://cdn.britannica.com/67/138367-004-08EABB20/Screenshot-Doom.jpg)
+![Doom Screenshot](/images/posts/game-dev-journey/doom.webp)
 #### **Doom – Khai Sinh Của Thể Loại FPS**
 
 Doom (1993) không chỉ là tựa game FPS nổi tiếng mà còn là cuộc cách mạng về đồ họa trong thời đại của nó.
@@ -52,7 +52,7 @@ Doom (1993) không chỉ là tựa game FPS nổi tiếng mà còn là cuộc c�
 - **Rendering:** Doom sử dụng **raycasting** để tạo môi trường 3D mô phỏng từ mô hình 2D, giúp tiết kiệm tài nguyên phần cứng.
 - **Lighting & Shading:** Kỹ thuật ánh sáng đơn giản nhưng hiệu quả để tạo bóng đổ, nâng cao tính thẩm mỹ và không khí căng thẳng của game.
 
-![Unreal Engine 5](https://cdn2.unrealengine.com/09-animate-in-context-1920x1080-4b1ce63db43b.jpg?resize=1&w=580)
+![Unreal Engine 5](/images/posts/game-dev-journey/unreal-engine-5.webp)
 #### **Unreal Engine – Bước Tiến Mới Với Full 3D**
 Sau Doom, Unreal Engine (1998) đã tạo ra một bước tiến lớn trong đồ họa 3D.
 
@@ -115,7 +115,7 @@ Mức lương của game developer tại TP.HCM phụ thuộc vào nhiều yếu
 
 ### **5. Các Công Cụ (Tools) Trong Ngành Game: Từ 3D, 2D đến Game Engine**  
 Game development yêu cầu sử dụng nhiều công cụ khác nhau để phát triển trò chơi, bao gồm cả công cụ đồ họa 2D và 3D, game engine, và các phần mềm hỗ trợ khác. Một số công cụ phổ biến bao gồm:
-![Unity 6](https://i.ytimg.com/vi/78URELPw5G0/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDtf5K3sTU_lmWxaCQ9uV63Jo0iTw)
+![Unity 6](/images/posts/game-dev-journey/unity-6.webp)
 - **Game Engines:**
   - **Unity:** Là công cụ phổ biến cho game 2D và 3D, Unity hỗ trợ nhiều nền tảng và là sự lựa chọn lý tưởng cho các game developers muốn phát triển nhanh chóng.
   - **Unreal Engine:** Được biết đến với đồ họa 3D chất lượng cao và khả năng xử lý các tựa game AAA. Unreal Engine phù hợp cho những game có yêu cầu đồ họa cao và phức tạp.
