@@ -94,6 +94,7 @@ async function compilePost(filePath) {
         category: frontmatter.category || 'tutorial',
         tags: frontmatter.tags || [],
         lang: detectLang(frontmatter, content),
+        translationKey: frontmatter.translationKey || undefined,
         series: frontmatter.series || undefined,
         order: frontmatter.order ?? undefined,
         readingTime: Math.ceil(stats.minutes),
@@ -184,6 +185,20 @@ async function main() {
         } catch (err) {
             errors.push(`${rel}: ${err.message}`);
         }
+    }
+
+    const slugs = new Set();
+    const translations = new Map();
+    for (const post of allPosts) {
+        if (slugs.has(post.slug)) errors.push(`Duplicate slug: ${post.slug}`);
+        slugs.add(post.slug);
+        if (!post.translationKey) continue;
+        const key = `${post.translationKey}:${post.lang}`;
+        if (translations.has(key)) errors.push(`Duplicate translation: ${key}`);
+        translations.set(key, post);
+        const sibling = allPosts.find(p => p.translationKey === post.translationKey && p.slug !== post.slug);
+        if (!sibling) errors.push(`Missing translation partner: ${post.slug}`);
+        else if (sibling.series !== post.series || sibling.order !== post.order) errors.push(`Translation lesson mismatch: ${post.translationKey}`);
     }
 
     if (errors.length > 0) {

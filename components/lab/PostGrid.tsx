@@ -6,7 +6,8 @@ import { PostCard } from './PostCard';
 import { BlogPost } from '@/types';
 import { Search, X, Filter, BookOpen, Clock, ChevronRight } from 'lucide-react';
 import { SciFiLoadBtn } from '@/components/ui/SciFiLoadBtn';
-import { SERIES_CONFIG, getSeriesPosts } from '@/lib/series';
+import { SERIES_CONFIG, getSeries, getSeriesPosts } from '@/lib/series';
+import { localizePosts } from '@/lib/post-localization';
 import Link from 'next/link';
 
 const INITIAL_COUNT = 6;
@@ -18,11 +19,13 @@ const SeriesCard = ({
     posts,
     isActive,
     onClick,
+    lang,
 }: {
     series: (typeof SERIES_CONFIG)[0];
     posts: BlogPost[];
     isActive: boolean;
     onClick: () => void;
+    lang: string;
 }) => {
     const totalTime = posts.reduce((sum, p) => sum + p.readingTime, 0);
     return (
@@ -48,7 +51,7 @@ const SeriesCard = ({
                 <div className="flex items-center gap-3 text-[10px] font-mono text-zinc-500">
                     <span className="flex items-center gap-1">
                         <BookOpen size={10} />
-                        {posts.length} bài
+                        {posts.length} {lang === 'vi' ? 'bài' : 'lessons'}
                     </span>
                     <span className="flex items-center gap-1">
                         <Clock size={10} />
@@ -61,7 +64,7 @@ const SeriesCard = ({
 };
 
 /* ── Series Expanded List ── */
-const SeriesList = ({ posts, series }: { posts: BlogPost[]; series: (typeof SERIES_CONFIG)[0] }) => (
+const SeriesList = ({ posts, series, lang }: { posts: BlogPost[]; series: (typeof SERIES_CONFIG)[0]; lang: string }) => (
     <motion.div
         initial={{ opacity: 0, height: 0 }}
         animate={{ opacity: 1, height: 'auto' }}
@@ -72,9 +75,9 @@ const SeriesList = ({ posts, series }: { posts: BlogPost[]; series: (typeof SERI
         <div className="pt-2 pb-4">
             <div className="flex items-center gap-2 mb-4">
                 <h3 className="text-sm font-bold text-zinc-200">{series.name}</h3>
-                <span className="text-[10px] font-mono text-zinc-600">— Theo thứ tự học</span>
-                <Link href={`/lab/series/${series.id}`} className="ml-auto text-[10px] font-mono text-primary hover:underline">
-                    Trang series →
+                <span className="text-[10px] font-mono text-zinc-600">— {lang === 'vi' ? 'Theo thứ tự học' : 'In learning order'}</span>
+                <Link href={`/lab/series/${series.id}${lang === 'en' && series.nameEn ? '-en' : ''}`} className="ml-auto text-[10px] font-mono text-primary hover:underline">
+                    {lang === 'vi' ? 'Trang series →' : 'Series page →'}
                 </Link>
             </div>
             <div className="space-y-2">
@@ -85,14 +88,14 @@ const SeriesList = ({ posts, series }: { posts: BlogPost[]; series: (typeof SERI
                         className="flex items-center gap-4 p-3 bg-zinc-900/50 border border-zinc-800/50 hover:border-primary/40 rounded-lg transition-all group"
                     >
                         <div className="w-8 h-8 rounded-lg bg-zinc-800 flex items-center justify-center text-xs font-mono font-bold text-zinc-400 group-hover:text-primary group-hover:bg-primary/10 transition-colors shrink-0">
-                            {idx + 1}
+                            {post.order ?? idx + 1}
                         </div>
                         <div className="flex-1 min-w-0">
                             <div className="text-sm text-zinc-200 group-hover:text-primary transition-colors truncate">
                                 {post.title}
                             </div>
                             <div className="text-[10px] text-zinc-600 font-mono mt-0.5">
-                                {post.readingTime} min read
+                                {post.readingTime} {lang === 'vi' ? 'phút đọc' : 'min read'}
                             </div>
                         </div>
                         <ChevronRight size={14} className="text-zinc-700 group-hover:text-primary shrink-0" />
@@ -104,16 +107,18 @@ const SeriesList = ({ posts, series }: { posts: BlogPost[]; series: (typeof SERI
 );
 
 /* ── Main PostGrid ── */
-export const PostGrid = ({ posts }: { posts: BlogPost[] }) => {
+export const PostGrid = ({ posts: allPosts }: { posts: BlogPost[] }) => {
+    const [lang, setLang] = useState('vi');
+    const posts = useMemo(() => localizePosts(allPosts, lang), [allPosts, lang]);
     const { activeCategory, activeTags, activeSeries, searchQuery, setCategory, toggleTag, setSeries, setSearch, clearFilters } = useLabStore();
     const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
     const seriesData = useMemo(() =>
         SERIES_CONFIG.map(s => ({
-            ...s,
+            ...getSeries(s.id, lang)!,
             posts: getSeriesPosts(posts, s.id),
         })).filter(s => s.posts.length > 0),
-    [posts]);
+    [posts, lang]);
 
     const categories = useMemo(() => {
         const map: Record<string, number> = {};
@@ -156,16 +161,27 @@ export const PostGrid = ({ posts }: { posts: BlogPost[] }) => {
 
     return (
         <div className="space-y-8">
+            <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Article language / Ngôn ngữ bài viết">
+                {(['vi', 'en'] as const).map(value => (
+                    <button key={value} type="button" lang={value} aria-pressed={lang === value}
+                        onClick={() => { setLang(value); setVisibleCount(INITIAL_COUNT); }}
+                        className={`rounded-full border px-4 py-2 text-sm ${lang === value ? 'border-primary text-primary' : 'border-zinc-700 text-zinc-300 hover:border-primary'}`}>
+                        {value === 'vi' ? 'Tiếng Việt' : 'English'}
+                    </button>
+                ))}
+                <span className="text-xs text-zinc-500">{lang === 'vi' ? 'Bài chưa có bản dịch giữ ngôn ngữ gốc.' : 'Untranslated articles retain their original language.'}</span>
+            </div>
             {/* Series Cards */}
             {seriesData.length > 0 && (
                 <div>
                     <h2 className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-4">
-                        📚 Learning Paths
+                        📚 {lang === 'vi' ? 'Lộ trình học' : 'Learning Paths'}
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                         {seriesData.map(s => (
                             <SeriesCard
                                 key={s.id}
+                                lang={lang}
                                 series={s}
                                 posts={s.posts}
                                 isActive={activeSeries === s.id}
@@ -178,7 +194,7 @@ export const PostGrid = ({ posts }: { posts: BlogPost[] }) => {
                     <AnimatePresence>
                         {activeSeries && (() => {
                             const s = seriesData.find(s => s.id === activeSeries);
-                            return s ? <SeriesList posts={s.posts} series={s} /> : null;
+                            return s ? <SeriesList posts={s.posts} series={s} lang={lang} /> : null;
                         })()}
                     </AnimatePresence>
                 </div>
@@ -189,7 +205,7 @@ export const PostGrid = ({ posts }: { posts: BlogPost[] }) => {
                 <>
                     <div className="flex items-center gap-4">
                         <div className="h-px flex-1 bg-zinc-800/50" />
-                        <span className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest">All Posts</span>
+                        <span className="text-[10px] font-mono text-zinc-600 uppercase tracking-widest">{lang === 'vi' ? 'Tất cả bài viết' : 'All Posts'}</span>
                         <div className="h-px flex-1 bg-zinc-800/50" />
                     </div>
 
@@ -198,7 +214,7 @@ export const PostGrid = ({ posts }: { posts: BlogPost[] }) => {
                         <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
                         <input
                             type="text"
-                            placeholder="Search posts..."
+                            placeholder={lang === 'vi' ? 'Tìm bài viết...' : 'Search posts...'}
                             value={searchQuery}
                             onChange={e => setSearch(e.target.value)}
                             className="w-full pl-11 pr-4 py-3 bg-zinc-900/60 border border-zinc-800 rounded-lg text-sm text-zinc-200 placeholder:text-zinc-600 font-mono focus:border-primary/50 focus:outline-none transition-colors"
@@ -220,7 +236,7 @@ export const PostGrid = ({ posts }: { posts: BlogPost[] }) => {
                                     : 'border-zinc-800 text-zinc-500 hover:border-zinc-700 hover:text-zinc-300'
                             }`}
                         >
-                            All ({posts.length})
+                            {lang === 'vi' ? 'Tất cả' : 'All'} ({posts.length})
                         </button>
                         {categories.map(cat => (
                             <button
@@ -261,10 +277,10 @@ export const PostGrid = ({ posts }: { posts: BlogPost[] }) => {
                 <div className="flex items-center gap-3">
                     <Filter size={12} className="text-zinc-500" />
                     <span className="text-[10px] font-mono text-zinc-500">
-                        {filtered.length} post{filtered.length !== 1 ? 's' : ''} found
+                        {lang === 'vi' ? `${filtered.length} bài viết` : `${filtered.length} posts found`}
                     </span>
                     <button onClick={clearFilters} className="text-[10px] font-mono text-primary hover:underline">
-                        Clear all
+                        {lang === 'vi' ? 'Xóa bộ lọc' : 'Clear all'}
                     </button>
                 </div>
             )}
@@ -282,14 +298,14 @@ export const PostGrid = ({ posts }: { posts: BlogPost[] }) => {
 
                     {filtered.length === 0 && (
                         <div className="text-center py-16">
-                            <p className="text-zinc-500 font-mono text-sm">No posts match your filters.</p>
+                            <p className="text-zinc-500 font-mono text-sm">{lang === 'vi' ? 'Không có bài viết phù hợp.' : 'No posts match your filters.'}</p>
                         </div>
                     )}
 
                     {hasMore && (
                         <SciFiLoadBtn
                             onClick={() => setVisibleCount(prev => Math.min(prev + LOAD_INCREMENT, filtered.length))}
-                            label="LOAD_MORE_POSTS"
+                            label={lang === 'vi' ? 'XEM_THÊM_BÀI' : 'LOAD_MORE_POSTS'}
                         />
                     )}
                 </>

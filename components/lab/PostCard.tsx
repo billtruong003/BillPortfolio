@@ -36,7 +36,7 @@ export const PostCard = ({ post }: { post: BlogPost }) => {
 
                     {post.featured && (
                         <div className="absolute top-3 left-3 px-2 py-1 bg-primary/90 text-black text-[10px] font-mono font-bold uppercase tracking-wider rounded">
-                            Featured
+                            {post.lang === 'vi' ? 'Nổi bật' : 'Featured'}
                         </div>
                     )}
                     <div className="absolute top-3 right-3 px-2 py-1 bg-black/60 backdrop-blur text-[10px] font-mono text-primary rounded border border-primary/20 uppercase tracking-wider">
@@ -56,11 +56,11 @@ export const PostCard = ({ post }: { post: BlogPost }) => {
                     <div className="flex items-center justify-between pt-3 border-t border-zinc-800/50">
                         <div className="flex items-center gap-1.5 text-[10px] font-mono text-zinc-500">
                             <Calendar size={10} />
-                            {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                            {new Date(post.date).toLocaleDateString(post.lang === 'vi' ? 'vi-VN' : 'en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}
                         </div>
                         <div className="flex items-center gap-1.5 text-[10px] font-mono text-zinc-500">
                             <Clock size={10} />
-                            {post.readingTime} min read
+                            {post.readingTime} {post.lang === 'vi' ? 'phút đọc' : 'min read'}
                         </div>
                     </div>
 

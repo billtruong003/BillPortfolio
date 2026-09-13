@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { PostHeading } from '@/types';
 import { List } from 'lucide-react';
 
-export const TableOfContents = ({ headings }: { headings: PostHeading[] }) => {
+export const TableOfContents = ({ headings, lang = 'en' }: { headings: PostHeading[]; lang?: string }) => {
     const [activeId, setActiveId] = useState<string>('');
 
     useEffect(() => {
@@ -32,7 +32,7 @@ export const TableOfContents = ({ headings }: { headings: PostHeading[] }) => {
         <nav className="sticky top-24 space-y-1">
             <div className="flex items-center gap-2 mb-4 pb-3 border-b border-zinc-800">
                 <List size={14} className="text-primary" />
-                <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest">On this page</span>
+                <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest">{lang === 'vi' ? 'Trong bài này' : 'On this page'}</span>
             </div>
             {headings.map((h) => (
                 <a

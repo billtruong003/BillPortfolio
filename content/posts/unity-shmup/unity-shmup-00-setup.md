@@ -1,151 +1,131 @@
 ---
-title: "Shmup #0: Dựng project Unity 6 cho nhiều mini game"
+title: "Shmup #0: Bản đồ khởi hành — chuẩn bị project để học tới cùng"
 date: "2026-09-13"
-lang: "vi"
+updated: "2026-09-14"
+lang: vi
+translationKey: unity-shmup-00-setup
 series: "shmup"
 order: 0
-excerpt: "Bài mở đầu series làm game bắn máy bay: tạo project Unity 6 URP, tổ chức folder để một project chứa nhiều game, import sprite đúng cách, git + LFS."
+excerpt: "Hiểu game đích, chuẩn bị công cụ và tài nguyên, rồi thiết lập cách lưu mốc bài học trước khi viết code."
 coverImage: "/images/posts/unity-shmup/00/cover.webp"
 category: "unity-dev"
-tags: ["Unity", "Unity 6", "Project Setup", "Git", "Shmup"]
+tags: ["Unity", "Unity 6", "Shmup", "Tutorial"]
 published: true
 featured: false
 ---
 
-## Series này là gì
+<div class="lesson-map"><strong>ĐÍCH ĐẾN</strong><p>Một game màn hình dọc: lái tàu, bắn địch, sống qua các wave, nhặt đồ và chơi lại sau khi hết máu.</p><ol><li>#0–#3 · Màn hình và điều khiển</li><li>#4–#7 · Vòng đời object, va chạm, dữ liệu và wave</li><li>#8–#11 · Ván chơi, pickup, phản hồi và bản Web</li></ol></div>
 
-12 bài, một game. Bắt đầu từ scene trống, kết thúc bằng một game bắn máy bay chạy trên trình duyệt, chơi được ngay ở mục [Arcade](/arcade?game=shmup) của trang này. Mỗi bài mở đúng **một** khái niệm và nối tiếp scene của bài trước, giống cách Catlike Coding dẫn người học.
+## Dựng chỗ trước khi dựng game
 
-Khác với series "Unity Cho Người Mới" cũ (2024), lần này:
-- Unity **6000.3 LTS**, URP, **Input System** mới (không dùng `Input.GetKey`)
-- Mọi bước đều có ảnh Inspector chụp lúc làm thật, kể cả lúc kéo reference
-- Code đầy đủ, có lý do cho từng quyết định, có mục "lỗi mình gặp"
+Chuyện là project Unity nào cũng bắt đầu gọn gàng, tới bài thứ tư thì rối. Bài này chưa viết dòng code nào, chỉ dựng sẵn chỗ để từng loại tài nguyên có nơi của nó, kể cả folder `_Common` mà phải tới bài 4 bạn mới thấy vì sao nó cần tồn tại.
 
-Cần biết trước: C# cơ bản (biến, hàm, class). Chưa có thì đọc [series C#](/lab/series/csharp) trước.
+Một game bắn máy bay nhìn qua là nhiều hệ thống chạy cùng lúc. Cách mình tách nó ra là đặt từng câu hỏi: camera nhìn thấy vùng nào, phím bấm biến thành chuyển động ra sao, viên đạn sống được bao lâu, ai là người giữ điểm số. Mỗi bài trả lời đúng một câu và để lại một hành vi quan sát được.
 
-## Hôm nay học gì
+Cách làm xuyên suốt series gói trong một câu mình hay nói: **make it exist first, you can make it good later.** Bài 3 sẽ cố tình bắn đạn bằng `Instantiate` và `Destroy` dù biết cách đó tốn, để bài 4 có một thứ cụ thể mà sửa. Học bằng cách nhìn thấy vấn đề của chính mình dễ vào hơn là đọc lời khuyên tránh nó từ đầu.
 
-- Tạo project URP và cài 2 package cần thiết
-- Tổ chức folder để **một project chứa nhiều game** mà không rối
-- Import sprite: Sprite Mode, Pixels Per Unit, Mipmap và vì sao NPOT không nén được
-- Git + Git LFS cho project Unity
+> **Về series này**
+>
+> Bạn cần biết trước biến, điều kiện, vòng lặp, hàm và class C#. Chưa có thì đọc [series C#](/lab/series/csharp). Event và coroutine sẽ được giải thích ngay lúc dùng.
+>
+> Ảnh chụp trong series lấy từ project mẫu của mình, nên vài Inspector có thể thuộc bản dựng trước đó. Khi số liệu trong ảnh lệch với bảng cấu hình trong bài, lấy bảng trong bài làm chuẩn.
+>
+> Mỗi bài kèm một gói script, không kèm scene hay prefab dựng sẵn. Game điều khiển bằng bàn phím và gamepad; khung dọc 9:16 không đồng nghĩa với điều khiển cảm ứng.
 
-Xong bài này bạn có: project sạch, sprite sẵn sàng kéo vào scene, repo git chuẩn.
+## Một bộ công cụ nhất quán
 
-## 1. Tạo project
+Project mẫu chạy trên **Unity 6000.3.10f1**, **URP 17.3.0**, **Input System 1.18.0**. Bản Unity 6 khác có thể bày giao diện hơi khác, nhưng các bước đều tìm được.
 
-Unity Hub → **New project** → template **Universal 3D**. Đặt tên và đường dẫn tuỳ bạn (mình dùng `D:\Projects\Tutorial`).
+Trong Unity Hub, thêm module **Web Build Support** nếu bạn định xuất bản Web ở bài 11. Rồi tạo project **Universal 3D**, đặt tên `ShmupLab`.
 
-Vì sao Universal 3D mà không phải Universal 2D: game này 2D, nhưng các series sau (3D movement, shader) dùng chung project. Project 3D làm 2D bình thường, chỉ khác camera (bài 1 sẽ đổi) và renderer mặc định.
+Template 3D làm game 2D vẫn bình thường, vì ta dùng sprite unlit và camera orthographic. Mình chọn nó để các series sau về 3D và shader dùng chung một project, và để renderer mặc định khớp với shader ở bài 10.
 
-Sau khi mở project: **Window → Package Manager** → tab Unity Registry, cài:
-- **2D** (feature set `com.unity.feature.2d`): Sprite Editor, Tilemap, 2D physics tooling
-- **Input System** (1.18): khi bật, Unity hỏi restart editor để đổi backend input → Yes
+Mở **Window → Package Manager**, cài **2D** feature set và **Input System** nếu chưa có. Unity sẽ hỏi khởi động lại để đổi input backend, chọn Yes. Sau đó kiểm tra **Project Settings → Player → Active Input Handling** đã là Input System. Series không cần package bên ngoài nào khác.
 
-## 2. Cấu trúc folder
+## Chuẩn bị hình theo vai trò
 
-Template để lại `Assets/` thế này:
+Dùng hình bạn có sẵn hoặc tải [Kenney Space Shooter Extension](https://kenney.nl/assets/space-shooter-extension). Tên file trong bộ đó khác với ảnh mẫu, nên hãy chọn theo vai trò thay vì đi tìm một tên file trùng khớp.
 
-```
+| Vai trò | Hình cần có | Tên gợi nhớ |
+|---|---|---|
+| Player | Tàu hướng mũi lên | Player |
+| Đạn | Hình nhỏ dài theo Y | Laser |
+| Địch | Hai hình phân biệt được | InsectBasic, InsectFast |
+| Thiên thạch | Nhỏ, vừa, lớn | Asteroid |
+| Pickup | Ba biểu tượng | Life, Shield, Rapid |
+| Nền | Màu nền và hoa văn sao lặp | Background, Stars |
+
+Kích thước hình khác mẫu cũng được, vì mọi tính toán trong series đều quy về pixel, PPU và world units. Nếu bạn không có texture sao lặp, bài 1 có phương án dựng sao bằng sprite ngay trong Editor.
+
+## Mỗi loại tài nguyên có một chỗ
+
+Tạo các thư mục sau bằng **Project window**:
+
+```text
 Assets/
-  InputSystem_Actions.inputactions
-  Readme.asset, TutorialInfo/
-  Scenes/SampleScene.unity
-  Settings/            (URP pipeline asset, renderer, volume)
+  _ShootEmUp/
+    Art/Sprites/
+    Art/Shaders/
+    Audio/
+    Input/
+    Prefabs/
+    Scenes/
+    ScriptableObjects/
+    Scripts/
+  _Common/Scripts/
+  ThirdParty/
 ```
 
-Cộng thêm folder sprite tải về là bắt đầu rối. Quy tắc mình dùng cho cả series:
+`_ShootEmUp` chứa game này. `ThirdParty` dành cho tài nguyên tải về. Còn `_Common` hiện đang trống, và nó sẽ trống tới bài 4 — lúc đó ta viết một cái object pool không thuộc riêng game bắn tàu, nên nó cần một chỗ đứng ngoài `_ShootEmUp`. Đây là cách tổ chức của project này chứ không phải luật Unity; project chỉ có đúng một game thì để chung thư mục vẫn chạy tốt.
 
-```
-Assets/
-  _Common/          thứ dùng chung cho mọi game trong project
-    Editor/  Input/  Scripts/  Settings/
-  _ShootEmUp/       game này
-    Art/Sprites/{Player, Enemies, Asteroids, Projectiles, Pickups, Background}
-    Audio/  Input/  Prefabs/  Scenes/  ScriptableObjects/  Scripts/
-  ThirdParty/       package, asset store, không đụng vào
-```
+Luôn kéo asset bằng Project window chứ đừng kéo trong File Explorer, vì Unity cần chuyển cả file `.meta` đi kèm. File meta giữ GUID, tức mã mà scene và prefab dùng để tìm lại sprite, material và script. Mất meta là reference đang đúng bỗng thành Missing.
 
-- Dấu `_` để folder của mình nổi lên đầu Project window.
-- **Mỗi game một folder gốc**, game sau (`_Platformer2D`, `_Movement3D`) đứng cạnh, không lồng nhau.
-- `_Common` chỉ chứa thứ dùng từ 2 game trở lên. Bài 4 sẽ đưa Object Pool vào đây.
+![Thư mục _ShootEmUp và _Common trong Project window](/images/posts/unity-shmup/00/setup_02_project-tree.webp)
 
-![Project window sau khi dọn](/images/posts/unity-shmup/00/setup_02_project-tree.webp)
+## Import đúng một sprite trước khi chỉnh hàng loạt
 
-**Chú ý quan trọng: di chuyển asset phải làm trong Unity** (kéo thả trong Project window). Mỗi asset có file `.meta` chứa GUID; scene, prefab, material tham chiếu nhau qua GUID. Kéo file trong Explorer mà quên `.meta` là Unity sinh GUID mới → mất hết reference, lỗi "Missing (Sprite)".
+Chọn hình tàu trong Project window và nhìn sang Inspector. Đặt **Texture Type = Sprite (2D and UI)**, **Sprite Mode = Single**, **Pixels Per Unit = 100**, rồi bấm Apply.
 
-Xoá `Readme.asset` và `TutorialInfo/` (readme của template). `Settings/` URP kéo vào `_Common/Settings/` — Project Settings → Graphics vẫn trỏ đúng vì GUID không đổi.
+![Texture Importer: ba dòng cần đổi trước khi Apply](/images/posts/unity-shmup/00/setup_01_texture-importer.webp)
 
-## 3. Import sprite
+Single dành cho file chứa một hình; spritesheet nhiều hình thì chọn Multiple rồi cắt vùng trong Sprite Editor.
 
-Bộ sprite mình dùng là gói tàu vũ trụ miễn phí gồm 26 PNG: tàu, drone, khiên, 2 loại bọ, 6 thiên thạch, 8 loại đạn, 3 bonus, nền + 2 lớp sao. Kéo vào `Art/Sprites/` và chia folder theo loại.
+PPU là thứ nối pixel với kích thước trong game, và nó đáng hiểu kỹ ngay từ đây vì cả series sẽ tính theo nó. Một hình rộng 200 px ở PPU 100 với scale 1 sẽ rộng 2 world units. Camera bài sau nhìn thấy bề ngang 9 units, nên tàu vừa nhập chiếm khoảng hai phần chín chiều rộng màn hình. Bạn ước lượng được tỉ lệ tàu trên màn hình mà chưa cần kéo nó vào scene.
 
-Chọn một sprite, Inspector hiện **Texture Import Settings**:
+Với hình nền sẽ dùng chế độ Tiled, nhớ đặt thêm **Mesh Type = Full Rect**. Camera trong series cố định nên có thể tắt mipmap.
 
-![Import settings của SpaceShip.png](/images/posts/unity-shmup/00/setup_01_texture-importer.webp)
+Kéo thử tàu vào scene để kiểm tra. Không thấy gì thì xem lại Sprite Mode, vùng slice và vị trí camera. Kiểm tra xong thì xoá object thử đi, giữ lại sprite asset.
 
-| Thuộc tính | Giá trị | Vì sao |
-|-----------|---------|--------|
-| Texture Type | Sprite (2D and UI) | Ảnh dùng làm sprite |
-| Sprite Mode | **Single** | Mỗi file một hình. Mode Multiple dành cho sprite sheet đã slice; để Multiple mà không slice thì kéo vào scene không hiện gì |
-| Pixels Per Unit | **100** | 100 px = 1 unit Unity. Tàu 241 px ≈ 2.4 unit. Chọn một số và giữ cố định cả game |
-| Generate Mip Maps | tắt | Mipmap chỉ có ích khi vật xa gần (3D). 2D camera cố định thì bỏ, tiết kiệm 33% bộ nhớ texture |
-| Generate Physics Shape | bật | Unity sinh sẵn hình collider bám alpha, bài 5 dùng cho `PolygonCollider2D` |
+## Lưu mốc đúng nghĩa
 
-Nhìn dòng cảnh báo vàng ở dưới: *"Only textures with width/height being multiple of 4 can be compressed to DXT5"*. Toàn bộ sprite gói này có kích thước lẻ (241×187, 87×87...) nên dù Compression = Normal Quality, Unity vẫn lưu **RGBA8 không nén** (dòng cuối preview ghi `241x187 (NPOT) RGBA8`). Kết luận: với sprite lẻ kích thước, setting nén không có tác dụng; muốn nén thật phải gom vào **Sprite Atlas** (series sau).
+Copy scene sang tên mới không đóng băng được bài cũ, vì scene cũ vẫn trỏ tới đúng những script và prefab mà bạn sắp sửa. Muốn quay lại đúng trạng thái của một bài thì phải chụp lại cả project.
 
-Chỉnh xong bấm **Apply**. Chọn nhiều file cùng lúc rồi chỉnh một lần cho nhanh.
-
-## 4. Git + LFS
-
-Trong folder project:
-
-```bash
-git init
-git lfs install
-```
-
-`.gitignore` chuẩn Unity, quan trọng nhất là bỏ `Library/`, `Temp/`, `Logs/`, `UserSettings/`, `*.csproj`, `*.sln`:
+Nếu dùng Git, tạo repo ngang hàng với Assets, Packages và ProjectSettings, rồi bỏ qua các thư mục Unity tự sinh:
 
 ```gitignore
-/[Ll]ibrary/
-/[Tt]emp/
-/[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
-/[Ll]ogs/
-/[Uu]ser[Ss]ettings/
+/Library/
+/Temp/
+/Obj/
+/Logs/
+/UserSettings/
+/Builds/
 *.csproj
 *.sln
 *.slnx
-.vs/
-.idea/
 ```
 
-`.gitattributes`: file YAML của Unity đánh dấu text để merge được, file nhị phân đi qua LFS:
+Giữ lại toàn bộ file `.meta`, thư mục Packages và ProjectSettings. Vào **Project Settings → Editor** đặt **Asset Serialization = Force Text** để file scene và prefab diff được.
 
-```gitattributes
-* text=auto eol=lf
-*.unity text merge=unityyamlmerge
-*.prefab text merge=unityyamlmerge
-*.asset text merge=unityyamlmerge
-*.mat text merge=unityyamlmerge
-*.png filter=lfs diff=lfs merge=lfs -text
-*.jpg filter=lfs diff=lfs merge=lfs -text
-*.wav filter=lfs diff=lfs merge=lfs -text
-*.fbx filter=lfs diff=lfs merge=lfs -text
-```
+Sau mỗi bài: Stop Play Mode, Save, commit, rồi gắn tag `lesson-XX`. Gói ZIP trên trang này chứa source của hướng dẫn, còn tag trong repo của bạn mới là mốc của chính bạn.
 
-Kiểm tra **Edit → Project Settings → Editor**: Asset Serialization = **Force Text** (template mới mặc định đã đúng). Thiếu cái này thì scene lưu nhị phân, git diff vô dụng.
+## Sẵn sàng sang bài 1 chưa?
 
-Commit đầu tiên. Từ giờ mỗi bài một commit và một tag `lesson-NN`, muốn xem lại trạng thái bài nào thì checkout tag đó.
+Bốn dấu hiệu: project mở lên không có lỗi đỏ trong Console, hình tàu kéo vào scene hiện được, Input System đã cài và đang bật, và bạn biết scene sẽ lưu ở đâu. Script sẽ nằm trong `_ShootEmUp/Scripts`, còn assembly definition thì bài 1 mới dựng.
 
-## Chú ý
+Bài sau dựng màn hình: camera nhìn thấy vùng nào, lớp nào vẽ đè lên lớp nào, và làm nền sao trôi liên tục mà không thấy đường nối.
 
-- **Kéo asset trong Unity, không kéo trong Explorer.** Lặp lại vì đây là lỗi mất reference số một của người mới.
-- Sprite Mode Multiple trên hình đơn = không hiện gì trong scene, không báo lỗi.
-- NPOT không nén được: đừng mất thời gian chỉnh Compression cho từng sprite.
+## Mã nguồn chặng này
 
-## Bài sau
+Bài 0 chưa có script nào. Từ bài 1 trở đi, mỗi bài có một gói ZIP gồm code và assembly definition, không kèm scene hay prefab.
 
-[Shmup #1](/lab/unity-shmup-01-scene-2d): scene 2D đầu tiên, camera orthographic, Sorting Layer, và script đầu tiên làm sao trôi.
+Tiếp theo: [Shmup #1](/lab/unity-shmup-01-scene-2d).

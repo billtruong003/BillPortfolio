@@ -1,65 +1,54 @@
 ---
-title: "Shmup #2: Di chuyển tàu với Input System và Rigidbody2D"
+title: "Shmup #2: Từ phím bấm đến vị trí tàu"
 date: "2026-09-15"
-lang: "vi"
+updated: "2026-09-14"
+lang: vi
+translationKey: unity-shmup-02-player-movement
 series: "shmup"
 order: 2
-excerpt: "Input Actions asset (Action Map, Composite, Control Scheme), đọc input trong script, Rigidbody2D Kinematic + MovePosition, và kẹp tàu trong màn hình tính từ camera."
+excerpt: "Theo dấu input qua Action, Vector2 và Rigidbody2D; tính biên camera để tàu di chuyển mà không rời màn hình."
 coverImage: "/images/posts/unity-shmup/02/cover.webp"
 category: "unity-dev"
-tags: ["Unity", "Input System", "Rigidbody2D", "Player Controller", "Shmup"]
+tags: ["Unity", "Unity 6", "Shmup", "Tutorial"]
 published: true
 featured: false
 ---
 
-## Hôm nay học gì
+<div class="lesson-flow"><span>Thiết bị</span><span>Binding</span><span>Move Action</span><span>Vector2</span><span>Vị trí mới</span></div>
 
-- **Input System** (package mới): Action Map, Action, Binding, Composite, Control Scheme
-- Đọc input bằng `InputActionAsset.FindAction` + `ReadValue<Vector2>()`
-- **Rigidbody2D Kinematic** + `MovePosition` trong `FixedUpdate`: vì sao không gán `transform.position`
-- Tính vùng camera thấy để kẹp tàu, không hard-code số
-- Gắn reference asset vào field trên Inspector, và asmdef reference
+## Bốn chặng giữa phím bấm và vị trí
 
-Xong bài này: WASD / mũi tên / stick gamepad điều khiển tàu, tàu không bay ra khỏi màn hình. Action `Fire` khai báo sẵn cho bài 3.
+Bấm phím D thì tàu chạy sang phải. Nghe hiển nhiên, nhưng từ lúc bạn bấm phím đến lúc tàu đổi vị trí, dữ liệu phải đi qua bốn chặng. Input System sinh ra để bạn không phải viết hai đoạn code khác nhau cho bàn phím và tay cầm.
 
-![Di chuyển và chạm biên](/images/posts/unity-shmup/02/move_05_movement.webp)
+Chuỗi đó thế này. Bàn phím báo rằng phím D đang được giữ. Một binding gắn phím đó với ý định `Move`. Action `Move` gộp mọi binding lại và trả về một `Vector2` giá trị (1, 0). Code lấy vector đó nhân với tốc độ và thời gian để tính ra vị trí mới. Nhờ lớp Action đứng giữa, code không cần biết người chơi đang bấm D hay đang đẩy stick.
 
-## 1. Copy scene
+Đầu vào là scene bài 1, lưu lại thành `SEU_02_PlayerMove`. Xong bài này: WASD, phím mũi tên hoặc stick đều lái được tàu, và tàu dừng lại ở mép khung thay vì bay ra ngoài.
 
-Project → chọn `SEU_01_Scene` → Ctrl+D → đổi tên `SEU_02_PlayerMove`. Mỗi bài một scene để bạn mở đúng trạng thái bài đó.
+## Tạo Move
 
-## 2. Input Actions asset
+Trong `_ShootEmUp/Input`, chọn Create → Input Actions và đặt tên **ShmupControls**. Mở asset đó lên, tạo Action Map tên **Gameplay**, rồi thêm Action **Move** với Action Type **Value** và Control Type **Vector2**.
 
-`_ShootEmUp/Input` → Create → **Input Actions** → tên `ShmupControls`. Double click mở editor:
+Thêm một Up/Down/Left/Right Composite cho WASD, giữ chế độ **Digital Normalized**. Thêm composite tương tự cho bốn phím mũi tên, và một binding `<Gamepad>/leftStick`. Bấm Save Asset.
 
-![Input Actions editor](/images/posts/unity-shmup/02/move_01_input-actions-editor.webp)
+![Ba cột map, action và binding trong Input Actions editor](/images/posts/unity-shmup/02/move_01_input-actions-editor.webp)
 
-1. Action Maps → **+** → `Gameplay`. (Bài 8 thêm map `UI` riêng, để pause menu không bị phím bắn chen vào.)
-2. Actions → + → `Move`, Action Type **Value**, Control Type **Vector 2**.
-   - + cạnh Move → *Add Up/Down/Left/Right Composite* → tên `WASD`, gán W/S/A/D.
-   - Thêm composite thứ hai `Arrows` cho 4 phím mũi tên.
-   - + → *Add Binding* → `<Gamepad>/leftStick`.
-3. Actions → + → `Fire`, Action Type **Button**. Binding: `<Keyboard>/space`, `<Mouse>/leftButton`, `<Gamepad>/buttonSouth`.
-4. Góc trên phải → Control Schemes → thêm `Keyboard&Mouse` (Keyboard bắt buộc, Mouse optional) và `Gamepad`. Mỗi binding tick scheme tương ứng.
-5. **Save Asset** (hoặc bật Auto-Save).
+Chưa tạo `Fire` ở đây, nó thuộc bài 3. Control Schemes cũng chưa cần, vì bài này đọc Action trực tiếp chứ không nhóm theo thiết bị.
 
-Hiểu thế nào:
-- **Action** là ý định của người chơi ("Move", "Fire"), **Binding** là phím cụ thể. Code chỉ nói chuyện với Action, đổi phím hay thêm gamepad không sửa code.
-- **Composite 2D Vector** gộp 4 phím thành 1 Vector2 (−1..1). Stick gamepad tự nhiên đã là Vector2.
-- Value cho input liên tục (stick), Button cho nhấn/nhả.
-- File `.inputactions` là JSON, git diff đọc được.
+Digital Normalized là lựa chọn đáng để ý. Nó chuẩn hoá vector về độ dài 1, nên giữ W và D cùng lúc không làm tàu đi chéo nhanh hơn đi thẳng. Bỏ chuẩn hoá thì đường chéo dài `√2 ≈ 1.41`, tức nhanh hơn 41%, và người chơi sẽ tự phát hiện ra mẹo đi chéo.
 
-## 3. asmdef tham chiếu Input System
+## asmdef phải tham chiếu Input System
 
-Code nằm trong assembly `ShootEmUp` (bài 1) nên **không thấy** `UnityEngine.InputSystem` cho tới khi thêm reference. Chọn `ShootEmUp.asmdef` → Assembly Definition References → **+** → `Unity.InputSystem` → Apply.
+Chọn `ShootEmUp.asmdef` trong Project window, tìm mục **Assembly Definition References**, bấm `+` và thêm **Unity.InputSystem**, rồi Apply.
 
-![asmdef reference](/images/posts/unity-shmup/02/move_02_asmdef-inspector.webp)
+![Unity.InputSystem trong danh sách reference của ShootEmUp.asmdef](/images/posts/unity-shmup/02/move_02_asmdef-inspector.webp)
 
-Không có bước này: `error CS0246: The type or namespace name 'InputSystem' could not be found`. Lỗi đầu tiên hầu như ai dùng asmdef cũng gặp.
+Bước này nhỏ nhưng bỏ qua là kẹt. Package đã cài rồi mà assembly chưa tham chiếu tới thì code vẫn không thấy namespace, và Console chỉ báo `namespace UnityEngine.InputSystem could not be found`. Câu đó đọc như chưa cài package, nên phản xạ thường là đi cài lại. Gặp lỗi này thì kiểm tra reference ở đây trước.
 
-## 4. Script PlayerMovement
+## Đọc input mỗi frame, dời tàu mỗi bước physics
 
-`_ShootEmUp/Scripts/Player/PlayerMovement.cs`:
+Tạo file hoàn chỉnh rồi mới gắn component. Script làm ba việc: đọc input, tính vị trí tiếp theo, và kẹp vị trí đó lại trong biên camera.
+
+**Assets/_ShootEmUp/Scripts/Player/PlayerMovement.cs**
 
 ```csharp
 using UnityEngine;
@@ -70,8 +59,13 @@ namespace ShootEmUp.Player
     [RequireComponent(typeof(Rigidbody2D))]
     public sealed class PlayerMovement : MonoBehaviour
     {
+        [Tooltip("Input Actions asset that contains the Gameplay/Move action.")]
         [SerializeField] private InputActionAsset controls;
+
+        [Tooltip("World units per second at full stick / key press.")]
         [SerializeField] private float speed = 8f;
+
+        [Tooltip("Keep this much distance (world units) between the ship pivot and the screen edge.")]
         [SerializeField] private Vector2 edgePadding = new Vector2(1.2f, 1f);
 
         private Rigidbody2D body;
@@ -87,8 +81,15 @@ namespace ShootEmUp.Player
             CacheCameraBounds();
         }
 
-        private void OnEnable()  => moveAction.Enable();
-        private void OnDisable() => moveAction.Disable();
+        private void OnEnable()
+        {
+            moveAction.Enable();
+        }
+
+        private void OnDisable()
+        {
+            moveAction.Disable();
+        }
 
         private void Update()
         {
@@ -97,6 +98,7 @@ namespace ShootEmUp.Player
 
         private void FixedUpdate()
         {
+            CacheCameraBounds();
             var target = body.position + moveInput * (speed * Time.fixedDeltaTime);
             target.x = Mathf.Clamp(target.x, minBounds.x, maxBounds.x);
             target.y = Mathf.Clamp(target.y, minBounds.y, maxBounds.y);
@@ -117,50 +119,74 @@ namespace ShootEmUp.Player
 }
 ```
 
-Điểm cần hiểu:
-- **Đọc input ở `Update`, di chuyển ở `FixedUpdate`.** Input đến theo frame; physics chạy theo bước cố định 0.02 s. Đọc trong FixedUpdate có thể bỏ lỡ phím nhấn nhanh; di chuyển Rigidbody trong Update thì physics và render lệch nhau.
-- `MovePosition` thay vì `transform.position =`: body Kinematic dùng MovePosition thì hệ physics biết nó "đang di chuyển" → trigger với vật khác tính đúng (bài 5), và Interpolate hoạt động.
-- `throwIfNotFound: true`: gõ sai tên action sẽ nổ ngay ở Awake với thông báo rõ, thay vì null âm thầm.
-- `OnEnable/OnDisable` bật tắt action: tắt object là ngừng nghe input.
-- `cam.aspect` lấy tỉ lệ thật của Game view/màn hình → đổi sang 3:4 vẫn đúng biên.
+Điểm đáng nói nhất là input được đọc trong `Update` còn Rigidbody chỉ được dời trong `FixedUpdate`, và hai hàm đó chạy theo hai nhịp khác nhau. `Update` chạy mỗi khung hình, `FixedUpdate` chạy theo bước physics cố định. Ở 144 fps thì có những frame không kèm bước physics nào, ở 30 fps thì ngược lại, một frame có thể kèm nhiều bước.
 
-Giới hạn (để bài sau): `CacheCameraBounds` chỉ tính một lần trong Awake. Bài 5 tách thành `ScreenBounds` dùng chung khi kẻ địch cũng cần.
+Vậy nên `moveInput` được giữ lại giữa hai nhịp. Nếu đọc input thẳng trong `FixedUpdate`, một cú gõ thật nhanh rơi vào khoảng giữa hai bước physics sẽ không được đọc lần nào và mất hẳn. Còn nếu gọi `MovePosition` trong `Update`, Rigidbody bị dời giữa chừng một bước physics và va chạm ở bài 5 sẽ tính sai.
 
-## 5. Gắn component và reference
+Riêng `Move` giữ được vector giữa hai nhịp vì nó là trạng thái đang giữ. Các thao tác kiểu nhấn một phát như `Fire` cần cách đọc khác, bài 3 sẽ dùng tới.
 
-Chọn `Player` → Add Component `PlayerMovement`. `[RequireComponent]` làm Unity tự thêm **Rigidbody 2D**. Chỉnh Rigidbody:
+## Biên của tâm tàu khác biên của hình tàu
 
-| | Giá trị | Vì sao |
+Camera bài 1 có nửa chiều rộng 4.5 và nửa chiều cao 8. Nếu để tâm tàu chạy tới X = 4.5 thì một nửa thân tàu đã nằm ngoài màn hình. Biên hợp lệ phải là biên camera trừ đi nửa kích thước tàu.
+
+Với tàu rộng 2.4 và cao 2 units, Edge Padding (1.2, 1) cho ra vùng hợp lệ X từ −3.3 đến 3.3 và Y từ −7 đến 7. Hai dòng `Mathf.Clamp` giữ tâm tàu trong khoảng đó. Sprite hay scale khác thì đo lại nửa kích thước hiển thị thật rồi điền vào.
+
+`CacheCameraBounds` được gọi lại mỗi bước physics thay vì tính một lần, để khung hình đổi tỉ lệ giữa chừng thì biên vẫn đúng. Nó giả định camera orthographic và không xoay. Bài 10 có rung camera, nhưng rung bằng một object con để toạ độ gameplay vẫn dựa trên một khung đứng yên.
+
+## Ráp reference
+
+Chọn `Player` và Add Component `PlayerMovement`. Vì script có `[RequireComponent(typeof(Rigidbody2D))]`, Unity tự thêm Rigidbody 2D luôn. Đặt **Body Type = Kinematic** và **Interpolate = Interpolate**.
+
+Kinematic nghĩa là vị trí do code quyết định chứ không do trọng lực, đúng thứ ta cần. Để Dynamic thì tàu rơi xuống ngay khi bấm Play. Interpolate làm mượt hình vẽ giữa hai bước physics, nên tàu không rung khi fps cao hơn tần số physics.
+
+Inspector lúc này có ô `Controls` đang để None:
+
+![PlayerMovement với ô Controls chưa nối](/images/posts/unity-shmup/02/move_03_player-inspector-before-wire.webp)
+
+Kéo **asset `ShmupControls` từ Project window** vào ô đó. Đây là asset nằm trong Project, khác với bài 3 khi bạn sẽ kéo một object từ Hierarchy vào ô `Muzzle`. Nối đúng thì chữ None đổi thành tên asset:
+
+![PlayerMovement sau khi nối Controls](/images/posts/unity-shmup/02/move_04_player-inspector-after-wire.webp)
+
+Đặt Speed 8 và Edge Padding theo kích thước tàu của bạn.
+
+## Thử từng giá trị Vector2
+
+Bấm Play, click vào Game view một cái rồi thử lần lượt. Cột giữa là thứ Action đang trả về, và bạn đối chiếu với thứ tàu đang làm:
+
+| Thao tác | Vector2 mong đợi | Tàu phải làm gì |
 |---|---|---|
-| Body Type | **Kinematic** | Dynamic bị physics đẩy, có trọng lực, quán tính — tàu shmup không cần. Kinematic: ta tự đặt vị trí, physics chỉ để phát hiện va chạm |
-| Collision Detection | Continuous | Đạn nhanh không xuyên |
-| Interpolate | Interpolate | Physics 50 Hz, màn hình 60–144 Hz; không interpolate thì tàu giật nhẹ |
+| Không bấm gì | (0, 0) | Đứng yên |
+| D | (1, 0) | Chạy sang phải |
+| W | (0, 1) | Đi lên |
+| W + D | Vector chéo dài 1 | Đi chéo, không nhanh hơn đi thẳng |
+| Stick nghiêng nhẹ | Vector dài dưới 1 | Đi chậm hơn nghiêng hết |
+| Đẩy vào bốn mép | Bị `Clamp` chặn | Dừng lại, không nhô ra ngoài |
 
-Lúc này ô **Controls** còn trống:
+![Tàu di chuyển trong khung](/images/posts/unity-shmup/02/move_05_movement.webp)
 
-![Trước khi gắn](/images/posts/unity-shmup/02/move_03_player-inspector-before-wire.webp)
+Thả phím là tàu phải dừng ngay, vì `ReadValue` trả về (0, 0).
 
-Kéo asset `ShmupControls` từ Project window thả vào ô Controls (hoặc bấm ⊙ bên phải ô rồi chọn):
+## Tàu không nhúc nhích
 
-![Sau khi gắn](/images/posts/unity-shmup/02/move_04_player-inspector-after-wire.webp)
+Lỗi này có bốn nguyên nhân, kiểm tra theo thứ tự vì chúng nằm ở bốn tầng khác nhau:
 
-Quên bước này, Play sẽ báo `NullReferenceException` ở dòng `controls.FindAction`.
+1. **Chưa click vào Game view.** Khi Game view mất focus, Input System gửi phím cho Editor chứ không gửi cho game. Đây là nguyên nhân phổ biến nhất và cũng dễ sửa nhất.
+2. **Chưa Save Asset sau khi tạo binding.** Input Actions editor không tự lưu, binding chỉ nằm trong cửa sổ.
+3. **Ô Controls vẫn là None.** Script tìm Action trong một asset rỗng.
+4. **Sai tên Action.** `FindAction("Gameplay/Move")` phân biệt hoa thường và phải khớp cả tên map lẫn tên action.
 
-## 6. Chạy thử
+Nếu Console báo lỗi liên quan tới input backend, kiểm tra **Project Settings → Player → Active Input Handling**:
 
-Play → WASD. Tàu dừng ở mép nhờ `edgePadding`. Mình đo bằng script: Speed 8, giữ phím 1.3 s, x dừng ở **±3.30** = 4.5 − 1.2, y dừng ở **±7.00** = 8 − 1. Đúng công thức.
+![Active Input Handling trong Player Settings](/images/posts/unity-shmup/02/move_06_input-system-settings.webp)
 
-Chỉnh Speed trên Inspector trong lúc Play để cảm giác. Lưu ý giá trị chỉnh trong Play Mode **mất khi Stop** → nhớ số rồi nhập lại.
+Còn nếu tàu chạy được nhưng bị cắt mất một phần hình ở mép, đó là lỗi khác hẳn: Edge Padding chưa khớp kích thước sprite. Hai triệu chứng này nằm ở hai tầng khác nhau nên đừng chữa bằng cùng một setting.
 
-## Lỗi mình gặp
+Bạn có thể đổi Speed ngay trong Play Mode để thử, nhưng nhớ nhập lại sau khi Stop vì Unity trả giá trị về như cũ.
 
-| Lỗi | Nguyên nhân | Sửa |
-|-----|-------------|-----|
-| `MissingComponentException: There is no 'Rigidbody2D' attached` khi viết `GetComponent<Rigidbody2D>() ?? AddComponent<...>()` | `??` so sánh null C#, nhưng `UnityEngine.Object` bị destroy/missing là **fake null**: object thật, `== null` trả true nhờ overload, `??` không dùng overload đó | Luôn viết `if (x == null)` với object Unity. Không dùng `??`, `?.` với Component, GameObject, ScriptableObject |
-| Play, nhấn phím, tàu đứng yên | Game view không focus → Input System đưa phím vào Editor, không vào game (setting *Play Mode Input Behavior*) | Click vào Game view. Nếu test tự động: Project Settings → Input System Package → Play Mode Input Behavior = All Device Input Always Goes To Game View |
+Chuỗi từ input tới chuyển động đã nối xong. Bài sau dùng một Action mới để tạo ra object thay vì dời object.
 
-![Input System settings](/images/posts/unity-shmup/02/move_06_input-system-settings.webp)
+## Mã nguồn chặng này
 
-## Bài sau
+[Tải script bài 2](/downloads/shmup/lesson-02.zip) — chỉ có code và assembly definition, không kèm scene, prefab hay bộ hình trong ảnh. Nâng từ bài trước thì chép đè file cùng đường dẫn.
 
-[Shmup #3](/lab/unity-shmup-03-shooting): prefab đạn, Instantiate, cooldown theo thời gian.
+Tiếp theo: [Shmup #3](/lab/unity-shmup-03-shooting).

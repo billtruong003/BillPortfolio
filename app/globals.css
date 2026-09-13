@@ -109,6 +109,32 @@ code[class*="language-"] .linenumber { color: #333; margin-right: 1em; user-sele
 /* Anchor targets clear the fixed 48px lab nav */
 .lab-prose h2, .lab-prose h3 { scroll-margin-top: 4.5rem; }
 
+/* Editorial diagrams remain readable without JavaScript and stack on mobile. */
+.lab-prose .lesson-map, .lab-prose .lesson-rules, .lab-prose .lesson-state {
+  padding: 1.5rem; border: 1px solid #4c6ef566; border-radius: 1rem;
+  background: linear-gradient(135deg, #4c6ef518, #111118); font-style: normal;
+}
+.lab-prose .lesson-map > strong, .lab-prose .lesson-rules > strong { color: #a5b4fc; letter-spacing: .08em; }
+.lab-prose .lesson-flow { display: flex; flex-wrap: wrap; gap: .65rem; align-items: center; }
+.lab-prose .lesson-flow span { padding: .65rem .9rem; border: 1px solid #4c6ef566; border-radius: .5rem; background: #4c6ef514; }
+.lab-prose .lesson-flow span:not(:last-child)::after { content: ' →'; color: #a5b4fc; }
+.lab-prose .lesson-compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.lab-prose .lesson-compare > div { padding: 1.25rem; border: 1px solid #3f3f46; border-radius: .75rem; background: #18181b; }
+.lab-prose .lesson-compare > div:last-child { border-color: #4c6ef588; background: #4c6ef514; }
+.lab-prose .lesson-stack { display: grid; gap: .5rem; }
+.lab-prose .lesson-stack > div { padding: .75rem 1rem; border-left: 3px solid #818cf8; background: #4c6ef51a; }
+.lab-prose .lesson-stack > div:nth-child(even) { margin-left: 1rem; background: #4c6ef50d; }
+.lab-prose .lesson-timeline { border-left: 2px solid #818cf8; padding-left: 1.5rem; }
+.lab-prose .lesson-timeline > p { position: relative; padding: .65rem 1rem; background: #18181b; border-radius: .5rem; }
+.lab-prose .lesson-timeline > p::before { content: ''; position: absolute; left: -1.9rem; top: 1.2rem; width: .65rem; height: .65rem; border-radius: 50%; background: #818cf8; }
+.lab-prose table { display: block; max-width: 100%; overflow-x: auto; }
+.lab-prose th, .lab-prose td { min-width: 7rem; }
+@media (max-width: 640px) {
+  .lab-prose .lesson-compare { grid-template-columns: minmax(0, 1fr); }
+  .lab-prose .lesson-map, .lab-prose .lesson-rules, .lab-prose .lesson-state { padding: 1rem; }
+  .lab-prose pre { padding: 1rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

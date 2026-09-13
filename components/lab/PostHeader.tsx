@@ -27,7 +27,7 @@ export const PostHeader = ({ post }: { post: BlogPost }) => {
                 </span>
                 {post.featured && (
                     <span className="px-2.5 py-1 bg-primary/90 text-black text-[10px] font-mono font-bold uppercase tracking-wider rounded">
-                        Featured
+                        {post.lang === 'vi' ? 'Nổi bật' : 'Featured'}
                     </span>
                 )}
             </div>
@@ -39,16 +39,16 @@ export const PostHeader = ({ post }: { post: BlogPost }) => {
             <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-zinc-500 mb-6">
                 <div className="flex items-center gap-1.5">
                     <Calendar size={12} />
-                    {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                    {new Date(post.date).toLocaleDateString(post.lang === 'vi' ? 'vi-VN' : 'en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}
                 </div>
                 {post.updated && post.updated !== post.date && (
                     <span className="text-zinc-600">
-                        Updated {new Date(post.updated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                        {post.lang === 'vi' ? 'Cập nhật' : 'Updated'} {new Date(post.updated).toLocaleDateString(post.lang === 'vi' ? 'vi-VN' : 'en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}
                     </span>
                 )}
                 <div className="flex items-center gap-1.5">
                     <Clock size={12} />
-                    {post.readingTime} min read
+                    {post.readingTime} {post.lang === 'vi' ? 'phút đọc' : 'min read'}
                 </div>
             </div>
 

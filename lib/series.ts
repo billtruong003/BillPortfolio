@@ -1,4 +1,5 @@
 import { BlogPost } from '@/types';
+import { localizePosts } from './post-localization';
 
 export interface Series {
     id: string;
@@ -6,6 +7,8 @@ export interface Series {
     icon: string;
     description: string;
     color: string;
+    nameEn?: string;
+    descriptionEn?: string;
 }
 
 export const SERIES_CONFIG: Series[] = [
@@ -32,6 +35,8 @@ export const SERIES_CONFIG: Series[] = [
     },
     {
         id: 'shmup',
+        nameEn: 'Build a shoot ’em up with Unity 6',
+        descriptionEn: 'Twelve complete lessons: from a 2D scene to movement, combat, waves, pickups, feedback, and a playable Web build.',
         name: 'Làm game bắn máy bay với Unity 6',
         icon: '🚀',
         description: 'Dựng một game shoot \'em up từ scene trống tới build WebGL: Input System, pool, ScriptableObject, HUD, shader',
@@ -46,18 +51,22 @@ export const SERIES_CONFIG: Series[] = [
     },
 ];
 
-export const getSeries = (id: string): Series | undefined =>
-    SERIES_CONFIG.find(s => s.id === id);
+export const getSeries = (id: string, lang = 'vi'): Series | undefined => {
+    const series = SERIES_CONFIG.find(s => s.id === id);
+    return series && lang === 'en'
+        ? { ...series, name: series.nameEn ?? series.name, description: series.descriptionEn ?? series.description }
+        : series;
+};
 
 export const getSeriesForPost = (post: BlogPost): Series | null =>
-    post.series ? getSeries(post.series) ?? null : null;
+    post.series ? getSeries(post.series, post.lang) ?? null : null;
 
 const byOrderThenDate = (a: BlogPost, b: BlogPost) =>
     (a.order ?? Infinity) - (b.order ?? Infinity) ||
     new Date(a.date).getTime() - new Date(b.date).getTime();
 
-export function getSeriesPosts(posts: BlogPost[], seriesId: string): BlogPost[] {
-    return posts.filter(p => p.series === seriesId).sort(byOrderThenDate);
+export function getSeriesPosts(posts: BlogPost[], seriesId: string, lang = 'vi'): BlogPost[] {
+    return localizePosts(posts.filter(p => p.series === seriesId), lang).sort(byOrderThenDate);
 }
 
 export function getSeriesNav(posts: BlogPost[], currentSlug: string) {
@@ -65,7 +74,7 @@ export function getSeriesNav(posts: BlogPost[], currentSlug: string) {
     const series = current ? getSeriesForPost(current) : null;
     if (!series) return null;
 
-    const ordered = getSeriesPosts(posts, series.id);
+    const ordered = getSeriesPosts(posts, series.id, current!.lang);
     const idx = ordered.findIndex(p => p.slug === currentSlug);
     if (idx === -1) return null;
 

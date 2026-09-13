@@ -11,6 +11,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { JsonLd } from '@/components/logic/JsonLd';
 import { SITE, absoluteUrl } from '@/lib/site';
+import { getTranslations, languageName } from '@/lib/post-localization';
 
 export function generateStaticParams() {
     return postManifest.posts.map(post => ({ slug: post.slug }));
@@ -26,7 +27,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     return {
         title: `${post.title} | ${SITE.name} Lab`,
         description: post.excerpt,
-        alternates: { canonical: url },
+        alternates: { canonical: url, languages: Object.fromEntries(getTranslations(postManifest.posts, post).map(p => [p.lang, absoluteUrl(`/lab/${p.slug}/`)])) },
         openGraph: {
             type: 'article',
             url,
@@ -73,18 +74,30 @@ export default function PostPage({ params }: { params: { slug: string } }) {
     const seriesNav = getSeriesNav(postManifest.posts, params.slug);
 
     // Fallback to generic prev/next if not in a series
-    const prevPost = seriesNav?.prev
-        ?? (postIndex < postManifest.posts.length - 1 ? postManifest.posts[postIndex + 1] : null);
-    const nextPost = seriesNav?.next
-        ?? (postIndex > 0 ? postManifest.posts[postIndex - 1] : null);
+    const prevPost = seriesNav ? seriesNav.prev
+        : (postIndex < postManifest.posts.length - 1 ? postManifest.posts[postIndex + 1] : null);
+    const nextPost = seriesNav ? seriesNav.next
+        : (postIndex > 0 ? postManifest.posts[postIndex - 1] : null);
+    const translations = getTranslations(postManifest.posts, post);
+    const vi = post.lang === 'vi';
 
     return (
-        <main className="relative min-h-screen w-full bg-[#050505]">
+        <main lang={post.lang} className="relative min-h-screen w-full bg-[#050505]">
             <JsonLd data={articleJsonLd(post)} />
             <LabNav postTitle={post.title} />
 
             <div className="relative z-10 pt-16 pb-16 px-6">
                 <div className="container mx-auto max-w-5xl">
+                    {translations.length > 1 && (
+                        <nav aria-label={vi ? 'Ngôn ngữ bài viết' : 'Article language'} className="flex flex-wrap gap-2 my-6">
+                            {translations.map(p => (
+                                <Link key={p.slug} href={`/lab/${p.slug}`} hrefLang={p.lang} lang={p.lang} aria-current={p.slug === post.slug ? 'page' : undefined}
+                                    className={`rounded-full border px-4 py-2 text-sm ${p.slug === post.slug ? 'border-primary text-primary' : 'border-zinc-700 text-zinc-300 hover:border-primary'}`}>
+                                    {languageName(p.lang)}
+                                </Link>
+                            ))}
+                        </nav>
+                    )}
                     <PostHeader post={post} />
 
                     {/* Series progress bar */}
@@ -124,7 +137,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
                         </div>
 
                         <aside className="hidden lg:block w-56 shrink-0">
-                            <TableOfContents headings={post.headings} />
+                            <TableOfContents headings={post.headings} lang={post.lang} />
                         </aside>
                     </div>
 
@@ -138,7 +151,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
                                 <ArrowLeft size={16} className="text-zinc-500 group-hover:text-primary shrink-0" />
                                 <div className="min-w-0">
                                     <div className="text-[10px] font-mono text-zinc-600 uppercase">
-                                        {seriesNav ? `← Bài ${seriesNav.currentIndex}` : 'Previous'}
+                                        {seriesNav ? `← ${vi ? 'Bài' : 'Lesson'} ${prevPost.order}` : (vi ? 'Bài trước' : 'Previous')}
                                     </div>
                                     <div className="text-sm text-zinc-300 group-hover:text-primary truncate">{prevPost.title}</div>
                                 </div>
@@ -151,7 +164,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
                             >
                                 <div className="min-w-0">
                                     <div className="text-[10px] font-mono text-zinc-600 uppercase">
-                                        {seriesNav ? `Bài ${seriesNav.currentIndex + 2} →` : 'Next'}
+                                        {seriesNav ? `${vi ? 'Bài' : 'Lesson'} ${nextPost.order} →` : (vi ? 'Bài sau' : 'Next')}
                                     </div>
                                     <div className="text-sm text-zinc-300 group-hover:text-primary truncate">{nextPost.title}</div>
                                 </div>

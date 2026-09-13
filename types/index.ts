@@ -123,6 +123,7 @@ export interface BlogPost {
     category: BlogCategory;
     tags: string[];
     lang: string;
+    translationKey?: string;
     series?: string;
     order?: number;
     readingTime: number;

@@ -1,0 +1,17 @@
+{
+    "name": "ShootEmUp",
+    "rootNamespace": "ShootEmUp",
+    "references": [
+        "Unity.InputSystem",
+        "BillLab.Common"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

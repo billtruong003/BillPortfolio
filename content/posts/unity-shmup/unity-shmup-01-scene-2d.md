@@ -1,166 +1,164 @@
 ---
-title: "Shmup #1: Scene 2D đầu tiên — camera, Sorting Layer, nền sao cuộn"
+title: "Shmup #1: Giải phẫu màn hình 2D — camera, lớp vẽ và nền sao"
 date: "2026-09-14"
-lang: "vi"
+updated: "2026-09-14"
+lang: vi
+translationKey: unity-shmup-01-scene-2d
 series: "shmup"
 order: 1
-excerpt: "Camera orthographic, Game view dọc 1080×1920, Sorting Layer quyết định ai vẽ đè ai, Draw Mode Tiled cho nền lặp vô hạn, và script đầu tiên: ScrollingLayer."
+excerpt: "Dựng màn hình tĩnh trước, rồi thêm chuyển động: hiểu world units, khung camera, sorting và chu kỳ nền sao."
 coverImage: "/images/posts/unity-shmup/01/cover.webp"
 category: "unity-dev"
-tags: ["Unity", "2D", "Camera", "Sorting Layer", "Sprite Renderer", "Shmup"]
+tags: ["Unity", "Unity 6", "Shmup", "Tutorial"]
 published: true
 featured: true
 ---
 
-## Hôm nay học gì
+<div class="lesson-stack"><div>FX / UI · thông tin và phản hồi</div><div>Player · tàu và lửa</div><div>Projectiles / Enemies · vật thể chơi</div><div>Stars-Near → Stars-Far → BG · nền</div></div>
 
-- Camera 2D là gì (orthographic) và cách đặt Game view tỉ lệ dọc
-- **Sorting Layer / Order in Layer**: ai vẽ đè lên ai
-- Draw Mode **Tiled** để một sprite lặp vô hạn
-- Script đầu tiên: `Update`, `Time.deltaTime`, `[SerializeField]`
-- Assembly Definition và vì sao project nhiều game cần nó
+## Bốn lớp chồng lên nhau
 
-Xong bài này bạn có: màn hình dọc, nền xanh với 2 lớp sao trôi tốc độ khác nhau (parallax), tàu đứng dưới đáy với lửa động cơ. Bấm Play là thấy sao trôi.
+Màn hình game bắn máy bay nhìn qua thì đơn giản: có tàu, có sao, có nền. Thực ra đó là bốn lớp sprite xếp chồng lên nhau, và thứ quyết định lớp nào được vẽ đè lên lớp nào không phải toạ độ Z như nhiều người mới vẫn nghĩ.
 
-![Kết quả bài 1](/images/posts/unity-shmup/01/scene_08_scrolling-stars.webp)
+Đây là thứ bạn sẽ có ở cuối bài:
 
-## 1. Scene mới, Game view dọc
+![Tàu đứng giữa khung dọc, hai lớp sao trôi phía sau](/images/posts/unity-shmup/01/scene_08_scrolling-stars.webp)
 
-**File → New Scene → Basic (URP)** → Ctrl+S, lưu vào `_ShootEmUp/Scenes/SEU_01_Scene.unity`.
+Ta dựng từ dưới lên: nền trước, tàu sau, rồi mới cho nền trôi. Hình tĩnh phải đúng trước khi viết dòng script nào, vì lỗi bố cục mà đem chạy thì rất khó tách khỏi lỗi chuyển động.
 
-Xoá `Directional Light`. Sprite dùng material `Sprite-Unlit-Default`, không nhận ánh sáng; giữ đèn chỉ tốn một pass render.
+Bắt đầu từ project bài 0. Tạo scene mới bằng template **Basic (URP)** và lưu thành `_ShootEmUp/Scenes/SEU_01_Scene.unity`.
 
-Game view → dropdown tỉ lệ (đang là *Free Aspect*) → **+** → Type: Fixed Resolution, 1080 × 1920, label `Portrait`. Chọn nó. Fixed Resolution thay vì Aspect 9:16 để ảnh chụp và UI (bài 8) ra đúng pixel như điện thoại.
+## Camera nhìn thấy đúng 9 × 16 units
 
-## 2. Camera 2D
+Trong Game view, thêm một Fixed Resolution **1080 × 1920** để khung hình đúng tỉ lệ dọc ngay từ đầu. Xoá Directional Light đi, vì sprite dùng material **Sprite-Unlit-Default** nên không cần đèn.
 
-Chọn `Main Camera`:
+Chọn Main Camera và đặt bốn thứ:
 
-![Inspector Main Camera](/images/posts/unity-shmup/01/scene_02_camera-inspector.webp)
+| Main Camera | Giá trị |
+|---|---|
+| Position / Rotation | (0, 0, −10) / (0, 0, 0) |
+| Projection | Orthographic |
+| Size | 8 |
+| Background Type / Color | Solid Color / #0B0F2A |
 
-| Thuộc tính | Giá trị | Vì sao |
-|-----------|---------|--------|
-| Position | (0, 0, −10) | Camera nhìn theo +Z, đứng ở z = −10 để sprite ở z = 0 nằm trước mặt |
-| Projection | **Orthographic** | 2D không có phối cảnh |
-| Size | **8** | Size = nửa chiều cao nhìn thấy (unit). 8 → thấy 16 unit cao, với 9:16 → 9 unit rộng |
-| Background Type | Solid Color | Không dùng skybox |
-| Background | `#0B0F2A` | Màu lộ ra nếu nền không phủ kín |
+![Bốn field cần đổi trên camera orthographic](/images/posts/unity-shmup/01/scene_02_camera-inspector.webp)
 
-Chiều rộng nhìn thấy **không** đặt trực tiếp: nó bằng Size × 2 × aspect. Đổi tỉ lệ Game view là chiều rộng đổi theo. Bài 2 sẽ tính biên từ camera thay vì hard-code số.
+Size là **nửa** chiều cao chứ không phải cả chiều cao, nên Size 8 nghĩa là camera nhìn thấy 16 units theo chiều dọc. Tỉ lệ 9:16 kéo theo chiều rộng bằng `16 × 9/16 = 9`. Camera đứng ở gốc toạ độ nên vùng nhìn thấy là X từ −4.5 đến 4.5 và Y từ −8 đến 8. Bốn con số này sẽ quay lại ở bài 2 khi chặn tàu trong màn hình, và ở bài 7 khi tính chỗ thả địch.
 
-## 3. Sorting Layers
+Đây là world units, không phải pixel. Một hình 200 px ở PPU 100 rộng đúng 2 units, tức chiếm hơn một phần năm bề ngang màn hình.
 
-**Edit → Project Settings → Tags and Layers → Sorting Layers** → dấu + thêm, kéo thả sắp thứ tự:
+## Đặt tàu ở Y = −5.5
 
-![Sorting Layers](/images/posts/unity-shmup/01/scene_03_sorting-layers.webp)
+Kéo sprite tàu vào scene tại (0, 0, 0) và kiểm tra nó nằm giữa Game view. Sau đó đổi Position thành (0, −5.5, 0) và đặt tên object là `Player`.
 
-```
-Background   ← vẽ trước (nằm dưới cùng)
-Default
-Enemies
-Projectiles
-Player
-FX
-UI           ← vẽ sau cùng (đè lên hết)
-```
+Con số −5.5 không phải tuỳ tiện. Camera nhìn thấy tới Y = −8, tàu cao khoảng 2 units nên tâm ở −5.5 đẩy đáy tàu xuống −6.5, còn chừa khoảng 1.5 units tới mép dưới. Khoảng đó là chỗ cho lửa động cơ và cho ngón tay người chơi ở bản mobile sau này. Sprite tàu của bạn cao khác thì tính lại theo cùng cách, đừng chép cứng −5.5.
 
-Ba điều người mới hay nhầm:
-- **Sorting Layer khác Layer** (mục "Layers" ngay dưới). Layer dùng cho physics và camera culling (bài 5). Sorting Layer chỉ quyết định thứ tự vẽ 2D.
-- Cùng Sorting Layer thì so **Order in Layer** (số lớn vẽ sau). Cùng cả hai thì Unity so theo z → thứ tự ngẫu nhiên. Luôn đặt Order rõ ràng.
-- Vì sao Projectiles nằm dưới Player: đạn bay ra từ dưới thân tàu, đạn đè lên tàu trông rất giả.
+![Transform và Sprite Renderer của Player](/images/posts/unity-shmup/01/scene_07_player-inspector.webp)
 
-## 4. Nền 3 lớp
+## Thứ tự vẽ nằm ở Sorting Layer
 
-Tạo Empty `Background` ở (0, 0, 0) làm cha, 3 con:
+Vào **Project Settings → Tags and Layers → Sorting Layers** và thêm lần lượt: Background, Default, Enemies, Projectiles, Player, FX, UI.
 
-**`BG`** — Sprite Renderer, Sprite `bg` (1000×1000 px = 10×10 unit). Scale (1, 1.7, 1) → 10×17 unit, phủ kín khung 9×16. Sorting Layer `Background`, Order 0.
+![Danh sách Sorting Layer theo đúng thứ tự vẽ](/images/posts/unity-shmup/01/scene_03_sorting-layers.webp)
 
-**`Stars-Far`** — Sprite `Stars-A`:
-- **Draw Mode: Tiled**, Size (10, 40). Tiled = sprite lặp lại để lấp đầy Size thay vì kéo giãn. Size cao 40 vì script sẽ dịch nó xuống tối đa 10 unit, lúc nào cũng phải phủ đủ 16 unit của khung.
-- Chọn Tiled xong Unity cảnh báo nếu sprite đang Mesh Type = Tight. Vào ảnh `Stars-A.png` → **Mesh Type: Full Rect** → Apply. Tight cắt mesh sát alpha nên tile bị hở mép.
-- Color alpha 0.45 (sao xa mờ hơn), Order 1.
-- Add Component `ScrollingLayer` (mục 6): Speed 0.6, Wrap Distance 10.
+Lớp nằm càng dưới trong danh sách thì vẽ càng sau, tức là đè lên các lớp phía trên. Trong cùng một lớp, Order in Layer lớn hơn thì vẽ sau.
 
-**`Stars-Near`** — Sprite `Stars-B`, Tiled (10, 40), Order 2, `ScrollingLayer` Speed 1.8, Wrap Distance 10.
+Chỗ này người mới rất hay nhầm **Sorting Layer** với **Layer**. Sorting Layer là danh sách bạn vừa tạo trong Tags and Layers, và nó chỉ quyết định thứ tự vẽ. Layer là ô dropdown ở góc trên bên phải Inspector của GameObject, và nó dành cho physics với camera culling. Đạn nằm sau thân tàu là luật vẽ, thuộc Sorting Layer. Đạn của bạn không gây sát thương cho chính tàu là luật va chạm, thuộc Layer, và bài 5 mới dùng tới.
 
-![Inspector Stars-Near](/images/posts/unity-shmup/01/scene_06_stars-near-inspector.webp)
+Đặt Player vào Sorting Layer **Player**, Order 0.
 
-Vì sao Wrap Distance = 10: chiều cao 1 tile = 1000 px / PPU 100 = 10 unit. Dịch xuống đúng 10 rồi nhảy về chỗ cũ thì hoa văn lặp trùng khít, mắt không thấy giật. Đổi PPU hay dùng sprite khác cỡ thì số này đổi theo, nên script để lộ field.
+## Lửa động cơ là object con
 
-## 5. Player
+Tạo một Empty làm con của `Player`, đặt tên `EngineFire`, gắn Sprite Renderer với sprite lửa. Local position khoảng (0, −1.02, 0), Order in Layer **−1**.
 
-- Empty `Player`, Position (0, −5.5, 0). Sprite Renderer, Sprite `SpaceShip`, Sorting Layer `Player`, Order 0.
-- Con `EngineFire`: Sprite `fire`, Local Position (0, −1.02, 0), Scale 0.7, Sorting Layer `Player`, **Order −1** (vẽ trước tàu → nằm sau thân).
+Order −1 đẩy lửa ra sau thân tàu trong cùng Sorting Layer Player, nên nó trông như phụt ra từ bên dưới đuôi chứ không dán đè lên. Vị trí chính xác phụ thuộc hình của bạn, cứ kéo trong Scene view cho khớp đuôi tàu.
 
-Lửa là object con để sau này tàu di chuyển thì lửa đi theo, và bài 10 chỉ cần scale con để làm hiệu ứng.
+![Cây Hierarchy với EngineFire là con của Player](/images/posts/unity-shmup/01/scene_01_hierarchy.webp)
 
-![Inspector Player](/images/posts/unity-shmup/01/scene_07_player-inspector.webp)
+Để `EngineFire` làm con là quyết định có hậu quả: tới bài 2 khi tàu chạy, lửa tự đi theo mà không cần một dòng code nào.
 
-Hierarchy cuối bài:
+## Ba lớp nền phủ kín khung
 
-![Hierarchy](/images/posts/unity-shmup/01/scene_01_hierarchy.webp)
+Tạo một Empty tên `Background` ở gốc toạ độ, rồi dựng ba object con bên trong theo thứ tự sau.
 
-## 6. Script đầu tiên: ScrollingLayer
+**BG** là lớp dưới cùng: một Sprite Renderer với hình nền phủ ít nhất 9 × 16 units, Sorting Layer Background, Order 0. Với hình 1000 × 1000 px ở PPU 100, scale (1, 1.7, 1) cho ra nền 10 × 17 units, dư một chút mỗi bên là vừa. Hình cỡ khác thì tính `pixel ÷ PPU × scale`.
 
-`_ShootEmUp/Scripts/Background/ScrollingLayer.cs`:
+**Stars-Far** nằm trên BG: Sprite Renderer để Draw Mode **Tiled**, Size (10, 40), alpha 0.45, Sorting Layer Background, Order 1. Texture sao cần bật Full Rect và có mép trên dưới lặp khớp nhau, nếu không lúc trôi sẽ thấy đường nối.
+
+**Stars-Near** nằm trên cùng của nhóm nền: cấu hình y hệt Stars-Far nhưng alpha 0.8 và Order 2. Đậm hơn để lát nữa khi hai lớp chạy khác tốc độ, mắt tự hiểu lớp đậm nằm gần hơn.
+
+![Sprite Renderer của Stars-Near ở chế độ Tiled](/images/posts/unity-shmup/01/scene_06_stars-near-inspector.webp)
+
+<details><summary>Không có texture sao lặp thì làm sao</summary>
+
+Với mỗi lớp, tạo một Empty rồi rải khoảng 12 sprite Circle nhỏ trong khoảng X từ −4.5 đến 4.5 và Y từ −5 đến 5, scale mỗi hình còn 0.03–0.06. Sau đó nhân đôi cả nhóm con lên Y +10 và xuống Y −10. Hoa văn khi đó lặp lại mỗi 10 units, khớp với Wrap Distance ở phần dưới. Phương án này dùng nhóm object nên bỏ qua các field Tiled.
+
+</details>
+
+## Scene view và Game view không hiện cùng một thứ
+
+Dựng xong nền, bạn sẽ thấy hai cửa sổ này khác hẳn nhau, và đó là bình thường.
+
+![Scene view nhìn thấy cả phần nền tràn ra ngoài khung](/images/posts/unity-shmup/01/scene_04_scene-view.webp)
+
+![Game view chỉ hiện đúng vùng camera cắt ra](/images/posts/unity-shmup/01/scene_05_game-view.webp)
+
+Scene view cho bạn nhìn khắp nơi, kể cả phần nền tràn ra ngoài. Game view chỉ hiện đúng vùng camera chọn, tức là những gì người chơi thấy. Phần nền thừa trong Scene view chính là phần sẽ trôi vào khung ở phần sau, nên thấy nó tràn ra là đúng.
+
+Kiểm tra hình tĩnh trước khi đi tiếp: nền phủ kín Game view không hở mép, lửa nằm sau đuôi tàu, sao xa mờ hơn sao gần. Sai chỗ nào thì sửa ngay, đừng chạy script đè lên một bố cục đang lỗi.
+
+## Cho nền trôi rồi quay lại đúng một chu kỳ
+
+Trong `_ShootEmUp/Scripts`, tạo một Assembly Definition tên **ShootEmUp**, Root Namespace `ShootEmUp`. Nó gom script trong thư mục thành một assembly riêng, và bài 2 sẽ thêm reference Input System vào đây. Nếu bạn chép asmdef từ gói source thì đừng tạo thêm bản thứ hai.
+
+Tạo `Scripts/Background/ScrollingLayer.cs`. Script chỉ làm một việc: đẩy object xuống với tốc độ cho trước, và mỗi khi đi hết một chu kỳ thì kéo nó về chỗ cũ.
+
+**Assets/_ShootEmUp/Scripts/Background/ScrollingLayer.cs**
 
 ```csharp
 using UnityEngine;
-
 namespace ShootEmUp.Background
 {
-    [RequireComponent(typeof(SpriteRenderer))]
     public sealed class ScrollingLayer : MonoBehaviour
     {
-        [Tooltip("World units per second. Higher = closer to the camera.")]
-        [SerializeField] private float speed = 1f;
-
-        [Tooltip("Height of one tile in world units (sprite px / Pixels Per Unit).")]
-        [SerializeField] private float wrapDistance = 10f;
-
+        [SerializeField, Min(0f)] private float speed = 1f;
+        [SerializeField, Min(0.01f)] private float wrapDistance = 10f;
         private Vector3 startPosition;
-
-        private void Awake()
-        {
-            startPosition = transform.position;
-        }
-
+        private float distance;
+        private void Awake() => startPosition = transform.position;
         private void Update()
         {
-            var pos = transform.position;
-            pos.y -= speed * Time.deltaTime;
-
-            if (pos.y <= startPosition.y - wrapDistance)
-            {
-                pos.y += wrapDistance;
-            }
-
-            transform.position = pos;
+            distance = Mathf.Repeat(distance + speed * Time.deltaTime, Mathf.Max(0.01f, wrapDistance));
+            transform.position = startPosition + Vector3.down * distance;
         }
     }
 }
 ```
 
-- `[SerializeField] private`: private nhưng vẫn hiện trên Inspector. Đừng dùng `public` chỉ để chỉnh trong editor.
-- `[Tooltip]`: chữ hiện khi rê chuột. Viết ngay từ đầu, sau 2 tuần chính bạn cũng quên.
-- `[RequireComponent]`: kéo script vào object không có SpriteRenderer thì Unity tự thêm.
-- `speed * Time.deltaTime`: không có deltaTime thì máy 144 fps sao trôi nhanh gấp đôi máy 60 fps.
-- `pos.y += wrapDistance` thay vì `pos.y = startPosition.y`: gán thẳng làm mất phần dư của frame đó (đã trôi quá 0.03 unit) → mỗi lần wrap giật nhẹ. Cộng lại thì giữ được phần dư.
-- `namespace ShootEmUp.Background`, `sealed`: để code game này không đụng tên với game sau trong cùng project.
+Chỗ đáng chú ý là `Mathf.Repeat`. Nó giữ phần dư thay vì đặt `distance` về 0, nên lúc hoa văn nhảy về vị trí đầu, nó nhảy đúng bằng một chu kỳ và mắt không bắt được cú nhảy. Nếu thay bằng `if (distance > wrapDistance) distance = 0` thì mỗi vòng sẽ mất một đoạn nhỏ và bạn thấy giật.
 
-## 7. Assembly Definition
+Chờ compile xong rồi Add Component lên hai lớp sao. Far để Speed 0.6, Near để Speed 1.8, cả hai Wrap Distance 10.
 
-Trong `_ShootEmUp/Scripts/` → Create → Scripting → **Assembly Definition** → tên `ShootEmUp`, Root Namespace `ShootEmUp`.
+Wrap Distance phải bằng đúng chu kỳ hoa văn của bạn. Với texture cao 1000 px ở PPU 100 thì chu kỳ là 10 units. Với phương án rải sprite Circle ở trên, chu kỳ cũng là 10 vì đó là khoảng cách giữa hai bản sao. Hoa văn có chu kỳ khác thì đổi con số này theo.
 
-Mặc định mọi script nằm chung `Assembly-CSharp`: sửa 1 file là compile lại tất cả. asmdef chia code thành assembly riêng: game Platformer sau này không compile lại khi sửa Shoot 'em up, và không thể vô tình gọi code của nhau. Người mới có thể bỏ qua; project nhiều game thì nên có từ đầu vì thêm sau phải sửa reference rất mệt. Bài 2 sẽ thấy ngay: phải thêm `Unity.InputSystem` vào References.
+Near chạy nhanh gấp ba Far là cố ý. Hai lớp cùng tốc độ thì trông như một tấm ảnh trôi; chênh tốc độ mới tạo ra cảm giác chiều sâu.
 
-## Lỗi mình gặp
+## Chạy đủ lâu để thấy đường nối
 
-| Lỗi | Nguyên nhân | Sửa |
-|-----|-------------|-----|
-| Bấm Play, sao không trôi, `Time.frameCount` đứng ở 1 | Editor mất focus (mình điều khiển Unity từ ngoài) và **Run In Background** tắt → Play Mode dừng khi cửa sổ Unity không active | Project Settings → Player → Resolution and Presentation → **Run In Background** ✓. Setting này cũng cần cho WebGL khi người chơi chuyển tab |
-| Tile sao hở mép | Mesh Type Tight | Full Rect |
+Bấm Play và để chạy 30 giây, đừng dừng sau vài giây.
 
-## Bài sau
+Lớp xa cần `10 ÷ 0.6 = 16.67` giây mới lặp lại một lần, nên chạy 5 giây rồi kết luận nền mượt là chưa kiểm tra gì cả. Lớp gần nhanh hơn, `10 ÷ 1.8 = 5.6` giây một vòng.
 
-[Shmup #2](/lab/unity-shmup-02-player-movement): điều khiển tàu bằng Input System, Rigidbody2D Kinematic, và kẹp tàu trong màn hình.
+Ba triệu chứng hay gặp và chỗ cần xem:
+
+- Giật đúng tại mỗi đường nối: chu kỳ hoa văn không khớp Wrap Distance, hoặc texture chưa lặp khớp mép.
+- Hở một dải trống khi trôi: nhóm hình chưa đủ cao, tăng Size của Tiled hoặc thêm bản sao.
+- Không chuyển động gì: xem script đã gắn chưa, component có đang bật không, và Play Mode có thực sự đang chạy không.
+
+Tới đây bạn đã tách được ba vai trò khác nhau: camera chọn vùng nhìn thấy, Sorting Layer chọn thứ tự vẽ, script đổi vị trí theo thời gian. Bài sau thêm người chơi vào chuỗi đó, để chính họ là người đổi vị trí tàu.
+
+## Mã nguồn chặng này
+
+[Tải script bài 1](/downloads/shmup/lesson-01.zip) — chỉ có code và assembly definition, không kèm scene, prefab hay bộ hình trong ảnh. Nâng từ bài trước thì chép đè file cùng đường dẫn.
+
+Tiếp theo: [Shmup #2](/lab/unity-shmup-02-player-movement).
