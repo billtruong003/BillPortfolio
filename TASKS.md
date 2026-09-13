@@ -4,7 +4,7 @@ Cập nhật: 2026-09-13. Tick `[x]` khi xong. Thứ tự phase là thứ tự l
 
 ---
 
-## Phase 1 — Dọn Lab (`/lab`) 🔥 đang làm
+## Phase 1 — Dọn Lab (`/lab`) ✅ xong 13/09/2026 (branch claude/stoic-maxwell-h8rb38, chưa merge main)
 
 ### 1.1 Lỗi thấy được ngay
 - [x] Bổ sung 2 ảnh cover bị thiếu: `public/images/posts/toon-shader-cover.jpg`, `public/images/posts/biome-shader-cover.jpg` (2 bài featured đang vỡ ảnh, live 404)

@@ -89,9 +89,9 @@ export const GameArcade = ({ games, autoPlayGameId }: GameArcadeProps) => {
                             </div>
                             <span className="font-mono text-primary text-xs tracking-[0.4em] uppercase">Interactive Lab</span>
                         </div>
-                        <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
+                        <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
                             Game <span className="text-primary">Arcade</span>
-                        </h1>
+                        </h2>
                         <p className="text-zinc-500 mt-3 max-w-lg text-sm">
                             Playable WebGL builds — chạy trực tiếp trên browser. Click vào game để chơi ngay.
                         </p>

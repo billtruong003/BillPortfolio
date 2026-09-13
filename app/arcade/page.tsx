@@ -57,7 +57,7 @@ export default function ArcadePage() {
                     </a>
                     <div className="flex items-center gap-3">
                         <Gamepad2 size={18} className="text-primary" />
-                        <span className="font-mono text-sm text-zinc-300 tracking-widest uppercase">Game Arcade</span>
+                        <h1 className="font-mono text-sm text-zinc-300 tracking-widest uppercase">Game Arcade</h1>
                         {games.length > 0 && (
                             <span className="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-mono rounded-full border border-primary/20">
                                 {games.length}
