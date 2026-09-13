@@ -12,14 +12,31 @@ import { Feed } from "@/components/sections/Feed";
 import { Certifications } from "@/components/sections/Certifications";
 import { ContactCTA } from "@/components/sections/ContactCTA";
 import { ProjectModal } from "@/components/overlay/ProjectModal";
+import { JsonLd } from "@/components/logic/JsonLd";
+import { SITE } from "@/lib/site";
+import resume from "@/data/resume.json";
 
 const ParticleBackground = dynamic(
   () => import("@/components/canvas/ParticleBackground").then((mod) => mod.ParticleBackground),
   { ssr: false }
 );
 
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: resume.profile.name,
+  jobTitle: resume.profile.title,
+  description: resume.profile.about,
+  url: SITE.url,
+  email: resume.profile.contact.email,
+  address: { "@type": "PostalAddress", addressLocality: "Ho Chi Minh City", addressCountry: "VN" },
+  sameAs: resume.socials.map((s) => s.url),
+};
+
 export default function Home() {
   return (
+    <>
+    <JsonLd data={personJsonLd} />
     <main className="relative min-h-screen w-full bg-[#050505] overflow-hidden">
       <div className="fixed inset-0 z-0 pointer-events-none">
         <ParticleBackground />
@@ -76,5 +93,6 @@ export default function Home() {
         </p>
       </footer>
     </main>
+    </>
   );
 }

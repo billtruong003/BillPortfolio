@@ -2,10 +2,14 @@ import { postManifest } from '@/data/posts';
 import { PostGrid } from '@/components/lab/PostGrid';
 import { LabNav } from '@/components/lab/LabNav';
 import { FlaskConical } from 'lucide-react';
+import type { Metadata } from 'next';
+import { SITE, absoluteUrl } from '@/lib/site';
 
-export const metadata = {
+export const metadata: Metadata = {
     title: 'Lab | Bill The Dev',
     description: 'Shader breakdowns, Unity tutorials, and tech art experiments by Bill Truong.',
+    alternates: { canonical: absoluteUrl('/lab/'), types: { 'application/rss+xml': absoluteUrl('/lab/feed.xml') } },
+    openGraph: { type: 'website', url: absoluteUrl('/lab/'), siteName: SITE.name, title: 'Dev Lab | Bill The Dev', description: 'Shader breakdowns, Unity tutorials, and tech art experiments by Bill Truong.' },
 };
 
 export default function LabPage() {

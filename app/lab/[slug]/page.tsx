@@ -8,19 +8,61 @@ import { getSeriesNav } from '@/lib/series';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, BookOpen } from 'lucide-react';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
+import { JsonLd } from '@/components/logic/JsonLd';
+import { SITE, absoluteUrl } from '@/lib/site';
 
 export function generateStaticParams() {
     return postManifest.posts.map(post => ({ slug: post.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
     const post = postManifest.posts.find(p => p.slug === params.slug);
     if (!post) return { title: 'Post Not Found' };
+
+    const url = absoluteUrl(`/lab/${post.slug}/`);
+    const images = post.coverImage ? [{ url: absoluteUrl(post.coverImage), alt: post.title }] : undefined;
+
     return {
-        title: `${post.title} | Bill The Dev Lab`,
+        title: `${post.title} | ${SITE.name} Lab`,
         description: post.excerpt,
+        alternates: { canonical: url },
+        openGraph: {
+            type: 'article',
+            url,
+            siteName: SITE.name,
+            title: post.title,
+            description: post.excerpt,
+            locale: post.lang === 'vi' ? 'vi_VN' : 'en_US',
+            publishedTime: post.date,
+            modifiedTime: post.updated ?? post.date,
+            authors: [SITE.author],
+            tags: post.tags,
+            images,
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: post.title,
+            description: post.excerpt,
+            images: images?.map(i => i.url),
+        },
     };
 }
+
+const articleJsonLd = (post: (typeof postManifest.posts)[number]) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt,
+    image: post.coverImage ? absoluteUrl(post.coverImage) : undefined,
+    datePublished: post.date,
+    dateModified: post.updated ?? post.date,
+    inLanguage: post.lang,
+    keywords: post.tags.join(', '),
+    author: { '@type': 'Person', name: SITE.author, url: SITE.url },
+    publisher: { '@type': 'Person', name: SITE.author, url: SITE.url },
+    mainEntityOfPage: absoluteUrl(`/lab/${post.slug}/`),
+});
 
 export default function PostPage({ params }: { params: { slug: string } }) {
     const postIndex = postManifest.posts.findIndex(p => p.slug === params.slug);
@@ -38,6 +80,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
 
     return (
         <main className="relative min-h-screen w-full bg-[#050505]">
+            <JsonLd data={articleJsonLd(post)} />
             <LabNav postTitle={post.title} />
 
             <div className="relative z-10 pt-16 pb-16 px-6">
@@ -77,7 +120,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
 
                     <div className="flex gap-12">
                         <div className="flex-1 min-w-0">
-                            <PostBody html={post.body} />
+                            <PostBody html={post.body} lang={post.lang} />
                         </div>
 
                         <aside className="hidden lg:block w-56 shrink-0">
