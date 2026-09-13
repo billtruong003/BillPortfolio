@@ -33,7 +33,7 @@ export const Testimonials = () => {
                                         Incoming_Message_0{idx + 1}
                                     </div>
                                     <p className="text-zinc-300 text-sm leading-relaxed italic">
-                                        "{item.quote}"
+                                        &quot;{item.quote}&quot;
                                     </p>
                                 </div>
 

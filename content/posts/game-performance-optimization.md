@@ -26,7 +26,7 @@ So, how can you optimize your game's performance? Here are 5 simple yet effectiv
 **Solution:** **Object Pooling** is a technique that allows you to reuse existing objects instead of constantly creating and destroying them. Imagine having a "pool" where you store pre-instantiated objects. When you need an object, you simply take one from the pool, use it, and then return it to the pool when you're done.
 
 **How to Implement:**
-![objectpool](/images/posts/perf-objectpool.png)
+![objectpool](/images/posts/perf-objectpool.webp)
 1. **Initialize the Pool:** At the start of the game, create a "pool" (typically a List or Queue) containing a predetermined number of objects. This number depends on your game's needs; you should estimate the maximum number of objects that might exist simultaneously.
 2. **Retrieve Objects from the Pool:** When you need to use an object, check if there's an available object in the pool. If there is, retrieve it, reset its necessary properties (position, state, etc.), and use it.
 3. **Return Objects to the Pool:** When an object is no longer needed, instead of destroying it, return it to the pool. Mark it as "available" so that it can be reused later.
@@ -49,7 +49,7 @@ So, how can you optimize your game's performance? Here are 5 simple yet effectiv
     *   **How to Implement:** In Unity or Unreal Engine, you can use the built-in tools to bake lighting. This process calculates the interaction of static light sources with static objects and stores the results in a lightmap.
     *   **Benefits:** Significantly reduces the load on the GPU by eliminating the need to calculate dynamic lighting for static objects, resulting in a noticeable performance boost.
     *   **Limitations:** Only applicable to static light sources and objects. Moving objects will not receive lighting from the lightmap.
-![bake-light](/images/posts/perf-light.png)
+![bake-light](/images/posts/perf-light.webp)
 
 *   **Reduce the Number of Dynamic Lights:** Limit the use of dynamic lights in a scene, especially lights that affect a large number of objects. Each dynamic light requires the GPU to perform calculations, so the more dynamic lights you have, the greater the performance impact.
     *   **Replace with Static Lights:** If possible, replace dynamic lights with static lights and utilize light baking.
@@ -60,7 +60,7 @@ So, how can you optimize your game's performance? Here are 5 simple yet effectiv
 
 *   **Use Level of Detail (LOD) for Shadows:** Display detailed shadows for objects close to the camera and simpler shadows (or even disable them) for objects further away.
     *   **Cascaded Shadow Maps:** Use the Cascaded Shadow Maps technique to render shadows at different resolutions based on the distance from the camera.
-![comparison](/images/posts/perf-comparison.png)
+![comparison](/images/posts/perf-comparison.webp)
 
 ## **3. Manage Textures Effectively**
 
@@ -72,14 +72,14 @@ So, how can you optimize your game's performance? Here are 5 simple yet effectiv
     *   **What is a Draw Call?** Each time the CPU needs to render an object, it sends a command to the GPU called a draw call. Too many draw calls can slow down the rendering process.
     *   **Benefits:** Reduces the number of draw calls, improving performance. Texture atlases also optimize memory usage.
     *   **How to Implement:** Use texture atlas creation tools available in engines like Unity and Unreal Engine or external software like TexturePacker.
-![drawcall](/images/posts/perf-drawcall.png)
+![drawcall](/images/posts/perf-drawcall.webp)
 
 *   **Compress Textures:** Use appropriate texture compression formats to reduce file size and loading times. Common compression formats include:
     *   **DXT (DirectX Texture Compression):** Suitable for PC textures.
     *   **ETC (Ericsson Texture Compression):** Suitable for mobile textures.
     *   **ASTC (Adaptive Scalable Texture Compression):** A modern compression format that supports multiple platforms and offers good quality.
     *   **Note:** Texture compression can reduce image quality, so it's important to balance quality and size.
-![comress](/images/posts/perf-compress.png)
+![comress](/images/posts/perf-compress.webp)
 
 *   **Adjust Texture Size:** Use appropriate texture sizes based on your needs; high-resolution textures are not always necessary, especially for small or distant objects.
     *   **Rule of Thumb:** Texture sizes should be powers of 2 (e.g., 256x256, 512x512, 1024x1024) for optimal performance.
@@ -88,7 +88,7 @@ So, how can you optimize your game's performance? Here are 5 simple yet effectiv
 *   **Mipmapping:** Mipmapping is a technique that creates multiple versions of the same texture at different resolutions, decreasing in size. During rendering, the engine automatically selects the appropriate mipmap level based on the distance from the camera to the object.
     *   **Benefits:** Improves performance, reduces aliasing (jagged edges), and shimmering artifacts on distant objects.
     *   **How to Implement:** Mipmaps are usually generated automatically by game engines when importing textures.
-![mipmap](/images/posts/perf-mipmap.png)
+![mipmap](/images/posts/perf-mipmap.webp)
 
 You are absolutely correct! Adding code snippets directly into the Markdown descriptions alongside the diagrams will make the explanations much clearer and more practical.
 
@@ -250,7 +250,7 @@ By integrating code snippets directly into the Markdown, the explanations are no
 *   **Memory Optimization:** Lower LOD models typically consume less memory.
 
 **Example:** A tree near the camera might be rendered with full details, including leaves and branches. As the player moves away, the tree automatically switches to a lower LOD level, perhaps just a simple shape, saving resources without significantly impacting the visual experience.
-![lod](/images/posts/perf-lod.png)
+![lod](/images/posts/perf-lod.webp)
 
 **Conclusion**
 

@@ -5,7 +5,7 @@ lang: "vi"
 series: "shader"
 order: 1
 excerpt: "Hướng dẫn chi tiết cách xây dựng shader trong Unity từ cơ bản đến nâng cao, bao gồm các tính năng như color, metallic, smoothness và base map."
-coverImage: "/images/posts/shader-basic-cover.png"
+coverImage: "/images/posts/shader-basic-cover.webp"
 category: "shader-breakdown"
 tags: ["Unity", "Shader", "Game Development", "Graphics", "HLSL"]
 published: true

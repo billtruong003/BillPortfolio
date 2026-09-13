@@ -86,13 +86,13 @@ const HologramModel = () => {
         }
     });
 
-    if (!gltf.scene || useFallback) {
-        return <FallbackShape materialRef={materialRef} />;
-    }
-
-    const scene = useMemo(() => gltf.scene.clone(), [gltf.scene]);
+    // Every hook below must run on every render: the GLB can finish loading (or fail) between
+    // renders, and an early return before a hook would change the hook order and crash React.
+    const scene = useMemo(() => (gltf.scene ? gltf.scene.clone() : null), [gltf.scene]);
 
     useEffect(() => {
+        if (!scene) return;
+
         scene.traverse((child: any) => {
             if (child.isMesh) {
                 child.material = new THREE.MeshBasicMaterial({ visible: false });
@@ -109,11 +109,15 @@ const HologramModel = () => {
 
     const meshes = useMemo(() => {
         const m: THREE.Mesh[] = [];
-        scene.traverse((child: any) => {
+        scene?.traverse((child: any) => {
             if (child.isMesh) m.push(child);
         });
         return m;
     }, [scene]);
+
+    if (!scene || useFallback) {
+        return <FallbackShape materialRef={materialRef} />;
+    }
 
     return (
         <Center>

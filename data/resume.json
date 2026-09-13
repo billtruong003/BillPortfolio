@@ -14,14 +14,14 @@
   "companies": [
     {
       "name": "GAMELOFT",
-      "logo": "/image/logos/gameloft.png",
+      "logo": "/image/logos/gameloft.webp",
       "url": "https://www.gameloft.com/",
       "role": "Gameplay Programmer",
       "story": "Gameloft was where I built my technical foundation. Working on Applaydu, an app with millions of users, I learned to manage technical debt and apply clean code practices under tight deadlines. My mentor pushed me hard, which helped me develop the discipline to handle large-scale projects. I included a photo of my desk because it reminds me of that focused environment.",
-      "modal_img": "/image/life/gameloftdesk.jpg",
+      "modal_img": "/image/life/gameloftdesk.webp",
       "gallery": [
-        { "type": "image", "src": "/image/life/gameloftscreen.jpg" },
-        { "type": "image", "src": "/image/life/gameloftdesk.jpg" }
+        { "type": "image", "src": "/image/life/gameloftscreen.webp" },
+        { "type": "image", "src": "/image/life/gameloftdesk.webp" }
       ]
     },
     {
@@ -30,42 +30,42 @@
       "url": "https://fptsoftware.com/",
       "role": "Software Engineer",
       "story": "At akaVerse, I had the freedom to explore advanced ideas, from shaders to Omniverse integration. I developed an automation tool that streamlined heritage digitization, turning weeks of work into a single-click process and helping meet project deadlines. I presented to NVIDIA's CEO and collaborated on high-profile partnerships. Though I enjoyed the supportive team, I moved on when the focus shifted to industrial 3D outsourcing, as I wanted to stay in game development.",
-      "modal_img": "/image/life/akvdesk.jpg",
+      "modal_img": "/image/life/akvdesk.webp",
       "gallery": [
         { "type": "video", "src": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/portfolio-assets/image/life/akvgametest.mp4" },
-        { "type": "image", "src": "/image/life/akvdesk.jpg" },
-        { "type": "image", "src": "/image/life/fptevent.jpg" }
+        { "type": "image", "src": "/image/life/akvdesk.webp" },
+        { "type": "image", "src": "/image/life/fptevent.webp" }
       ]
     },
     {
       "name": "CURLY BLUE",
-      "logo": "/image/logos/curlyblue.png",
+      "logo": "/image/logos/curlyblue.webp",
       "url": "https://curlyblue.io/",
       "role": "Technical Artist (Promoted) & Unity Dev",
       "story": "Shmackle was visually flat and struggling to hold 72 FPS using basic Unlit shaders when I joined. I took ownership of the visual overhaul, writing custom HLSL shaders for Toon Shading, Outlines, and Dissolve effects. This 'Graphics Update' not only modernized the game's look but, through aggressive optimization (draw-call reduction, GPU instancing, texture atlasing), held the 72 FPS baseline on Quest 2 and reached roughly 80 to 90 FPS on Quest 3. My ability to bridge art and engineering led to my promotion to Technical Artist.",
-      "modal_img": "/image/life/cutoffmoment.jpg"
+      "modal_img": "/image/life/cutoffmoment.webp"
     },
     {
       "name": "GOLDEN SEA STUDIO",
-      "logo": "/image/logos/goldensea.png",
+      "logo": "/image/logos/goldensea.webp",
       "url": "https://goldenseastudio.com/",
       "role": "Unity Developer",
       "story": "This was a high-velocity production environment. I handled full-cycle development for outsourced Hyper Casual titles, typically shipping a complete game every 1-2 months. This role trained me to code for speed, adapt instantly to client feedback, and deliver polished core loops under strict deadlines.",
-      "modal_img": "/image/logos/goldensea.png"
+      "modal_img": "/image/logos/goldensea.webp"
     },
     {
       "name": "MARATHON EDU",
-      "logo": "/image/logos/marathonedu.png",
+      "logo": "/image/logos/marathonedu.webp",
       "url": "https://marathon.edu.vn/",
       "role": "Teacher",
       "story": "In this freelance role, I taught while gaining exposure to a large EdTech company's infrastructure and operations.",
-      "modal_img": "/image/logos/marathonedu.png"
+      "modal_img": "/image/logos/marathonedu.webp"
     }
   ],
   "productions": [
     {
       "name": "KINDLY'S PROMISE",
-      "logo": "/image/life/kindlypromise.png",
+      "logo": "/image/life/kindlypromise.webp",
       "url": "https://github.com/billtruong003/Kindly-Project",
       "at_company": "Personal Indie Product",
       "role": "Solo Developer & Technical Artist",
@@ -121,7 +121,7 @@
       "role": "R&D Engineer",
       "desc": "Industrial Digital Twin",
       "story": "My automation tools optimized rendering for large CAD models in WebGL, reducing setup time dramatically.",
-      "modal_img": "/image/life/nvdiasummit.jpg"
+      "modal_img": "/image/life/nvdiasummit.webp"
     },
     {
       "name": "APPLAYDU",
@@ -348,7 +348,7 @@
       "title": "Bill's DevSprint (SaaS)",
       "category": "tool",
       "type": "video",
-      "src": "/image/proj/billdevsprint.jpg",
+      "src": "/image/proj/billdevsprint.webp",
       "url": "https://billdevsprint.com/",
       "tags": ["SaaS", "React", "Project Management", "Productivity"],
       "description": "Built in 48 hours, with dynamic themes, Google Drive integration, and drag-and-drop features."
@@ -418,7 +418,7 @@
       "title": "MemeCrawler AI",
       "category": "tool",
       "type": "web",
-      "src": "/image/proj/memecrawler.png",
+      "src": "/image/proj/memecrawler.webp",
       "url": "http://billthedevlab.store/",
       "tags": ["Python", "AI", "Web Scraping"],
       "description": "AI scraper for meme collection and categorization."
@@ -428,7 +428,7 @@
       "title": "Sketchfab Gallery",
       "category": "web",
       "type": "web",
-      "src": "/image/proj/sketchfabgallery.png",
+      "src": "/image/proj/sketchfabgallery.webp",
       "url": "https://billtruong003.github.io/SketchFabGallery/",
       "tags": ["REST API", "3D Web", "JavaScript"],
       "description": "Dynamic 3D model gallery using Sketchfab API."

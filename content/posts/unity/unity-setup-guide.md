@@ -28,7 +28,7 @@ Unity Hub là công cụ giúp bạn quản lý các phiên bản Unity và các
 - Truy cập trang tải Unity Hub tại [Unity Download Page](https://unity.com/download).
 - Chọn **"Download Unity Hub"** và tải về file cài đặt tương ứng với hệ điều hành của bạn (Windows hoặc macOS).
 - Sau khi tải về, mở file cài đặt và làm theo các bước hướng dẫn để cài Unity Hub vào máy tính của bạn.
-![Download Unity Hub](/images/posts/download-unity.png)
+![Download Unity Hub](/images/posts/download-unity.webp)
 
 ### **Bước 2: Đăng Nhập và Lấy License**
 

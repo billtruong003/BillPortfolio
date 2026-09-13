@@ -5,7 +5,7 @@ lang: "vi"
 series: "swift"
 order: 5
 excerpt: "Hướng dẫn chi tiết tạo trò chơi TicTacToe đơn giản với SwiftUI, học cách sử dụng @State, LazyVGrid, ForEach và xử lý logic trò chơi."
-coverImage: "/images/posts/tictactoe-cover.png"
+coverImage: "/images/posts/tictactoe-cover.webp"
 category: "devlog"
 tags: ["SwiftUI", "TicTacToe", "Game Development", "Mobile", "iOS"]
 published: true

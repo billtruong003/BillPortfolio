@@ -5,7 +5,7 @@ lang: "en"
 series: "swift"
 order: 1
 excerpt: "A complete guide to learning SwiftUI from scratch. This series covers everything from Swift basics to advanced SwiftUI concepts."
-coverImage: "/images/posts/swiftui-cover.jpeg"
+coverImage: "/images/posts/swiftui-cover.webp"
 category: "tutorial"
 tags: ["SwiftUI", "iOS", "macOS", "Tutorial"]
 published: true

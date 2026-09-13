@@ -5,7 +5,7 @@ lang: "en"
 series: "shader"
 order: 3
 excerpt: "Building a stylized environment system with GPU-instanced grass, flowers, and trees that react to player movement."
-coverImage: "/images/posts/biome-shader-cover.jpg"
+coverImage: "/images/posts/biome-shader-cover.webp"
 category: "shader-breakdown"
 tags: ["GPU Instancing", "Compute Shader", "Unity", "HLSL", "Environment Art"]
 published: true

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Maximize, Minimize, Volume2, VolumeX, RefreshCw, Loader2, AlertTriangle, X, Gamepad2, Info } from 'lucide-react';
 import { WebGLGame } from '@/types';
 import { getAssetPath } from '@/lib/utils';
+import { trackOnce } from '@/lib/analytics';
 
 interface UnityPlayerProps {
     game: WebGLGame;
@@ -79,6 +80,8 @@ export const UnityPlayer = ({ game, onClose, mode = 'fullpage' }: UnityPlayerPro
 
     const loadGame = useCallback(async () => {
         if (loadState === 'loading-script' || loadState === 'loading-data') return;
+
+        trackOnce(`game_play_${game.id}`, 'game_play', { gameId: game.id, title: game.title });
         setLoadState('loading-script');
         setProgress(0);
         setErrorMsg('');

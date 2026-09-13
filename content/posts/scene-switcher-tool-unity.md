@@ -3,7 +3,7 @@ title: "Scene Switcher Tool for Unity"
 date: "2024-06-04"
 lang: "en"
 excerpt: "A custom Unity Editor tool to simplify scene switching during development. Quickly switch, load additively, and bookmark frequently used scenes."
-coverImage: "/images/posts/shader-basic-cover.png"
+coverImage: "/images/posts/shader-basic-cover.webp"
 category: "tools"
 tags: ["Unity", "Tool", "UnityEditor"]
 published: true

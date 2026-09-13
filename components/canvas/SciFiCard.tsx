@@ -98,7 +98,7 @@ const CardLayout = () => {
             <group position={[0, -0.6, 0]}>
                 {/* Dòng chữ trạng thái */}
                 <Text position={[-1.4, 0.15, 0]} fontSize={0.05} color={THEME.primary} anchorX="left" font={fontUrl}>
-                    /// SYSTEM_ACCESS_GRANTED
+                    {'/// SYSTEM_ACCESS_GRANTED'}
                 </Text>
 
                 {/* Giả lập Barcode */}

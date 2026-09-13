@@ -1,49 +1,39 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import { track, trackOnce } from '@/lib/analytics';
 
-interface ScrollTrackerProps {
-    slug: string;
-    readingTime: number;
-}
+const DEPTH_MARKS = [25, 50, 75, 100] as const;
 
-export const ScrollTracker = ({ slug, readingTime }: ScrollTrackerProps) => {
+/** Reports how far down a post the reader got, and whether they stayed long enough to have read it. */
+export const ScrollTracker = ({ slug, readingTime }: { slug: string; readingTime: number }) => {
     const startTime = useRef(Date.now());
     const sentDepths = useRef(new Set<number>());
     const sentComplete = useRef(false);
 
     useEffect(() => {
-        const gasUrl = process.env.NEXT_PUBLIC_GAS_URL;
-        if (!gasUrl) return;
-        if (navigator.doNotTrack === '1') return;
-
-        const sessionKey = `lab_viewed_${slug}`;
-        if (!sessionStorage.getItem(sessionKey)) {
-            sessionStorage.setItem(sessionKey, '1');
-            send(gasUrl, { type: 'post_view', slug, path: window.location.pathname });
-        }
+        trackOnce(`lab_viewed_${slug}`, 'post_view', { slug });
 
         const checkScroll = () => {
-            const scrollTop = window.scrollY;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
             if (docHeight <= 0) return;
 
-            const depth = Math.round((scrollTop / docHeight) * 100);
-            for (const threshold of [25, 50, 75, 100]) {
-                if (depth >= threshold && !sentDepths.current.has(threshold)) {
-                    sentDepths.current.add(threshold);
-                    send(gasUrl, { type: 'post_scroll', slug, path: window.location.pathname, scrollDepth: threshold });
+            const depth = Math.round((window.scrollY / docHeight) * 100);
+            for (const mark of DEPTH_MARKS) {
+                if (depth >= mark && !sentDepths.current.has(mark)) {
+                    sentDepths.current.add(mark);
+                    track('post_scroll', { slug, scrollDepth: mark });
                 }
             }
         };
 
         const checkReadComplete = () => {
             if (sentComplete.current) return;
+
             const elapsed = (Date.now() - startTime.current) / 1000;
-            const threshold = readingTime * 60 * 0.8;
-            if (elapsed >= threshold) {
-                sentComplete.current = true;
-                send(gasUrl, { type: 'post_read_complete', slug, path: window.location.pathname, readTime: Math.round(elapsed) });
-            }
+            if (elapsed < readingTime * 60 * 0.8) return;
+
+            sentComplete.current = true;
+            track('post_read_complete', { slug, readTime: Math.round(elapsed) });
         };
 
         window.addEventListener('scroll', checkScroll, { passive: true });
@@ -57,13 +47,3 @@ export const ScrollTracker = ({ slug, readingTime }: ScrollTrackerProps) => {
 
     return null;
 };
-
-function send(url: string, data: Record<string, any>) {
-    const payload = { ...data, timestamp: new Date().toISOString() };
-    const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
-    if (navigator.sendBeacon) {
-        navigator.sendBeacon(url, blob);
-    } else {
-        fetch(url, { method: 'POST', body: blob, keepalive: true, mode: 'no-cors' }).catch(() => {});
-    }
-}

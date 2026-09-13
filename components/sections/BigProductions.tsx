@@ -43,7 +43,7 @@ export const BigProductions = () => {
                         Impactful Products
                     </h2>
                     <p className="text-zinc-500 text-sm max-w-2xl">
-                        Major titles and systems I've architected. Click to view development stories.
+                        Major titles and systems I&apos;ve architected. Click to view development stories.
                     </p>
                 </div>
 

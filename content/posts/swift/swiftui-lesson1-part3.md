@@ -5,7 +5,7 @@ lang: "en"
 series: "swift"
 order: 4
 excerpt: "Dive into Object-Oriented Programming in Swift. Learn about classes, structures, inheritance, and protocols to build organized and reusable code."
-coverImage: "/images/posts/swiftui-learn-cover.png"
+coverImage: "/images/posts/swiftui-learn-cover.webp"
 category: "tutorial"
 tags: ["Swift", "SwiftUI", "iOS", "Programming"]
 published: true
