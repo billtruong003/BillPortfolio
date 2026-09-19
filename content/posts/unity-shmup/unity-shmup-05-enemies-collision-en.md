@@ -1,7 +1,7 @@
 ---
 title: "Shmup #5: Collision rules — from overlap to damage and death"
 date: "2026-09-18"
-updated: "2026-09-13"
+updated: "2026-09-19"
 lang: en
 translationKey: unity-shmup-05-enemies-collision
 series: "shmup"
@@ -14,35 +14,43 @@ published: true
 featured: false
 ---
 
-<div class="lesson-rules"><strong>THIS STAGE'S RULES</strong><p>Player bullet → enemy: lose 1 HP, consume bullet.</p><p>Enemy → player: lose 1 HP on initial contact; enemy keeps moving.</p><p>Player bullet → player / enemy → enemy: ignore.</p></div>
+<div class="lesson-rules"><strong>RULES FOR THIS STAGE</strong><p>Our bullet → enemy: 1 HP lost, bullet disappears.</p><p>Enemy → ship: 1 HP lost when the overlap begins, enemy keeps flying.</p><p>Our bullet → ship / enemy → enemy: ignored.</p></div>
 
-## Define rules before choosing components
+## Write the rules before choosing components
 
-Start with pooled shooting and save `SEU_05_Enemies`. Finish with three descending enemies at 2 HP each and a player at 3 HP. There is no HUD yet; observe destroyed objects and inspect Health's state using the Debug Inspector when needed.
+So far bullets pass straight through everything. This lesson defines a rule for each collision pair: our bullets damage enemies, enemies damage the ship on contact, and every other pair is ignored. The hard part is not the code — it is the checkbox grid in Physics 2D, because one wrong tick means bullets fly through enemies and the Console says nothing at all.
 
-**Collider2D** defines the contact shape. A **trigger** reports overlap without pushing objects apart. **Rigidbody2D** participates in simulation. The **Layer Collision Matrix** selects which pairs to consider. Understand these roles before setting checkboxes.
+Start from the pooled shooting system and save the scene as `SEU_05_Enemies`. The result is three enemies descending with 2 HP each against a ship with 3 HP. There is no HUD yet, so you verify by watching objects get cleaned up, or by reading Health through the Inspector in Debug mode.
 
-## Turn the interaction table into a Layer Matrix
+Four things cooperate here. **Collider2D** describes an object's contact area. **Trigger** reports that two areas overlap without pushing them apart. **Rigidbody2D** brings an object into the physics simulation. **Layer Collision Matrix** selects which pairs are worth testing. Only once all four are clear does ticking checkboxes mean anything.
 
-Create available user layers named Player, PlayerProjectile, Enemy, EnemyProjectile, and Pickup. Their numeric slots do not have to match the screenshot. In Physics 2D → Layer Collision Matrix, allow these pairs:
+## The rules table becomes a tick matrix
 
-| Pair | Enabled | Purpose |
+Go to **Project Settings → Tags and Layers** and create the free user layers: Player, PlayerProjectile, Enemy, EnemyProjectile, Pickup. Their index numbers do not have to match my screenshot.
+
+![The user layer list after adding them](/images/posts/unity-shmup/05/enemy_01_layers.webp)
+
+Now open **Project Settings → Physics 2D → Layer Collision Matrix**. Among those five layers, enable exactly four pairs:
+
+| Pair | Enabled | Why |
 |---|---|---|
-| PlayerProjectile × Enemy | Yes | Player bullets hit enemies |
-| Player × Enemy | Yes | Ramming |
-| Player × EnemyProjectile | Yes | Reserved for the enemy-bullet exercise |
+| PlayerProjectile × Enemy | Yes | Our bullets hit enemies |
+| Player × Enemy | Yes | Enemies ram the ship |
+| Player × EnemyProjectile | Yes | For the enemy-fire exercise |
 | Player × Pickup | Yes | Used in lesson 9 |
-| Other pairs involving these layers | No | No intended interaction |
+| Every other pair among these five | No | No interaction in this game |
 
-Sorting Layers still only control drawing. A correct Sorting Layer cannot repair an incorrect physics Layer.
+![The Layer Collision Matrix with four boxes ticked](/images/posts/unity-shmup/05/enemy_02_collision-matrix.webp)
 
-**Triggers differ from ordinary collisions.** [Unity's RigidbodyType2D.Kinematic documentation](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/RigidbodyType2D.Kinematic.html) identifies triggers as an exception to Kinematic–Kinematic collision restrictions. The trigger colliders here do not require Full Kinematic Contacts merely to receive trigger messages. At least one side needs Rigidbody2D, and both sides must use **2D** physics.
+This is the screenshot to study closely. The matrix is a triangular grid with layer names running vertically, and a single cell sits at the intersection of a row and a column that can be far apart. Tick one cell off by a row and physics silently skips that pair — bullets pass through enemies, and the Console prints nothing. Compare the screenshot against your own screen before moving on.
 
-## Health owns HP; DamageOnContact owns the hit
+Worth repeating the lesson 1 distinction now that both appear together: **Sorting Layer** decides which sprite draws over which, **Layer** decides which pairs physics considers. Get Sorting right and Layer wrong and the picture looks fine while no collisions happen.
 
-The flow is overlap → find Health → subtract HP → report changes → report death at zero → clean up according to policy. Enemies return to a pool or are destroyed. The player remains available so later lessons can display HP and Game Over.
+One thing about triggers before wiring anything: per [Unity's RigidbodyType2D.Kinematic documentation](https://docs.unity3d.com/6000.0/Documentation/ScriptReference/RigidbodyType2D.Kinematic.html), triggers are the exception to the Kinematic–Kinematic restriction. Two kinematic objects do receive each other's triggers without enabling Full Kinematic Contacts. The remaining conditions: at least one side needs a Rigidbody2D, and both must use **2D** physics rather than mixing in 3D.
 
-Create the full Health file:
+## Health owns hit points, DamageOnContact owns the hit
+
+The flow we need: receive an overlap, find `Health`, subtract, announce the change, announce death if it reaches zero, then clean up according to each type's own policy. Enemies return to a pool or get destroyed. The ship stays, so lesson 8 can still read its HP to show a Game Over screen.
 
 **Assets/_ShootEmUp/Scripts/Combat/Health.cs**
 
@@ -110,11 +118,13 @@ namespace ShootEmUp.Combat
 }
 ```
 
-Current belongs to each instance and resets on enable. Changed supports displays; Damaged reports actual hits; Died reports reaching zero. SetMax and Heal are controlled mutation methods used later by data and pickups.
+`Current` is per-instance state refilled in `OnEnable`, following the pooling rule from lesson 4. A recycled enemy therefore always starts at full health.
 
-DefaultExecutionOrder initializes Health before ordinary listeners. A HUD or effect should not read uninitialized health and require a repair at the end of the series.
+The three events serve three different purposes, and splitting them this way means lessons 8 and 10 need no changes here. `Changed` fires whenever the number moves, healing included, which suits a HUD. `Damaged` fires only on a real hit, so lesson 10 can drive a flash and an impact sound without flashing when you pick up a health drop. `Died` fires exactly once when HP reaches zero.
 
-Create DamageOnContact:
+`[DefaultExecutionOrder(-100)]` makes `Health` initialise ahead of ordinary components. Without it, a listener whose `OnEnable` runs earlier could read `Current` before it has been filled.
+
+Now the part that deals damage.
 
 **Assets/_ShootEmUp/Scripts/Combat/DamageOnContact.cs**
 
@@ -147,11 +157,15 @@ namespace ShootEmUp.Combat
 }
 ```
 
-For bullets, set consumed **before** TakeDamage. A bullet overlapping two enemies in one physics step only acts once. This is part of the completed collision behavior, not a bug deferred to the wave lesson. Enabling a reused bullet resets the flag.
+The ordering inside `OnTriggerEnter2D` is where this lesson goes past the usual tutorial. The `consumed` flag is set **before** `TakeDamage` is called, not after.
 
-## Move enemies beyond the screen
+Here is why. One bullet can touch two enemies with overlapping colliders inside a single physics step, and Unity calls `OnTriggerEnter2D` twice in a row before the object has a chance to deactivate. Set the flag after subtracting health and the second call still gets through, so one bullet kills two enemies. Set it before and the second call is blocked on the first line. This is the finished rule for the lesson, not a stopgap waiting for the wave lesson to fix. The flag resets in `OnEnable` for the next lifetime.
 
-Create both files before attaching EnemyMover:
+`GetComponentInParent<Health>()` rather than `GetComponent`, because the collider may live on a child object. On the ship, `Health` sits on the parent while a collider might be somewhere below it.
+
+## Make enemies descend and leave the screen
+
+Create both files below before adding the `EnemyMover` component.
 
 **Assets/_ShootEmUp/Scripts/Core/ScreenBounds.cs**
 
@@ -221,34 +235,62 @@ namespace ShootEmUp.Enemies
 }
 ```
 
-ScreenBounds returns an orthographic world rectangle. EnemyMover moves downward and cleans up beyond the bottom plus a margin. **Leaving the screen does not call TakeDamage**, so it must not count as a kill.
+`ScreenBounds` packages the camera-region arithmetic in one place, because lessons 7 and 9 reuse it to pick spawn positions and cleanup thresholds.
 
-## Assemble all three object types
+An enemy leaving the screen is returned via `Release` and never passes through `TakeDamage`. That distinction matters for lesson 8: an enemy that drifts off the bottom does not count as killed and scores nothing, while one you shoot does.
 
-| Object | Layer / Collider | Components and values |
-|---|---|---|
-| Bullet_Player prefab | PlayerProjectile; CapsuleCollider2D trigger, approximately (0.35, 1.1) | Kinematic body; DamageOnContact Damage 1, Release Self On Hit enabled |
-| Enemy_Insect prefab | Enemy; CircleCollider2D trigger, radius approximately 0.45 | Kinematic body; PooledObject; Health Max 2, Remove On Death enabled; EnemyMover Speed 3; DamageOnContact Damage 1, Release Self On Hit disabled |
-| Player | Player; fitted PolygonCollider2D trigger | Kinematic body; Health Max 3, **Remove On Death disabled** |
+`despawnMargin` lets the enemy leave the frame completely before disappearing, so players never watch one evaporate on the bottom edge.
 
-Collider dimensions are local and affected by object scale. Verify actual hit regions in Scene view. Enemies carry PooledObject but are manually placed in this stage; Release falls back to Destroy without a pool owner.
+## Configure the three object types
 
-![Locating the player's collider and Health](/images/posts/unity-shmup/05/enemy_05_player-collider-health.webp)
+Three objects, one rules table from the top of the lesson, three different setups.
 
-Place enemies at (−2.2, 9.5), (0, 11), and (2.2, 12.5). They enter from above because the camera's top is Y = 8.
+**The `Bullet_Player` prefab.** Set Layer to **PlayerProjectile**. Add a CapsuleCollider2D with **Is Trigger** enabled, roughly (0.35, 1.1) depending on your laser sprite. The Rigidbody 2D stays Kinematic from lesson 3. Add `DamageOnContact` with Damage 1 and Release Self On Hit **enabled**, because a bullet that hits should disappear.
 
-## Use a test matrix instead of one recorded run
+![The trigger collider on the bullet prefab](/images/posts/unity-shmup/05/enemy_03_bullet-prefab-collider.webp)
 
-Start with one enemy: one bullet should not kill it; two should. Then ram the player: HP falls by one when overlap begins. Remaining overlapped does not cause one damage every frame; separating and re-entering starts another overlap.
+**The `Enemy_Insect` prefab.** Build it from your enemy sprite. Layer **Enemy**, a CircleCollider2D trigger with radius around 0.45. Rigidbody 2D Kinematic, plus `PooledObject`, `Health` with Max 2 and Remove On Death enabled, `EnemyMover` with Speed 3, and `DamageOnContact` with Damage 1 but Release Self On Hit **disabled** — an enemy that rams the ship keeps flying rather than vanishing.
 
-Overlap two enemies and confirm one bullet is consumed once without a double-release error. Do not shoot and confirm enemies disappear below the screen. At zero HP, the player remains present; lesson 8 connects the HUD and end-of-run behavior.
+![The components on the Enemy_Insect prefab](/images/posts/unity-shmup/05/enemy_04_enemy-prefab.webp)
 
-For missing hits, inspect Layer Matrix, Is Trigger, Rigidbody2D, collider shape, and position in that order. If hits arrive but HP is wrong, inspect Damage and Health instead. Diagnose the layer that owns the failure.
+**The `Player` object in the scene.** Layer **Player**, a PolygonCollider2D trigger fitted to the hull. The Kinematic Rigidbody 2D is already there from lesson 2. Add `Health` with Max 3 and **Remove On Death disabled**, because the ship must survive its own death.
+
+![The collider and Health on the ship](/images/posts/unity-shmup/05/enemy_05_player-collider-health.webp)
+
+Collider Size and Radius values are in local units and are affected by the object's scale. Turn on gizmos in Scene view to confirm the real hit area sits where you think it does, rather than trusting the numbers.
+
+Enemies at this stage already carry `PooledObject` but are still placed by hand with no pool owning them. When one calls `Release` without an owner it falls into the `else Destroy` branch written in lesson 4, so it still behaves correctly. Lesson 7 attaches them to a real pool.
+
+## Place three enemies
+
+Drag the enemy prefab into the scene three times, at (−2.2, 9.5), (0, 11), and (2.2, 12.5).
+
+![The three enemies in the Hierarchy](/images/posts/unity-shmup/05/enemy_06_hierarchy.webp)
+
+All three sit above Y = 8, the camera's top edge, so pressing Play brings them into frame from outside rather than popping them into the middle of the screen. Three different heights make them arrive one at a time, which makes each one easy to observe.
+
+![Game view at the start, enemies not yet in frame](/images/posts/unity-shmup/05/enemy_07_game-view-start.webp)
+
+## A test matrix instead of one playthrough
+
+Run one situation at a time, each checking exactly one rule.
+
+Shoot a single enemy: the first bullet does not kill it because it has 2 HP, the second does. The enemy disappears, and so does the bullet the moment it connects rather than flying on.
+
+Let an enemy touch the ship: the ship's HP drops by exactly 1 at the moment the overlap begins. Leave the two objects overlapping and HP does not keep draining every frame, because `OnTriggerEnter2D` fires once per contact. Separate and touch again and it is a new contact, so HP drops again.
+
+Place two enemies on top of each other and fire one bullet into the overlap: only one takes damage. That is the `consumed` rule above, and the Console must stay clean with no `already released` lines.
+
+Fire nothing at all: all three drift to the bottom and get cleaned up. Check the Hierarchy has none left.
+
+Take three hits on the ship: it stays in the scene rather than disappearing, because Remove On Death is off. The HUD and stopping the run come in lesson 8.
+
+![Shooting down enemies in Game view](/images/posts/unity-shmup/05/enemy_08_shooting-enemies.webp)
+
+If hits never register, work from the outside in: Layer Collision Matrix, then Is Trigger, then Rigidbody2D, then the collider shape, and only then position. If hits register but the health numbers are wrong, that is a different level entirely — check Damage and Max Health.
 
 ## Source for this stage
 
-[Download all lesson 5 scripts](/downloads/shmup/lesson-05.zip). The archive contains code and assembly definitions, not scenes, prefabs, or the pictured artwork. Assemble the scene using this lesson. When upgrading, replace files at the same paths; never put two versions of a class in Assets.
-
+[Download the lesson 5 scripts](/downloads/shmup/lesson-05.zip) — code and assembly definitions only, no scenes, prefabs, or the pictured artwork. When upgrading from an earlier lesson, overwrite files at the same paths.
 
 Next: [Shmup #6](/lab/unity-shmup-06-scriptable-objects-en).
-

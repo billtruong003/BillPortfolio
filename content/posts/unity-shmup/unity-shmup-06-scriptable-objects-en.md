@@ -1,7 +1,7 @@
 ---
 title: "Shmup #6: One machine, many enemy types — separate configuration from state"
 date: "2026-09-19"
-updated: "2026-09-13"
+updated: "2026-09-19"
 lang: en
 translationKey: unity-shmup-06-scriptable-objects
 series: "shmup"
@@ -16,25 +16,25 @@ featured: false
 
 <div class="lesson-compare"><div><strong>INSECT BASIC</strong><p>2 HP · Speed 3 · Score 10</p></div><div><strong>INSECT FAST</strong><p>1 HP · Speed 5.5 · Score 20</p></div></div>
 
-## What actually differs between two enemies?
+## Where do two enemies actually differ?
 
-Lesson 5 produced a prefab with rendering, health, damage, and movement. Duplicating it to create a faster enemy works initially, but a structural change would eventually need updating across many copies.
+To add a faster enemy, the first instinct is to hit Ctrl+D on the prefab and edit a few numbers. That works right up until you need to change the collider and have to open every copy to change it again.
 
-Compare the cards above. Their components are identical; sprites and numbers differ. Keep **one prefab** and move those differences into **two data assets**. Save the scene as `SEU_06_Data`.
+Look at the two cards above. Both enemies use exactly the same component set: Sprite Renderer, Rigidbody, collider, `Health`, `EnemyMover`, `DamageOnContact`. All that differs is the sprite and a handful of numbers. So we keep **one prefab** and move the differences into **two data assets** that live separately.
 
-## Keep three kinds of data separate
+Save the scene as `SEU_06_Data`.
 
-| Location | Owns | Example |
+## Three kinds of data that must not mix
+
+| Where | Holds | Example |
 |---|---|---|
-| Prefab | Shared component structure and references | Rigidbody, collider, Enemy |
-| ScriptableObject asset | Type configuration | Max HP 2, Speed 3 |
-| Instance component | Individual runtime state | Enemy A has 1 HP, B has 2 HP |
+| Prefab | Component structure and shared references | Rigidbody, collider, Enemy |
+| ScriptableObject asset | Configuration for one type | Max HP 2, Speed 3 |
+| Component on an instance | Per-object runtime state | Enemy A has 1 HP left, enemy B has 2 |
 
-A ScriptableObject is an asset in Project, not a component attached to a GameObject. Two enemies can read the same EnemyData. They must **not** write Current HP into that shared asset, or one enemy's damage could alter the entire type's data.
+A ScriptableObject is an asset living in Project, not a component you drop onto a GameObject. That leads to a consequence you have to remember: two enemies read the same `EnemyData`, so writing current health into that asset would drain the health of the entire type when one of them gets shot. Current health belongs to the instance, and lesson 5 already put it in the right place inside `Health.Current`.
 
-## Derive the data from the comparison
-
-Create EnemyData:
+## Build the data from the comparison table
 
 **Assets/_ShootEmUp/Scripts/Data/EnemyData.cs**
 
@@ -60,26 +60,26 @@ namespace ShootEmUp.Data
 }
 ```
 
-CreateAssetMenu adds an asset creation menu. Min constrains Inspector editing; it does not replace all runtime validation. ScoreValue is stored now and becomes useful when lesson 8 connects scoring.
+`[CreateAssetMenu]` is what makes this asset creatable with the mouse: it adds an entry to the Project window's Create menu. Without the attribute the class still compiles, but you would need code to create an instance.
 
-Under `ScriptableObjects/Enemies`, use Create → ShootEmUp → Enemy Data:
+`scoreValue` is stored now even though this lesson has no scoring. Lesson 8 reads it when an enemy dies, and declaring it up front saves editing all six assets later.
 
-| Asset | Your sprite | Max Health | Speed | Contact Damage | Score |
+In `ScriptableObjects/Enemies`, choose Create → ShootEmUp → Enemy Data twice:
+
+| Asset | Sprite | Max Health | Speed | Contact Damage | Score |
 |---|---|---|---|---|---|
-| Enemy_InsectBasic | Regular enemy | 2 | 3 | 1 | 10 |
+| Enemy_InsectBasic | Standard enemy | 2 | 3 | 1 | 10 |
 | Enemy_InsectFast | Second enemy | 1 | 5.5 | 1 | 20 |
 
 ![An EnemyData asset in the Inspector](/images/posts/unity-shmup/06/data_02_enemydata-inspector.webp)
 
-## Apply connects configuration to behavior
+## Apply bridges configuration and behavior
 
-Enemy reads the asset and sends each value to the component responsible for using it:
+An asset is just data sitting still. Something has to read it and hand each value to the component that knows what to do with it:
 
 <div class="lesson-flow"><span>EnemyData</span><span>Enemy.Apply</span><span>Sprite / Health / Mover / Damage</span></div>
 
-Replace Health, DamageOnContact, and EnemyMover with the complete lesson 6 versions so SetMax, Speed, and Damage match the new interface. Preserve prefab references and replace files at their original paths rather than creating duplicate classes.
-
-Create Enemy.cs:
+Before creating `Enemy`, replace `Health`, `DamageOnContact`, and `EnemyMover` with the complete versions in the lesson 6 package. Those three files add `SetMax` plus the `Speed` and `Damage` properties that `Apply` writes into. Overwrite the files at the same paths, do not create a second class, and the prefab's references survive untouched.
 
 **Assets/_ShootEmUp/Scripts/Enemies/Enemy.cs**
 
@@ -134,19 +134,37 @@ namespace ShootEmUp.Enemies
 }
 ```
 
-OnEnable applies the default configuration on each activation. Public Apply also lets a future spawner select a type after Get. Health initializes before ordinary components, and SetMax both sets the limit and refills HP, preventing reused enemies from retaining old health.
+`Apply` runs in `OnEnable`, following the pooling rule from lesson 4: every time an object is switched on it starts a new lifetime, so the configuration must be reloaded. `SetMax` both sets the ceiling and refills, so a recycled enemy never inherits the previous one's health.
 
-Open Enemy_Insect, add Enemy, and assign **Enemy_InsectBasic** to Data. The renderer and other component fields now provide defaults that Enemy.Apply overwrites.
+`Apply` is also public because lesson 7 needs it: the spawner rents an object from the pool and only then decides what type it should be.
 
-## Make a variant through an instance override
+Open the `Enemy_Insect` prefab, add the `Enemy` component, and drag **Enemy_InsectBasic** into the Data field. From now on the sprite and numbers sitting on the individual components are only starting values, because `Apply` overwrites them the moment the object is enabled.
 
-Keep three enemies in the scene. On the middle instance, change Data to Enemy_InsectFast. This is an instance override: do not Apply All to the prefab, which would change the default type for every instance.
+This is exactly the part that is hardest to believe, so look at it directly. Before running, the enemy's Inspector holds the prefab's values:
 
-Play. The regular enemies should move slowly and take two hits; the middle one should move faster and take one. This verifies rendering, movement, and health together. A different sprite alone is insufficient evidence.
+![Components on the enemy before Apply runs](/images/posts/unity-shmup/06/data_04_enemy-component-before.webp)
 
-## Apply the same idea to weapons
+Press Play and the same Inspector now holds the asset's values:
 
-Create WeaponData:
+![Components on the enemy after Apply runs](/images/posts/unity-shmup/06/data_05_enemy-component-after.webp)
+
+Those two screenshots are the proof that the asset beats the prefab. If nothing changes, check whether the Data field is empty and whether the Console printed `no EnemyData assigned`.
+
+## Make a variant with an instance override
+
+The scene still has the three hand-placed enemies from lesson 5. Select the middle one and change its Data field to `Enemy_InsectFast`.
+
+![The overridden Data row shown in bold on the instance](/images/posts/unity-shmup/06/data_06_instance-override.webp)
+
+Unity bolds the changed row and adds a blue bar on the left to mark it as an override belonging to that instance alone. Do not press Apply All in the top bar, because that pushes the change up to the prefab and makes `InsectFast` the default for every enemy.
+
+Press Play: the two ordinary enemies move slowly and need two hits, the middle one is fast and dies to a single hit.
+
+![Two different enemy types produced from one prefab](/images/posts/unity-shmup/06/data_08_two-enemy-types.webp)
+
+Check all three things rather than just the sprite. A changed sprite only proves `spriteRenderer.sprite` was assigned; the speed and the number of hits are what prove `mover.Speed` and `health.SetMax` received their data too.
+
+## Reuse the same idea for the gun
 
 **Assets/_ShootEmUp/Scripts/Data/WeaponData.cs**
 
@@ -165,7 +183,11 @@ namespace ShootEmUp.Data
 }
 ```
 
-Create **Weapon_Laser** with Shots Per Second 6, Projectile Speed 14, Damage 1. Replace Projectile and PlayerShooting using the complete lesson 6 files. PlayerShooting receives WeaponData instead of its own rate field, then calls Projectile.Configure after Get to set speed and contact damage.
+Create a **Weapon_Laser** asset with Shots Per Second 6, Projectile Speed 14, Damage 1.
+
+![The WeaponData asset in the Inspector](/images/posts/unity-shmup/06/data_03_weapondata-inspector.webp)
+
+Replace `Projectile` and `PlayerShooting` with the lesson 6 versions from the source package. `PlayerShooting` drops its own fire-rate field in favour of a `WeaponData`, and after renting a bullet from the pool it calls `Configure` to set that bullet's travel speed and damage.
 
 **Assets/_ShootEmUp/Scripts/Combat/Projectile.cs**
 
@@ -223,20 +245,24 @@ namespace ShootEmUp.Combat
 }
 ```
 
-Assign Weapon_Laser to Player's Weapon field. Verify Controls, Projectile Pool, and Muzzle remain connected. Each shot reads the current weapon configuration; already-flying bullets keep the speed and damage assigned at spawn.
+Select `Player`, drag `Weapon_Laser` into the Weapon field, then confirm `Controls`, `Projectile Pool`, and `Muzzle` are still intact:
 
-## Understand when an edit takes effect
+![PlayerShooting with the Weapon field wired](/images/posts/unity-shmup/06/data_07_playershooting-weapon.webp)
 
-During Play Mode, change Weapon_Laser's Shots Per Second from 6 to 12. Subsequent shots change cadence. Changing Enemy_InsectBasic's Speed does not automatically update an already-moving enemy if Apply only runs on activation. A data asset does not push every edit into every consumer.
+## When a number actually takes effect
 
-Editor asset edits made during Play Mode may persist after stopping. Inspect the diff and restore 6/14/1 if the change was only experimental. This is not a built-game save system.
+This is the most confusing part of ScriptableObjects, and it follows a clear rule.
 
-Finish when one prefab represents two types, each instance owns independent HP, and you can distinguish **values copied at spawn** from **values read for every shot**.
+Press Play and change `Weapon_Laser`'s Shots Per Second from 6 to 12: the cadence changes immediately. Still in Play, change `Enemy_InsectBasic`'s Speed: enemies already in flight do not speed up, and only the ones enabled afterwards pick up the new value.
+
+The difference is who reads the asset and when. `PlayerShooting` reads its `WeaponData` on **every shot**, so changes show up instantly. `Enemy` reads its `EnemyData` once in `OnEnable`, which is **at spawn**, so an enemy already spawned keeps its old copy. A data asset does not push changes out to everything using it.
+
+One warning while experimenting: edits to an asset during Play Mode are kept by the Editor after you stop, unlike edits to a component. If you were only testing, reset the numbers to 6 / 14 / 1.
+
+This stage is done when one prefab represents two enemy types, each instance's health is independent, and you can tell configuration-read-at-spawn apart from configuration-read-per-shot. Next lesson replaces the three hand-placed enemies with a schedule.
 
 ## Source for this stage
 
-[Download all lesson 6 scripts](/downloads/shmup/lesson-06.zip). The archive contains code and assembly definitions, not scenes, prefabs, or the pictured artwork. Assemble the scene using this lesson. When upgrading, replace files at the same paths; never put two versions of a class in Assets.
-
+[Download the lesson 6 scripts](/downloads/shmup/lesson-06.zip) — code and assembly definitions only, no scenes, prefabs, or the pictured artwork. When upgrading from an earlier lesson, overwrite files at the same paths.
 
 Next: [Shmup #7](/lab/unity-shmup-07-waves-asteroids-en).
-

@@ -6,7 +6,7 @@ excerpt: "Khám phá hành trình trở thành một game developer, từ việc
 coverImage: "/images/posts/game-dev-journey/cover.webp"
 category: "devlog"
 tags: ["Game Development", "Career Journey", "Game Developer", "Unity"]
-published: true
+published: false
 featured: false
 ---
 

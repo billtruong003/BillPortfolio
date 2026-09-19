@@ -1,7 +1,7 @@
 ---
 title: "Shmup #11: From project to playable link — build and publish for the Web"
 date: "2026-09-24"
-updated: "2026-09-13"
+updated: "2026-09-19"
 lang: en
 translationKey: unity-shmup-11-build-webgl
 series: "shmup"
@@ -14,19 +14,25 @@ published: true
 featured: false
 ---
 
-<div class="lesson-flow"><span>Completed project</span><span>Web build</span><span>Local HTTP</span><span>Hosting</span><span>Another player</span></div>
+<div class="lesson-flow"><span>Finished project</span><span>Web build</span><span>Local HTTP</span><span>Hosting</span><span>Someone else plays</span></div>
 
-## First gate: finish a complete run in the Editor
+## Five gates
 
-Lesson 10 produced the final SEU_10_Juice scene. Build that scene; a separate lesson 11 scene is unnecessary. Save the scene and assets before proceeding.
+Between a project in the Editor and a link somebody else can click there are five gates. Clear one and close it behind you, because letting an Editor bug reach the Web build means adding two more layers to search: the browser and the server.
 
-Play from zero score through Game Over and Restart. Verify controls, audio, and pickups without red errors. Record the Unity and package versions. An Editor bug becomes harder to diagnose after adding browser and server layers.
+Lesson 10 left you with the final scene, `SEU_10_Juice`. This lesson publishes that exact scene, with no need to copy it into a scene 11 just for the build. Save the scene and all assets before starting.
 
-The game supports keyboard and gamepad. Portrait proportions do not supply touch controls; describe its actual input support when sharing.
+## Gate 1: the Editor build survives a full run
 
-## Understand the build's path
+Play from 0 points through Game Over and Restart. Check the controls, the audio, the pickups, and that the Console has no red lines left. Note down the Unity version and package configuration you are using.
 
-Unity turns code and assets into files downloaded over HTTP. `.wasm` contains WebAssembly code, `.data` contains packaged data, and the framework and loader coordinate initialization.
+This is the gate worth being strict about, because each later gate adds another thing that can break. A gameplay bug found in the Editor is debugged in the Editor. The same bug found on the Web build means eliminating the browser and the server first before arriving back where you started.
+
+This game plays on keyboard and gamepad. The vertical frame does not come with touch controls, so say that plainly next to the link when you share it.
+
+## Understand what a build produces
+
+Unity turns your code and data into a set of files that the browser downloads over HTTP. The `.wasm` file is the WebAssembly executable, `.data` holds packed assets, and the framework and loader handle startup.
 
 ```text
 ShootEmUp/
@@ -39,84 +45,91 @@ ShootEmUp/
     ShootEmUp.data
 ```
 
-Exact names depend on build settings. Inspect the generated folder and index.html rather than renaming one file while leaving old loader references.
+Exact filenames depend on the build configuration, so always read the real names in the folder and in the generated `index.html`. Renaming a single file while the loader still points at the old name is a reliable way to break a build.
 
-## Build gate: establish a working baseline
+## Gate 2: configure for correctness first
 
-Install Web Build Support through Unity Hub. In **File → Build Profiles**, select Web and Switch Platform. Enable **only SEU_10_Juice** in Scene List, not every tutorial scene.
+Unity Hub needs Web Build Support installed for this Editor. Open **File → Build Profiles**, choose Web, and Switch Platform. In the **Scene List**, enable only `SEU_10_Juice` and remove the learning scenes from earlier lessons.
 
-| Setting | Starting choice | Purpose |
+That Scene List step is small and ruins the whole build when wrong, because Unity treats the first scene in the list as the entry point. Enable all twelve scenes instead and the build balloons, carrying every asset those older scenes reference. Note that Unity 6's Build Profiles window differs from the older Build Settings, so older tutorials point at a menu that no longer exists.
+
+| Setting | Starting configuration | Purpose |
 |---|---|---|
-| Product Name | ShootEmUp | Product identity |
+| Product Name | ShootEmUp | Product name |
 | Default Canvas | 540 × 960 | 9:16 frame |
-| Compression Format | Disabled for the first release check | Reduce server-configuration variables |
-| Data Caching | Enabled | Allow caching where supported |
-| Managed Stripping | Keep initial default | Establish correctness before increasing it |
-| Exceptions | Retain diagnostic support | Read runtime failures |
-| Development Build | On for diagnosis, off for release measurement | Separate the two tasks |
+| Compression Format | Disabled for the first test build | One fewer server-dependent variable |
+| Data Caching | On | Lets the browser cache data where supported |
+| Managed Stripping | Leave at default | Get it correct first, optimise later |
+| Exceptions | Keep error support | Readable runtime errors while diagnosing |
+| Development Build | On while diagnosing, off while measuring | Keep the two purposes separate |
 
-Build into `Builds/WebGL/ShootEmUp`, outside Assets. Do not move individual files while the build is running. Development and Release builds differ; label which one you measure.
+![Player Settings for the Web platform](/images/posts/unity-shmup/11/build_01_player-settings-webgl.webp)
 
-Run In Background does not guarantee steady execution in a background browser tab. Browsers may throttle it, so do not promise precise continued gameplay while the tab is hidden.
+The Compression Format row deserves emphasis. Disabled for the first build is not because compression is bad, but because compression requires the server to send the right headers; combine two unverified things in one attempt and a failure tells you nothing about which one broke. Turn compression on once you have a build that works.
 
-## Local gate: use HTTP rather than opening a file
+Build into `Builds/WebGL/ShootEmUp`, outside the Assets folder. Do not edit or move files while the build is running.
 
-With Node.js available, run from the project directory:
+One note on Run In Background: it does not guarantee steady execution in a background tab, because browsers are allowed to throttle tabs that are not visible. Do not design gameplay assuming the game keeps running accurately once the player switches tabs.
+
+## Gate 3: serve over HTTP, never open the file directly
+
+With Node.js installed, run this from the project folder:
 
 ```bash
 npx serve Builds/WebGL/ShootEmUp
 ```
 
-Open the local address printed by the server. Opening index.html through file:// is not equivalent to hosting and can fail when fetching WebAssembly or assets.
+Open the local address the server prints. Opening `index.html` directly through `file://` is not equivalent to hosting and usually fails to load WebAssembly, because browsers apply a very different security policy to that protocol.
 
-Inspect DevTools → Network and Console. Loader, framework, wasm, and data must load correctly, not receive an HTML error page disguised by status 200. Click the canvas and test input. Audio may require a click or tap because of [browser autoplay restrictions described by Unity](https://docs.unity3d.com/6000.0/Documentation/Manual/webgl-audio.html).
+Open DevTools and switch to the Network and Console tabs. The loader, framework, wasm, and data files all have to arrive with status 200 and the right content type. The trap here is that a misconfigured server can still return 200 along with an HTML error page instead of the real file, so read the Type column and the size rather than only the number 200.
 
-Test first load and reload, all four movement edges, pickups, Game Over, and Restart. A loading bar reaching 100% is not a complete test.
+Once the game reaches its first screen, click the canvas before testing the controls. Audio may stay silent until that first interaction because of [the browser autoplay policy Unity documents](https://docs.unity3d.com/6000.0/Documentation/Manual/webgl-audio.html) — that is browser behavior, not a bug on your side.
 
-## Hosting gate: preserve the folder and verify its URL
+Test both a fresh load and a reload. Fly into all four edges, collect a buff, reach Game Over, and Restart. A loading bar reaching 100% proves only that the files downloaded.
 
-Upload the whole build directory to your static host, preserving relative paths. Test its index.html URL directly before embedding it in a separate page. Use HTTPS for sharing.
+## Gate 4: hosting and headers
 
-An uncompressed baseline confirms paths and structure. Enabling gzip or Brotli in a release build requires matching server headers; changing extensions alone is insufficient:
+Upload the whole build folder to whichever static host you use, preserving the relative folder structure. Test the `index.html` URL directly before embedding it in another page. Use HTTPS for anything you share.
 
-| File form | Content-Encoding | Important Content-Type |
+When you enable gzip or Brotli for the release build, the server has to send matching headers — this is not just a matter of changing file extensions:
+
+| Form | Content-Encoding | Content-Type |
 |---|---|---|
-| Uncompressed .wasm | Do not incorrectly set gzip/br | application/wasm |
+| Uncompressed .wasm | No gzip/br header | application/wasm |
 | .wasm.gz | gzip | application/wasm |
 | .wasm.br | br | application/wasm |
 
-Decompression Fallback offers JavaScript decompression when server headers cannot be controlled, with loading tradeoffs. Consult [Unity's Web deployment documentation](https://docs.unity3d.com/6000.0/Documentation/Manual/webgl-deploying.html) for your hosting configuration.
+If you cannot control your host's headers, use Decompression Fallback: Unity ships JavaScript-side decompression, at the cost of slower startup. Read [Unity's Web deployment guide](https://docs.unity3d.com/6000.0/Documentation/Manual/webgl-deploying.html) before configuring a specific host.
 
-When the page and build use different origins, check CORS too. Do not add unrelated headers to fix a simple 404 path error.
+If you embed the game on one origin while loading the build from another, you also need to handle CORS. When you hit a 404, find the wrong path rather than enabling headers until the errors happen to stop.
 
-## Measure before calling a change an optimization
+## Gate 5: measure before calling it optimised
 
-| Measurement | Record |
+| Measurement | How to record it |
 |---|---|
-| Output size | Total file bytes on disk |
-| Transferred data | Network Transfer Size with a cold cache |
-| Time to play | URL opened until controls respond |
-| Correctness | Repeat the same gameplay checks after each change |
+| Output size | Total bytes of the files on disk |
+| Data transferred | Network tab, cold cache, Transfer Size column |
+| Time to play | From opening the URL to having control |
+| Correctness | Replay the same scenario after every change |
 
-More aggressive stripping may reduce code, but requires retesting initialization and reflection paths. Change one factor at a time: stripping, compression, or textures. The author's build size is not a mandatory target for different artwork and content.
+The rule is to change exactly one thing at a time: stripping, or compression, or textures. Stronger stripping does reduce code size, but it forces you to re-test initialisation paths and anything using reflection.
 
-Warm-cache loading may be faster than cold-cache loading. Record browser, device, network, and cache state; a number without conditions cannot support a comparison.
+Every number needs its conditions attached: which browser, which device, what network, warm or cold cache. A warm-cache load is considerably faster than a cold one, so a number on its own compares to nothing. And do not treat your own machine's build size as a required target for a different project, because most of the size is assets rather than code.
 
-<details><summary>Case study: embedding into this portfolio's Arcade</summary>
+<details><summary>Case study: embedding into this site's Arcade</summary>
 
-This site uses `public/webgl-games/registry.json`. Each entry describes the Build URL, buildName, compression, and aspect ratio. UnityPlayer uses it to construct loader/framework/wasm/data URLs. This is a website-specific integration, not a Unity requirement.
+This site keeps a registry at `public/webgl-games/registry.json`. Each entry describes the Build folder URL, the `buildName`, the compression format, and the aspect ratio. The `UnityPlayer` component uses that entry to construct URLs for the loader, framework, wasm, and data. This is how this website integrates builds, not a required Unity step.
 
-For CDN/R2 hosting, upload first, verify the actual file URLs, then update the registry with their real names. A placeholder path is not an existing endpoint.
+If you host the build on a CDN or R2, upload first, open each real URL to confirm it works, and only then update the registry with the actual filenames.
 
 </details>
 
-## Before sending the link
+## Checklist before sending the link
 
-Another person should open the URL in a fresh window, understand the controls, and complete a run. Verify complete downloads, audio after interaction, correct framing, clean restarts without duplicate events, and no gameplay errors. State keyboard/gamepad support beside the game.
+Somebody else opens the URL in a fresh window, understands the controls, and completes a full run. No missing files, audio works after the first interaction, the frame has the right aspect, restarting does not duplicate events, and the Console shows no gameplay errors. State the keyboard and gamepad requirement right next to the game.
 
-You have connected a complete chain: scene → input → shooting → pooling → collision → data → waves → session → pickups → feedback → Web. Enemy bullets, drones, or pause can follow, but each extension deserves explicit rules and repeatable checks of its own.
+You have now connected a complete chain: scene → input → bullets → pooling → collision → data → waves → runs → pickups → feedback → Web build. If you want to keep going, enemy fire, tracking drones, or a pause screen all make good exercises. Each one needs its own rules table and its own test pass, exactly the way these eleven stages worked.
 
 ## Source for this stage
 
-[Download all lesson 11 scripts](/downloads/shmup/lesson-11.zip). The archive contains code and assembly definitions, not scenes, prefabs, or the pictured artwork. Assemble the scene using this lesson. When upgrading, replace files at the same paths; never put two versions of a class in Assets.
-
+[Download the lesson 11 scripts](/downloads/shmup/lesson-11.zip) — code and assembly definitions only, no scenes, prefabs, or the pictured artwork. When upgrading from an earlier lesson, overwrite files at the same paths.

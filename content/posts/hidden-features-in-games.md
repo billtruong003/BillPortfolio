@@ -6,7 +6,7 @@ excerpt: "Khám phá những tính năng ẩn trong các trò chơi nổi tiến
 coverImage: "/images/posts/hidden-features-in-games/cover.webp"
 category: "devlog"
 tags: ["AI", "Game Mechanics", "Hidden Features", "Easter Eggs", "Game Design"]
-published: true
+published: false
 featured: false
 ---
 

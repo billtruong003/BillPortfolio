@@ -6,7 +6,7 @@ excerpt: "As a game developer, optimizing your game is crucial for a smooth play
 coverImage: "/images/posts/perf-comparison.webp"
 category: "tutorial"
 tags: ["Game Development", "Optimization", "Performance", "Unity", "Unreal Engine"]
-published: true
+published: false
 featured: false
 ---
 

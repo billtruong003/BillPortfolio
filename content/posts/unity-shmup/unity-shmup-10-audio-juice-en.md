@@ -1,7 +1,7 @@
 ---
 title: "Shmup #10: Designing feedback — hear and see each event"
 date: "2026-09-23"
-updated: "2026-09-13"
+updated: "2026-09-19"
 lang: en
 translationKey: unity-shmup-10-audio-juice
 series: "shmup"
@@ -14,30 +14,30 @@ published: true
 featured: false
 ---
 
-<div class="lesson-compare"><div><strong>LOGIC ONLY</strong><p>HP decreases, enemies disappear, score increases.</p></div><div><strong>WITH FEEDBACK</strong><p>Hear shots, see hits, recognize kills, and distinguish player damage.</p></div></div>
+<div class="lesson-compare"><div><strong>LOGIC ONLY</strong><p>HP drops, enemies vanish, score climbs.</p></div><div><strong>WITH FEEDBACK</strong><p>Hear the shot, see the hit, register the kill, feel the ship take damage.</p></div></div>
 
-## Begin with what the player needs to perceive
+## Start from what the player needs to notice
 
-Start with the completed run and pickup systems, saving `SEU_10_Juice`. This lesson does not change damage, probabilities, or firing rates to improve feel. It makes the existing rules' outcomes readable.
+The run already obeys every rule. But firing makes no sound, taking a hit shows nothing, and enemies die in silence. This lesson changes not one damage number. It only makes the rules that already exist visible to the player.
+
+Save the scene as `SEU_10_Juice`. The lesson splits into four independent stages — audio, flash, explosions, shake — and each one works on its own. Finish and verify a stage before moving to the next, because four overlapping effects are very hard to debug together.
 
 | Event | Sound | Visual | Camera |
 |---|---|---|---|
-| Fired | Quiet laser | Existing bullet | None |
-| Enemy.Damaged | Optional | Short flash | None |
-| Enemy.Killed | Explosion | Burst at death position | Light shake |
+| Fired | Small laser | Bullet already exists | None |
+| Enemy.Damaged | Optional | Brief flash | None |
+| Enemy.Killed | Explosion | Burst at the death position | Light shake |
 | Player.Damaged | Distinct hit | Ship flash | Stronger shake |
-| Collected | Pickup | Shield when applicable | None |
-| GameOver | End cue | Existing panel | No additional shake |
+| Collected | Pickup | Shield if applicable | None |
+| GameOver | Ending sound | Panel already exists | None |
 
-Gameplay should not directly invoke audio, particles, and the camera for each kill. It announces events; listeners translate them into feedback. Disabling a listener should remove its effect without breaking the rules.
+The principle throughout: gameplay only announces events, and listeners turn events into feedback. One kill should not have to call `AudioSource`, a particle system, and the camera itself. The test is that disabling every listener leaves the run obeying all its rules, having lost only the sight and sound.
 
-## Sound stage: finish one shot first
+## Stage 1: audio
 
-Use short clips you own or [Kenney Sci-fi Sounds](https://kenney.nl/assets/sci-fi-sounds). Choose five clips and give them recognizable roles: Laser, Explosion, Hit, Pickup, and GameOver under Audio/SFX. These are roles, not required filenames.
+Use short clips you have, or grab [Kenney Sci-fi Sounds](https://kenney.nl/assets/sci-fi-sounds). Pick five and name them by role inside `Audio/SFX`: Laser, Explosion, Hit, Pickup, GameOver.
 
-Replace PlayerShooting and PlayerPowerups with lesson 10's versions, exposing Fired and Collected. Health already has a dedicated Damaged event from lesson 5, so healing is not mistaken for a hit.
-
-Create the complete GameSfx file:
+Replace `PlayerShooting` and `PlayerPowerups` with the lesson 10 versions, which add the `Fired` and `Collected` events. `Health` already has its own `Damaged` event from lesson 5, and this is where that decision pays off: `Damaged` fires only on a genuine hit, so healing never triggers an impact sound.
 
 **Assets/_ShootEmUp/Scripts/Audio/GameSfx.cs**
 
@@ -117,19 +117,29 @@ namespace ShootEmUp.Audio
 }
 ```
 
-Awake caches AudioSource; OnEnable subscribes and OnDisable removes each subscription. PlayOneShot lets short clips overlap. Keep the laser quieter than the player hit so sustained firing does not mask damage feedback.
+The whole class is a table mapping events to clips, and the entire `OnDisable` exists to unhook exactly what `OnEnable` hooked up. `PlayOneShot` lets short clips overlap on one `AudioSource`, unlike `Play` which cuts off whatever is already running.
 
-Create a GameSfx object with AudioSource **Play On Awake off** and **Spatial Blend = 0**. Assign the five event sources and five clips. Camera Shake can remain empty during audio testing. Keep exactly one active AudioListener, normally on Main Camera.
+The `laserVolume` default of 0.35 is a mixing decision rather than an arbitrary number. At six shots per second, a laser at full volume drowns out the sound warning you that the ship is taking damage, which is the one sound the player most needs to hear.
 
-Test firing, collection, taking damage, kills, and Game Over. Resolve duplicated playback before adding visuals.
+Create an Empty named `GameSfx` and add an `AudioSource` with **Play On Awake off** and **Spatial Blend = 0**. Spatial Blend 0 means 2D audio that plays evenly regardless of position, which is what interface SFX want.
 
-## Flash stage: control one sprite's color
+![GameSfx before wiring five sources and five clips](/images/posts/unity-shmup/10/juice_01_gamesfx-before.webp)
 
-A flash changes RGB briefly while preserving the sprite's alpha. The shader exposes `_FlashAmount`: zero is normal, one is the flash color. **HitFlash** listens to Damaged and changes that property on its renderer.
+Wire the five event sources and five clips. Leave Camera Shake empty for now; the final stage fills it:
 
-Create `Art/Shaders/SpriteFlash.shader` from the complete source below. It is a minimal unlit shader for this series' URP renderer configuration, not a replacement for every SpriteRenderer feature.
+![GameSfx fully wired](/images/posts/unity-shmup/10/juice_02_gamesfx-after.webp)
 
-<details><summary>Complete shader — expand when creating the file</summary>
+Main Camera must have exactly one active `AudioListener`; more than one makes Unity warn you and the audio behave strangely.
+
+Press Play and try each action: fire, collect, take damage, kill, die. If one keypress produces two sounds, a listener is subscribed twice — check whether two `GameSfx` objects exist in the scene. Fix that before moving to the visuals.
+
+## Stage 2: flash
+
+A flash changes a sprite's RGB for a very short moment and then restores it, while keeping alpha so the silhouette does not break. The shader takes a `_FlashAmount` parameter: 0 is the normal colour, 1 is the flash colour.
+
+Create `Art/Shaders/SpriteFlash.shader`. It is a minimal unlit shader matching this series' URP setup, not a full replacement for every Sprite Renderer feature.
+
+<details><summary>Full shader — open when creating the file</summary>
 
 **Assets/_ShootEmUp/Art/Shaders/SpriteFlash.shader**
 
@@ -212,9 +222,13 @@ Shader "ShootEmUp/SpriteFlash"
 
 </details>
 
-The fragment blends straight color, then multiplies alpha **once** before Blend One OneMinusSrcAlpha. Multiplying both the flash color and final result would darken partially transparent edges incorrectly.
+The easiest thing to get wrong sits in the last two lines of `frag`. The fragment blends the colour first and multiplies by alpha **exactly once**, because the blend mode is `One OneMinusSrcAlpha`, which is premultiplied alpha. Multiply alpha into both the flash colour and the result and the sprite's semi-transparent edges darken in a way that is hard to explain.
 
-Create **Mat_SpriteFlash**, choose ShootEmUp/SpriteFlash, and set Flash Amount 0. Assign it to Player and the enemy prefab. Create HitFlash and attach it to both:
+Create a **Mat_SpriteFlash** material using the `ShootEmUp/SpriteFlash` shader with Flash Amount 0:
+
+![The Mat_SpriteFlash material](/images/posts/unity-shmup/10/juice_03_material.webp)
+
+Assign that material to the Sprite Renderer on `Player` and on the enemy prefab, then add `HitFlash` to both.
 
 **Assets/_ShootEmUp/Scripts/FX/HitFlash.cs**
 
@@ -288,13 +302,19 @@ namespace ShootEmUp.FX
 }
 ```
 
-MaterialPropertyBlock assigns a value per renderer without editing the shared material. It is not a batching guarantee; inspect the render path and SRP Batcher compatibility in Frame Debugger when optimizing.
+`MaterialPropertyBlock` is where this lesson goes past the usual tutorial. The common approach is `spriteRenderer.material.SetFloat(...)`, but touching `.material` makes Unity clone a separate material for that renderer, so ten enemies become ten materials. A property block writes a per-renderer value while every renderer keeps sharing one material asset.
 
-Test a 2 HP enemy: the first hit leaves it alive long enough to see the flash. The fatal hit removes it immediately, so the explosion communicates the kill. A shielded player receives no Damaged event when damage is blocked.
+Calling `SetFlash(0f)` in `OnEnable` is the lesson 4 pooling rule applied to effects: an enemy killed mid-flash returns to the pool with `_FlashAmount` still at 1, and comes back pure white next spawn unless it is reset.
 
-## Explosion stage: preview before pooling
+![A flash frame on an enemy that just took a hit](/images/posts/unity-shmup/10/juice_04_enemy-prefab-hitflash.webp)
 
-Create **FX_Explosion** and add ParticleSystem:
+![The white flash lasting 0.08 seconds](/images/posts/unity-shmup/10/juice_05_flash-frame.webp)
+
+Test on a 2 HP enemy: the first hit leaves it alive so you see the flash, while the second removes it immediately, which is why the explosion in the next stage is what signals a kill. A shielded ship receives no `Damaged` event so it does not flash when a hit is blocked — correct, because no damage occurred.
+
+## Stage 3: explosions
+
+Create an Empty named **FX_Explosion** and add a `ParticleSystem`:
 
 | Module | Starting configuration |
 |---|---|
@@ -303,13 +323,17 @@ Create **FX_Explosion** and add ParticleSystem:
 | Main | Simulation Space World, Stop Action Callback |
 | Emission | Rate 0, Burst at 0, Count 22 |
 | Shape | Circle, Radius 0.15 |
-| Size over Lifetime | Decrease from 1 to 0 |
-| Color over Lifetime | Yellow/orange, alpha fading to 0 |
+| Size over Lifetime | Falling from 1 to 0 |
+| Color over Lifetime | Yellow/orange, alpha falling to 0 |
 | Renderer | Sorting FX, transparent unlit particle material |
 
-A material using **Universal Render Pipeline/Particles/Unlit**, Surface Type Transparent, and a soft particle texture works as a starting point. Preview it first: gameplay code cannot fix an invisible material.
+![The FX_Explosion ParticleSystem](/images/posts/unity-shmup/10/juice_06_particle-inspector.webp)
 
-Add PooledObject and PooledParticle, then save the prefab:
+Two rows matter especially. **Simulation Space World** leaves the particles where the explosion happened rather than dragging them along with the object; set to Local, the explosion follows the pooled object when it gets reused. **Stop Action Callback** is what makes `OnParticleSystemStopped` fire at all, and forgetting it means the object never returns to the pool.
+
+Build the particle material from **Universal Render Pipeline/Particles/Unlit** with Surface Type Transparent and a soft particle texture. Preview the ParticleSystem in Scene view to confirm particles actually appear before wiring any code, because no amount of code rescues an invisible material.
+
+Add `PooledObject` and `PooledParticle`, then save it as a prefab.
 
 **Assets/_ShootEmUp/Scripts/FX/PooledParticle.cs**
 
@@ -344,17 +368,21 @@ namespace ShootEmUp.FX
 }
 ```
 
-Create ExplosionPool with FX_Explosion, Prewarm 8, Max Size 30. Add ExplosionOnKill to a scene object and assign the pool. Its complete file is in the ZIP. It supplies position and scale to Get before activation, preventing the initial burst from using a previous location.
+Create an `ExplosionPool` with the `FX_Explosion` prefab, Prewarm 8, Max Size 30. Add `ExplosionOnKill` to a scene object and wire the pool in; the complete file is in the source package. It calls `Get` with the position and scale **before** the particle system is enabled, so the first burst never appears where the previous explosion happened.
 
-Returning requires Stop Action = Callback. Confirm an explosion becomes inactive when finished and can play again on another kill. Retained old particles indicate a reset/clear problem.
+![An explosion at the position of a dead enemy](/images/posts/unity-shmup/10/juice_07_explosion-frame.webp)
 
-## Shake stage: keep gameplay bounds stable
+Verify: after the explosion the object returns to inactive in the Hierarchy, and killing the next enemy explodes again. If a new explosion carries leftover particles from the previous one, revisit the ParticleSystem's clear behavior.
 
-Shaking the camera position read by ScreenBounds could also shake spawn and movement limits. Create **CameraRig** at (0,0,0), parent Main Camera beneath it, and set camera local position (0,0,−10). Keep orthographic Size 8 and local rotation 0.
+## Stage 4: camera shake
 
-Lesson 10's PlayerMovement and ScreenBounds read gameplay center from CameraRig when a parent exists. Replace both files from the ZIP. Do not use an unrelated offset parent with this convention.
+Shaking the Main Camera's position directly is the quietest mistake in this lesson. `ScreenBounds` reads the camera position to compute spawn regions and the ship's movement bounds, so a shaking camera shakes both of those, and the ship gets nudged with every explosion.
 
-Attach CameraShake to **Main Camera**, not the rig:
+The fix is to separate them: create an Empty named **CameraRig** at (0,0,0), make Main Camera its child, and keep the camera's local position at (0,0,−10). The camera stays orthographic at Size 8 with local rotation 0. The rig stays still as the gameplay frame, and the child camera is what is allowed to shake.
+
+Replace `PlayerMovement` and `ScreenBounds` with the lesson 10 versions from the source package: they take the gameplay centre from the `CameraRig` parent when one exists. Do not put the camera under some other parent with an offset outside this convention.
+
+Attach `CameraShake` to **Main Camera**, not to the rig.
 
 **Assets/_ShootEmUp/Scripts/FX/CameraShake.cs**
 
@@ -408,18 +436,24 @@ namespace ShootEmUp.FX
 }
 ```
 
-Assign it to GameSfx. Kills use light shaking; player hits use the defaults. A new request replaces the current shake in this version. Disabling it must restore the resting position.
+`falloff` decays from 1 to 0, so the shake hits hard and dies away, which is how a real impact behaves. A constant-amplitude shake reads as an earthquake rather than an explosion.
 
-## Combine effects and exercise reuse
+A new request arriving mid-shake replaces the current one rather than stacking, thanks to the `StopCoroutine` at the top of `Shake`. And `restPosition` is always restored when the component is disabled, so the camera never gets stuck off-centre.
 
-Play a sequence: rapid fire, several close kills, a blocked shield hit, shield expiry, player damage, Game Over, then Restart. Healing must not play a hit sound. A reused enemy must not flash merely because its new type has fewer HP. Explosions belong at the death position. Camera shake returns to rest without moving player boundaries.
+Drag this component into the Camera Shake field on `GameSfx`. A kill uses a light 0.12 shake over 0.15 seconds, while the ship taking damage uses the stronger default — the player can tell the two events apart by feel alone.
 
-Feedback now follows explicit events. Shaders and particles provide presentation; the run must still behave correctly with GameSfx, HitFlash, and ExplosionOnKill disabled.
+## Combine everything and check the reuse points
+
+Play a full run and work through this list: fire a long burst, kill several enemies close together, let a shield block a hit, let the shield expire, take a hit, reach Game Over, then Restart.
+
+Five things must hold. No hit sound when collecting a health pickup. A recycled enemy does not flash just because its new type has less health. Explosions appear exactly where enemies died. The camera returns to its rest position after every shake. And the ship's movement bounds do not drift while the camera shakes.
+
+![A run with sound, flash, explosions, and shake all active](/images/posts/unity-shmup/10/juice_08_juice.webp)
+
+The feedback layer now hangs off clearly defined events. The shader and particles are presentation only: disable `GameSfx`, `HitFlash`, and `ExplosionOnKill` and the run behaves exactly as it did in lesson 9.
 
 ## Source for this stage
 
-[Download all lesson 10 scripts](/downloads/shmup/lesson-10.zip). The archive contains code and assembly definitions, not scenes, prefabs, or the pictured artwork. Assemble the scene using this lesson. When upgrading, replace files at the same paths; never put two versions of a class in Assets.
-
+[Download the lesson 10 scripts](/downloads/shmup/lesson-10.zip) — code and assembly definitions only, no scenes, prefabs, or the pictured artwork. When upgrading from an earlier lesson, overwrite files at the same paths.
 
 Next: [Shmup #11](/lab/unity-shmup-11-build-webgl-en).
-

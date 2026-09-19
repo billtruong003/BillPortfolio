@@ -1,7 +1,7 @@
 ---
 title: "Shmup #0: The starting map — prepare a project you can finish"
 date: "2026-09-13"
-updated: "2026-09-13"
+updated: "2026-09-19"
 lang: en
 translationKey: unity-shmup-00-setup
 series: "shmup"
@@ -14,42 +14,52 @@ published: true
 featured: false
 ---
 
-<div class="lesson-map"><strong>DESTINATION</strong><p>A portrait shooter: steer, fire, survive waves, collect powerups, and restart after losing your health.</p><ol><li>#0–#3 · Screen composition and controls</li><li>#4–#7 · Object lifetime, collisions, data, and waves</li><li>#8–#11 · Sessions, pickups, feedback, and a Web build</li></ol></div>
+<div class="lesson-map"><strong>DESTINATION</strong><p>A vertical shooter: fly a ship, shoot enemies, survive waves, collect drops, and play again after losing all health.</p><ol><li>#0–#3 · Screen and controls</li><li>#4–#7 · Object lifetime, collision, data, and waves</li><li>#8–#11 · Runs, pickups, feedback, and the Web build</li></ol></div>
 
-## Understand the destination before opening the Editor
+## Build the shelves before building the game
 
-A shooter appears to run many systems at once. We will break it into questions: what does the camera see, how does input become movement, how long does a bullet live, and who owns the score? Each lesson finishes an observable behavior before expanding it.
+Every Unity project starts tidy and turns into a mess around lesson four. This lesson writes no code at all. It just sets up a place for each kind of asset to live, including the `_Common` folder that will look pointless until lesson 4 explains why it exists.
 
-You should know C# variables, conditions, loops, methods, and classes. The [C# series](/lab/series/csharp) covers these foundations in Vietnamese. Events and coroutines are introduced where they become useful. This game targets keyboard and gamepad; portrait proportions do not automatically provide touch input.
+A shoot 'em up looks like many systems running at once. The way I break it apart is by asking one question at a time: what does the camera see, how does a key press become movement, how long does a bullet live, who owns the score. Each lesson answers one of those and leaves behind one behavior you can observe.
 
-The screenshots come from the author's reference project. This edition includes **source archives for each stage**, without prebuilt scenes or prefabs. Some Inspector screenshots predate this edition; the written settings and attached source define the current exercise.
+The approach across the whole series fits in a line I keep coming back to: **make it exist first, you can make it good later.** Lesson 3 deliberately fires bullets with `Instantiate` and `Destroy` even though that is wasteful, so lesson 4 has something concrete to fix. Seeing the problem in your own Hierarchy sticks better than reading advice about avoiding it.
 
-## Use a consistent toolchain
+> **About this series**
+>
+> You need C# basics first: variables, conditionals, loops, methods, and classes. If that is new, read the [C# series](/lab/series/csharp) first. Events and coroutines get explained where they are used.
+>
+> Screenshots come from my reference project, so a few Inspectors may show an earlier build. Where a screenshot disagrees with a configuration table in the text, the table wins.
+>
+> Each lesson ships a script package, not a prebuilt scene or prefab. The game takes keyboard and gamepad input; a 9:16 frame does not imply touch controls.
 
-The reference project records **Unity 6000.3.10f1**, **URP 17.3.0**, and **Input System 1.18.0**. These are project versions, not a promise that every Unity 6 release has identical menus.
+## One consistent toolchain
 
-Install **Web Build Support** through Unity Hub if you intend to export in lesson 11. Create a **Universal 3D** project named `ShmupLab`. Unlit sprites and an orthographic camera work in this template. Keep its default renderer to match lesson 10's shader.
+The reference project runs **Unity 6000.3.10f1**, **URP 17.3.0**, and **Input System 1.18.0**. Other Unity 6 builds may arrange the interface slightly differently, but every step here is findable.
 
-Open **Window → Package Manager** and install the **2D** feature set and **Input System** if needed. Accept the input backend change and restart. Check that **Project Settings → Player → Active Input Handling** includes Input System. No third-party tooling is needed.
+In Unity Hub, add the **Web Build Support** module if you plan to publish to the Web in lesson 11. Then create a **Universal 3D** project named `ShmupLab`.
+
+A 3D template makes 2D games perfectly well, because we use unlit sprites and an orthographic camera. I chose it so later 3D and shader series can share one project, and so the default renderer matches the shader in lesson 10.
+
+Open **Window → Package Manager** and install the **2D** feature set plus **Input System** if they are missing. Unity will ask to restart in order to switch the input backend — say yes. Afterwards check that **Project Settings → Player → Active Input Handling** reads Input System. No third-party packages are needed anywhere in the series.
 
 ## Prepare artwork by role
 
-Use existing artwork or [Kenney Space Shooter Extension](https://kenney.nl/assets/space-shooter-extension). Its filenames differ from the screenshots; select by role instead of looking for an identical filename.
+Use sprites you already have, or grab the [Kenney Space Shooter Extension](https://kenney.nl/assets/space-shooter-extension). Filenames in that pack differ from my screenshots, so pick by role instead of hunting for a matching filename.
 
-| Role | Required artwork | Working name |
+| Role | What you need | Name to remember |
 |---|---|---|
-| Player | Upward-facing ship | Player |
-| Projectile | Small vertical shape | Laser |
-| Enemies | Two distinct shapes | InsectBasic, InsectFast |
+| Player | Ship pointing up | Player |
+| Projectile | Small shape, tall on Y | Laser |
+| Enemies | Two distinguishable shapes | InsectBasic, InsectFast |
 | Asteroids | Small, medium, large | Asteroid |
-| Pickups | Three distinct icons | Life, Shield, Rapid |
-| Background | Base color and repeating stars | Background, Stars |
+| Pickups | Three icons | Life, Shield, Rapid |
+| Background | Base colour and a tiling star pattern | Background, Stars |
 
-Lesson 1 offers an Editor-only star pattern if you lack a seamless texture. Your images may differ in size; we will calculate using pixels, PPU, and world units rather than requiring one asset pack.
+Different sprite sizes are fine, because every measurement in the series is derived from pixels, PPU, and world units. If you have no tiling star texture, lesson 1 includes a way to build star layers from sprites inside the Editor.
 
-## Give each resource a home
+## A place for each kind of asset
 
-Create these folders in the **Project window**:
+Create these folders through the **Project window**:
 
 ```text
 Assets/
@@ -66,29 +76,31 @@ Assets/
   ThirdParty/
 ```
 
-`_ShootEmUp` owns the game. `_Common` receives the pool in lesson 4. `ThirdParty` contains external resources. There is no need to organize several future games yet.
+`_ShootEmUp` holds this game. `ThirdParty` holds anything downloaded. `_Common` is empty right now and stays empty until lesson 4, where we write an object pool that is not specific to a space shooter and therefore needs somewhere to live outside `_ShootEmUp`. This is how I organise this project, not a Unity rule; a project with exactly one game can keep everything together and still work.
 
-Move assets in the Project window so Unity moves their `.meta` files too. Meta files hold GUIDs: identifiers used by scenes and prefabs to find sprites, materials, and scripts. Losing them can produce Missing references.
+Always move assets using the Project window rather than File Explorer, because Unity needs to move the accompanying `.meta` file too. A meta file holds the GUID, the identifier that scenes and prefabs use to find a sprite, material, or script again. Lose the meta and a working reference turns into Missing.
 
-![An example of grouped resources in the Project window](/images/posts/unity-shmup/00/setup_02_project-tree.webp)
+![The _ShootEmUp and _Common folders in the Project window](/images/posts/unity-shmup/00/setup_02_project-tree.webp)
 
-## Import one sprite before batch editing
+## Import one sprite before touching the rest
 
-Select the ship image. Set **Texture Type = Sprite (2D and UI)**, **Sprite Mode = Single**, and **Pixels Per Unit = 100**, then Apply. Single means one sprite per file; a spritesheet needs Multiple and defined slices.
+Select the ship sprite in the Project window and look at the Inspector. Set **Texture Type = Sprite (2D and UI)**, **Sprite Mode = Single**, **Pixels Per Unit = 100**, then press Apply.
 
-PPU connects pixels to game dimensions: a 200 px-wide image at PPU 100 and scale 1 is 2 world units wide. The next lesson's camera is 9 units wide, giving you a useful way to estimate the ship's screen coverage.
+![Texture Importer: three rows to change before Apply](/images/posts/unity-shmup/00/setup_01_texture-importer.webp)
 
-For backgrounds using Tiled drawing, select **Mesh Type = Full Rect**. Mipmaps can be disabled for this fixed-camera exercise. Odd image dimensions do not universally prevent compression; support depends on the format and target platform. Optimization is not required to confirm a successful import.
+Single is for files holding one image; a spritesheet needs Multiple and regions cut in the Sprite Editor.
 
-![Texture Importer: locate Type, Mode, and PPU before applying](/images/posts/unity-shmup/00/setup_01_texture-importer.webp)
+PPU is what connects pixels to in-game size, and it is worth understanding now because the whole series measures in it. An image 200 px wide at PPU 100 with scale 1 becomes exactly 2 world units wide. The camera in the next lesson shows 9 units across, so your freshly imported ship covers roughly two ninths of the screen width. You can estimate that ratio before dragging anything into a scene.
 
-Drag the ship into the scene to test it. If it is invisible, inspect Sprite Mode, slices, and camera position. Delete the temporary object but keep the sprite asset.
+For the background image that will use Tiled draw mode, also set **Mesh Type = Full Rect**. The camera in this series never moves, so mipmaps can be turned off.
 
-## Save checkpoints that preserve the whole lesson
+Drag the ship into a scene to check it. If nothing appears, look at Sprite Mode, the slice regions, and the camera position. Once it works, delete the test object and keep the sprite asset.
 
-Copying a scene does not freeze code: the old scene still references scripts and prefabs you may edit. Returning to an exact lesson requires a project snapshot.
+## Checkpoints that actually hold
 
-If using Git, create the repository beside Assets, Packages, and ProjectSettings. Ignore generated content:
+Copying a scene to a new name does not freeze an earlier lesson, because the old scene still points at the same scripts and prefabs you are about to edit. Returning to the exact state of a lesson requires a snapshot of the whole project.
+
+If you use Git, put the repository next to Assets, Packages, and ProjectSettings, then ignore everything Unity regenerates:
 
 ```gitignore
 /Library/
@@ -102,14 +114,18 @@ If using Git, create the repository beside Assets, Packages, and ProjectSettings
 *.slnx
 ```
 
-Keep `.meta` files, Packages, and ProjectSettings. Under Project Settings → Editor, choose **Asset Serialization = Force Text**. Git LFS is an additional option for substantial binary resources; a custom merge driver is not required to begin.
+Keep every `.meta` file plus the Packages and ProjectSettings folders. In **Project Settings → Editor**, set **Asset Serialization = Force Text** so scene and prefab files produce readable diffs.
 
-After each lesson, stop Play Mode, save, commit, and create your own `lesson-XX` tag. The website ZIPs contain tutorial source, not complete substitutes for your project checkpoints.
+After each lesson: stop Play Mode, save, commit, and tag `lesson-XX`. The ZIP files on this site carry the tutorial's source; the tags in your own repository are your checkpoints.
 
-## Ready for lesson 1
+## Ready for lesson 1?
 
-Continue when the project opens without red errors, a dragged ship sprite appears, Input System is installed, and you know where to save scenes. Scripts belong under `_ShootEmUp/Scripts`; lesson 1 establishes their assembly before using them.
+Four signs: the project opens with no red errors in the Console, the ship sprite renders when dropped into a scene, Input System is installed and active, and you know where scenes get saved. Scripts will live in `_ShootEmUp/Scripts`; the assembly definition comes in lesson 1.
 
-You now have a repeatable starting environment. Next, build the screen from its camera to its individual visual layers.
+Next up we build the screen: what the camera sees, which layer draws over which, and how to scroll a star field with no visible seam.
+
+## Source for this stage
+
+Lesson 0 has no scripts. From lesson 1 onward, each lesson ships a ZIP with code and assembly definitions, but no scenes or prefabs.
 
 Next: [Shmup #1](/lab/unity-shmup-01-scene-2d-en).

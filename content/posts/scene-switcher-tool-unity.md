@@ -68,13 +68,13 @@ The Scene Switcher Tool is a custom Unity Editor tool designed to simplify the p
 ## Screenshots
 
 #### Main Tool Window
-<img src="Editor/Resources/Image/UIPick.png" alt="Main Tool Window" width="400">
+<img src="https://raw.githubusercontent.com/billtruong003/SceneSwitcherToolUnity/main/Editor/Resources/Image/UIPick.png" alt="Main Tool Window" width="400">
 
 #### Open Tool
-<img src="Editor/Resources/Image/OpenTool.png" alt="Toggle Scene Selection" width="400">
+<img src="https://raw.githubusercontent.com/billtruong003/SceneSwitcherToolUnity/main/Editor/Resources/Image/OpenTool.png" alt="Toggle Scene Selection" width="400">
 
 #### Search Buttons
-<img src="Editor/Resources/Image/Search.png" alt="Action Buttons" width="400">
+<img src="https://raw.githubusercontent.com/billtruong003/SceneSwitcherToolUnity/main/Editor/Resources/Image/Search.png" alt="Action Buttons" width="400">
 
 ## Installation
 
