@@ -30,10 +30,10 @@ export const TrustedBy = () => {
             <div className="container mx-auto px-6">
                 <div className="flex flex-col items-center mb-16">
                     <span className="font-mono text-primary text-xs tracking-[0.4em] uppercase mb-4">
-                        Professional Journey
+                        Companies
                     </span>
                     <h2 className="text-3xl md:text-4xl font-bold text-center text-zinc-100 max-w-2xl">
-                        Proudly collaborated with
+                        Where I have worked
                     </h2>
                 </div>
 

@@ -90,14 +90,6 @@ const ChannelCard = ({ config, stats, loading }: { config: ChannelConfig; stats:
         >
             <div className={`h-20 relative overflow-hidden ${config.accent === "text-primary" ? "bg-gradient-to-r from-amber-900/40 to-orange-900/20" : "bg-gradient-to-r from-red-900/40 to-pink-900/20"}`}>
                 <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 50%)" }} />
-
-                <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2 py-1 bg-black/40 rounded-full backdrop-blur-sm border border-white/10">
-                    <span className="relative flex h-1.5 w-1.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
-                    </span>
-                    <span className="text-[9px] font-mono text-zinc-300 tracking-wider">LIVE_DATA</span>
-                </div>
             </div>
 
             <div className="relative -mt-8 px-5">
@@ -130,10 +122,12 @@ const ChannelCard = ({ config, stats, loading }: { config: ChannelConfig; stats:
                 </div>
 
                 <div className="grid grid-cols-3 gap-3 mt-auto pt-4 border-t border-white/5">
-                    {loading ? (
+                    {!loading && !stats ? (
+                        <span className="col-span-3 text-sm text-zinc-400 group-hover:text-zinc-200">Visit channel</span>
+                    ) : loading ? (
                         <div className="col-span-3 flex items-center justify-center py-2">
                             <Loader2 className="animate-spin text-zinc-600" size={16} />
-                            <span className="text-[10px] font-mono text-zinc-600 ml-2">FETCHING...</span>
+                            <span className="text-[10px] font-mono text-zinc-600 ml-2">Loading</span>
                         </div>
                     ) : (
                         <>
@@ -224,7 +218,7 @@ export const YouTubeChannels = () => {
                     })()}
 
                     <p className="text-zinc-500 text-sm max-w-md">
-                        Real-time stats from my channels. Subscribe to stay updated on dev content and VR gaming.
+                        Unity dev content, VR gameplay and AI experiments.
                     </p>
                 </div>
 
@@ -237,14 +231,6 @@ export const YouTubeChannels = () => {
                             loading={loading}
                         />
                     ))}
-                </div>
-
-                <div className="mt-8 flex items-center justify-center gap-2 text-[10px] font-mono text-zinc-700">
-                    <span className="relative flex h-1.5 w-1.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500/50 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500/50"></span>
-                    </span>
-                    DATA_REFRESHES_EVERY_5_MIN • SECURED_BY_CORS
                 </div>
             </div>
         </section>

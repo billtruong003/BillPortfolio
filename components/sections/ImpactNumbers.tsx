@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Eye, Rocket, GitBranch, Layers } from 'lucide-react';
+import { Eye, Gamepad2, BookOpen, GitBranch } from 'lucide-react';
 import { CHANNELS, CHANNEL_IDS } from '@/data/channels';
 import { resumeData } from '@/data/resume';
 
@@ -17,7 +17,7 @@ function formatViews(n: number): string {
     return n.toString();
 }
 
-export const ImpactNumbers = () => {
+export const ImpactNumbers = ({ gameCount, labPostCount }: { gameCount: number; labPostCount: number }) => {
     const [totalViews, setTotalViews] = useState<string | null>(null);
 
     const fetchViews = useCallback(async () => {
@@ -41,10 +41,10 @@ export const ImpactNumbers = () => {
     useEffect(() => { fetchViews(); }, [fetchViews]);
 
     const stats = [
-        { value: totalViews || '—', label: 'YouTube Views', sub: `Across ${CHANNELS.length} Channels`, icon: Eye },
+        { value: totalViews || resumeData.stats.youtubeViews, label: 'YouTube Views', sub: `Across ${CHANNELS.length} Channels`, icon: Eye },
+        { value: String(gameCount), label: 'Playable Games', sub: 'In the browser, Game Lab', icon: Gamepad2 },
+        { value: String(labPostCount), label: 'Dev Lab Lessons', sub: 'Unity 6 build-along series', icon: BookOpen },
         { value: `${resumeData.stats.openSourceRepos}+`, label: 'Open Source', sub: 'GitHub Repositories', icon: GitBranch },
-        { value: String(resumeData.stats.shippedTitles), label: 'Shipped Titles', sub: 'Mobile · VR · WebGL', icon: Rocket },
-        { value: '3-in-1', label: 'Code · Shaders · Tools', sub: 'Rare Skill Combo', icon: Layers },
     ];
 
     return (

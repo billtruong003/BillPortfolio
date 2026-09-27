@@ -171,7 +171,7 @@ export interface ResumeData {
     portfolio: Project[];
     certifications: { name: string; issuer: string; date: string; url?: string }[];
     /** Headline numbers shown by ImpactNumbers. Edited here, not hard-coded in the component. */
-    stats: { shippedTitles: number; openSourceRepos: number };
+    stats: { youtubeViews: string; openSourceRepos: number };
     testimonials: { quote: string; author: string; role: string }[];
     tech_stack: { languages: string[]; frameworks: string[]; others: string[] };
 }

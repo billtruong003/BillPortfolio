@@ -1,10 +1,10 @@
 ---
-title: "C# Cho Game Dev #6: OOP Nâng Cao — Inheritance, Interface & Polymorphism"
+title: "C# cho người mới #6: Kế thừa, interface và đa hình"
 date: "2024-10-30"
 lang: "vi"
 series: "csharp"
 order: 6
-excerpt: "Inheritance, abstract class, interface và polymorphism — những công cụ mạnh mẽ giúp bạn xây dựng hệ thống game linh hoạt và mở rộng được."
+excerpt: "Dùng kế thừa để không phải chép code giữa Goblin, Archer và Boss, dùng abstract class và interface để nhiều loại object dùng chung một đoạn code xử lý."
 coverImage: "/images/posts/csharp-cover.webp"
 category: "tutorial"
 tags: ["CSharp", "OOP", "Game Development", "Course"]
@@ -14,14 +14,23 @@ featured: false
 
 ## Bài toán mở đầu
 
-Bạn có class `Enemy`. Giờ bạn cần Goblin (melee), Archer (ranged), và Boss (đặc biệt). Cả 3 đều có HP, Name, TakeDamage() giống nhau, nhưng Attack() khác nhau. Copy-paste 3 lần? Sửa bug phải sửa 3 chỗ? Không. Bạn cần **Inheritance**.
+Bạn có class `Enemy`. Giờ cần thêm Goblin (đánh gần), Archer (bắn xa) và Boss. Cả ba đều có HP, Name, `TakeDamage()` giống hệt nhau, chỉ `Attack()` là khác. Chép class ra 3 lần thì chạy được, nhưng mỗi lần sửa một bug trong `TakeDamage()` bạn phải sửa 3 chỗ. Cách đúng là **kế thừa** (inheritance).
 
-## Inheritance — Kế thừa
+Như bài trước, trong các ví dụ dưới đây code chạy nằm ở trên, khai báo class nằm ở dưới cùng.
 
-Class con **kế thừa** mọi thứ từ class cha, rồi thêm/thay đổi những gì cần thiết.
+## Kế thừa
+
+Class con **kế thừa** mọi thứ từ class cha, rồi thêm hoặc thay đổi phần riêng của nó.
 
 ```csharp
-// Class cha — chứa logic chung
+Goblin g = new Goblin();
+Archer a = new Archer();
+
+g.Attack();       // "Goblin lao vào cắn! Damage: 10"
+a.Attack();       // "Archer bắn tên từ khoảng cách 20! Damage: 15"
+g.TakeDamage(20); // "Goblin nhận 20 dmg → HP: 30", hàm này kế thừa từ Enemy
+
+// Class cha: chứa phần dùng chung
 class Enemy
 {
     public string Name { get; set; }
@@ -48,7 +57,7 @@ class Enemy
     }
 }
 
-// Class con — kế thừa Enemy
+// Class con: kế thừa Enemy
 class Goblin : Enemy
 {
     public Goblin() : base("Goblin", 50, 10) { }
@@ -75,23 +84,16 @@ class Archer : Enemy
 }
 ```
 
-### Từ khóa quan trọng
+### Từ khóa cần nhớ
 
-- `: Enemy` — kế thừa từ class Enemy
-- `: base(...)` — gọi constructor của class cha
-- `virtual` — cho phép class con **ghi đè** method này
-- `override` — class con ghi đè method của cha
+- `: Enemy`: kế thừa từ class Enemy
+- `: base(...)`: gọi constructor của class cha
+- `virtual`: cho phép class con **ghi đè** hàm này
+- `override`: class con ghi đè hàm của cha
 
-```csharp
-Goblin g = new Goblin();
-Archer a = new Archer();
+## Protected: cho class con truy cập
 
-g.Attack();       // "Goblin lao vào cắn! Damage: 10"
-a.Attack();       // "Archer bắn tên từ khoảng cách 20! Damage: 15"
-g.TakeDamage(20); // "Goblin nhận 20 dmg → HP: 30" — kế thừa từ Enemy
-```
-
-## Protected — Truy cập từ class con
+Field `private` thì class con cũng không đụng vào được. Muốn giấu với bên ngoài nhưng vẫn cho class con dùng, hãy dùng `protected`:
 
 ```csharp
 class Enemy
@@ -112,7 +114,7 @@ class Boss : Enemy
 
     public void Rage()
     {
-        health += 200;  // OK — protected, truy cập từ class con
+        health += 200;  // OK vì health là protected và Boss là class con
         Console.WriteLine($"{Name} nổi giận! HP tăng lên {health}!");
     }
 }
@@ -124,11 +126,23 @@ class Boss : Enemy
 | `protected` | O | O | X |
 | `private` | O | X | X |
 
-## Abstract Class — Class không thể tạo trực tiếp
+## Abstract class: class không tạo trực tiếp được
 
-Đôi khi class cha chỉ là **khái niệm**, không nên tạo object trực tiếp. Bạn không bao giờ tạo "Enemy" chung chung — bạn tạo Goblin, Dragon, Slime cụ thể.
+Có những class cha chỉ là **khái niệm chung**. Không ai tạo một "Skill" chung chung, bạn chỉ tạo Fireball hay Heal cụ thể. Đánh dấu class là `abstract` để compiler chặn việc tạo object từ nó.
+
+Ví dụ này cần một class `Character` làm mục tiêu cho skill, nên có thêm một `Character` đơn giản ở cuối, có sẵn `TakeDamage` và `Heal`:
 
 ```csharp
+Character hero = new Character("Knight", 100);
+Fireball fb = new Fireball();
+HealSpell heal = new HealSpell();
+
+fb.ShowInfo();       // kế thừa từ Skill
+fb.Execute(hero);    // Knight mất 60 HP
+heal.Execute(hero);  // Knight hồi 40 HP
+
+// Skill skill = new Skill("?", 0);  // LỖI COMPILE! Không tạo được object từ abstract class
+
 abstract class Skill
 {
     public string Name { get; set; }
@@ -140,10 +154,10 @@ abstract class Skill
         ManaCost = manaCost;
     }
 
-    // Abstract method — BẮT BUỘC class con phải implement
+    // Hàm abstract: class con BẮT BUỘC phải viết phần thân
     public abstract void Execute(Character target);
 
-    // Method thường — class con kế thừa luôn
+    // Hàm thường: class con dùng luôn
     public void ShowInfo()
     {
         Console.WriteLine($"[{Name}] Mana: {ManaCost}");
@@ -182,14 +196,39 @@ class HealSpell : Skill
     }
 }
 
-// Skill skill = new Skill("?", 0);  // COMPILE ERROR! Không thể tạo abstract class
-Fireball fb = new Fireball();
-fb.ShowInfo();  // kế thừa từ Skill
+// Mục tiêu của skill
+class Character
+{
+    public string Name { get; set; }
+    public int Health { get; private set; }
+    public int MaxHealth { get; private set; }
+
+    public Character(string name, int maxHealth)
+    {
+        Name = name;
+        MaxHealth = maxHealth;
+        Health = maxHealth;
+    }
+
+    public void TakeDamage(int amount)
+    {
+        Health -= amount;
+        if (Health < 0) Health = 0;
+        Console.WriteLine($"  {Name}: HP {Health}/{MaxHealth}");
+    }
+
+    public void Heal(int amount)
+    {
+        Health += amount;
+        if (Health > MaxHealth) Health = MaxHealth;
+        Console.WriteLine($"  {Name}: HP {Health}/{MaxHealth}");
+    }
+}
 ```
 
-## Interface — Hợp đồng hành vi
+## Interface: bản cam kết về hành vi
 
-Interface định nghĩa **hành vi** mà class phải thực hiện, nhưng không chứa logic. Một class có thể implement **nhiều interface** (khác với inheritance chỉ 1 class cha).
+Kế thừa có một giới hạn: mỗi class chỉ có **một** class cha. Một cái thùng gỗ bị bắn vỡ được, nhân vật cũng bị bắn được, nhưng thùng gỗ không phải nhân vật, bắt nó kế thừa `Character` là sai. Interface giải quyết chuyện này: nó chỉ ghi ra class phải có những hàm nào, không chứa logic. Một class có thể implement **nhiều interface**.
 
 ```csharp
 interface IDamageable
@@ -210,7 +249,7 @@ interface IMoveable
 }
 ```
 
-Convention: Interface bắt đầu bằng chữ `I`.
+Quy ước: tên interface bắt đầu bằng chữ `I`.
 
 ### Implement interface
 
@@ -249,7 +288,7 @@ class Player : IDamageable, IHealable, IMoveable
     }
 }
 
-// Destructible barrel — nhận damage nhưng không heal, không di chuyển
+// Thùng gỗ phá được: nhận damage nhưng không hồi máu, không di chuyển
 class Barrel : IDamageable
 {
     public int Health { get; set; } = 30;
@@ -263,12 +302,12 @@ class Barrel : IDamageable
 }
 ```
 
-### Tại sao Interface quan trọng?
+### Interface có ích ở chỗ nào?
 
-Vì bạn có thể viết code **chung** cho mọi thứ implement cùng interface:
+Bạn viết được một đoạn code **dùng chung** cho mọi thứ implement cùng interface:
 
 ```csharp
-// Hàm gây damage cho BẤT CỨ THỨ GÌ IDamageable
+// Gây damage cho BẤT CỨ THỨ GÌ là IDamageable
 void DealAreaDamage(List<IDamageable> targets, int damage)
 {
     foreach (IDamageable target in targets)
@@ -279,13 +318,27 @@ void DealAreaDamage(List<IDamageable> targets, int damage)
 }
 ```
 
-Player, Enemy, Barrel, Crystal — tất cả đều nhận damage qua cùng 1 hàm. Đây chính là **Polymorphism**.
+Player, Enemy, Barrel, Crystal đều nhận damage qua cùng một hàm này. Đó chính là **đa hình** (polymorphism).
 
-## Polymorphism — Đa hình
+## Đa hình
 
-Cùng một method call, hành vi khác nhau tùy object thực tế:
+Cùng một lời gọi hàm, nhưng mỗi object chạy phiên bản của riêng nó:
 
 ```csharp
+// Đa hình: cùng kiểu Shape, hành vi khác nhau
+List<Shape> shapes = new List<Shape>
+{
+    new Circle(5),
+    new Rectangle(3, 4),
+    new Circle(10)
+};
+
+foreach (Shape shape in shapes)
+{
+    shape.Draw();  // gọi đúng hàm của class con
+    Console.WriteLine($"  Diện tích: {shape.Area():F2}");
+}
+
 abstract class Shape
 {
     public abstract float Area();
@@ -310,25 +363,22 @@ class Rectangle : Shape
     public override float Area() => Width * Height;
     public override void Draw() => Console.WriteLine($"Vẽ hình chữ nhật {Width}x{Height}");
 }
-
-// Polymorphism: cùng kiểu Shape, hành vi khác nhau
-List<Shape> shapes = new List<Shape>
-{
-    new Circle(5),
-    new Rectangle(3, 4),
-    new Circle(10)
-};
-
-foreach (Shape shape in shapes)
-{
-    shape.Draw();  // gọi đúng method của class con
-    Console.WriteLine($"  Diện tích: {shape.Area():F2}");
-}
 ```
 
-## Ví Dụ Tổng Hợp: Entity System
+## Ví dụ tổng hợp: hệ thống nhân vật
 
 ```csharp
+Warrior knight = new Warrior("Knight", 120, 25, 8);
+Mage wizard = new Mage("Wizard", 70, 20, 50);
+Warrior orc = new Warrior("Orc", 100, 30, 5);
+
+Console.WriteLine("=== BATTLE START ===\n");
+knight.Attack(orc);   // Orc có giáp, còn 80 HP
+wizard.Attack(orc);   // Phép gây x2 damage, Orc còn 45 HP
+orc.Attack(knight);   // Knight có giáp, còn 98 HP
+wizard.Attack(orc);   // Orc còn 10 HP
+knight.Attack(orc);   // Orc bị hạ
+
 interface IDamageable
 {
     int Health { get; }
@@ -423,31 +473,20 @@ class Mage : GameEntity, IAttacker
         }
     }
 }
-
-// === Battle ===
-Warrior knight = new Warrior("Knight", 120, 25, 8);
-Mage wizard = new Mage("Wizard", 70, 20, 50);
-Warrior orc = new Warrior("Orc", 100, 30, 5);
-
-Console.WriteLine("=== BATTLE START ===\n");
-knight.Attack(orc);   // Orc có armor
-wizard.Attack(orc);   // Magic damage x2
-orc.Attack(knight);   // Knight có armor
-wizard.Attack(orc);   // finish off
 ```
 
-## Bài Tập
+## Bài tập
 
-**Bài 1: Animal Kingdom**
-Tạo abstract class `Animal` (Name, Sound). Class con: `Dog`, `Cat`, `Bird`. Mỗi con override `MakeSound()`. Tạo `List<Animal>`, duyệt và gọi `MakeSound()` — polymorphism.
+**Bài 1: Thế giới động vật**
+Tạo abstract class `Animal` (Name, Sound). Các class con: `Dog`, `Cat`, `Bird`, mỗi con override `MakeSound()`. Tạo `List<Animal>`, duyệt và gọi `MakeSound()` để thấy đa hình hoạt động.
 
-**Bài 2: Skill System**
-Tạo interface `IUseable` với method `Use(Character target)`. Implement: `HealthPotion` (heal 50), `DamageScroll` (deal 30 dmg), `Shield` (tăng armor 10). Tạo list `IUseable` items, duyệt và dùng.
+**Bài 2: Vật phẩm dùng được**
+Tạo interface `IUseable` với hàm `Use(Character target)` (dùng lại class `Character` ở phần abstract class). Implement: `HealthPotion` (hồi 50 HP), `DamageScroll` (gây 30 damage), `Shield` (tăng giáp 10, bạn tự thêm property giáp vào `Character`). Tạo list `IUseable`, duyệt và dùng từng món.
 
-**Bài 3: Entity Hierarchy**
-Tạo abstract `Entity` → `Character` → `Player` / `NPC`. Tạo `Destructible` → `Barrel` / `Crate`. Interface `IInteractable` cho NPC và Crate. Tạo mixed list và tương tác.
+**Bài 3: Cây phân cấp**
+Tạo abstract `Entity`, từ đó ra `Character`, rồi ra `Player` và `NPC`. Tạo `Destructible`, từ đó ra `Barrel` và `Crate`. Interface `IInteractable` dành cho NPC và Crate. Tạo một list trộn lẫn các loại và cho chúng tương tác.
 
 ---
 
-**Bài trước:** [C# #5: OOP Basics](/lab/csharp-05-oop-basics)
-**Bài tiếp:** [C# #7: Ứng Dụng — Exception, LINQ & Delegate](/lab/csharp-07-applied)
+**Bài trước:** [C# cho người mới #5: Class, object và constructor](/lab/csharp-05-oop-basics)
+**Bài tiếp:** [C# cho người mới #7: Exception, LINQ và delegate](/lab/csharp-07-applied)

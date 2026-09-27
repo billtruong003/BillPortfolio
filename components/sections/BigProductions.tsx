@@ -33,17 +33,17 @@ export const BigProductions = () => {
     };
 
     return (
-        <section className="py-20 border-b border-white/5 bg-[#080808] relative z-20">
+        <section id="work" className="py-20 border-b border-white/5 bg-[#080808] relative z-20 scroll-mt-20">
             <div className="container mx-auto px-6">
                 <div className="mb-12">
                     <span className="font-mono text-primary text-xs tracking-[0.4em] uppercase mb-2 block">
-                        Key Deployments
+                        Work
                     </span>
                     <h2 className="text-3xl font-bold text-zinc-100 mb-4">
-                        Impactful Products
+                        Selected Work
                     </h2>
                     <p className="text-zinc-500 text-sm max-w-2xl">
-                        Major titles and systems I&apos;ve architected. Click to view development stories.
+                        Products I worked on at studios, plus my own projects. Click a card for the story.
                     </p>
                 </div>
 
@@ -116,7 +116,7 @@ export const BigProductions = () => {
                     className="flex flex-col items-center justify-center pt-8 border-t border-white/5"
                 >
                     <p className="text-zinc-500 font-mono text-xs md:text-sm text-center max-w-lg mb-6 leading-relaxed">
-                        These products represent key industrial milestones. 
+                        Studio and personal work above. 
                         <br className="hidden md:block"/>
                         For a deeper dive into technical experiments, open-source tools, and shaders, explore the portfolio below.
                     </p>

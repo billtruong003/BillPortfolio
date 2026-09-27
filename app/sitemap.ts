@@ -3,6 +3,8 @@ import { postManifest } from '@/data/posts';
 import { absoluteUrl } from '@/lib/site';
 import { SERIES_CONFIG, getSeriesPosts } from '@/lib/series';
 import { getTranslations } from '@/lib/post-localization';
+import { DOC_TRACKS } from '@/lib/docs-tracks';
+import { getDocPages } from '@/data/docs';
 
 export const dynamic = 'force-static';
 
@@ -33,5 +35,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ...(post.translationKey ? { alternates: { languages: Object.fromEntries(getTranslations(postManifest.posts, post).map(p => [p.lang, absoluteUrl(`/lab/${p.slug}/`)])) } } : {}),
     }));
 
-    return [...pages, ...series, ...posts];
+    const docs: MetadataRoute.Sitemap = [
+        { url: absoluteUrl('/docs/'), changeFrequency: 'weekly', priority: 0.8 },
+        ...DOC_TRACKS.filter((t) => getDocPages(t.id).length).flatMap((t) => [
+            { url: absoluteUrl(`/docs/${t.id}/`), changeFrequency: 'weekly' as const, priority: 0.7 },
+            ...getDocPages(t.id).map((p) => ({ url: absoluteUrl(`/docs/${t.id}/${p.slug}/`), changeFrequency: 'monthly' as const, priority: 0.6 })),
+        ]),
+    ];
+
+    return [...pages, ...series, ...posts, ...docs];
 }

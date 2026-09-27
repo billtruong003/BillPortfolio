@@ -8,8 +8,7 @@ export const Testimonials = () => {
         <section className="py-24 px-6 relative">
             <div className="container mx-auto max-w-6xl">
                  <h2 className="text-3xl font-bold mb-12 flex items-center gap-4">
-                    <span className="text-primary font-mono">03.</span> 
-                    <span className="text-zinc-100">Transmission Logs</span>
+                    <span className="text-zinc-100">What people say</span>
                 </h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

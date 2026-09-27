@@ -1,0 +1,373 @@
+# Ảnh minh họa cho Docs
+
+File này sinh tự động từ `npm run compile-posts`. Mỗi dòng là một chỗ trống đang chờ ảnh.
+Tìm ảnh gốc, sửa bằng ChatGPT theo prompt, xuất `.webp` (khoảng 1200x675) rồi đặt đúng đường dẫn. Build lại là ảnh tự hiện.
+
+## algorithms
+
+- **Độ phức tạp Big-O: đo tốc độ thuật toán**: `public/images/docs/algorithms/do-phuc-tap-big-o.webp`
+  - Ý tưởng: Nhân vật anime cầm đồng hồ bấm giờ đứng ở ngã ba: một con đường chật kín quái phải đi qua từng con, con đường kia chỉ có một tấm bảng tra cứu, nhân vật chọn tấm bảng với vẻ mặt đắc ý.
+  - Prompt: Edit this image: the character holds a stopwatch at a fork in a fantasy road. The left path is crowded with dozens of small monsters in a long line, a sign reads 'O(n)'. The right path has a single glowing lookup board, a sign reads 'O(1)'. The character smugly points to the right path. Keep the original art style, 16:9.
+- **Two Sum: tìm hai số có tổng bằng mục tiêu**: `public/images/docs/algorithms/two-sum.webp`
+  - Ý tưởng: Nhân vật anime đứng trước quầy shop trong game, tay cầm túi 9 xu, đang lựa hai món đồ có giá cộng lại vừa đúng 9.
+  - Prompt: Edit this image: the character stands at a fantasy game shop counter holding a small pouch labeled '9 coins', comparing two item price tags '2' and '7' with a thoughtful face. Keep the original art style, 16:9.
+- **Contains Duplicate: kiểm tra mảng có phần tử trùng**: `public/images/docs/algorithms/contains-duplicate.webp`
+  - Ý tưởng: Nhân vật anime làm thủ kho, cầm kính lúp soi hai thanh kiếm giống hệt nhau cùng mang số ID #042, mặt hốt hoảng vì phát hiện bug nhân bản đồ.
+  - Prompt: Edit this image: the character is a warehouse keeper in a fantasy armory, holding a big magnifying glass over two identical swords on a table, both with small tags reading '#042'. The character looks shocked. Keep the original art style, 16:9.
+- **Valid Anagram: hai chuỗi có cùng bộ chữ cái không**: `public/images/docs/algorithms/valid-anagram.webp`
+  - Ý tưởng: Nhân vật anime ngồi trên sàn, xếp lại các khối gỗ có chữ L-I-S-T-E-N thành S-I-L-E-N-T, một khối bay lơ lửng giữa hai hàng, mặt tập trung như đang giải đố trong game.
+  - Prompt: Edit this image: the character sits on the floor rearranging wooden letter blocks. The top row of blocks reads 'LISTEN', the bottom row reads 'SILENT', one block floats between the rows. The character looks focused like solving a puzzle. Keep the original art style, 16:9.
+- **Valid Parentheses: kiểm tra ngoặc đóng mở hợp lệ**: `public/images/docs/algorithms/valid-parentheses.webp`
+  - Ý tưởng: Nhân vật anime là pháp sư đang niệm chú, trước mặt là ba vòng phép hình ngoặc lồng vào nhau { [ ( ) ] }, vòng trong cùng vừa khép lại phát sáng.
+  - Prompt: Edit this image: the character is a mage casting a spell, with three glowing magic rings shaped like nested brackets '{ [ ( ) ] }' floating in front of them. The innermost pair '( )' is closing and glowing brightest. Keep the original art style, 16:9.
+- **Valid Palindrome: kiểm tra chuỗi đối xứng bằng hai con trỏ**: `public/images/docs/algorithms/palindrome-hai-con-tro.webp`
+  - Ý tưởng: Nhân vật anime đứng trước chiếc gương ma thuật, giơ tấm bảng tên 'RACECAR', trong gương hiện đúng chữ đó, hai tay nhân vật chỉ vào hai đầu tấm bảng như hai con trỏ.
+  - Prompt: Edit this image: the character stands in front of a magic mirror holding a name plate that reads 'RACECAR'. The reflection shows the same readable word. The character points at both ends of the plate with two fingers, like two pointers. Keep the original art style, 16:9.
+- **Binary Search: tìm nhị phân trong mảng đã sắp xếp**: `public/images/docs/algorithms/binary-search.webp`
+  - Ý tưởng: Nhân vật anime đứng trong thang máy của một dungeon 100 tầng, màn hình hiện tầng 50, tay cầm tấm bản đồ ghi 'Boss: cao hơn?', đang phân vân bấm nút lên hay xuống.
+  - Prompt: Edit this image: the character stands inside a fantasy dungeon elevator with a floor display reading '50 / 100'. They hold a map with a note 'Boss: higher?' and hover a finger between an 'UP' and a 'DOWN' button. Keep the original art style, 16:9.
+- **Best Time to Buy and Sell Stock: mua một lần, bán một lần lời nhất**: `public/images/docs/algorithms/best-time-to-buy-sell.webp`
+  - Ý tưởng: Nhân vật anime là thương nhân ở chợ trong game, đứng trước bảng giá 'Trứng Rồng' vẽ đường lên xuống theo ngày, một tay cắm cờ xanh ở đáy thấp nhất, tay kia cắm cờ đỏ ở đỉnh phía sau.
+  - Prompt: Edit this image: the character is a merchant at a fantasy market, standing next to a large chalkboard price chart titled 'Dragon Egg' with a zigzag line over 6 days. They pin a green flag labeled 'BUY' at the lowest point and a red flag labeled 'SELL' at a later peak. Keep the original art style, 16:9.
+- **Maximum Subarray: đoạn con có tổng lớn nhất với Kadane**: `public/images/docs/algorithms/maximum-subarray.webp`
+  - Ý tưởng: Nhân vật anime ngồi trước màn hình xem lại trận đấu, thanh điểm bên dưới là dãy ô xanh đỏ xen kẽ, nhân vật cầm bút dạ khoanh một đoạn liên tiếp và dán nhãn 'BEST STREAK' để cắt làm highlight.
+  - Prompt: Edit this image: the character sits in front of a monitor reviewing a match replay. Below the video is a timeline bar of green and red score blocks with numbers like '+4', '-1', '+2', '+1'. The character circles a continuous section with a marker, labeled 'BEST STREAK'. Keep the original art style, 16:9.
+- **Merge Sorted Arrays: gộp hai mảng đã sắp xếp**: `public/images/docs/algorithms/merge-sorted-arrays.webp`
+  - Ý tưởng: Nhân vật anime làm trọng tài đứng giữa hai cổng dịch chuyển ghi 'Server A' và 'Server B', mỗi cổng có một hàng người chơi xếp theo điểm, nhân vật chỉ tay gọi từng người vào một hàng chung duy nhất.
+  - Prompt: Edit this image: the character acts as a referee standing between two glowing portals labeled 'Server A' and 'Server B'. From each portal comes a line of small players holding score cards in ascending order. The character points, calling them one by one into a single merged line. Keep the original art style, 16:9.
+- **Move Zeroes: dồn số 0 về cuối mảng tại chỗ**: `public/images/docs/algorithms/move-zeroes.webp`
+  - Ý tưởng: Nhân vật anime mở giao diện kho đồ lộn xộn có ô trống xen giữa, bấm nút 'Sort', các món đồ trượt sang trái theo đúng thứ tự cũ còn ô trống dồn hết về cuối hàng.
+  - Prompt: Edit this image: the character presses a big 'Sort' button on a floating game inventory panel. A row of item slots shows potions, a sword and a shield sliding to the left in order, while empty slots gather at the right end. Keep the original art style, 16:9.
+- **Group Anagrams: nhóm các từ cùng bộ chữ cái**: `public/images/docs/algorithms/group-anagrams.webp`
+  - Ý tưởng: Nhân vật anime là thủ thư trong thư viện phép thuật, đang thả các cuộn giấy ghi 'eat', 'tea', 'tan', 'nat', 'bat' vào ba chiếc giỏ dán nhãn 'aet', 'ant', 'abt', một cuộn đang bay giữa không trung tìm đúng giỏ.
+  - Prompt: Edit this image: the character is a librarian in a magic library dropping small paper scrolls with words 'eat', 'tea', 'tan', 'nat', 'bat' into three baskets labeled 'aet', 'ant' and 'abt'. One scroll floats mid-air heading to the right basket. Keep the original art style, 16:9.
+- **Fibonacci: đệ quy, ghi nhớ và vòng lặp**: `public/images/docs/algorithms/fibonacci-de-quy-va-memo.webp`
+  - Ý tưởng: Nhân vật anime chăm trại thỏ trong game nông trại, chuồng thỏ đông dần theo từng tháng, tay cầm cuốn sổ ghi dãy 1, 1, 2, 3, 5, 8 với vẻ mặt hoảng hốt.
+  - Prompt: Edit this image: the character is a farmer in a cozy farming game, surrounded by more and more rabbits spilling out of a wooden hutch, holding a notebook with the numbers '1, 1, 2, 3, 5, 8' written on it and looking panicked. Keep the original art style, 16:9.
+- **Climbing Stairs: đếm số cách leo cầu thang**: `public/images/docs/algorithms/climbing-stairs.webp`
+  - Ý tưởng: Nhân vật anime trong game platformer đang nhảy lên tháp bậc đá, trên mỗi bậc có số đếm cách leo 1, 2, 3, 5, 8 phát sáng, nhân vật giơ tay đếm ngón.
+  - Prompt: Edit this image: the character is jumping up a stone staircase in a 2D platformer game, each step has a glowing number floating above it reading '1', '2', '3', '5', '8', and the character is counting on their fingers mid-jump. Keep the original art style, 16:9.
+- **Coin Change: đổi tiền bằng ít đồng xu nhất**: `public/images/docs/algorithms/coin-change.webp`
+  - Ý tưởng: Nhân vật anime đứng trước máy đổi tiền trong một khu trò chơi fantasy, màn hình máy ghi 11 vàng, nhân vật đang xếp các đồng xu 5, 5, 1 thành ba chồng gọn gàng.
+  - Prompt: Edit this image: the character stands in front of a fantasy arcade coin exchange machine whose screen reads '11 GOLD', carefully arranging three coins labeled '5', '5' and '1' on the counter with a satisfied smile. Keep the original art style, 16:9.
+- **Reverse Linked List: đảo ngược danh sách liên kết**: `public/images/docs/algorithms/reverse-linked-list.webp`
+  - Ý tưởng: Nhân vật anime cưỡi trên đầu con rắn trong game Snake cổ điển, đang kéo dây cương cho con rắn quay đầu đi ngược lại, các đốt thân đánh số 5, 4, 3, 2, 1.
+  - Prompt: Edit this image: the character rides on the head of a giant pixel-art snake from a classic Snake game, pulling reins to turn the snake around, each body segment has a number painted on it reading '5', '4', '3', '2', '1'. Keep the original art style, 16:9.
+- **Linked List Cycle: phát hiện vòng lặp bằng rùa và thỏ**: `public/images/docs/algorithms/linked-list-cycle.webp`
+  - Ý tưởng: Nhân vật anime chạy đua trên một đường đua hình vòng tròn trong game, một bên là chú rùa chậm rãi, một bên là chú thỏ phóng nhanh sắp bắt kịp rùa từ phía sau, nhân vật cầm cờ trọng tài.
+  - Prompt: Edit this image: the character is a race referee holding a checkered flag beside a circular race track in a cute racing game, a slow turtle and a fast rabbit run on the loop and the rabbit is about to lap the turtle from behind, a sign reads 'LOOP?'. Keep the original art style, 16:9.
+- **Longest Substring Without Repeating Characters: chuỗi con dài nhất không lặp ký tự**: `public/images/docs/algorithms/longest-substring-no-repeat.webp`
+  - Ý tưởng: Nhân vật anime tung chuỗi combo kỹ năng trong game đối kháng, phía trên đầu hiện một khung sáng trượt dọc theo dãy biểu tượng kỹ năng, bao đúng ba biểu tượng khác nhau.
+  - Prompt: Edit this image: the character performs a flashy skill combo in a fighting game, above them a row of skill icons with letters 'P W W K E W', and a glowing sliding frame highlights the three icons 'W K E', with a combo counter reading 'COMBO x3'. Keep the original art style, 16:9.
+- **BFS: tìm đường ngắn nhất trên bản đồ lưới**: `public/images/docs/algorithms/bfs-tim-duong-tren-luoi.webp`
+  - Ý tưởng: Nhân vật anime chạy trốn trong mê cung ô vuông của game roguelike, phía sau là một con slime đang lần theo các ô sáng đánh số 1, 2, 3 lan ra như gợn sóng, nhân vật ngoái lại hốt hoảng.
+  - Prompt: Edit this image: the character runs through a top-down tile-based dungeon maze in a roguelike game, looking back in panic at a cute slime monster following them, the floor tiles between them glow with ripple-like numbers '1', '2', '3', '4' spreading out from the slime. Keep the original art style, 16:9.
+- **Number of Islands: đếm đảo và tô vùng (flood fill)**: `public/images/docs/algorithms/dem-dao-flood-fill.webp`
+  - Ý tưởng: Nhân vật anime cầm xô sơn khổng lồ đổ xuống bản đồ quần đảo trong game khám phá, sơn loang kín một hòn đảo rồi dừng ở mép nước, bên cạnh là bảng đếm ghi Đảo: 3.
+  - Prompt: Edit this image: the character holds a giant paint bucket and pours bright paint onto a top-down island map in an exploration game, the paint fills exactly one island and stops at the water's edge, a wooden sign nearby reads 'ISLANDS: 3'. Keep the original art style, 16:9.
+- **Binary Tree Traversal: bốn cách duyệt cây nhị phân**: `public/images/docs/algorithms/duyet-cay-nhi-phan.webp`
+  - Ý tưởng: Nhân vật anime đứng trước bảng cây kỹ năng phát sáng trong game RPG, dùng cây gậy phép chỉ lần lượt từng ô kỹ năng theo thứ tự, các ô đã chỉ hiện số 1, 2, 3.
+  - Prompt: Edit this image: the character stands in front of a large glowing skill tree panel in a fantasy RPG, pointing a magic staff at the skill nodes one by one, the visited nodes show small glowing numbers '1', '2', '3' and a label at the top reads 'SKILL TREE'. Keep the original art style, 16:9.
+- **Sorting: bubble sort, merge sort, quick sort và hàm sắp xếp có sẵn**: `public/images/docs/algorithms/sap-xep-co-ban.webp`
+  - Ý tưởng: Nhân vật anime làm trọng tài bảng xếp hạng cuối mùa giải trong game, đang bê từng tấm bảng tên người chơi đổi chỗ cho nhau để điểm cao đứng trên, mồ hôi nhễ nhại.
+  - Prompt: Edit this image: the character is sweating while carrying and swapping large player name boards on a giant end-of-season leaderboard in an online game, the boards show scores '9', '6', '5', '2' being rearranged, a banner at the top reads 'LEADERBOARD'. Keep the original art style, 16:9.
+- **Top K Frequent Elements: k phần tử xuất hiện nhiều nhất**: `public/images/docs/algorithms/top-k-pho-bien.webp`
+  - Ý tưởng: Nhân vật anime làm chủ tiệm vũ khí trong game, đang cắm biển Bán chạy nhất lên ba món đồ trên kệ, bên cạnh là cuốn sổ đếm vạch ghi số lần mỗi món được mua.
+  - Prompt: Edit this image: the character runs a fantasy weapon shop in an RPG, placing a 'TOP 2' sign on a sword and a health potion on the shelf, next to an open ledger filled with tally marks counting how many times each item was bought. Keep the original art style, 16:9.
+
+## csharp
+
+- **Giới thiệu C#**: `public/images/docs/csharp/gioi-thieu.webp`
+  - Ý tưởng: Nhân vật anime đứng trước một tấm bản đồ thế giới kiểu game, cắm cờ C# lên bốn vùng đất: Unity, Web, Desktop, Tool.
+  - Prompt: Edit this image: the character stands in front of a fantasy world map pinned on a wall, placing small flags with the text 'C#' on four regions labeled 'Unity', 'Web', 'Desktop' and 'Tool'. Keep the original art style, 16:9.
+- **Cài đặt C# với .NET 8 và VS Code**: `public/images/docs/csharp/cai-dat.webp`
+  - Ý tưởng: Nhân vật anime đang lắp ráp một chiếc bàn làm việc như lắp đồ nội thất, các hộp giấy ghi '.NET 8 SDK' và 'VS Code', trên màn hình hiện dòng 'dotnet run'.
+  - Prompt: Edit this image: the character is assembling a desk setup from cardboard boxes, one box labeled '.NET 8 SDK', another labeled 'VS Code'. A monitor on the desk shows a terminal with the text 'dotnet run'. Keep the original art style, 16:9.
+- **Cú pháp C# cơ bản**: `public/images/docs/csharp/cu-phap.webp`
+  - Ý tưởng: Nhân vật anime cầm một con dấu khổng lồ hình dấu chấm phẩy, đóng xuống cuối từng dòng chữ trên cuộn giấy dài như đang duyệt lệnh.
+  - Prompt: Edit this image: the character holds a giant rubber stamp shaped like a semicolon ';' and stamps it at the end of each line on a long parchment scroll with lines of code such as 'Console.WriteLine("Hello")'. Keep the original art style, 16:9.
+- **Output và comment trong C#**: `public/images/docs/csharp/output-va-comment.webp`
+  - Ý tưởng: Nhân vật anime làm người dẫn chuyện trong game RPG, cầm loa nói vào khung thoại trên màn hình, bên cạnh dán mấy tờ giấy note ghi chú bằng dấu '//'.
+  - Prompt: Edit this image: the character is an RPG narrator speaking into a megaphone, and a retro game dialogue box on a big screen shows 'Console.WriteLine("Quest started!")'. Sticky notes starting with '//' are stuck on the screen frame. Keep the original art style, 16:9.
+- **Biến trong C#**: `public/images/docs/csharp/bien.webp`
+  - Ý tưởng: Nhân vật anime đang dán nhãn lên những chiếc hộp gỗ trong kho đồ của game: hộp ghi 'hp = 100', hộp ghi 'playerName'.
+  - Prompt: Edit this image: the character is labeling small wooden storage boxes in a cozy game inventory room. Labels read 'int hp = 100' and 'string playerName'. Keep the original art style, warm lighting, 16:9.
+- **Kiểu dữ liệu trong C#**: `public/images/docs/csharp/kieu-du-lieu.webp`
+  - Ý tưởng: Nhân vật anime đang phân loại vật phẩm vào các ngăn tủ đồ khác cỡ: ngăn nhỏ ghi 'bool', ngăn vừa ghi 'int', ngăn dài ghi 'string', tay cầm một đồng xu ghi 'decimal'.
+  - Prompt: Edit this image: the character is sorting game items into a wooden cabinet with drawers of different sizes, labeled 'bool', 'char', 'int', 'long', 'float', 'double' and 'string'. The character holds a shiny coin engraved with 'decimal'. Keep the original art style, 16:9.
+- **Ép kiểu trong C#**: `public/images/docs/csharp/ep-kieu.webp`
+  - Ý tưởng: Nhân vật anime đứng bên lò rèn, đổ một thỏi kim loại ghi '9.7' vào khuôn hình chữ nhật ghi '(int)', thỏi ra khỏi khuôn chỉ còn '9', mảnh vụn '.7' rơi xuống đất.
+  - Prompt: Edit this image: the character works at a blacksmith forge, pouring a glowing metal bar labeled '9.7' into a rectangular mold labeled '(int)'. The bar coming out reads '9', and a small broken shard labeled '.7' falls to the floor. Keep the original art style, 16:9.
+- **Nhập dữ liệu từ bàn phím trong C#**: `public/images/docs/csharp/nhap-du-lieu.webp`
+  - Ý tưởng: Nhân vật anime làm lính gác cổng thành, cầm sổ hỏi tên người đến, một lữ khách đưa tờ giấy ghi 'năm mươi' thay vì '50' và nhân vật nhíu mày giơ biển 'FormatException'.
+  - Prompt: Edit this image: the character is a castle gate guard holding a ledger titled 'Console.ReadLine()'. A traveler hands over a paper that says 'năm mươi' instead of '50', and the guard frowns while holding up a small sign reading 'FormatException'. Keep the original art style, 16:9.
+- **Toán tử trong C#**: `public/images/docs/csharp/toan-tu.webp`
+  - Ý tưởng: Nhân vật anime chia 7 miếng bánh cho 2 bạn đồng hành, mỗi người được 3 miếng, miếng thứ 7 còn lại trên đĩa có cắm lá cờ ghi '7 % 2 = 1'.
+  - Prompt: Edit this image: the character is sharing 7 slices of cake between 2 adventurer companions, each companion holds 3 slices, and one leftover slice on the plate has a tiny flag reading '7 % 2 = 1'. A chalkboard behind shows '7 / 2 = 3'. Keep the original art style, 16:9.
+- **Math và Random trong C#**: `public/images/docs/csharp/math.webp`
+  - Ý tưởng: Nhân vật anime ngồi bàn chơi board game, tung một viên xúc xắc 20 mặt đang lơ lửng giữa không trung, bên cạnh là tấm bảng ghi công thức 'Math.Clamp(hp, 0, 100)'.
+  - Prompt: Edit this image: the character sits at a tabletop game table and has just rolled a glowing 20-sided die that floats mid-air showing '20'. A small whiteboard beside the table reads 'Math.Clamp(hp, 0, 100)' and 'CRIT!'. Keep the original art style, 16:9.
+- **Chuỗi (string) trong C#**: `public/images/docs/csharp/chuoi.webp`
+  - Ý tưởng: Nhân vật anime xâu các hạt chữ cái vào một sợi dây như làm vòng tay, các hạt ghép thành chữ 'Aki Lv.5', một kéo nhỏ đang cắt ra đoạn 'Lv.5' như Substring.
+  - Prompt: Edit this image: the character is threading letter beads onto a string like making a bracelet, the beads spell 'Aki Lv.5'. A small pair of scissors hovers near the string, cutting off the part 'Lv.5'. Keep the original art style, 16:9.
+- **Kiểu bool trong C#**: `public/images/docs/csharp/bool.webp`
+  - Ý tưởng: Nhân vật anime đứng trước một cánh cửa hầm ngục có hai bóng đèn 'true' xanh và 'false' đỏ, tay giơ chiếc chìa khoá vàng, đèn 'hasKey = true' đang sáng.
+  - Prompt: Edit this image: the character stands in front of a dungeon door with two indicator lamps above it, a green one labeled 'true' and a red one labeled 'false'. The character raises a golden key, and a glowing sign on the door reads 'hasKey = true'. Keep the original art style, 16:9.
+- **Câu lệnh if else trong C#**: `public/images/docs/csharp/if-else.webp`
+  - Ý tưởng: Nhân vật anime đứng ở ngã ba đường trong rừng, cột biển chỉ đường có ba tấm gỗ ghi 'if (hp > 50)', 'else if (hp > 0)', 'else', mỗi hướng dẫn tới một nơi khác: đấu trường, quán trọ, nghĩa địa.
+  - Prompt: Edit this image: the character stands at a forest crossroads in front of a wooden signpost with three arrows reading 'if (hp > 50)', 'else if (hp > 0)' and 'else'. The paths lead to an arena, a cozy inn and a small graveyard. Keep the original art style, 16:9.
+- **Câu lệnh switch trong C#**: `public/images/docs/csharp/switch.webp`
+  - Ý tưởng: Nhân vật anime đứng trước máy bán hàng tự động trong game, mỗi nút bấm ghi 'case 1: Kiếm', 'case 2: Khiên', 'case 3: Bình máu', 'default: ???', nhân vật đang bấm nút số 2.
+  - Prompt: Edit this image: the character stands in front of a fantasy vending machine with labeled buttons 'case 1: Sword', 'case 2: Shield', 'case 3: Potion' and 'default: ???'. The character is pressing button 2 and a shield drops into the tray. Keep the original art style, 16:9.
+- **Vòng lặp while trong C#**: `public/images/docs/csharp/vong-lap-while.webp`
+  - Ý tưởng: Nhân vật anime chạy trên chiếc bánh xe cho chuột hamster khổng lồ, trên bánh xe ghi 'while (hp > 0)', bên cạnh thanh máu đang tụt dần.
+  - Prompt: Edit this image: the character is running inside a giant hamster wheel with the text 'while (hp > 0)' painted on its rim. A floating game health bar next to the wheel is slowly draining. Keep the original art style, 16:9.
+- **Vòng lặp for trong C#**: `public/images/docs/csharp/vong-lap-for.webp`
+  - Ý tưởng: Nhân vật anime leo cầu thang tháp có 10 bậc đánh số từ 0 tới 9, trên tường ghi 'for (int i = 0; i < 10; i++)', bậc thứ 10 bị gạch chéo.
+  - Prompt: Edit this image: the character is climbing a stone tower staircase with steps numbered 0 to 9. The wall shows carved text 'for (int i = 0; i < 10; i++)'. An eleventh step above is crossed out with a red X. Keep the original art style, 16:9.
+- **Break và continue trong C#**: `public/images/docs/csharp/break-continue.webp`
+  - Ý tưởng: Nhân vật anime đi dọc hành lang hầm ngục có nhiều rương báu, nhảy qua một rương rỗng có biển 'continue', và dừng lại vui mừng ở rương có chìa khoá với biển 'break'.
+  - Prompt: Edit this image: the character walks down a dungeon corridor lined with treasure chests. The character hops over an empty chest with a small sign reading 'continue', and stops happily at an open chest containing a golden key, with a sign reading 'break'. Keep the original art style, 16:9.
+- **Mảng (array) trong C#**: `public/images/docs/csharp/mang.webp`
+  - Ý tưởng: Nhân vật anime đứng trước một dãy tủ đồ đánh số 0, 1, 2, 3, đang ngơ ngác vì mở nhầm tủ số 4 không tồn tại, bên trong chỉ có khói.
+  - Prompt: Edit this image: the character stands in front of a row of numbered lockers labeled 0, 1, 2, 3. They are confused, holding open an extra locker labeled 4 that puffs out gray smoke. Keep the original art style, 16:9.
+- **Vòng lặp foreach trong C#**: `public/images/docs/csharp/foreach.webp`
+  - Ý tưởng: Nhân vật anime đi dọc một băng chuyền, lần lượt đóng dấu 'đã kiểm' lên từng hộp đồ chạy qua, không bỏ sót hộp nào.
+  - Prompt: Edit this image: the character walks along a conveyor belt carrying small item crates, stamping each crate with a red stamp that reads 'CHECKED'. A sign above the belt reads 'foreach'. Keep the original art style, 16:9.
+- **List trong C#**: `public/images/docs/csharp/list.webp`
+  - Ý tưởng: Nhân vật anime nhét thêm một món đồ vào chiếc ba lô ma thuật tự dài ra, một cuộn giấy danh sách đồ dài tới tận sàn nhà.
+  - Prompt: Edit this image: the character happily stuffs a glowing sword into a magical backpack that stretches longer to fit it. A long paper scroll titled 'List<string> inventory' unrolls from the backpack down to the floor. Keep the original art style, 16:9.
+- **Dictionary trong C#**: `public/images/docs/csharp/dictionary.webp`
+  - Ý tưởng: Nhân vật anime làm chủ tiệm trong game, đang tra một cuốn sổ giá to: mỗi dòng là tên món đồ nối với giá vàng, khách xếp hàng hỏi giá.
+  - Prompt: Edit this image: the character is a shopkeeper behind a fantasy item counter, flipping through a large price ledger. Visible lines read 'Potion = 50' and 'Iron Sword = 300'. A small customer waits with a coin pouch. Keep the original art style, 16:9.
+- **Hàm (method) trong C#**: `public/images/docs/csharp/ham.webp`
+  - Ý tưởng: Nhân vật anime bấm một nút đỏ to ghi 'CastFireball()' trên bảng điều khiển, cả đống cầu lửa bay ra đúng một kiểu mỗi lần bấm.
+  - Prompt: Edit this image: the character presses a big red arcade button labeled 'CastFireball()' on a control panel. Each press launches an identical small fireball out of a cannon. Keep the original art style, 16:9.
+- **Tham số của hàm trong C#**: `public/images/docs/csharp/tham-so.webp`
+  - Ý tưởng: Nhân vật anime đứng ở lò rèn, bỏ từng nguyên liệu có dán nhãn 'damage', 'element' vào các khe khác nhau của cỗ máy rèn kiếm, cuối máy ra một thanh kiếm.
+  - Prompt: Edit this image: the character stands at a fantasy forge machine with labeled input slots 'damage' and 'element'. They drop a glowing ore into the 'damage' slot while a finished sword slides out of the other end. Keep the original art style, 16:9.
+- **Nạp chồng hàm (overloading) trong C#**: `public/images/docs/csharp/nap-chong-ham.webp`
+  - Ý tưởng: Nhân vật anime cầm một cây đũa phép duy nhất tên 'Cast', vẫy một lần ra quả cầu lửa, vẫy lần khác kèm viên ngọc băng thì ra cơn bão tuyết.
+  - Prompt: Edit this image: the character holds a single magic wand engraved with the word 'Cast'. On one side a small fireball pops out, on the other side, with a blue ice gem attached, a swirling snowstorm comes out. Keep the original art style, 16:9.
+- **Class và object trong C#**: `public/images/docs/csharp/class-va-object.webp`
+  - Ý tưởng: Nhân vật anime cầm tờ bản vẽ kỹ thuật ghi 'class Slime', trước mặt là một cỗ máy đang in ra ba con slime khác màu từ cùng một bản vẽ.
+  - Prompt: Edit this image: the character holds a blueprint sheet titled 'class Slime' next to a cute machine. The machine is popping out three slimes of different colors (green, blue, pink), each with a tiny name tag. Keep the original art style, 16:9.
+- **Constructor trong C#**: `public/images/docs/csharp/constructor.webp`
+  - Ý tưởng: Nhân vật anime đứng ở bàn tạo nhân vật, xoay núm chỉnh 'name', 'hp' trên một cái lồng kính, bên trong một hiệp sĩ tí hon vừa được lắp ráp xong và mở mắt.
+  - Prompt: Edit this image: the character operates a glowing character-creation pod with dials labeled 'name' and 'hp'. Inside the glass pod a tiny chibi knight has just been assembled and opens its eyes. A screen on the pod reads 'new Hero("Aki", 100)'. Keep the original art style, 16:9.
+- **Access modifier trong C#: public, private, protected**: `public/images/docs/csharp/access-modifier.webp`
+  - Ý tưởng: Nhân vật anime làm thủ kho ngân hàng vàng của guild: quầy trước ghi 'public' cho khách gửi rút, két sắt phía sau ghi 'private' có ổ khoá to, nhân vật đang chặn một tên trộm định thò tay vào két.
+  - Prompt: Edit this image: the character works as a guild bank clerk. The front counter has a sign 'public: Deposit / Withdraw', and behind them a big vault door with a padlock labeled 'private gold'. The character blocks a sneaky thief reaching toward the vault. Keep the original art style, 16:9.
+- **Property trong C#: get và set**: `public/images/docs/csharp/property.webp`
+  - Ý tưởng: Nhân vật anime đứng gác trước cổng thành có hai ô cửa sổ ghi 'get' và 'set': ô 'get' cho xem thanh máu, ô 'set' đang từ chối một tờ giấy ghi 'hp = -50'.
+  - Prompt: Edit this image: the character is a gatekeeper at a small castle gate with two service windows labeled 'get' and 'set'. Through the 'get' window a health bar is shown, while at the 'set' window the character stamps 'REJECTED' on a note that reads 'hp = -50'. Keep the original art style, 16:9.
+- **Kế thừa trong C#**: `public/images/docs/csharp/ke-thua.webp`
+  - Ý tưởng: Nhân vật anime chỉ vào một cây gia phả của quái vật vẽ trên bảng: gốc ghi 'Enemy', hai nhánh là một con Slime nhỏ và một con Boss rồng, cả hai đều đội chiếc mũ giống mũ của ông tổ Enemy.
+  - Prompt: Edit this image: the character points at a chalkboard family tree of monsters. The root box reads 'Enemy', with two branches: a small cute slime labeled 'Slime' and a big dragon labeled 'Boss'. Both monsters wear the same little horned helmet as the 'Enemy' ancestor. Keep the original art style, 16:9.
+- **Interface trong C#**: `public/images/docs/csharp/interface.webp`
+  - Ý tưởng: Nhân vật anime cầm kiếm gỗ đi quanh sân tập, gõ thử vào một con slime, một thùng gỗ và một hình nộm; cả ba đều đeo chung một tấm huy hiệu 'IDamageable'.
+  - Prompt: Edit this image: the character holds a wooden practice sword in a training yard, tapping a slime, a wooden crate and a straw training dummy. All three wear the same round badge that reads 'IDamageable'. Keep the original art style, 16:9.
+- **Enum trong C#**: `public/images/docs/csharp/enum.webp`
+  - Ý tưởng: Nhân vật anime xoay một chiếc núm vặn lớn trên tường có đúng bốn nấc 'Idle', 'Run', 'Jump', 'Dead', mỗi lần vặn thì cái bóng của nhân vật đổi tư thế theo.
+  - Prompt: Edit this image: the character turns a big retro wall dial with exactly four labeled positions: 'Idle', 'Run', 'Jump', 'Dead'. The dial points to 'Jump', and the character's shadow on the wall is mid-jump. Keep the original art style, 16:9.
+- **Try catch trong C#: xử lý exception**: `public/images/docs/csharp/try-catch.webp`
+  - Ý tưởng: Nhân vật anime đứng dưới một cây cầu gỗ ọp ẹp, giăng sẵn tấm lưới an toàn ghi 'catch'; một hiệp sĩ tí hon vừa trượt chân rơi xuống và nằm gọn trong lưới.
+  - Prompt: Edit this image: the character stands under a rickety wooden bridge labeled 'try', holding up a big safety net labeled 'catch'. A tiny chibi knight has just slipped off the bridge and lands safely in the net. Keep the original art style, 16:9.
+- **Null trong C#: toán tử ?., ?? và kiểu int?**: `public/images/docs/csharp/null.webp`
+  - Ý tưởng: Nhân vật anime tự tin vung tay định chém quái, nhưng tay trống trơn vì ô vũ khí trên thanh trang bị đang để trống, trên đầu hiện bong bóng chữ 'weapon == null'.
+  - Prompt: Edit this image: the character dramatically swings at a monster but their hand is empty, no weapon. A game-style equipment bar nearby shows an empty weapon slot, and a speech bubble above the character reads 'weapon == null'. Keep the original art style, 16:9.
+
+## hlsl
+
+- **Shader là gì? Nhập môn HLSL trong Unity**: `public/images/docs/hlsl/shader-la-gi.webp`
+  - Ý tưởng: Nhân vật anime đứng chỉ huy một đội robot tí hon, mỗi robot cầm cọ tô đúng một ô vuông trên tấm canvas khổng lồ hình một con rồng pixel.
+  - Prompt: Edit this image: the character stands like a conductor in front of a giant canvas made of square pixels showing a pixel-art dragon. Hundreds of tiny robots each paint exactly one square at the same time. A small sign on the easel reads 'GPU'. Keep the original art style, 16:9.
+- **Shader đầu tiên trong Unity 6 URP**: `public/images/docs/hlsl/shader-dau-tien.webp`
+  - Ý tưởng: Nhân vật anime cầm một khối lập phương màu hồng chóe, mặt ngơ ngác, bên cạnh là tờ giấy nhớ ghi 'Shader error?'.
+  - Prompt: Edit this image: the character holds a bright magenta pink cube in both hands with a confused face. A yellow sticky note next to them reads 'Shader error?'. On the desk behind, a laptop screen shows a Unity editor. Keep the original art style, 16:9.
+- **Cấu trúc một shader URP: ShaderLab, Pass và HLSLPROGRAM**: `public/images/docs/hlsl/cau-truc-shader.webp`
+  - Ý tưởng: Nhân vật anime xếp một hộp cơm bento nhiều tầng, mỗi ngăn dán nhãn Properties, SubShader, Pass, HLSLPROGRAM.
+  - Prompt: Edit this image: the character is carefully stacking a multi-tier bento box on a table. Each tier has a small label: 'Shader', 'Properties', 'SubShader', 'Pass', 'HLSLPROGRAM'. The innermost tier holds two rice balls labeled 'vert' and 'frag'. Keep the original art style, 16:9.
+- **Kiểu dữ liệu trong HLSL: float, half, vector và ma trận**: `public/images/docs/hlsl/kieu-du-lieu.webp`
+  - Ý tưởng: Nhân vật anime đứng sau quầy tiệm thuốc trong game RPG, xếp các lọ thuốc to nhỏ khác nhau dán nhãn half, float, float3, float4x4.
+  - Prompt: Edit this image: the character is behind a fantasy potion shop counter, arranging glass bottles of different sizes on a shelf. Labels read 'half', 'float', 'float3', and a big crate labeled 'float4x4'. Keep the original art style, 16:9.
+- **Swizzle trong HLSL: .xyzw và .rgba**: `public/images/docs/hlsl/swizzle.webp`
+  - Ý tưởng: Nhân vật anime đang đổi chỗ bốn khối đồ chơi màu đỏ, xanh lá, xanh dương, trắng trên kệ, bảng phía trên ghi 'rgba → bgra'.
+  - Prompt: Edit this image: the character is swapping four toy blocks on a shelf, colored red, green, blue and white, lettered R, G, B, A. A small chalkboard above reads 'rgba -> bgra'. The character looks playful. Keep the original art style, 16:9.
+- **Hàm có sẵn trong HLSL: lerp, step, smoothstep và các hàm hay dùng**: `public/images/docs/hlsl/ham-co-san.webp`
+  - Ý tưởng: Nhân vật anime mở một hộp đồ nghề, bên trong mỗi dụng cụ khắc tên một hàm: lerp, step, smoothstep, saturate.
+  - Prompt: Edit this image: the character opens a wooden toolbox on a workbench. Each tool inside has an engraved name: a wrench 'lerp', a hammer 'step', a smooth file 'smoothstep', a clamp 'saturate'. The character holds up the 'lerp' wrench proudly. Keep the original art style, 16:9.
+- **Vertex shader trong HLSL: làm lá cờ bay**: `public/images/docs/hlsl/vertex-shader.webp`
+  - Ý tưởng: Nhân vật anime đứng trên tường thành lâu đài, giữ cột cờ, lá cờ bay thành hình sóng sin rất đều, có đường lưới chấm các đỉnh trên lá cờ.
+  - Prompt: Edit this image: the character stands on a castle wall holding a flagpole. The flag waves in a perfectly regular sine-wave shape, with small glowing dots marking a grid of vertices across the flag cloth. The flag has two horizontal color stripes. Keep the original art style, 16:9.
+- **Fragment shader trong HLSL: tô màu theo vị trí**: `public/images/docs/hlsl/fragment-shader.webp`
+  - Ý tưởng: Nhân vật anime cầm cọ tô từng ô vuông trên sàn nhà game theo kiểu sọc vàng đen cảnh báo, phía xa là hồ dung nham đỏ rực.
+  - Prompt: Edit this image: the character kneels on a tiled game floor, painting yellow and black diagonal hazard stripes square by square with a small brush. In the background, a glowing orange lava pool. A tiny sign reads 'frag()'. Keep the original art style, 16:9.
+- **Properties trong shader Unity: CBUFFER và SRP Batcher**: `public/images/docs/hlsl/properties.webp`
+  - Ý tưởng: Nhân vật anime ngồi trước bàn điều khiển đầy thanh trượt và núm vặn, mỗi núm dán nhãn _BaseColor, _Glow, _Speed, trên màn hình phía trước là con quái đổi màu theo.
+  - Prompt: Edit this image: the character sits at a mixing-console style control panel full of sliders and knobs, labeled '_BaseColor', '_Glow', '_Speed'. On a monitor in front, a cute slime monster changes color as a slider moves. Keep the original art style, 16:9.
+- **Texture và UV trong shader URP**: `public/images/docs/hlsl/texture-va-uv.webp`
+  - Ý tưởng: Nhân vật anime đang gói quà: tờ giấy gói in lưới ô vuông đánh số từ (0,0) tới (1,1), đang được bọc quanh một hộp quà.
+  - Prompt: Edit this image: the character is wrapping a gift box with wrapping paper printed with a checkered grid. The paper corners are labeled '(0,0)' and '(1,1)'. The character smooths the paper onto the box with a focused smile. Keep the original art style, 16:9.
+- **Màu và gradient trong shader: lerp theo UV và tint**: `public/images/docs/hlsl/mau-va-gradient.webp`
+  - Ý tưởng: Nhân vật anime đứng trên thang, dùng con lăn sơn một phông nền sân khấu hình bầu trời hoàng hôn chuyển từ cam dưới chân sang tím ở trên đỉnh.
+  - Prompt: Edit this image: the character stands on a small ladder, using a paint roller to paint a large stage backdrop with a smooth sunset gradient from orange at the bottom to deep purple at the top. A paint can on the floor is labeled 'lerp'. Keep the original art style, 16:9.
+- **Thời gian trong shader: _Time, nhấp nháy khi trúng đòn và nước chảy**: `public/images/docs/hlsl/thoi-gian-va-chuyen-dong.webp`
+  - Ý tưởng: Nhân vật anime ngồi trên tảng đá bên dòng suối, tay cầm chiếc đồng hồ bấm giờ ghi '_Time.y', mặt nước lấp lánh trôi theo hai hướng.
+  - Prompt: Edit this image: the character sits on a rock beside a sparkling stream, holding up a stopwatch whose screen reads '_Time.y'. The water surface shows two layers of ripples flowing in slightly different directions. Keep the original art style, 16:9.
+- **Ánh sáng Lambert trong shader URP và toon hai bậc**: `public/images/docs/hlsl/anh-sang-lambert.webp`
+  - Ý tưởng: Nhân vật anime giơ cao cây đèn lồng soi vào một bức tượng hiệp sĩ, nửa tượng sáng, nửa tượng tối, ranh giới sáng tối sắc nét như tranh hoạt hình.
+  - Prompt: Edit this image: the character holds up a glowing lantern next to a small knight statue. The statue is cel-shaded with exactly two tones, a bright side and a flat shadow side with a crisp border. A tag hanging on the statue reads 'dot(N, L)'. Keep the original art style, 16:9.
+- **Shader trong suốt trong Unity URP: Blend, ZWrite và clip**: `public/images/docs/hlsl/trong-suot.webp`
+  - Ý tưởng: Nhân vật anime cầm một tấm khiên năng lượng trong suốt màu xanh nhạt, nhìn xuyên qua khiên thấy một con quái mờ mờ phía sau.
+  - Prompt: Edit this image: the character holds up a translucent light-blue energy shield. Through the shield, a small monster is visible but slightly tinted and blurred. A tiny floating label near the shield reads 'Blend SrcAlpha OneMinusSrcAlpha'. Keep the original art style, 16:9.
+- **Debug shader trong Unity: xuất giá trị ra màu và Frame Debugger**: `public/images/docs/hlsl/debug-shader.webp`
+  - Ý tưởng: Nhân vật anime đội mũ thám tử, cầm kính lúp soi vào màn hình hiện một quả cầu tô màu đỏ xanh lá xanh dương như bản đồ normal.
+  - Prompt: Edit this image: the character wears a detective hat and holds a magnifying glass up to a monitor. The screen shows a sphere colored in smooth red, green and blue gradients like a normal map debug view. A sticky note on the monitor reads 'return half4(n * 0.5 + 0.5, 1);'. Keep the original art style, 16:9.
+
+## javascript
+
+- **Giới thiệu JavaScript**: `public/images/docs/javascript/gioi-thieu.webp`
+  - Ý tưởng: Nhân vật anime cầm hai tay cầm chơi game, một cái dán nhãn 'Browser', một cái dán nhãn 'Node', cả hai đều cắm vào cùng một hộp ghi 'JS'.
+  - Prompt: Edit this image: the character happily holds two game controllers, one labeled 'Browser' and one labeled 'Node', both cables plugged into a small yellow box with the text 'JS'. Keep the original art style, 16:9.
+- **Cách chạy JavaScript**: `public/images/docs/javascript/chay-javascript.webp`
+  - Ý tưởng: Nhân vật anime bấm phím F12 thật to trên bàn phím, cửa sổ Console bật ra như một cánh cửa bí mật trong game.
+  - Prompt: Edit this image: the character dramatically presses a giant F12 key on a keyboard, and a glowing developer console window pops out like a secret door with the text 'Console' on top. Keep the original art style, 16:9.
+- **Output trong JavaScript**: `public/images/docs/javascript/output.webp`
+  - Ý tưởng: Nhân vật anime cầm loa hét vào ba cái bảng: bảng 'console.log' cho dev, bảng điểm 'textContent' cho người chơi, và một bảng 'alert' đang bật popup đỏ chói.
+  - Prompt: Edit this image: the character holds a megaphone and shouts toward three signboards, one labeled 'console.log', one scoreboard labeled 'textContent' showing 'Score: 120', and one flashing red popup labeled 'alert'. Keep the original art style, 16:9.
+- **Cú pháp và comment trong JavaScript**: `public/images/docs/javascript/cu-phap-va-comment.webp`
+  - Ý tưởng: Nhân vật anime dán những tờ giấy note màu vàng có ghi '// hồi máu' và '// boss phase 2' lên các dòng code trên một màn hình lớn, như đang đánh dấu bản đồ.
+  - Prompt: Edit this image: the character sticks yellow sticky notes onto lines of code on a big monitor, the notes read '// heal' and '// boss phase 2', and one small note at the end of a line shows a big semicolon ';'. Keep the original art style, 16:9.
+- **Biến trong JavaScript**: `public/images/docs/javascript/bien.webp`
+  - Ý tưởng: Nhân vật anime xếp hai loại hũ lên kệ: hũ nắp mở ghi 'let hp' đang được đổ thêm nước máu, hũ khoá kín bằng ổ khoá ghi 'const MAX_HP'.
+  - Prompt: Edit this image: the character arranges jars on a shelf, an open jar labeled 'let hp' being refilled with red liquid, and a jar sealed with a small padlock labeled 'const MAX_HP = 100'. Keep the original art style, 16:9.
+- **Kiểu dữ liệu trong JavaScript**: `public/images/docs/javascript/kieu-du-lieu.webp`
+  - Ý tưởng: Nhân vật anime đứng trước năm cái rương báu khác màu, mỗi rương khắc một chữ: number, string, boolean, null, undefined. Rương undefined trống trơn, nhân vật gãi đầu.
+  - Prompt: Edit this image: the character stands before five colorful treasure chests with engraved labels 'number', 'string', 'boolean', 'null' and 'undefined'; the 'undefined' chest is open and completely empty, and the character scratches their head. Keep the original art style, 16:9.
+- **Toán tử trong JavaScript**: `public/images/docs/javascript/toan-tu.webp`
+  - Ý tưởng: Nhân vật anime làm trọng tài cân hai bên đĩa cân: một bên là số 5, một bên là chuỗi '5'. Tấm biển ghi '===' giơ thẻ đỏ, tấm biển '==' thì gật đầu cho qua.
+  - Prompt: Edit this image: the character acts as a referee beside a balance scale, one pan holds the number 5, the other holds a paper tag reading "'5'"; a sign labeled '===' raises a red card while a sign labeled '==' shrugs. Keep the original art style, 16:9.
+- **Chuỗi trong JavaScript**: `public/images/docs/javascript/chuoi.webp`
+  - Ý tưởng: Nhân vật anime đang xâu các hạt chữ cái lên sợi dây như vòng cổ, tạo thành chữ 'LEVEL UP', và cầm kéo cắt chuỗi ra từng khúc.
+  - Prompt: Edit this image: the character threads letter beads onto a string like a necklace spelling 'LEVEL UP', holding small scissors ready to split it into pieces. Keep the original art style, 16:9.
+- **Số trong JavaScript**: `public/images/docs/javascript/so.webp`
+  - Ý tưởng: Nhân vật anime tung một viên xúc xắc hai mươi mặt khổng lồ, trên mặt xúc xắc hiện 'Math.random()', phía sau là quái vật đang chờ xem mình mất bao nhiêu máu.
+  - Prompt: Edit this image: the character throws a giant twenty-sided die with the text 'Math.random()' on its face, while a nervous cute slime monster behind waits with a floating damage number '-17'. Keep the original art style, 16:9.
+- **Mảng trong JavaScript**: `public/images/docs/javascript/mang.webp`
+  - Ý tưởng: Nhân vật anime xếp đồ vào một dãy ô kho đồ kiểu game RPG, mỗi ô có số thứ tự 0, 1, 2, 3 ở góc, tay đang đẩy thêm một bình máu vào ô cuối.
+  - Prompt: Edit this image: the character places items into a horizontal row of RPG inventory slots, each slot has a small index number 0, 1, 2, 3 in the corner, and the character pushes a red potion into the last empty slot labeled 'push()'. Keep the original art style, 16:9.
+- **Object trong JavaScript**: `public/images/docs/javascript/object.webp`
+  - Ý tưởng: Nhân vật anime cầm một tấm thẻ nhân vật kiểu game thẻ bài, trên thẻ có các dòng 'name: Aki', 'hp: 100', 'level: 3', và đang dùng bút sửa số hp.
+  - Prompt: Edit this image: the character holds a large trading-card style character sheet with lines 'name: "Aki"', 'hp: 100', 'level: 3', and is using a pen to cross out 100 and write 80. Keep the original art style, 16:9.
+- **If else trong JavaScript**: `public/images/docs/javascript/if-else.webp`
+  - Ý tưởng: Nhân vật anime đứng giữa ngã ba trong hầm ngục, biển chỉ đường ghi 'if (hp > 50)' trỏ vào phòng boss và 'else' trỏ về phía suối hồi máu.
+  - Prompt: Edit this image: the character stands at a fork in a dungeon corridor, a wooden signpost reads 'if (hp > 50)' pointing toward a boss door and 'else' pointing toward a glowing healing fountain. Keep the original art style, 16:9.
+- **Switch trong JavaScript**: `public/images/docs/javascript/switch.webp`
+  - Ý tưởng: Nhân vật anime đứng trước một bảng điều khiển có nhiều cần gạt ghi 'case "sword"', 'case "bow"', 'case "staff"', một cần gạt thiếu chốt 'break' khiến cả dãy đèn bật sáng loạn xạ.
+  - Prompt: Edit this image: the character stands at a control panel with several levers labeled 'case "sword"', 'case "bow"', 'case "staff"'; one lever is missing its stopper labeled 'break', causing a whole row of warning lights to flash, the character looks surprised. Keep the original art style, 16:9.
+- **Vòng lặp trong JavaScript**: `public/images/docs/javascript/vong-lap.webp`
+  - Ý tưởng: Nhân vật anime chạy vòng quanh một đường đua hình tròn, mỗi vòng đạp qua một vạch có số 0, 1, 2, 3, và một con slime đang cầm cờ ghi 'i < 5' đứng ở vạch đích.
+  - Prompt: Edit this image: the character runs laps around a small circular track with lap markers numbered 0, 1, 2, 3, 4 on the ground, while a cute slime holding a flag with the text 'i < 5' waits at the finish line. Keep the original art style, 16:9.
+- **Hàm trong JavaScript**: `public/images/docs/javascript/ham.webp`
+  - Ý tưởng: Nhân vật anime vận hành một cỗ máy rèn: bỏ vào phễu hai viên đá ghi 'attack' và 'defense', đầu ra là một tấm thẻ ghi 'damage', trên thân máy có chữ 'function'.
+  - Prompt: Edit this image: the character operates a cute blacksmith machine with a funnel on top, dropping in two glowing stones labeled 'attack' and 'defense'; a small card labeled 'return damage' slides out of the output slot; the machine body reads 'function'. Keep the original art style, 16:9.
+- **Arrow function trong JavaScript**: `public/images/docs/javascript/arrow-function.webp`
+  - Ý tưởng: Nhân vật anime là cung thủ, kéo cung bắn một mũi tên có đuôi ghi '=>' xuyên qua ba quả táo xếp hàng, mỗi quả ghi một chữ 'map', 'filter', 'find'.
+  - Prompt: Edit this image: the character is an archer drawing a bow and shooting a glowing arrow shaped like '=>' that pierces three apples lined up, each apple labeled 'map', 'filter' and 'find'. Keep the original art style, 16:9.
+- **DOM trong JavaScript**: `public/images/docs/javascript/dom.webp`
+  - Ý tưởng: Nhân vật anime cầm kính lúp soi một cái cây mà mỗi cành là một thẻ HTML ('body', 'div', 'span#hp'), tay kia đang gắn thêm một chiếc lá mới ghi 'li'.
+  - Prompt: Edit this image: the character holds a magnifying glass up to a whimsical tree whose branches are labeled with HTML tags 'body', 'div' and 'span#hp', while the other hand attaches a new glowing leaf labeled '<li>'. Keep the original art style, 16:9.
+- **Sự kiện trong JavaScript**: `public/images/docs/javascript/su-kien.webp`
+  - Ý tưởng: Nhân vật anime đập mạnh vào một nút bấm arcade to màu đỏ ghi 'click', phía trên bảng điểm nhảy '+10' kèm tia sáng, bên cạnh là một chú mèo đang ngồi trên phím Space.
+  - Prompt: Edit this image: the character slams a big red arcade button labeled 'click', a scoreboard above pops '+10' with sparkles, and a small cat sits on a keyboard Space key labeled 'keydown' nearby. Keep the original art style, 16:9.
+- **JSON trong JavaScript**: `public/images/docs/javascript/json.webp`
+  - Ý tưởng: Nhân vật anime đang gấp một con robot nhân vật thành một cuộn giấy dài ghi chữ JSON để cất vào ngăn kéo có nhãn 'localStorage', bên cạnh là cuộn giấy khác đang mở ra thành robot trở lại.
+  - Prompt: Edit this image: the character folds a small toy robot into a long paper scroll covered with '{"score": 120}' text and places it into a drawer labeled 'localStorage'; next to it, another scroll unfolds back into a toy robot. Keep the original art style, 16:9.
+- **Async await trong JavaScript**: `public/images/docs/javascript/async-await.webp`
+  - Ý tưởng: Nhân vật anime ngồi chờ ở quầy tiệm rèn, tay cầm tấm vé ghi 'Promise', trên tường có đồng hồ cát; thợ rèn phía sau đang mang ra thanh kiếm có thẻ 'await'.
+  - Prompt: Edit this image: the character waits at a blacksmith shop counter holding a ticket that reads 'Promise', an hourglass on the wall, while the blacksmith in the back brings out a sword tagged 'await'. Keep the original art style, 16:9.
+- **Module trong JavaScript**: `public/images/docs/javascript/module.webp`
+  - Ý tưởng: Nhân vật anime lắp ráp một con robot từ các khối lego, mỗi khối là một file có nhãn 'player.js', 'enemy.js', 'ui.js', các khối nối với nhau bằng đầu cắm ghi 'import' và 'export'.
+  - Prompt: Edit this image: the character assembles a toy robot from colorful building blocks, each block labeled 'player.js', 'enemy.js' and 'ui.js', with connectors between them labeled 'import' and 'export'. Keep the original art style, 16:9.
+- **Giới thiệu TypeScript**: `public/images/docs/javascript/typescript-gioi-thieu.webp`
+  - Ý tưởng: Nhân vật anime đeo kính bảo hộ, đứng ở cổng kiểm tra an ninh của một lâu đài, máy quét ghi 'tsc' đang chặn một cái hộp có nhãn 'hp = "nhiều"' và bật đèn đỏ.
+  - Prompt: Edit this image: the character wears safety goggles and operates a castle security gate with a scanner labeled 'tsc'; a box labeled 'hp = "a lot"' is stopped on the conveyor belt with a red warning light. Keep the original art style, 16:9.
+- **Kiểu dữ liệu trong TypeScript**: `public/images/docs/javascript/typescript-kieu.webp`
+  - Ý tưởng: Nhân vật anime phân loại đồ vào các ngăn tủ có nhãn 'number', 'string', 'string[]', và một ngăn đặc biệt hai màu ghi 'number | null' đang chứa một nửa chiếc khiên.
+  - Prompt: Edit this image: the character sorts items into cabinet drawers labeled 'number', 'string' and 'string[]', plus one special two-colored drawer labeled 'number | null' that holds a half-transparent shield. Keep the original art style, 16:9.
+- **Interface trong TypeScript**: `public/images/docs/javascript/typescript-interface.webp`
+  - Ý tưởng: Nhân vật anime cầm một bản thiết kế nhân vật kiểu bản vẽ kỹ thuật màu xanh có tiêu đề 'interface Hero', các ô 'name', 'hp', 'weapon?' được đánh dấu, bên cạnh là một nhân vật chibi được lắp đúng theo bản vẽ.
+  - Prompt: Edit this image: the character holds a blue technical blueprint titled 'interface Hero' with fields 'name: string', 'hp: number' and 'weapon?: string', while a small chibi figure built exactly from the blueprint stands on the desk. Keep the original art style, 16:9.
+
+## python
+
+- **Giới thiệu Python**: `public/images/docs/python/gioi-thieu.webp`
+  - Ý tưởng: Nhân vật anime ôm một con trăn đồ chơi màu xanh vàng, sau lưng là bốn cánh cửa ghi 'Tool', 'Tự động', 'Blender', 'AI'.
+  - Prompt: Edit this image: the character is hugging a cute plush python snake in blue and yellow colors, standing in front of four small doors labeled 'Tool', 'Auto', 'Blender', 'AI'. Keep the original art style, cheerful mood, 16:9.
+- **Cài đặt Python trên Windows**: `public/images/docs/python/cai-dat.webp`
+  - Ý tưởng: Nhân vật anime đang kéo thanh tiến trình cài đặt khổng lồ như kéo dây thừng, trên thanh ghi 'Python 3.12 ... 87%', một ô checkbox 'Add to PATH' được đánh dấu to tướng.
+  - Prompt: Edit this image: the character is pulling a giant installation progress bar like a rope, the bar reads 'Python 3.12 ... 87%', and a big checked checkbox next to it reads 'Add python.exe to PATH'. Keep the original art style, 16:9.
+- **Cú pháp Python**: `public/images/docs/python/cu-phap.webp`
+  - Ý tưởng: Nhân vật anime xếp các khối gạch code thành bậc thang thụt vào đều nhau, một khối lệch ra ngoài đang rơi xuống kèm chữ 'IndentationError'.
+  - Prompt: Edit this image: the character is stacking glowing code blocks into neat indented stairs, one misaligned block is falling off with a small red label 'IndentationError'. Keep the original art style, playful mood, 16:9.
+- **Biến trong Python**: `public/images/docs/python/bien.webp`
+  - Ý tưởng: Nhân vật anime cầm máy dán nhãn, dán tấm nhãn 'gold = 250' lên một túi tiền và 'hp = 100' lên một bình thuốc đỏ trên kệ.
+  - Prompt: Edit this image: the character is using a label maker, sticking a tag reading 'gold = 250' onto a coin pouch and another tag reading 'hp = 100' onto a red potion bottle on a shelf. Keep the original art style, 16:9.
+- **Kiểu dữ liệu trong Python**: `public/images/docs/python/kieu-du-lieu.webp`
+  - Ý tưởng: Nhân vật anime đứng trước năm ô kệ phân loại vật phẩm, mỗi ô dán nhãn int, float, str, bool, None; ô None trống trơn và nhân vật gãi đầu nhìn nó.
+  - Prompt: Edit this image: the character stands in front of a sorting shelf with five compartments labeled 'int', 'float', 'str', 'bool', 'None'. Coins in int, a measuring cup in float, a scroll in str, a light switch in bool, and the None box is empty while the character scratches their head. Keep the original art style, 16:9.
+- **Số trong Python**: `public/images/docs/python/so.webp`
+  - Ý tưởng: Nhân vật anime chia 17 đồng vàng cho 5 đứa bạn, mỗi đứa 3 đồng, 2 đồng còn thừa nằm trong tay nhân vật với bảng ghi '17 // 5 = 3' và '17 % 5 = 2'.
+  - Prompt: Edit this image: the character is dividing gold coins among five small chibi friends, each friend holds 3 coins, and the character holds 2 leftover coins. A small chalkboard behind reads '17 // 5 = 3' and '17 % 5 = 2'. Keep the original art style, 16:9.
+- **Ép kiểu trong Python**: `public/images/docs/python/ep-kieu.webp`
+  - Ý tưởng: Nhân vật anime đứng cạnh một cái máy biến hình kiểu lò rèn: bỏ tờ giấy ghi '"100"' vào một đầu, đầu kia rơi ra đồng xu khắc số 100.
+  - Prompt: Edit this image: the character is operating a small magical forge machine. On one side they insert a paper note reading '"100"', and on the other side a shiny coin engraved with '100' pops out. A sign on the machine reads 'int()'. Keep the original art style, 16:9.
+- **Chuỗi trong Python**: `public/images/docs/python/chuoi.webp`
+  - Ý tưởng: Nhân vật anime cầm kéo cắt một dải ruy băng dài có in chữ 'DRAGONSLAYER', mảnh vừa cắt ra ghi 'DRAGON', bên dưới có tấm bảng '[0:6]'.
+  - Prompt: Edit this image: the character is cutting a long ribbon with scissors. The ribbon has letters 'DRAGONSLAYER' printed on it, and the cut piece reads 'DRAGON'. A small sign below reads '[0:6]'. Keep the original art style, 16:9.
+- **Bool và toán tử trong Python**: `public/images/docs/python/bool-va-toan-tu.webp`
+  - Ý tưởng: Nhân vật anime đứng trước cánh cổng lâu đài có hai ổ khóa, tay cầm chìa khóa ghi 'has_key' và thẻ ghi 'level >= 10', trên cổng khắc chữ 'and'.
+  - Prompt: Edit this image: the character stands in front of a castle gate with two locks. They hold a key tagged 'has_key' in one hand and a badge reading 'level >= 10' in the other. The word 'and' is carved above the gate. Keep the original art style, 16:9.
+- **List trong Python**: `public/images/docs/python/list.webp`
+  - Ý tưởng: Nhân vật anime xếp đồ vào một dãy ô kho đồ đánh số 0, 1, 2, 3 trên sàn, đang đặt thanh kiếm vào ô cuối, bên cạnh là bảng ghi 'inventory.append("Kiếm")'.
+  - Prompt: Edit this image: the character is placing items into a row of numbered inventory slots on the floor marked 0, 1, 2, 3, currently putting a sword into the last slot. A small sign nearby reads 'inventory.append("sword")'. Keep the original art style, 16:9.
+- **Tuple trong Python**: `public/images/docs/python/tuple.webp`
+  - Ý tưởng: Nhân vật anime cố cạy nắp một hộp kính niêm phong chứa tọa độ '(12, 7)', trên hộp dán nhãn 'tuple: không sửa được', cái xà beng trong tay cong queo.
+  - Prompt: Edit this image: the character is trying to pry open a sealed glass display case with a bent crowbar. Inside the case is a glowing scroll reading '(12, 7)'. A label on the case reads 'tuple'. The character looks frustrated but cute. Keep the original art style, 16:9.
+- **Set trong Python**: `public/images/docs/python/set.webp`
+  - Ý tưởng: Nhân vật anime đang phân loại thẻ bài vào album sưu tập, mỗi ô chỉ có một lá, tay cầm một lá trùng đang lắc đầu vứt vào thùng ghi 'duplicate'.
+  - Prompt: Edit this image: the character is sorting collectible monster cards into an album where each slot holds only one card. They are shaking their head and tossing a duplicate card into a small bin labeled 'duplicate'. The album cover reads 'set()'. Keep the original art style, 16:9.
+- **Dictionary trong Python**: `public/images/docs/python/dictionary.webp`
+  - Ý tưởng: Nhân vật anime đứng sau quầy tiệm đồ, sau lưng là tủ nhiều ngăn kéo, mỗi ngăn dán nhãn tên món ('Kiếm', 'Khiên', 'Bình máu') và thẻ giá treo bên cạnh.
+  - Prompt: Edit this image: the character is a shopkeeper behind a counter. Behind them is a wooden cabinet with many drawers, each drawer labeled with an item name like 'sword', 'shield', 'potion', with a small price tag hanging next to each. Keep the original art style, 16:9.
+- **If else trong Python**: `public/images/docs/python/if-else.webp`
+  - Ý tưởng: Nhân vật anime đứng ở ngã ba trong rừng, ba tấm biển gỗ chỉ ba hướng ghi 'if hp > 70', 'elif hp > 30', 'else', nhân vật nhìn thanh máu trên đầu mình để chọn đường.
+  - Prompt: Edit this image: the character stands at a three-way fork in a forest path. Three wooden signposts point in different directions reading 'if hp > 70', 'elif hp > 30', and 'else'. A small health bar floats above the character's head. Keep the original art style, 16:9.
+- **Vòng lặp while trong Python**: `public/images/docs/python/vong-lap-while.webp`
+  - Ý tưởng: Nhân vật anime đánh một con slime khổng lồ bằng kiếm gỗ, trên đầu slime có thanh máu gần cạn, một tấm biển nhỏ cắm dưới đất ghi 'while slime_hp > 0:'.
+  - Prompt: Edit this image: the character is repeatedly hitting a giant cute slime with a wooden sword. The slime has a nearly empty health bar above it. A small wooden sign stuck in the ground reads 'while slime_hp > 0:'. Keep the original art style, action pose, 16:9.
+- **Vòng lặp for trong Python**: `public/images/docs/python/vong-lap-for.webp`
+  - Ý tưởng: Nhân vật anime đi dọc một hàng rương kho báu đánh số 0 tới 4, mở lần lượt từng cái, tay cầm cuốn sổ ghi 'for chest in chests:'.
+  - Prompt: Edit this image: the character walks along a row of five treasure chests numbered 0 to 4, opening them one by one. They hold a small notebook reading 'for chest in chests:'. Keep the original art style, adventurous mood, 16:9.
+- **Hàm trong Python**: `public/images/docs/python/ham.webp`
+  - Ý tưởng: Nhân vật anime vận hành một cỗ máy rèn vũ khí: bỏ vào phễu một thỏi sắt và viên ngọc, nhấn nút 'def forge()', đầu ra rơi xuống thanh kiếm sáng lấp lánh có gắn thẻ 'return'.
+  - Prompt: Edit this image: the character is operating a magical forging machine. They drop an iron ingot and a gem into a funnel on top, press a big button labeled 'def forge()', and a shiny sword slides out of the output tray with a small tag reading 'return'. Keep the original art style, 16:9.
+- **Lambda trong Python**: `public/images/docs/python/lambda.webp`
+  - Ý tưởng: Nhân vật anime đang xếp các thẻ nhân vật trên bàn theo chiều cao cột điểm, tay cầm tấm thẻ nhỏ ghi 'key=lambda p: p[1]' như cầm lá bùa phép.
+  - Prompt: Edit this image: the character is arranging hero cards on a table in order from highest to lowest score, each card showing a score number. They hold up a small glowing talisman card reading 'key=lambda p: p[1]' like a magic spell. Keep the original art style, 16:9.
+- **Class và object trong Python**: `public/images/docs/python/class-va-object.webp`
+  - Ý tưởng: Nhân vật anime cầm một bản vẽ thiết kế quái vật ghi 'class Slime', trước mặt là ba con slime thật khác màu vừa nhảy ra từ bản vẽ, mỗi con đeo thẻ tên riêng.
+  - Prompt: Edit this image: the character holds a blueprint sheet titled 'class Slime' with a slime sketch on it. In front of them, three real cute slimes of different colors (green, blue, pink) are hopping out of the blueprint, each wearing a small name tag. Keep the original art style, 16:9.
+- **Kế thừa trong Python**: `public/images/docs/python/ke-thua.webp`
+  - Ý tưởng: Nhân vật anime vẽ cây phả hệ quái vật lên bảng đen: gốc cây ghi 'Enemy', ba cành ghi 'Slime', 'Archer', 'Boss', con Boss nhỏ đội vương miện đứng trên cành cao nhất.
+  - Prompt: Edit this image: the character is drawing a monster family tree on a chalkboard. The trunk is labeled 'Enemy' and three branches are labeled 'Slime', 'Archer', 'Boss'. A tiny chibi boss monster with a crown sits on the top branch. Keep the original art style, 16:9.
+- **Module và pip trong Python**: `public/images/docs/python/module-va-pip.webp`
+  - Ý tưởng: Nhân vật anime đang nhận một thùng hàng từ con chim giao hàng, trên thùng in chữ 'pip install', bên cạnh là balo đã có sẵn mấy túi nhỏ ghi 'random', 'math', 'json'.
+  - Prompt: Edit this image: the character is receiving a delivery crate from a cute delivery bird. The crate is stamped 'pip install'. Next to the character is a backpack with small pouches labeled 'random', 'math', 'json'. Keep the original art style, 16:9.
+- **Đọc ghi file trong Python**: `public/images/docs/python/doc-ghi-file.webp`
+  - Ý tưởng: Nhân vật anime ngồi trước điểm lưu game hình viên pha lê phát sáng, đang nhét một cuộn giấy ghi 'highscore.txt' vào trong, trên cuộn giấy khác đang bay ra ghi 'save.json'.
+  - Prompt: Edit this image: the character is at a glowing crystal save point, inserting a scroll labeled 'highscore.txt' into it, while another scroll labeled 'save.json' floats out. Keep the original art style, magical atmosphere, 16:9.
+- **Try except trong Python**: `public/images/docs/python/try-except.webp`
+  - Ý tưởng: Nhân vật anime cầm vợt bắt bướm, đang tóm gọn một con bọ đỏ có chữ 'ValueError' trên lưng, sau lưng là tấm lưới an toàn ghi 'try / except' căng dưới cây cầu gỗ.
+  - Prompt: Edit this image: the character is holding a butterfly net and catching a small red bug with 'ValueError' written on its back. Behind them, a safety net labeled 'try / except' is stretched under a wooden rope bridge. Keep the original art style, playful mood, 16:9.

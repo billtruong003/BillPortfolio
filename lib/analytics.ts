@@ -16,7 +16,8 @@ export type AnalyticsEvent =
     | 'post_scroll'
     | 'post_read_complete'
     | 'game_play'
-    | 'cv_download';
+    | 'cv_download'
+    | 'contact_submit';
 
 const ENDPOINT = process.env.NEXT_PUBLIC_GAS_URL;
 

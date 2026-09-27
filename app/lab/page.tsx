@@ -6,10 +6,10 @@ import type { Metadata } from 'next';
 import { SITE, absoluteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
-    title: 'Lab | Bill The Dev',
-    description: 'Shader breakdowns, Unity tutorials, and tech art experiments by Bill Truong.',
+    title: 'Dev Lab | Bill The Dev',
+    description: 'Step-by-step Unity 6 series by Bill Truong: build a game from an empty scene to a playable Web build.',
     alternates: { canonical: absoluteUrl('/lab/'), types: { 'application/rss+xml': absoluteUrl('/lab/feed.xml') } },
-    openGraph: { type: 'website', url: absoluteUrl('/lab/'), siteName: SITE.name, title: 'Dev Lab | Bill The Dev', description: 'Shader breakdowns, Unity tutorials, and tech art experiments by Bill Truong.' },
+    openGraph: { type: 'website', url: absoluteUrl('/lab/'), siteName: SITE.name, title: 'Dev Lab | Bill The Dev', description: 'Step-by-step Unity 6 series by Bill Truong: build a game from an empty scene to a playable Web build.' },
 };
 
 export default function LabPage() {
@@ -27,11 +27,11 @@ export default function LabPage() {
                             <span className="font-mono text-primary text-xs tracking-[0.4em] uppercase">Dev Lab</span>
                         </div>
                         <h1 className="text-4xl md:text-5xl font-black text-zinc-100 tracking-tight mb-4">
-                            Shader Breakdowns & <span className="text-primary">Tech Notes</span>
+                            Build games with <span className="text-primary">Unity 6</span>
                         </h1>
                         <p className="text-zinc-400 max-w-2xl text-base leading-relaxed">
-                            Deep dives into shader code, Unity rendering, and technical art.
-                            Each post includes full source code and performance analysis.
+                            Step-by-step series in English and Vietnamese. Every lesson ends with a build you can run,
+                            with the scripts to download, and the finished game is playable in the Game Lab.
                         </p>
                     </div>
                 </section>

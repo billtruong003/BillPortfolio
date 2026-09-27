@@ -3,7 +3,7 @@
     {
       "id": "merge-fruit",
       "title": "Merge Fruit",
-      "description": "A Suika-style merge puzzle game shipped at Golden Sea Studio.",
+      "description": "A Suika-style merge puzzle I took from prototype to release at Golden Sea Studio.",
       "thumbnail": "webgl-games/mushroom-game/mushroom.jpg",
       "tags": [
         "Hyper Casual",
@@ -368,7 +368,58 @@
       "preferredOrientation": "portrait",
       "sourceUrl": "https://github.com/billtruong003/BillUnityLab",
       "labSeries": "shmup"
+    },
+    {
+      "id": "platformer",
+      "title": "Platformer (Dev Lab)",
+      "description": "Pixel-art platformer built step by step in the Dev Lab Unity series: tilemaps with Rule Tiles, coyote time and jump buffering, a camera rig that shakes without ever showing past the room, ScriptableObject enemies, a stomp-only boss, and a level select.",
+      "thumbnail": "webgl-games/platformer/thumbnail.webp",
+      "tags": [
+        "Unity 6",
+        "URP",
+        "Tutorial Series",
+        "Platformer",
+        "Pixel Art"
+      ],
+      "genre": "platformer",
+      "releaseDate": "2026-09-19",
+      "buildSize": "50 MB",
+      "status": "playable",
+      "build": {
+        "buildPath": "/webgl-games/platformer/Build",
+        "buildName": "Platformer",
+        "compression": "none",
+        "hasStreamingAssets": false,
+        "companyName": "BillTheDev",
+        "productName": "Platformer",
+        "productVersion": "1.0"
+      },
+      "controls": {
+        "keyboard": [
+          "A/D or Arrow Keys — Move",
+          "Space — Jump (hold for height, tap for a hop)",
+          "Space in air — Double jump",
+          "Space on a wall — Wall jump"
+        ],
+        "gamepad": [
+          "Left Stick — Move",
+          "A — Jump"
+        ],
+        "mouse": [
+          "Left Click — Menu buttons"
+        ],
+        "touch": false
+      },
+      "unityVersion": "6000.3 (Unity 6)",
+      "display": {
+        "fixedRatio": true,
+        "ratioWidth": 16,
+        "ratioHeight": 9
+      },
+      "preferredOrientation": "landscape",
+      "sourceUrl": "https://github.com/billtruong003/BillUnityLab",
+      "labSeries": "platformer"
     }
   ],
-  "lastUpdated": "2026-09-13T03:54:32.489Z"
+  "lastUpdated": "2026-09-19"
 }

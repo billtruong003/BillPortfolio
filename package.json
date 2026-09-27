@@ -3,15 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "node scripts/compile-posts.mjs",
+    "predev": "node scripts/compile-posts.mjs && node scripts/compile-docs.mjs",
     "dev": "next dev",
     "optimize": "node scripts/optimize-assets.mjs",
-    "compile-posts": "node scripts/compile-posts.mjs",
-    "prebuild": "node scripts/optimize-assets.mjs && node scripts/compile-posts.mjs",
+    "compile-posts": "node scripts/compile-posts.mjs && node scripts/compile-docs.mjs",
+    "prebuild": "node scripts/optimize-assets.mjs && node scripts/compile-posts.mjs && node scripts/compile-docs.mjs",
     "add-game": "node scripts/add-game.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "resume": "node scripts/build-resume.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^9.105.6",

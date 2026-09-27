@@ -8,7 +8,7 @@ excerpt: "Hướng dẫn chi tiết cách xây dựng shader trong Unity từ c�
 coverImage: "/images/posts/shader-basic-cover.webp"
 category: "shader-breakdown"
 tags: ["Unity", "Shader", "Game Development", "Graphics", "HLSL"]
-published: true
+published: false
 featured: true
 ---
 

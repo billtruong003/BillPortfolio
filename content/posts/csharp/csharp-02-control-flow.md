@@ -1,10 +1,10 @@
 ---
-title: "C# Cho Game Dev #2: Control Flow — Điều Kiện & Vòng Lặp"
+title: "C# cho người mới #2: Điều kiện và vòng lặp"
 date: "2024-10-22"
 lang: "vi"
 series: "csharp"
 order: 2
-excerpt: "Điều khiển luồng chương trình với if/else, switch và vòng lặp for/while. Học cách ra quyết định và lặp lại hành động — nền tảng của mọi game logic."
+excerpt: "Dùng if/else và switch để chương trình biết chọn nhánh, dùng for và while để lặp lại một việc. Cuối bài ghép tất cả thành một trận đánh theo lượt nhỏ."
 coverImage: "/images/posts/csharp-cover.webp"
 category: "tutorial"
 tags: ["CSharp", "Programming", "Game Development", "Course"]
@@ -12,11 +12,11 @@ published: true
 featured: false
 ---
 
-## Tại sao cần Control Flow?
+## Vì sao cần điều kiện và vòng lặp
 
-Game liên tục ra quyết định mỗi frame: Người chơi có đang nhấn nút nhảy không? HP còn bao nhiêu? Enemy nào gần nhất? Tất cả đều cần **điều kiện**. Và khi cần kiểm tra 100 viên đạn, 50 enemy, hay 64 ô inventory — bạn cần **vòng lặp**.
+Game ra quyết định liên tục mỗi frame: người chơi có đang bấm nút nhảy không, HP còn bao nhiêu, enemy nào ở gần nhất. Những câu hỏi đó cần **điều kiện**. Còn khi phải kiểm tra 100 viên đạn, 50 enemy hay 64 ô inventory, bạn không thể viết tay từng dòng, bạn cần **vòng lặp**.
 
-## If / Else — Ra quyết định
+## If / else: chọn nhánh
 
 ### Cú pháp cơ bản
 
@@ -37,7 +37,7 @@ else
 }
 ```
 
-**Luồng chạy:** Kiểm tra từ trên xuống, gặp điều kiện `true` đầu tiên thì chạy block đó và **bỏ qua tất cả phần còn lại**.
+**Thứ tự chạy:** kiểm tra từ trên xuống, gặp điều kiện `true` đầu tiên thì chạy khối đó và **bỏ qua toàn bộ phần còn lại**. Vì vậy thứ tự quan trọng. Nếu đặt `health < 25` lên trước `health <= 0`, HP bằng 0 sẽ rơi vào nhánh "Critical" và không bao giờ tới được "Game Over".
 
 ### Kết hợp điều kiện
 
@@ -45,32 +45,32 @@ else
 int stamina = 50;
 bool isGrounded = true;
 
-// AND — cả hai phải đúng
+// AND: cả hai phải đúng
 if (stamina > 20 && isGrounded)
 {
     Console.WriteLine("Có thể dash!");
 }
 
-// OR — một trong hai đúng là đủ
+// OR: một trong hai đúng là đủ
 if (health <= 0 || timeLeft <= 0)
 {
     Console.WriteLine("Game Over!");
 }
 ```
 
-### Ternary Operator — if/else viết gọn 1 dòng
+### Toán tử ba ngôi: if/else viết trên 1 dòng
 
 ```csharp
 string status = (health > 0) ? "Alive" : "Dead";
-int healAmount = (health < 50) ? 30 : 15;  // heal nhiều hơn khi HP thấp
+int healAmount = (health < 50) ? 30 : 15;  // HP thấp thì hồi nhiều hơn
 string display = $"HP: {health} ({(health > 50 ? "OK" : "LOW")})";
 ```
 
-Chỉ nên dùng khi logic đơn giản. Nếu phức tạp, dùng if/else cho dễ đọc.
+Chỉ nên dùng khi logic đơn giản. Lồng nhiều tầng thì quay về if/else cho dễ đọc.
 
-## Switch — Nhiều nhánh rõ ràng
+## Switch: nhiều nhánh theo một giá trị
 
-Khi cần kiểm tra 1 biến với nhiều giá trị cụ thể, `switch` sạch hơn if/else:
+Khi cần so một biến với nhiều giá trị cụ thể, chuỗi `else if` dài rất khó đọc. `switch` gọn hơn:
 
 ```csharp
 string weapon = "Bow";
@@ -92,9 +92,9 @@ switch (weapon)
 }
 ```
 
-**Lưu ý:** Mỗi `case` phải có `break;` để thoát. `default` xử lý mọi trường hợp không match.
+**Lưu ý:** C# không cho một `case` chạy tuột xuống `case` kế tiếp như C hay JavaScript. Vì vậy mỗi `case` có code phải kết thúc bằng một lệnh nhảy ra: thường là `break`, nhưng `return`, `continue`, `goto` hay `throw` cũng được. Quên thì compiler báo lỗi ngay. `default` xử lý mọi giá trị không khớp case nào.
 
-### Switch Expression (C# 8+) — viết gọn hơn nữa
+### Switch expression (C# 8 trở lên): gọn hơn nữa
 
 ```csharp
 int damage = weapon switch
@@ -107,9 +107,9 @@ int damage = weapon switch
 Console.WriteLine($"Damage: {damage}");
 ```
 
-Cách này rất hay khi muốn gán giá trị dựa trên điều kiện.
+Cách này hợp khi bạn muốn gán một giá trị tùy theo điều kiện.
 
-## For Loop — Lặp khi biết số lần
+## Vòng lặp for: khi biết số lần lặp
 
 ### Cú pháp
 
@@ -123,7 +123,7 @@ for (int i = 0; i < 5; i++)
 
 Ba phần: `khởi tạo; điều kiện; bước nhảy`. Vòng lặp chạy khi điều kiện còn `true`.
 
-### Ví dụ game: Spawn enemies
+### Ví dụ: spawn enemy
 
 ```csharp
 int enemyCount = 5;
@@ -146,7 +146,7 @@ Spawn enemy #5 tại x=12
 ### Lặp ngược
 
 ```csharp
-// Countdown
+// Đếm ngược
 for (int i = 10; i >= 0; i--)
 {
     Console.WriteLine(i);
@@ -154,7 +154,7 @@ for (int i = 10; i >= 0; i--)
 Console.WriteLine("GO!");
 ```
 
-## While Loop — Lặp khi không biết trước số lần
+## Vòng lặp while: khi không biết trước số lần
 
 ```csharp
 int bossHealth = 250;
@@ -170,9 +170,9 @@ while (bossHealth > 0)
 Console.WriteLine($"Boss defeated sau {turn} turns!");
 ```
 
-`while` phù hợp khi không biết trước sẽ lặp bao nhiêu lần — phụ thuộc vào điều kiện runtime.
+Bạn không biết trước boss chết sau mấy lượt, nó tùy vào máu và damage lúc chạy. Những trường hợp như vậy dùng `while`. Nhớ đảm bảo điều kiện sẽ có lúc thành `false`, nếu không vòng lặp chạy mãi.
 
-### Do-While — Chạy ít nhất 1 lần
+### Do-while: chạy ít nhất 1 lần
 
 ```csharp
 string input;
@@ -185,13 +185,14 @@ do
 Console.WriteLine("Đăng nhập thành công!");
 ```
 
-Khác biệt: `do-while` kiểm tra điều kiện **sau** khi chạy, nên luôn chạy ít nhất 1 lần.
+Khác biệt: `do-while` kiểm tra điều kiện **sau** khi chạy thân vòng lặp, nên thân luôn chạy ít nhất 1 lần.
 
-## Break & Continue
+## Break và continue
 
-### Break — thoát vòng lặp ngay lập tức
+### Break: thoát vòng lặp ngay
 
 ```csharp
+// Giả sử đã có sẵn: mảng enemies, biến player và hàm GetDistance
 // Tìm enemy đầu tiên trong phạm vi
 for (int i = 0; i < enemyCount; i++)
 {
@@ -204,10 +205,11 @@ for (int i = 0; i < enemyCount; i++)
 }
 ```
 
-### Continue — bỏ qua iteration hiện tại
+### Continue: bỏ qua lượt hiện tại
 
 ```csharp
-// Heal tất cả teammates còn sống
+// Giả sử đã có sẵn: teamSize và mảng teamHealth
+// Hồi máu cho mọi đồng đội còn sống
 for (int i = 0; i < teamSize; i++)
 {
     if (teamHealth[i] <= 0)
@@ -218,12 +220,12 @@ for (int i = 0; i < teamSize; i++)
 }
 ```
 
-## Nested Loops — Vòng lặp lồng nhau
+## Vòng lặp lồng nhau
 
-Dùng khi làm việc với grid 2D (map, inventory, board game):
+Dùng khi làm việc với lưới 2D (map, inventory, bàn cờ):
 
 ```csharp
-// Tạo grid 3x3 cho Tic-Tac-Toe
+// Tạo lưới 3x3 cho cờ ca-rô
 int rows = 3, cols = 3;
 int cellNumber = 1;
 
@@ -234,7 +236,7 @@ for (int row = 0; row < rows; row++)
         Console.Write($"[{cellNumber}] ");
         cellNumber++;
     }
-    Console.WriteLine();  // xuống dòng sau mỗi row
+    Console.WriteLine();  // xuống dòng sau mỗi hàng
 }
 ```
 
@@ -245,14 +247,15 @@ Output:
 [7] [8] [9]
 ```
 
-## Ví Dụ Tổng Hợp: Mini Turn-Based Combat
+## Ví dụ tổng hợp: trận đánh theo lượt
 
 ```csharp
 int playerHP = 100;
 int enemyHP = 80;
 int turn = 1;
+bool ranAway = false;
 
-while (playerHP > 0 && enemyHP > 0)
+while (playerHP > 0 && enemyHP > 0 && !ranAway)
 {
     Console.WriteLine($"\n--- Turn {turn} ---");
     Console.WriteLine($"Player HP: {playerHP} | Enemy HP: {enemyHP}");
@@ -262,7 +265,7 @@ while (playerHP > 0 && enemyHP > 0)
     switch (choice)
     {
         case "1":
-            int damage = 15 + (turn % 3 == 0 ? 10 : 0);  // bonus mỗi 3 turn
+            int damage = 15 + (turn % 3 == 0 ? 10 : 0);  // cứ 3 lượt được thêm damage
             enemyHP -= damage;
             string bonus = (turn % 3 == 0) ? " (CRITICAL!)" : "";
             Console.WriteLine($"Bạn gây {damage} damage!{bonus}");
@@ -274,9 +277,8 @@ while (playerHP > 0 && enemyHP > 0)
             Console.WriteLine($"Hồi {heal} HP!");
             break;
         case "3":
-            Console.WriteLine("Bạn chạy trốn!");
-            playerHP = -1;  // trigger end
-            continue;
+            ranAway = true;
+            continue;  // quay lại kiểm tra điều kiện while, ranAway = true nên vòng lặp dừng
         default:
             Console.WriteLine("Lệnh không hợp lệ, mất lượt!");
             break;
@@ -294,26 +296,30 @@ while (playerHP > 0 && enemyHP > 0)
 }
 
 // Kết quả
-if (enemyHP <= 0)
+if (ranAway)
+    Console.WriteLine("\nBạn đã chạy thoát!");
+else if (enemyHP <= 0)
     Console.WriteLine("\nBạn thắng!");
-else if (playerHP <= 0)
+else
     Console.WriteLine("\nGame Over!");
 ```
 
-Ví dụ này kết hợp **while loop**, **switch**, **if/else**, **ternary**, **modulo**, và **break/continue** — tất cả những gì bạn vừa học.
+Để ý cách xử lý lựa chọn "Run". Cách dễ nghĩ ra là gán `playerHP = -1` cho vòng lặp dừng, nhưng khi đó phần kết quả sẽ in "Game Over!", tức là chạy trốn bị tính như chết. Một biến `bool` riêng tên `ranAway` nói đúng chuyện gì đã xảy ra, và phần kết quả kiểm tra nó trước.
 
-## Bài Tập
+Ví dụ này dùng lại gần hết những gì bạn vừa học: **while**, **switch**, **if/else**, **toán tử ba ngôi**, **%**, **break** và **continue**.
 
-**Bài 1: Xếp hạng Player**
-Nhập vào điểm score. In ra rank: S (>= 10000), A (>= 7000), B (>= 4000), C (>= 2000), D (còn lại). Dùng if/else hoặc switch expression.
+## Bài tập
 
-**Bài 2: Loot Table**
-Viết vòng lặp mở 10 rương. Mỗi rương dùng `Random` để random số 1-100. Nếu <= 5: Legendary, <= 20: Rare, <= 50: Common, còn lại: Empty. Đếm và in tổng mỗi loại. (Gợi ý: `new Random().Next(1, 101)`)
+**Bài 1: Xếp hạng người chơi**
+Nhập điểm score. In ra rank: S (>= 10000), A (>= 7000), B (>= 4000), C (>= 2000), D (còn lại). Dùng if/else hoặc switch expression.
 
-**Bài 3: Dungeon Grid**
-In ra một dungeon grid 5x5. Mỗi ô random là `"."` (trống), `"#"` (tường), hoặc `"E"` (enemy). Đặt player `"P"` ở vị trí [0,0].
+**Bài 2: Mở rương**
+Viết vòng lặp mở 10 rương. Mỗi rương dùng `Random` để lấy số từ 1 đến 100. Nếu <= 5: Legendary, <= 20: Rare, <= 50: Common, còn lại: Empty. Đếm và in tổng mỗi loại. (Gợi ý: tạo một lần `Random rng = new Random();` ngoài vòng lặp, rồi gọi `rng.Next(1, 101)` trong vòng lặp)
+
+**Bài 3: Lưới dungeon**
+In ra một lưới dungeon 5x5. Mỗi ô ngẫu nhiên là `"."` (trống), `"#"` (tường) hoặc `"E"` (enemy). Đặt người chơi `"P"` ở vị trí [0,0].
 
 ---
 
-**Bài trước:** [C# #1: Syntax, Biến & Kiểu Dữ Liệu](/lab/csharp-01-basics)
-**Bài tiếp:** [C# #3: Collections — Array, List & Dictionary](/lab/csharp-03-collections)
+**Bài trước:** [C# cho người mới #1: Cú pháp, biến và kiểu dữ liệu](/lab/csharp-01-basics)
+**Bài tiếp:** [C# cho người mới #3: Array, List và Dictionary](/lab/csharp-03-collections)

@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { Hero } from "@/components/sections/Hero";
 import { ImpactNumbers } from "@/components/sections/ImpactNumbers";
 import { TrustedBy } from "@/components/sections/TrustedBy";
@@ -8,13 +7,21 @@ import { YouTubeChannels } from "@/components/sections/YouTubeChannels";
 import { Experience } from "@/components/sections/Experience";
 import { Portfolio } from "@/components/sections/Portfolio";
 import { Testimonials } from "@/components/sections/Testimonials";
-import { Feed } from "@/components/sections/Feed";
 import { Certifications } from "@/components/sections/Certifications";
-import { ContactCTA } from "@/components/sections/ContactCTA";
+import { Contact } from "@/components/sections/Contact";
+import { Services } from "@/components/sections/Services";
+import { LabShowcase } from "@/components/sections/LabShowcase";
+import { SiteNav } from "@/components/layout/SiteNav";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import { ProjectModal } from "@/components/overlay/ProjectModal";
 import { JsonLd } from "@/components/logic/JsonLd";
 import { SITE } from "@/lib/site";
 import resume from "@/data/resume.json";
+import registry from "@/public/webgl-games/registry.json";
+import { postManifest } from "@/data/posts";
+
+const gameCount = registry.games.length;
+const labPostCount = new Set(postManifest.posts.map((p) => p.translationKey || p.slug)).size;
 
 const ParticleBackground = dynamic(
   () => import("@/components/canvas/ParticleBackground").then((mod) => mod.ParticleBackground),
@@ -42,56 +49,24 @@ export default function Home() {
         <ParticleBackground />
       </div>
 
+      <SiteNav />
       <div className="relative z-10">
         <Hero />
-        <ImpactNumbers />
-
-        <div className="flex flex-col">
-          <TrustedBy />
-          <Experience />
-          <BigProductions />
-        </div>
-
+        <ImpactNumbers gameCount={gameCount} labPostCount={labPostCount} />
+        <Services />
+        <BigProductions />
+        <LabShowcase />
+        <Experience />
+        <TrustedBy />
+        <Portfolio />
         <Testimonials />
         <YouTubeChannels />
-        <Portfolio />
-
-        <section className="py-16 px-6 border-y border-white/5 bg-[#080808] relative z-20">
-          <div className="container mx-auto flex flex-col items-center text-center gap-6">
-            <span className="font-mono text-primary text-xs tracking-[0.4em] uppercase">Interactive Lab</span>
-            <h2 className="text-3xl font-bold text-zinc-100">Want to play some games?</h2>
-            <p className="text-zinc-500 text-sm max-w-lg">
-              Explore my WebGL game builds — playable directly in your browser. No downloads needed.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href="/arcade"
-                className="group flex items-center gap-3 px-8 py-4 bg-primary/10 hover:bg-primary text-primary hover:text-black font-mono text-sm font-bold uppercase tracking-widest border border-primary/30 hover:border-primary rounded-lg transition-all duration-300 shadow-lg hover:shadow-primary/20"
-              >
-                🎮 ENTER GAME ARCADE
-              </Link>
-              <Link
-                href="/lab"
-                className="group flex items-center gap-3 px-8 py-4 bg-white/5 hover:bg-white/10 text-zinc-300 hover:text-white font-mono text-sm font-bold uppercase tracking-widest border border-white/10 hover:border-primary/50 rounded-lg transition-all duration-300"
-              >
-                🧪 READ DEV LAB
-              </Link>
-            </div>
-          </div>
-        </section>
-
         <Certifications />
-        <Feed />
-        <ContactCTA />
+        <Contact />
       </div>
 
       <ProjectModal />
-
-      <footer className="relative z-10 py-12 text-center border-t border-white/5 bg-black/40 backdrop-blur-md">
-        <p className="text-zinc-600 font-mono text-xs">
-          © {new Date().getFullYear()} Bill The Dev. <br className="md:hidden" /> Engineered with Next.js & R3F.
-        </p>
-      </footer>
+      <SiteFooter />
     </main>
     </>
   );

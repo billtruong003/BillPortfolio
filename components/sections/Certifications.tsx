@@ -10,8 +10,8 @@ export const Certifications = () => {
         <section className="py-12 px-6 border-y border-white/5 bg-black/20 backdrop-blur-sm">
             <div className="container mx-auto">
                 <div className="flex flex-col items-center text-center mb-10">
-                    <span className="font-mono text-primary text-xs tracking-[0.3em] uppercase mb-2">Verified Credentials</span>
-                    <h3 className="text-xl text-zinc-300 font-bold">Security Clearances & Certificates</h3>
+                    <span className="font-mono text-primary text-xs tracking-[0.3em] uppercase mb-2">Credentials</span>
+                    <h3 className="text-xl text-zinc-300 font-bold">Certifications & Awards</h3>
                 </div>
 
                 <div className="flex flex-wrap justify-center gap-4">

@@ -1,10 +1,10 @@
 ---
-title: "C# Cho Game Dev #1: Syntax, Biến & Kiểu Dữ Liệu"
+title: "C# cho người mới #1: Cú pháp, biến và kiểu dữ liệu"
 date: "2024-10-20"
 lang: "vi"
 series: "csharp"
 order: 1
-excerpt: "Bắt đầu hành trình C# từ con số 0. Tìm hiểu cấu trúc chương trình, kiểu dữ liệu, biến, hằng, toán tử và nhập/xuất dữ liệu — tất cả với context game development."
+excerpt: "Viết dòng C# đầu tiên, rồi làm quen với kiểu dữ liệu, biến, hằng, toán tử và nhập xuất trên console. Ví dụ lấy từ chỉ số nhân vật trong game."
 coverImage: "/images/posts/csharp-cover.webp"
 category: "tutorial"
 tags: ["CSharp", "Programming", "Game Development", "Course"]
@@ -12,28 +12,30 @@ published: true
 featured: false
 ---
 
-## Tại sao C# cho Game Dev?
+## Series này dành cho ai
 
-C# là ngôn ngữ chính của **Unity** — engine được dùng để làm Hollow Knight, Cuphead, Genshin Impact, và hàng ngàn tựa game khác. Trước khi nhảy vào Unity, bạn cần nắm vững C# đã. Series này sẽ đưa bạn từ zero đến đủ kiến thức để bắt đầu scripting trong Unity.
+Unity dùng C# để viết script. Nếu bạn mở series [Làm game bắn máy bay với Unity 6](/lab/unity-shmup-00-setup) mà thấy `float`, `List<T>` hay `class` còn lạ, thì nên đi qua series này trước. Nó chỉ dạy phần C# nền tảng, chạy trên console, chưa đụng tới Unity.
+
+Bạn cần cài .NET SDK (bản 6 trở lên), tạo project bằng `dotnet new console`, rồi dán code vào `Program.cs` và chạy `dotnet run`.
 
 **Series gồm 7 bài:**
-1. **Syntax, Biến & Kiểu Dữ Liệu** ← Bạn đang ở đây
-2. Control Flow: Điều Kiện & Vòng Lặp
-3. Collections: Array, List & Dictionary
-4. Methods, Parameters & Enum
-5. OOP: Class, Object & Constructor
-6. OOP Nâng Cao: Inheritance, Interface & Polymorphism
-7. Ứng Dụng: Exception, LINQ & Delegate
+1. **Cú pháp, biến và kiểu dữ liệu** (bài này)
+2. Điều kiện và vòng lặp
+3. Array, List và Dictionary
+4. Hàm, tham số và enum
+5. OOP: class, object và constructor
+6. OOP tiếp theo: kế thừa, interface và đa hình
+7. Exception, LINQ và delegate
 
 ## Hello World
 
-Mọi hành trình đều bắt đầu từ một dòng code:
+Dòng code đầu tiên:
 
 ```csharp
 Console.WriteLine("Hello, Game Dev!");
 ```
 
-Nếu bạn dùng **.NET 6+** (top-level statements), chỉ cần dòng trên là đủ. Với phiên bản cũ hơn, bạn cần cấu trúc đầy đủ:
+Từ **.NET 6** trở đi, C# cho phép viết code ngay ở đầu file mà không cần bọc trong class. Cách này gọi là **top-level statements**, và cả series sẽ dùng nó. Bạn sẽ gặp cấu trúc đầy đủ dưới đây trong tài liệu cũ, nó chạy ra cùng một kết quả:
 
 ```csharp
 using System;
@@ -47,39 +49,39 @@ class Program
 }
 ```
 
-- `using System;` — import thư viện chuẩn
-- `class Program` — mọi code trong C# đều nằm trong class
-- `static void Main` — điểm bắt đầu của chương trình
-- `Console.WriteLine` — in ra console và xuống dòng
+- `using System;`: dùng thư viện chuẩn
+- `class Program`: code C# nằm trong class
+- `static void Main`: chỗ chương trình bắt đầu chạy
+- `Console.WriteLine`: in ra console rồi xuống dòng
 
-## Kiểu Dữ Liệu
+## Kiểu dữ liệu
 
-Trong game, mọi thứ đều là dữ liệu: máu nhân vật là số, tên player là chuỗi, trạng thái sống/chết là boolean. C# có các kiểu dữ liệu cơ bản sau:
+Trong game, mọi thứ đều là dữ liệu: máu nhân vật là số, tên người chơi là chuỗi, còn sống hay đã chết là true/false. Mỗi loại dữ liệu có một kiểu riêng trong C#.
 
 ### Số nguyên
 
 ```csharp
-int playerHealth = 100;        // -2.1 tỷ → 2.1 tỷ
-long worldSeed = 9876543210L;  // số cực lớn
-byte itemSlot = 255;           // 0 → 255, tiết kiệm bộ nhớ
+int playerHealth = 100;        // khoảng -2.1 tỷ đến 2.1 tỷ
+long worldSeed = 9876543210L;  // số rất lớn
+byte itemSlot = 255;           // 0 đến 255, tốn ít bộ nhớ
 ```
 
-`int` là kiểu bạn sẽ dùng nhiều nhất. `byte` hữu ích khi tối ưu bộ nhớ (ví dụ: color channels 0-255).
+`int` là kiểu bạn dùng nhiều nhất. `byte` có ích khi cần tiết kiệm bộ nhớ, ví dụ kênh màu có giá trị 0 đến 255.
 
 ### Số thực
 
 ```csharp
-float moveSpeed = 5.5f;        // 7 chữ số chính xác, PHẢI có hậu tố f
-double preciseAngle = 45.123456789; // 15 chữ số chính xác
+float moveSpeed = 5.5f;             // khoảng 7 chữ số chính xác, PHẢI có hậu tố f
+double preciseAngle = 45.123456789; // khoảng 15 chữ số chính xác
 ```
 
-**Quan trọng:** Unity dùng `float` cho hầu hết mọi thứ (position, rotation, scale). Luôn nhớ thêm `f` sau số thực khi dùng float.
+Lỗi hay gặp nhất: viết `float moveSpeed = 5.5;` rồi bị báo lỗi. Số có dấu chấm mà không có hậu tố thì C# hiểu là `double`, và nó không tự ép `double` về `float`. Unity dùng `float` cho gần như mọi thứ (vị trí, góc xoay, tỉ lệ), nên hãy tập thói quen thêm `f` sau số thực.
 
-### Chuỗi & Ký tự
+### Chuỗi và ký tự
 
 ```csharp
 string playerName = "BillTheDev";
-char rank = 'S';  // ký tự đơn, dùng nháy đơn
+char rank = 'S';  // một ký tự, dùng nháy đơn
 ```
 
 ### Boolean
@@ -89,33 +91,33 @@ bool isAlive = true;
 bool isGrounded = false;
 ```
 
-Chỉ có 2 giá trị: `true` hoặc `false`. Đây là kiểu bạn sẽ dùng cực kỳ nhiều trong game logic.
+Chỉ có 2 giá trị: `true` hoặc `false`. Logic game dùng kiểu này rất nhiều.
 
 ### Bảng tóm tắt
 
-| Kiểu | Kích thước | Ví dụ game dev |
+| Kiểu | Kích thước | Ví dụ trong game |
 |------|-----------|----------------|
 | `int` | 4 bytes | HP, damage, score |
 | `float` | 4 bytes | speed, position, rotation |
-| `double` | 8 bytes | tính toán chính xác cao |
+| `double` | 8 bytes | phép tính cần độ chính xác cao |
 | `bool` | 1 byte | isAlive, isGrounded, hasKey |
-| `string` | dynamic | playerName, dialogText |
-| `char` | 2 bytes | grade, keyPress |
+| `string` | tùy độ dài | playerName, dialogText |
+| `char` | 2 bytes | xếp hạng, phím bấm |
 
-## Biến và Hằng
+## Biến và hằng
 
-### Biến — giá trị thay đổi được
+### Biến: giá trị đổi được
 
 ```csharp
 int score = 0;
-score = score + 100;  // score giờ = 100
-score += 50;          // viết gọn, score = 150
+score = score + 100;  // score giờ là 100
+score += 50;          // viết gọn, score là 150
 
 string weapon = "Sword";
 weapon = "Bow";  // đổi vũ khí
 ```
 
-### Hằng — giá trị cố định
+### Hằng: giá trị cố định
 
 ```csharp
 const int MAX_HEALTH = 100;
@@ -123,19 +125,19 @@ const float GRAVITY = -9.81f;
 const string GAME_VERSION = "1.0.0";
 ```
 
-Dùng `const` cho những giá trị không bao giờ thay đổi. Convention: đặt tên UPPER_SNAKE_CASE.
+Dùng `const` cho những giá trị không bao giờ đổi. Tên hằng thường viết kiểu UPPER_SNAKE_CASE.
 
-### Var — để compiler tự suy luận kiểu
+### var: để compiler tự đoán kiểu
 
 ```csharp
-var damage = 25;          // compiler biết đây là int
-var name = "Player";      // compiler biết đây là string
-var speed = 3.5f;         // compiler biết đây là float
+var damage = 25;          // compiler hiểu là int
+var name = "Player";      // compiler hiểu là string
+var speed = 3.5f;         // compiler hiểu là float
 ```
 
-`var` tiện nhưng chỉ nên dùng khi kiểu dữ liệu đã rõ ràng từ giá trị gán.
+`var` tiện, nhưng chỉ nên dùng khi nhìn giá trị gán là biết ngay kiểu.
 
-## Toán Tử
+## Toán tử
 
 ### Toán tử số học
 
@@ -146,19 +148,19 @@ int sum = a + b;       // 13
 int diff = a - b;      // 7
 int product = a * b;   // 30
 int quotient = a / b;  // 3 (chia nguyên!)
-int remainder = a % b; // 1 (chia dư — rất hữu ích)
+int remainder = a % b; // 1 (phần dư, rất hay dùng)
 ```
 
-**Lưu ý quan trọng:** `int / int` cho kết quả `int` (bỏ phần thập phân). Muốn kết quả thực, ép kiểu:
+**Chỗ dễ sai:** `int / int` cho ra `int`, phần thập phân bị bỏ đi. Muốn ra số thực thì ép kiểu một trong hai số:
 
 ```csharp
 float result = (float)a / b;  // 3.333...
 ```
 
-**Toán tử `%` (modulo)** cực kỳ hay dùng trong game:
+**Toán tử `%` (chia lấy dư)** dùng nhiều trong game:
 
 ```csharp
-// Cycle qua 4 hướng: 0, 1, 2, 3, 0, 1, 2, 3...
+// Xoay vòng 4 hướng: 0, 1, 2, 3, 0, 1, 2, 3...
 int direction = (currentStep % 4);
 
 // Kiểm tra số chẵn/lẻ
@@ -177,17 +179,17 @@ bool isDifferent = (teamA != teamB);
 ### Toán tử logic
 
 ```csharp
-// AND — cả hai phải true
+// AND: cả hai phải true
 bool canDash = (isGrounded && stamina > 20);
 
-// OR — một trong hai true là đủ
+// OR: một trong hai true là đủ
 bool gameOver = (health <= 0 || timeLeft <= 0);
 
-// NOT — đảo ngược
+// NOT: đảo ngược
 bool isVisible = !isHidden;
 ```
 
-### Toán tử gán tắt
+### Toán tử gán rút gọn
 
 ```csharp
 health -= 25;     // health = health - 25
@@ -197,7 +199,7 @@ ammo--;           // ammo = ammo - 1
 combo++;          // combo = combo + 1
 ```
 
-## Nhập/Xuất Dữ Liệu
+## Nhập và xuất dữ liệu
 
 ### Xuất ra console
 
@@ -208,17 +210,17 @@ Console.WriteLine("Game Over!");
 // Xuất không xuống dòng
 Console.Write("Enter name: ");
 
-// String interpolation — cách viết gọn nhất
+// String interpolation: cách viết gọn nhất
 string name = "Bill";
 int score = 9999;
 Console.WriteLine($"Player: {name} | Score: {score}");
 
-// Format trực tiếp trong interpolation
+// Định dạng ngay trong interpolation
 float completion = 0.756f;
 Console.WriteLine($"Progress: {completion:P1}");  // "Progress: 75.6%"
 ```
 
-**Tip:** `$"..."` (string interpolation) là cách format chuỗi phổ biến nhất trong C# hiện đại. Luôn ưu tiên cách này thay vì nối chuỗi bằng `+`.
+Nối chuỗi bằng `+` nhiều lần rất khó đọc, dễ thiếu dấu cách. `$"..."` (string interpolation) gọn hơn và là cách phổ biến trong C# hiện nay, nên ưu tiên dùng nó.
 
 ### Nhập từ bàn phím
 
@@ -233,32 +235,32 @@ Console.Write("Nhập tốc độ: ");
 float speed = float.Parse(Console.ReadLine());
 ```
 
-**Cẩn thận:** `Console.ReadLine()` luôn trả về `string`. Muốn số phải dùng `int.Parse()` hoặc `float.Parse()`. Nếu người dùng nhập sai (ví dụ nhập chữ thay vì số), chương trình sẽ crash — cách xử lý lỗi này sẽ học ở bài 7.
+**Cẩn thận:** `Console.ReadLine()` luôn trả về `string`. Muốn có số thì phải dùng `int.Parse()` hoặc `float.Parse()`. Nếu người dùng gõ chữ thay vì số, chương trình sẽ dừng vì lỗi. Cách xử lý chuyện này nằm ở bài 7.
 
-## Ép Kiểu (Type Casting)
+## Ép kiểu
 
 ```csharp
-// Implicit — tự động, an toàn (nhỏ → lớn)
+// Ép ngầm: tự động và an toàn (kiểu nhỏ sang kiểu lớn)
 int damage = 50;
-float damageFloat = damage;  // 50 → 50.0f, OK
+float damageFloat = damage;  // 50 thành 50.0f, không mất gì
 
-// Explicit — thủ công, có thể mất dữ liệu (lớn → nhỏ)
+// Ép tường minh: phải viết ra, có thể mất dữ liệu (kiểu lớn sang kiểu nhỏ)
 float position = 3.7f;
 int gridX = (int)position;  // 3 (cắt phần thập phân, KHÔNG làm tròn)
 
-// Parse — chuyển string sang số
+// Parse: chuyển string sang số
 string input = "100";
 int health = int.Parse(input);
 ```
 
-## Ví Dụ Tổng Hợp: Character Stats
+## Ví dụ tổng hợp: chỉ số nhân vật
 
 ```csharp
-// Khai báo stats nhân vật
+// Khai báo chỉ số nhân vật
 string characterName = "Dark Knight";
 int health = 100;
 int maxHealth = 100;
-float attackSpeed = 1.2f;
+float attackSpeed = 1.5f;
 int baseDamage = 25;
 bool isAlive = true;
 
@@ -271,7 +273,7 @@ Console.WriteLine($"{characterName} nhận {incomingDamage} damage! HP: {health}
 isAlive = (health > 0);
 Console.WriteLine($"Còn sống: {isAlive}");
 
-// Tính DPS
+// Tính DPS (sát thương mỗi giây)
 float dps = baseDamage * attackSpeed;
 Console.WriteLine($"DPS: {dps}");
 
@@ -284,21 +286,21 @@ Output:
 ```
 Dark Knight nhận 30 damage! HP: 70/100
 Còn sống: True
-DPS: 30
+DPS: 37.5
 HP còn: 70%
 ```
 
-## Bài Tập
+## Bài tập
 
-**Bài 1: Inventory Slot**
-Tạo các biến cho một item trong inventory: tên item (`string`), số lượng (`int`), trọng lượng mỗi cái (`float`), có thể stack được không (`bool`). In ra thông tin item và tổng trọng lượng.
+**Bài 1: Ô inventory**
+Tạo các biến cho một item trong inventory: tên item (`string`), số lượng (`int`), trọng lượng mỗi cái (`float`), có xếp chồng được không (`bool`). In ra thông tin item và tổng trọng lượng.
 
-**Bài 2: Damage Calculator**
-Nhập vào base damage (`int`) và critical multiplier (`float`). Tính damage thường và critical damage. In kết quả dạng: `"Normal: 25 | Critical: 50.0"`.
+**Bài 2: Tính damage**
+Nhập base damage (`int`) và hệ số chí mạng (`float`). Tính damage thường và damage chí mạng. In kết quả dạng: `"Normal: 25 | Critical: 50.0"`.
 
-**Bài 3: Currency Converter**
-Trong game có 3 loại tiền: Gold, Silver, Copper. 1 Gold = 100 Silver, 1 Silver = 100 Copper. Nhập vào tổng số Copper, chuyển đổi và in ra dạng: `"5 Gold, 23 Silver, 17 Copper"`. (Gợi ý: dùng `/` và `%`)
+**Bài 3: Đổi tiền**
+Game có 3 loại tiền: Gold, Silver, Copper. 1 Gold = 100 Silver, 1 Silver = 100 Copper. Nhập tổng số Copper, đổi ra và in dạng: `"5 Gold, 23 Silver, 17 Copper"`. (Gợi ý: dùng `/` và `%`)
 
 ---
 
-**Bài tiếp theo:** [C# Cho Game Dev #2: Control Flow — Điều Kiện & Vòng Lặp](/lab/csharp-02-control-flow)
+**Bài tiếp theo:** [C# cho người mới #2: Điều kiện và vòng lặp](/lab/csharp-02-control-flow)

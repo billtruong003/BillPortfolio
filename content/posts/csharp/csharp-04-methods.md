@@ -1,10 +1,10 @@
 ---
-title: "C# Cho Game Dev #4: Methods, Parameters & Enum"
+title: "C# cho người mới #4: Hàm, tham số và enum"
 date: "2024-10-26"
 lang: "vi"
 series: "csharp"
 order: 4
-excerpt: "Tổ chức code bằng hàm (methods), hiểu về parameters, return values, overloading và enum — bước quan trọng trước khi vào OOP."
+excerpt: "Gom code lặp lại vào hàm, truyền tham số, trả về kết quả, nạp chồng hàm, rồi dùng enum thay cho chuỗi và số khó nhớ. Đây là bước đệm trước OOP."
 coverImage: "/images/posts/csharp-cover.webp"
 category: "tutorial"
 tags: ["CSharp", "Programming", "Game Development", "Course"]
@@ -12,31 +12,31 @@ published: true
 featured: false
 ---
 
-## Tại sao cần Methods?
+## Vì sao cần hàm
 
-Bạn viết code tính damage ở 5 chỗ khác nhau. Khi cần sửa công thức, phải sửa cả 5 chỗ. Methods giải quyết vấn đề này: viết **một lần**, gọi **nhiều nơi**.
+Bạn viết công thức tính damage ở 5 chỗ khác nhau. Tới lúc cần sửa công thức, bạn phải sửa đủ cả 5 chỗ, sót một chỗ là game tính sai mà khó phát hiện. Hàm (method) giải quyết chuyện này: viết **một lần**, gọi ở **nhiều nơi**, sửa một chỗ là xong.
 
-## Cú Pháp Cơ Bản
+## Cú pháp cơ bản
 
 ```csharp
-// Định nghĩa method
+// Định nghĩa hàm
 static void SayHello()
 {
     Console.WriteLine("Hello, Game Dev!");
 }
 
-// Gọi method
+// Gọi hàm
 SayHello();  // "Hello, Game Dev!"
 SayHello();  // Gọi lại bao nhiêu lần cũng được
 ```
 
 Cấu trúc: `[access] [static] returnType MethodName(parameters)`
 
-- `static` — tạm thời luôn dùng, sẽ hiểu rõ hơn ở bài OOP
-- `void` — method không trả về giá trị
-- Tên method dùng **PascalCase** (chữ cái đầu viết hoa)
+- `static`: tạm thời cứ viết vào, bài OOP sẽ giải thích
+- `void`: hàm không trả về giá trị
+- Tên hàm viết kiểu **PascalCase** (viết hoa chữ cái đầu mỗi từ)
 
-## Parameters — Truyền dữ liệu vào
+## Tham số: truyền dữ liệu vào hàm
 
 ```csharp
 static void TakeDamage(int amount)
@@ -48,7 +48,7 @@ TakeDamage(30);   // "Nhận 30 damage!"
 TakeDamage(50);   // "Nhận 50 damage!"
 ```
 
-### Nhiều parameters
+### Nhiều tham số
 
 ```csharp
 static void Attack(string attacker, string target, int damage)
@@ -59,7 +59,7 @@ static void Attack(string attacker, string target, int damage)
 Attack("Player", "Goblin", 25);
 ```
 
-### Default parameters
+### Tham số mặc định
 
 ```csharp
 static void Heal(int amount = 20, bool showEffect = true)
@@ -73,9 +73,9 @@ Heal(50);         // amount=50, showEffect=true
 Heal(30, false);  // amount=30, showEffect=false
 ```
 
-Default params phải đặt **sau** params bắt buộc.
+Tham số có giá trị mặc định phải đặt **sau** các tham số bắt buộc.
 
-## Return — Trả về giá trị
+## Return: trả về giá trị
 
 ```csharp
 static int CalculateDamage(int baseDmg, float multiplier)
@@ -87,10 +87,10 @@ int damage = CalculateDamage(30, 1.5f);
 Console.WriteLine($"Damage: {damage}");  // 45
 ```
 
-- Kiểu return phải match với kiểu khai báo (`int` ở đây)
-- `return` kết thúc method ngay lập tức
+- Giá trị trả về phải đúng kiểu đã khai báo (`int` ở đây)
+- `return` kết thúc hàm ngay lập tức
 
-### Return boolean — kiểm tra điều kiện
+### Trả về bool để kiểm tra điều kiện
 
 ```csharp
 static bool CanAfford(int gold, int price)
@@ -104,7 +104,7 @@ else
     Console.WriteLine("Không đủ tiền!");
 ```
 
-### Return với early exit
+### Thoát sớm bằng return
 
 ```csharp
 static float GetHealthPercent(int current, int max)
@@ -114,9 +114,11 @@ static float GetHealthPercent(int current, int max)
 }
 ```
 
-## Ref & Out — Thay đổi biến bên ngoài
+## Ref và out: đổi biến ở bên ngoài hàm
 
-### Ref — truyền tham chiếu
+### Ref: truyền tham chiếu
+
+Lỗi hay gặp: viết hàm trừ máu, gọi xong in biến ra thì máu vẫn y nguyên. Lý do là mặc định hàm chỉ nhận **bản sao** của giá trị, đổi bản sao không ảnh hưởng biến gốc. Muốn hàm sửa được biến gốc thì dùng `ref`:
 
 ```csharp
 static void ApplyDamage(ref int health, int damage)
@@ -127,12 +129,10 @@ static void ApplyDamage(ref int health, int damage)
 
 int playerHP = 100;
 ApplyDamage(ref playerHP, 30);
-Console.WriteLine(playerHP);  // 70 — biến gốc bị thay đổi
+Console.WriteLine(playerHP);  // 70, biến gốc đã bị đổi
 ```
 
-Không có `ref`, method chỉ nhận **bản copy** của giá trị.
-
-### Out — trả về nhiều giá trị
+### Out: trả về nhiều giá trị
 
 ```csharp
 static void GetMinMax(int[] numbers, out int min, out int max)
@@ -151,43 +151,56 @@ GetMinMax(scores, out int lowest, out int highest);
 Console.WriteLine($"Min: {lowest}, Max: {highest}");  // Min: 50, Max: 800
 ```
 
-`out` bắt buộc method phải gán giá trị trước khi kết thúc.
+Hàm có tham số `out` bắt buộc phải gán giá trị cho nó trước khi kết thúc.
 
-## Method Overloading — Cùng tên, khác params
+## Nạp chồng hàm: cùng tên, khác tham số
+
+Nạp chồng (overloading) cho phép nhiều hàm cùng tên nhưng nhận kiểu hoặc số lượng tham số khác nhau. Compiler nhìn vào đối số bạn truyền để chọn đúng hàm.
+
+Có một bẫy khi dùng top-level statements: các hàm viết thẳng trong file như từ đầu bài tới giờ là **hàm cục bộ** (local function), và hàm cục bộ **không được nạp chồng**. Viết ba hàm `Damage` cùng tên ở đó thì compiler báo trùng tên. Cách đúng là đặt chúng trong một class:
 
 ```csharp
-static int Damage(int base_dmg)
-{
-    return base_dmg;
-}
+// Compiler tự chọn hàm phù hợp dựa trên đối số
+Console.WriteLine(DamageCalc.Damage(30));              // 30
+Console.WriteLine(DamageCalc.Damage(30, 2.0f));        // 60
+Console.WriteLine(DamageCalc.Damage(30, 10, true));    // 52
 
-static int Damage(int base_dmg, float critMultiplier)
+static class DamageCalc
 {
-    return (int)(base_dmg * critMultiplier);
-}
+    public static int Damage(int baseDmg)
+    {
+        return baseDmg;
+    }
 
-static int Damage(int base_dmg, int bonusDmg, bool isElemental)
-{
-    int total = base_dmg + bonusDmg;
-    if (isElemental) total = (int)(total * 1.3f);
-    return total;
-}
+    public static int Damage(int baseDmg, float critMultiplier)
+    {
+        return (int)(baseDmg * critMultiplier);
+    }
 
-// Compiler tự chọn method phù hợp dựa trên arguments
-Console.WriteLine(Damage(30));              // 30
-Console.WriteLine(Damage(30, 2.0f));        // 60
-Console.WriteLine(Damage(30, 10, true));    // 52
+    public static int Damage(int baseDmg, int bonusDmg, bool isElemental)
+    {
+        int total = baseDmg + bonusDmg;
+        if (isElemental) total = (int)(total * 1.3f);
+        return total;
+    }
+}
 ```
 
-Overloading cho phép cùng 1 tên method nhưng nhận các kiểu/số lượng parameter khác nhau.
+`public` cho phép code bên ngoài class gọi hàm, bài 5 sẽ nói kỹ.
 
-## Enum — Tập hợp hằng số có tên
+**Lưu ý về thứ tự trong file:** khi dùng top-level statements, mọi khai báo kiểu (`class`, `enum`, `struct`, `interface`) phải nằm **sau** phần code chạy. Đặt class hay enum lên đầu file rồi mới viết code chạy bên dưới, compiler sẽ báo lỗi CS8803. Từ đây trở đi, các ví dụ đều viết code chạy ở trên, khai báo kiểu ở dưới cùng.
 
-Enum giúp thay thế "magic numbers" bằng tên có ý nghĩa.
+## Enum: tập hằng số có tên
+
+Code kiểu `if (state == 2)` hay `if (weapon == "Bow")` rất khó đọc: số 2 nghĩa là gì, chuỗi gõ sai một chữ thì sao. Những giá trị như vậy gọi là "magic number" hay "magic string". Enum thay chúng bằng tên có nghĩa.
 
 ### Cú pháp
 
 ```csharp
+WeaponType equipped = WeaponType.Sword;
+Console.WriteLine(equipped);        // "Sword"
+Console.WriteLine((int)equipped);   // 0
+
 enum WeaponType
 {
     Sword,    // 0
@@ -196,16 +209,12 @@ enum WeaponType
     Dagger,   // 3
     Axe       // 4
 }
-
-WeaponType equipped = WeaponType.Sword;
-Console.WriteLine(equipped);        // "Sword"
-Console.WriteLine((int)equipped);   // 0
 ```
 
 ### Dùng trong switch
 
 ```csharp
-enum GameState { MainMenu, Playing, Paused, GameOver }
+HandleState(GameState.Playing);  // "Game đang chạy"
 
 static void HandleState(GameState state)
 {
@@ -226,20 +235,13 @@ static void HandleState(GameState state)
     }
 }
 
-HandleState(GameState.Playing);  // "Game đang chạy"
+enum GameState { MainMenu, Playing, Paused, GameOver }
 ```
 
 ### Gán giá trị cụ thể
 
 ```csharp
-enum Rarity
-{
-    Common = 1,
-    Uncommon = 2,
-    Rare = 3,
-    Epic = 4,
-    Legendary = 5
-}
+Console.WriteLine($"Legendary drop rate: {GetDropRate(Rarity.Legendary)}%");
 
 static int GetDropRate(Rarity rarity)
 {
@@ -254,25 +256,35 @@ static int GetDropRate(Rarity rarity)
     };
 }
 
-Console.WriteLine($"Legendary drop rate: {GetDropRate(Rarity.Legendary)}%");
+enum Rarity
+{
+    Common = 1,
+    Uncommon = 2,
+    Rare = 3,
+    Epic = 4,
+    Legendary = 5
+}
 ```
 
-### Tại sao dùng Enum thay vì string?
+### Vì sao dùng enum thay vì string?
 
 ```csharp
-// BAD — magic strings, dễ typo
-string state = "playin";  // typo, không ai bắt lỗi
+// SAI: dùng chuỗi, gõ sai chính tả không ai báo
+string state = "playin";  // sai chính tả, chương trình vẫn chạy và chạy sai
 
-// GOOD — enum, compiler bắt lỗi
-GameState state = GameState.Playin;  // COMPILE ERROR!
+// ĐÚNG: dùng enum, compiler bắt lỗi ngay
+GameState state = GameState.Playin;  // LỖI COMPILE!
 ```
 
-Enum cho bạn **autocomplete** trong IDE và **compile-time error** khi nhập sai. Trong Unity, enum cực kỳ phổ biến.
+Enum cho bạn **gợi ý tự động** trong IDE và **báo lỗi lúc compile** khi gõ sai. Trong Unity, enum xuất hiện ở khắp nơi.
 
-## Ví Dụ Tổng Hợp: Combat System
+## Ví dụ tổng hợp: tính sát thương theo hệ
 
 ```csharp
-enum Element { None, Fire, Water, Grass }
+// Sử dụng
+int dmg = CalculateFinalDamage(40, Element.Fire, Element.Grass, true);
+PrintAttackResult("Charmander", "Bulbasaur", dmg, Element.Fire, Element.Grass, true);
+// Output: Charmander → Bulbasaur: 120 damage CRITICAL! Hiệu quả cao!
 
 static float GetElementMultiplier(Element attacker, Element defender)
 {
@@ -301,24 +313,21 @@ static void PrintAttackResult(string attacker, string defender, int damage,
     Console.WriteLine($"{attacker} → {defender}: {damage} damage{crit} {effectiveness}");
 }
 
-// Sử dụng
-int dmg = CalculateFinalDamage(40, Element.Fire, Element.Grass, true);
-PrintAttackResult("Charmander", "Bulbasaur", dmg, Element.Fire, Element.Grass, true);
-// Output: Charmander → Bulbasaur: 120 damage CRITICAL! Hiệu quả cao!
+enum Element { None, Fire, Water, Grass }
 ```
 
-## Bài Tập
+## Bài tập
 
-**Bài 1: Math Utils**
-Viết 3 method: `Max(int a, int b)` trả về số lớn hơn, `Clamp(int value, int min, int max)` giới hạn giá trị trong khoảng, và `Map(float value, float fromMin, float fromMax, float toMin, float toMax)` ánh xạ giá trị từ range này sang range khác.
+**Bài 1: Hàm tiện ích**
+Viết 3 hàm: `Max(int a, int b)` trả về số lớn hơn, `Clamp(int value, int min, int max)` giữ giá trị trong khoảng min đến max, và `Map(float value, float fromMin, float fromMax, float toMin, float toMax)` quy đổi giá trị từ khoảng này sang khoảng khác.
 
-**Bài 2: Shop System**
-Tạo enum `ItemType { Weapon, Armor, Potion, Scroll }`. Viết method `GetPrice(ItemType type, Rarity rarity)` trả về giá = basePrice * rarityMultiplier. Viết method `TryBuy(ref int gold, ItemType type, Rarity rarity)` trả về `bool` và trừ gold nếu đủ tiền.
+**Bài 2: Cửa hàng**
+Tạo enum `ItemType { Weapon, Armor, Potion, Scroll }`. Viết hàm `GetPrice(ItemType type, Rarity rarity)` trả về giá = giá gốc * hệ số độ hiếm. Viết hàm `TryBuy(ref int gold, ItemType type, Rarity rarity)` trả về `bool` và trừ gold nếu đủ tiền.
 
-**Bài 3: Dice Roller**
-Viết method overloaded `Roll()` (1d6 mặc định), `Roll(int sides)` (1 xúc xắc n mặt), `Roll(int count, int sides)` (nhiều xúc xắc). In kết quả mỗi viên và tổng.
+**Bài 3: Tung xúc xắc**
+Viết các hàm nạp chồng `Roll()` (1 xúc xắc 6 mặt), `Roll(int sides)` (1 xúc xắc n mặt), `Roll(int count, int sides)` (nhiều xúc xắc). In kết quả từng viên và tổng. Nhớ đặt chúng trong một `static class` như `DamageCalc` ở trên.
 
 ---
 
-**Bài trước:** [C# #3: Collections](/lab/csharp-03-collections)
-**Bài tiếp:** [C# #5: OOP — Class, Object & Constructor](/lab/csharp-05-oop-basics)
+**Bài trước:** [C# cho người mới #3: Array, List và Dictionary](/lab/csharp-03-collections)
+**Bài tiếp:** [C# cho người mới #5: Class, object và constructor](/lab/csharp-05-oop-basics)

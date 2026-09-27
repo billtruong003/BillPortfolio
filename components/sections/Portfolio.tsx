@@ -37,10 +37,10 @@ export const Portfolio = () => {
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
                 <div>
                     <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
-                        Selected <span className="text-primary">Works</span>
+                        Projects & <span className="text-primary">open source</span>
                     </h2>
                     <p className="text-zinc-500 max-w-md">
-                        A curation of shaders, tools, and immersive experiences from the vault.
+                        Shaders, tools, web apps and small games I built on my own.
                     </p>
                 </div>
                 

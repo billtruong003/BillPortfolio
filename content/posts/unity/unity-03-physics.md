@@ -8,7 +8,7 @@ excerpt: "Hệ thống vật lý của Unity: Rigidbody cho trọng lực và l�
 coverImage: "/images/posts/unity-fundamental.webp"
 category: "unity-dev"
 tags: ["Unity", "Physics", "Game Development", "Tutorial"]
-published: true
+published: false
 featured: false
 ---
 

@@ -6,7 +6,7 @@ excerpt: "Hướng dẫn chi tiết cách cài đặt Unity, lấy license và c
 coverImage: "/images/posts/unity-setup-guide/cover.webp"
 category: "tutorial"
 tags: ["Unity", "Game Development", "Visual Studio", "VSCode"]
-published: true
+published: false
 featured: false
 ---
 

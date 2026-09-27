@@ -49,6 +49,7 @@ function metadata(path) {
     const immutable = name.endsWith('.unityweb') || name.endsWith('.bundle');
     let contentType = 'application/octet-stream';
     if (name.endsWith('.js')) contentType = 'text/javascript; charset=utf-8';
+    else if (name.endsWith('.wasm')) contentType = 'application/wasm';
     else if (name.endsWith('.json')) contentType = 'application/json; charset=utf-8';
     else if (name.endsWith('.xml')) contentType = 'application/xml; charset=utf-8';
     else if (name.endsWith('.hash')) contentType = 'text/plain; charset=utf-8';

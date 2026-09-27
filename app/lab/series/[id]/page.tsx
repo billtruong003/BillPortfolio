@@ -9,10 +9,14 @@ import { SITE, absoluteUrl } from '@/lib/site';
 
 type Params = { params: { id: string } };
 
+// The -en page only exists once the series has a name and posts in English.
+const hasEnglish = (id: string) =>
+    !!SERIES_CONFIG.find(s => s.id === id)?.nameEn && postManifest.posts.some(p => p.series === id && p.lang === 'en');
+
 export function generateStaticParams() {
     return SERIES_CONFIG
         .filter(s => getSeriesPosts(postManifest.posts, s.id).length > 0)
-        .flatMap(s => [{ id: s.id }, ...(s.nameEn && postManifest.posts.some(p => p.series === s.id && p.lang === 'en') ? [{ id: `${s.id}-en` }] : [])]);
+        .flatMap(s => [{ id: s.id }, ...(hasEnglish(s.id) ? [{ id: `${s.id}-en` }] : [])]);
 }
 
 export function generateMetadata({ params }: Params): Metadata {
@@ -23,7 +27,7 @@ export function generateMetadata({ params }: Params): Metadata {
     return {
         title: `${series.name} | ${SITE.name} Lab`,
         description: series.description,
-        alternates: { canonical: url, ...(series.nameEn ? { languages: { vi: absoluteUrl(`/lab/series/${series.id}/`), en: absoluteUrl(`/lab/series/${series.id}-en/`) } } : {}) },
+        alternates: { canonical: url, ...(hasEnglish(series.id) ? { languages: { vi: absoluteUrl(`/lab/series/${series.id}/`), en: absoluteUrl(`/lab/series/${series.id}-en/`) } } : {}) },
         openGraph: { type: 'website', url, siteName: SITE.name, title: series.name, description: series.description },
     };
 }
@@ -42,7 +46,7 @@ export default function SeriesPage({ params }: Params) {
 
             <div className="relative z-10 pt-28 pb-24 px-6">
                 <div className="container mx-auto max-w-3xl">
-                    {series.nameEn && <nav aria-label={lang === 'vi' ? 'Ngôn ngữ series' : 'Series language'} className="flex gap-4 mb-6 text-sm text-primary">
+                    {hasEnglish(series.id) && <nav aria-label={lang === 'vi' ? 'Ngôn ngữ series' : 'Series language'} className="flex gap-4 mb-6 text-sm text-primary">
                         <Link href={`/lab/series/${series.id}`} hrefLang="vi" lang="vi" aria-current={lang === 'vi' ? 'page' : undefined}>Tiếng Việt</Link>
                         <Link href={`/lab/series/${series.id}-en`} hrefLang="en" lang="en" aria-current={lang === 'en' ? 'page' : undefined}>English</Link>
                     </nav>}

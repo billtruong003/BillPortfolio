@@ -8,7 +8,7 @@ excerpt: "Viết script C# đầu tiên trong Unity. Hiểu MonoBehaviour lifecy
 coverImage: "/images/posts/unity-fundamental.webp"
 category: "unity-dev"
 tags: ["Unity", "CSharp", "Scripting", "Game Development"]
-published: true
+published: false
 featured: false
 ---
 

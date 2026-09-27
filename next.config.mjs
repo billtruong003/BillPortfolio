@@ -10,8 +10,6 @@ const nextConfig = {
       { protocol: "https", hostname: "raw.githubusercontent.com" },
       { protocol: "https", hostname: "placehold.co" },
       { protocol: "https", hostname: "img.youtube.com" },
-      { protocol: "https", hostname: "billdevsprint.com" },
-      { protocol: "https", hostname: "billthedevlab.store" },
       { protocol: "https", hostname: "api.microlink.io" },
       { protocol: "https", hostname: "github.com" },
       { protocol: "https", hostname: "media.licdn.com" },

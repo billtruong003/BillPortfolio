@@ -13,13 +13,6 @@ export interface Series {
 
 export const SERIES_CONFIG: Series[] = [
     {
-        id: 'csharp',
-        name: 'C# Cho Game Dev',
-        icon: '💻',
-        description: 'Từ zero đến OOP — nền tảng C# cho game developer',
-        color: '#68217A',
-    },
-    {
         id: 'unity',
         name: 'Unity Cho Người Mới',
         icon: '🎮',
@@ -41,6 +34,22 @@ export const SERIES_CONFIG: Series[] = [
         icon: '🚀',
         description: 'Dựng một game shoot \'em up từ scene trống tới build WebGL: Input System, pool, ScriptableObject, HUD, shader',
         color: '#4C6EF5',
+    },
+    {
+        id: 'platformer',
+        nameEn: 'Build a pixel-art platformer with Unity 6',
+        descriptionEn: 'Seventeen lessons from a single sprite to a playable Web build: tilemaps, jump feel measured rather than guessed, ScriptableObject characters, enemies, a boss, juice, and how to find the bugs Unity never reports.',
+        name: 'Làm game platformer pixel art với Unity 6',
+        icon: '🏃',
+        description: 'Mười bảy bài từ một sprite tới build WebGL: tilemap, cú nhảy tính bằng công thức, ScriptableObject, địch, boss, juice, và cách tự tìm lỗi Unity không báo',
+        color: '#2FB37A',
+    },
+    {
+        id: 'csharp',
+        name: 'C# cho người mới làm game',
+        icon: '💻',
+        description: 'Nền tảng C# trước khi vào Unity: biến, vòng lặp, collection, hàm, OOP, LINQ và delegate',
+        color: '#68217A',
     },
     {
         id: 'shader',

@@ -8,7 +8,7 @@ excerpt: "Building a stylized environment system with GPU-instanced grass, flowe
 coverImage: "/images/posts/biome-shader-cover.webp"
 category: "shader-breakdown"
 tags: ["GPU Instancing", "Compute Shader", "Unity", "HLSL", "Environment Art"]
-published: true
+published: false
 featured: false
 ---
 

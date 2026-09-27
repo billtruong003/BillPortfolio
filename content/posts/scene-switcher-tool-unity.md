@@ -6,7 +6,7 @@ excerpt: "A custom Unity Editor tool to simplify scene switching during developm
 coverImage: "/images/posts/shader-basic-cover.webp"
 category: "tools"
 tags: ["Unity", "Tool", "UnityEditor"]
-published: true
+published: false
 featured: false
 ---
 

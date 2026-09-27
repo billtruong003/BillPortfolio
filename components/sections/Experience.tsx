@@ -12,12 +12,11 @@ export const Experience = () => {
     const data = mode === "dev" ? resumeData.experience.dev : resumeData.experience.teaching;
 
     return (
-        <section className="py-32 px-6">
+        <section id="experience" className="py-24 px-6 scroll-mt-20">
             <div className="container mx-auto max-w-5xl">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                     <h2 className="text-3xl font-bold flex items-center gap-4">
-                        <span className="text-primary font-mono">02.</span>
-                        <span className="text-zinc-100">Experience Logs</span>
+                        <span className="text-zinc-100">Experience</span>
                     </h2>
 
                     <div className="flex p-1 bg-white/5 border border-white/10 rounded-lg backdrop-blur-md">
@@ -28,7 +27,7 @@ export const Experience = () => {
                                 mode === "dev" ? "bg-primary text-black font-bold shadow-[0_0_15px_rgba(255,184,77,0.4)]" : "text-zinc-400 hover:text-white"
                             )}
                         >
-                            <Code2 size={16} /> DEV_OPS
+                            <Code2 size={16} /> Development
                         </button>
                         <button
                             onClick={() => setMode("teaching")}
@@ -37,7 +36,7 @@ export const Experience = () => {
                                 mode === "teaching" ? "bg-primary text-black font-bold shadow-[0_0_15px_rgba(255,184,77,0.4)]" : "text-zinc-400 hover:text-white"
                             )}
                         >
-                            <GraduationCap size={16} /> INSTRUCTION
+                            <GraduationCap size={16} /> Teaching
                         </button>
                     </div>
                 </div>

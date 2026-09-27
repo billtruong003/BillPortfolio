@@ -1,0 +1,205 @@
+{
+  "website": "https://www.billthedev.com",
+  "summary": "Unity engineer and generalist. I make games, and when a game needs a shader, an editor tool, a server or a web page, I build that too. I like trying things other people skip: I started a VR gameplay channel that now has 2.5M+ views, sell a Blender add-on on Superhive, and open-sourced a Gemini API proxy that has 38 stars on GitHub. At studios I worked on Applaydu (50M+ downloads) and Shmackle (Meta Quest, 4.7 stars from 23K+ ratings). I work a lot, mostly because I enjoy it.",
+  "games": [
+    {
+      "name": "Zombie War",
+      "url": "https://www.billthedev.com/arcade?game=zombie-war",
+      "tag": "solo, playable in the browser",
+      "meta": "Unity 6, URP, WebGL",
+      "bullets": [
+        "Top-down zombie survival shooter with campaign waves and bosses: 25 weapons, a 978-part modular costume system, and NavMesh hordes drawn with vertex animation textures and pooling.",
+        "Addressables, Animation Rigging weapon IK, VFX Graph and Burst, built on my own BillGameCore framework."
+      ]
+    },
+    {
+      "name": "Timeless Soul",
+      "url": "https://www.billthedev.com/arcade?game=zeno",
+      "tag": "Unity 20th Anniversary Game Jam",
+      "meta": "Unity 6, URP, WebGL",
+      "bullets": [
+        "Roguelite horde shooter where every death leaves a Soul Grave that shapes the next life; VAT enemies, occlusion baking and kaiju bosses, built within the jam."
+      ]
+    },
+    {
+      "name": "VR and multiplayer prototypes",
+      "url": "https://github.com/billtruong003",
+      "tag": "personal",
+      "meta": "Unity 6",
+      "bullets": [
+        "TOSSZONE: multiplayer VR with Photon Fusion, Meta XR SDK and XR Interaction Toolkit. Dungeon Game: VR dungeon crawler with OpenXR and XR Hands.",
+        "Duel Radiant Arena: online duels on a Colyseus server. A 2D multiplayer game on SpacetimeDB with Spine characters."
+      ]
+    },
+    {
+      "name": "AI simulations for YouTube",
+      "url": "https://www.youtube.com/@BillAITrainer",
+      "tag": "Content War, Square Race",
+      "meta": "Unity 6, AI Navigation",
+      "bullets": [
+        "100 NavMesh AI agents fighting in a procedural battle royale arena with a shrinking zone, plus racing simulations, recorded as channel footage."
+      ]
+    },
+    {
+      "name": "Drag & Slice: Culinary Journey",
+      "url": "https://billtruong003.itch.io/dragslice-culinary-journey",
+      "tag": "Korea Game Week contest, team entry",
+      "meta": "Unity, Firebase",
+      "bullets": [
+        "Drag-to-shoot action with a cooking loop, released on itch.io and playable on the web."
+      ]
+    },
+    {
+      "name": "Game Lab and Dev Lab",
+      "url": "https://www.billthedev.com/lab",
+      "tag": "billthedev.com",
+      "meta": "10 WebGL games, 2 series",
+      "bullets": [
+        "Ten playable WebGL builds on my site, and build-along Unity 6 series (a 12-lesson shoot 'em up in English and Vietnamese, and a pixel-art platformer) that each end in a playable build."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "BillGameCore",
+      "url": "https://github.com/billtruong003/BillGameCore",
+      "tag": "Unity framework",
+      "meta": "C#",
+      "bullets": [
+        "My reusable Unity framework (services, tweening, shared systems), used across six of my Unity 6 projects."
+      ]
+    },
+    {
+      "name": "Git Profile Awaken",
+      "url": "https://git-profile-awaken.vercel.app",
+      "tag": "open source, 6 stars",
+      "meta": "TypeScript, Vercel",
+      "bullets": [
+        "Turns any GitHub profile into an RPG-style status card built from the user's activity."
+      ]
+    },
+    {
+      "name": "Pro Origin Tools",
+      "url": "https://superhivemarket.com/products/pro-origin-tools",
+      "tag": "paid Blender add-on on Superhive",
+      "meta": "Python, bpy",
+      "bullets": [
+        "Sets object origins for whole selections: finds separate mesh islands, adds a one-click hinge for doors and lids, and runs in batch or from scripts."
+      ]
+    },
+    {
+      "name": "Unity and Blender tools",
+      "url": "https://github.com/billtruong003",
+      "tag": "open source",
+      "meta": "C#, Python, bpy",
+      "bullets": [
+        "Scene Switcher (Unity editor), Pro Atlas Baker (Blender atlasing and UV packing), Responsive WebGL Template (Unity WebGL that fits any screen)."
+      ]
+    },
+    {
+      "name": "Bill SSOutline and Bill Biome Shader",
+      "url": "https://github.com/billtruong003/Bill-SSOutline",
+      "tag": "open source",
+      "meta": "Render Graph, compute shaders",
+      "bullets": [
+        "Screen-space outline on URP Render Graph with depth, normal and color edges plus occlusion and selection masks; stylized biome with compute-shader GPU instancing, interactive foliage and a painting tool."
+      ]
+    },
+    {
+      "name": "KeyStream-Gemini",
+      "url": "https://github.com/billtruong003/KeyStream-Gemini",
+      "tag": "open source, 38 stars and 15 forks",
+      "meta": "JavaScript",
+      "bullets": [
+        "Reverse proxy with an OpenAI-compatible endpoint that rotates across Gemini API keys, so requests keep going when one key hits its rate limit."
+      ]
+    },
+    {
+      "name": "Lucy",
+      "url": "https://billtruong003.github.io/lucy-showcase/",
+      "tag": "personal AI agent",
+      "meta": "Claude Agent SDK, Node.js, SQLite",
+      "bullets": [
+        "Runs 24/7 on a small VPS over Telegram, with long-term memory (full-text and vector search), MCP tools and a guard against dangerous commands."
+      ]
+    },
+    {
+      "name": "More tools",
+      "url": "https://github.com/billtruong003",
+      "tag": "open source",
+      "meta": "Python, TypeScript",
+      "bullets": [
+        "Wavewright (local AI sound effects for games), a Discord bot with an LLM router, a Whisper subtitle pipeline."
+      ]
+    }
+  ],
+  "community": [
+    {
+      "name": "YouTube",
+      "url": "https://www.youtube.com/@BillVRGamer",
+      "tag": "Bill VR Gamer, Bill The Dev, Bill AI Trainer",
+      "period": "2023 - Present",
+      "text": "2.5M+ views and 1.5K+ subscribers on VR gameplay, plus Unity devlogs and AI simulation videos."
+    },
+    {
+      "name": "FullHouseDev",
+      "tag": "Game Development Instructor, part-time",
+      "period": "Sep 2024 - Jul 2026",
+      "text": "Taught Unity and game development through hands-on projects and reviewed student code."
+    },
+    {
+      "name": "Marathon Education",
+      "tag": "CS Education Counselor, part-time",
+      "period": "Mar 2023 - Jun 2026",
+      "text": "Helped students learning computer science choose a path and work through problems."
+    },
+    {
+      "name": "DigiUni Vietnam",
+      "tag": "IT Teacher, part-time",
+      "period": "Jul 2022 - Jun 2024",
+      "text": "Started as a teaching assistant, then taught programming, game development and 3D basics."
+    }
+  ],
+  "education": [
+    {
+      "school": "FPT University",
+      "location": "Ho Chi Minh City, Vietnam",
+      "degree": "Software Engineering",
+      "note": "30% Talent Scholarship",
+      "period": "Since 2022"
+    },
+    {
+      "school": "EMASI Van Phuc International School",
+      "location": "Ho Chi Minh City, Vietnam",
+      "degree": "High School Diploma (Honors)",
+      "note": "GPA 9.2/10",
+      "period": "2019 - 2022"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Game development",
+      "items": "C#, Unity 6 and 2022 LTS, URP, Addressables, Input System, Cinemachine, AI Navigation, Animation Rigging, Burst, Spine, DOTween, Odin, Unity Ads, IAP and Analytics"
+    },
+    {
+      "name": "Graphics",
+      "items": "HLSL, Shader Graph, VFX Graph, URP Render Graph, compute shaders, GPU instancing, vertex animation textures, profiling and optimization on Quest and mobile"
+    },
+    {
+      "name": "XR and networking",
+      "items": "Meta XR SDK, XR Interaction Toolkit, OpenXR, XR Hands, Photon Fusion, Colyseus, SpacetimeDB, PlayFab, Firebase, NVIDIA Omniverse"
+    },
+    {
+      "name": "Tools, web and AI",
+      "items": "Python, Blender Python API, TypeScript, Next.js, React, Astro, Node.js, SQLite, GitHub Actions, Claude Agent SDK, MCP, Gemini API"
+    },
+    {
+      "name": "Awards",
+      "items": "Top 6, Vietnam GameVerse 2024 (Animal Push Royale); selected by FPT IS for developer training led by Apple engineers"
+    },
+    {
+      "name": "Languages",
+      "items": "English (IELTS 6.0), Vietnamese (native)"
+    }
+  ]
+}

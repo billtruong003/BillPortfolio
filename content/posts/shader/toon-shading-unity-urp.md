@@ -4,17 +4,17 @@ date: "2026-04-10"
 lang: "en"
 series: "shader"
 order: 2
-excerpt: "How I built a multi-pass toon shader with custom outlines for Shmackle VR, achieving 90 FPS on Meta Quest."
+excerpt: "How I built a multi-pass toon shader with custom outlines for Shmackle VR, while holding 72 FPS on Quest 2."
 coverImage: "/images/posts/toon-shader-cover.webp"
 category: "shader-breakdown"
 tags: ["HLSL", "Unity", "URP", "Toon Shading", "VR"]
-published: true
+published: false
 featured: true
 ---
 
 ## The Problem
 
-When I joined the Shmackle VR project at Curly Blue, the game was using basic **Unlit shaders** — flat, lifeless visuals that couldn't hold 72 FPS on Meta Quest. The art team wanted a stylized toon look, but every off-the-shelf solution either killed performance or didn't support VR single-pass instanced rendering.
+When I joined the Shmackle VR project at Curly Blue, the game used flat unlit assets and could not hold a stable 72 FPS on Quest 2. The art team wanted a stylized toon look, but every off-the-shelf solution either killed performance or didn't support VR single-pass instanced rendering.
 
 So I built one from scratch.
 
@@ -83,7 +83,8 @@ float SobelDepth(float2 uv, float2 texelSize) {
 
 | Metric | Before | After |
 |--------|--------|-------|
-| FPS (Quest 2) | ~70 unstable | 90 locked |
+| FPS (Quest 2) | ~70 unstable | 72 stable |
+| FPS (Quest 3) | n/a | ~80 to 90 |
 | Draw Calls | 340+ | 180 |
 | Shader Variants | 12 | 4 |
 | Visual Quality | Flat Unlit | Stylized Toon |

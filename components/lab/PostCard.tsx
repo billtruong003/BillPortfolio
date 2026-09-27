@@ -5,10 +5,12 @@ import { Clock, Calendar } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getAssetPath } from '@/lib/utils';
+import { forwardRef } from 'react';
 
-export const PostCard = ({ post }: { post: BlogPost }) => {
+// forwardRef: AnimatePresence mode="popLayout" measures its children through a ref.
+export const PostCard = forwardRef<HTMLAnchorElement, { post: BlogPost }>(({ post }, ref) => {
     return (
-        <Link href={`/lab/${post.slug}`}>
+        <Link ref={ref} href={`/lab/${post.slug}`}>
             <motion.article
                 layout
                 initial={{ opacity: 0, y: 20 }}
@@ -75,4 +77,6 @@ export const PostCard = ({ post }: { post: BlogPost }) => {
             </motion.article>
         </Link>
     );
-};
+});
+
+PostCard.displayName = 'PostCard';
