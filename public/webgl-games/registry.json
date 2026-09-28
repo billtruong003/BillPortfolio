@@ -31,7 +31,7 @@
       },
       "controls": {
         "mouse": [
-          "Left Click/Drag — Drop Fruit"
+          "Left Click/Drag â€” Drop Fruit"
         ],
         "touch": true
       },
@@ -69,7 +69,7 @@
       },
       "controls": {
         "mouse": [
-          "Drag & Release — Shoot/Slice"
+          "Drag & Release â€” Shoot/Slice"
         ],
         "touch": true
       },
@@ -107,7 +107,7 @@
       },
       "controls": {
         "keyboard": [
-          "A-Z — Type words to attack"
+          "A-Z â€” Type words to attack"
         ],
         "touch": false
       },
@@ -146,7 +146,7 @@
       },
       "controls": {
         "mouse": [
-          "Left Click & Drag — Swipe to paint"
+          "Left Click & Drag â€” Swipe to paint"
         ],
         "touch": true
       },
@@ -184,7 +184,7 @@
       },
       "controls": {
         "mouse": [
-          "Click & Drag — Slice to the rhythm"
+          "Click & Drag â€” Slice to the rhythm"
         ],
         "touch": true
       },
@@ -193,7 +193,7 @@
     {
       "id": "zeno",
       "title": "Timeless Soul",
-      "description": "A roguelite horde-survival top-down shooter built for Unity Jam 2025. Play as an immortal Dark Mage cursed to fight across infinite lifetimes — each death leaves a Soul Grave that becomes a permanent ally or explosive power-up in the next reincarnation. Features occlusion map baking, vertex animation textures, and kaiju boss fights.",
+      "description": "A roguelite horde-survival top-down shooter built for Unity Jam 2025. Play as an immortal Dark Mage cursed to fight across infinite lifetimes â€” each death leaves a Soul Grave that becomes a permanent ally or explosive power-up in the next reincarnation. Features occlusion map baking, vertex animation textures, and kaiju boss fights.",
       "thumbnail": "webgl-games/zeno/thumbnail.png",
       "tags": [
         "Roguelite",
@@ -224,11 +224,11 @@
       },
       "controls": {
         "keyboard": [
-          "WASD — Move"
+          "WASD â€” Move"
         ],
         "mouse": [
-          "Left Click — Fire piercing magic bolts",
-          "Right Click — Dash"
+          "Left Click â€” Fire piercing magic bolts",
+          "Right Click â€” Dash"
         ],
         "touch": false
       },
@@ -271,12 +271,12 @@
       },
       "controls": {
         "keyboard": [
-          "WASD — Move",
-          "Number keys — Switch weapon"
+          "WASD â€” Move",
+          "Number keys â€” Switch weapon"
         ],
         "mouse": [
-          "Aim — Move pointer",
-          "Left Click — Fire"
+          "Aim â€” Move pointer",
+          "Left Click â€” Fire"
         ],
         "touch": false
       },
@@ -286,13 +286,13 @@
     {
       "id": "spirit-war",
       "title": "Spirit War",
-      "description": "A strategy action game by Page Mèo Sen. Founded by Hit, with feature development and gameplay systems support by Bill.",
+      "description": "A strategy action game by Page MÃ¨o Sen. Founded by Hit, with feature development and gameplay systems support by Bill.",
       "thumbnail": "webgl-games/spirit-war/thumbnail.png",
       "tags": [
         "Strategy",
         "Action",
         "Collab",
-        "Page Mèo Sen"
+        "Page MÃ¨o Sen"
       ],
       "genre": "strategy",
       "releaseDate": "2026-04-11",
@@ -315,7 +315,7 @@
       },
       "controls": {
         "mouse": [
-          "Left Click — Select & Command"
+          "Left Click â€” Select & Command"
         ],
         "touch": false
       },
@@ -337,7 +337,7 @@
       "buildSize": "49 MB",
       "status": "playable",
       "build": {
-        "buildPath": "/webgl-games/shmup/Build",
+        "buildPath": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/shmup/Build",
         "buildName": "ShootEmUp",
         "compression": "none",
         "hasStreamingAssets": false,
@@ -347,15 +347,15 @@
       },
       "controls": {
         "keyboard": [
-          "WASD / Arrow Keys — Move",
-          "Space — Fire"
+          "WASD / Arrow Keys â€” Move",
+          "Space â€” Fire"
         ],
         "gamepad": [
-          "Left Stick — Move",
-          "A — Fire"
+          "Left Stick â€” Move",
+          "A â€” Fire"
         ],
         "mouse": [
-          "Left Click — Fire"
+          "Left Click â€” Fire"
         ],
         "touch": false
       },
@@ -386,7 +386,7 @@
       "buildSize": "50 MB",
       "status": "playable",
       "build": {
-        "buildPath": "/webgl-games/platformer/Build",
+        "buildPath": "https://pub-1776f9137d1f4b65986e86fb25ba33ba.r2.dev/platformer/Build",
         "buildName": "Platformer",
         "compression": "none",
         "hasStreamingAssets": false,
@@ -396,17 +396,17 @@
       },
       "controls": {
         "keyboard": [
-          "A/D or Arrow Keys — Move",
-          "Space — Jump (hold for height, tap for a hop)",
-          "Space in air — Double jump",
-          "Space on a wall — Wall jump"
+          "A/D or Arrow Keys â€” Move",
+          "Space â€” Jump (hold for height, tap for a hop)",
+          "Space in air â€” Double jump",
+          "Space on a wall â€” Wall jump"
         ],
         "gamepad": [
-          "Left Stick — Move",
-          "A — Jump"
+          "Left Stick â€” Move",
+          "A â€” Jump"
         ],
         "mouse": [
-          "Left Click — Menu buttons"
+          "Left Click â€” Menu buttons"
         ],
         "touch": false
       },

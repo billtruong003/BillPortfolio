@@ -114,7 +114,10 @@ và trong mọi pass:
 #pragma shader_feature_local _SHAPE_NOISE _SHAPE_DIRECTION _SHAPE_SPHERE
 ```
 
-`KeywordEnum` tạo một ô chọn trong Inspector và tự bật đúng keyword `_SHAPE_` tương ứng. Dùng keyword thay vì `if` theo một số thực, vì mỗi material chỉ dùng một hình dạng, và Unity sẽ biên dịch riêng một bản shader không chứa code của hai nhánh kia. `shader_feature` (khác `multi_compile`) chỉ build những bản có material thật sự dùng, nên không phình build.
+`KeywordEnum` tạo một ô chọn trong Inspector và tự bật đúng keyword `_SHAPE_` tương ứng.
+
+![Inspector của material Dissolve_Burrow_Direction: ô Shape đang chọn Direction, Noise Strength 0.3, viền màu xanh](/images/lab/dissolve/dissolve-p2-inspector-material.webp)
+ Dùng keyword thay vì `if` theo một số thực, vì mỗi material chỉ dùng một hình dạng, và Unity sẽ biên dịch riêng một bản shader không chứa code của hai nhánh kia. `shader_feature` (khác `multi_compile`) chỉ build những bản có material thật sự dùng, nên không phình build.
 
 Một chỗ dễ quên: phải khai báo keyword ở **mọi** pass, kể cả ShadowCaster và DepthOnly. Pass nào thiếu thì pass đó luôn chạy nhánh noise, và bóng lại tan một kiểu, thân tan một kiểu.
 
@@ -215,6 +218,10 @@ void OnHit(RaycastHit hit, DissolveShape shape)
 ```
 
 Làm con của quái thì khi quái còn đang ngã, lỗ cháy vẫn nằm đúng chỗ trên người nó. Lưu thẳng tọa độ `hit.point` thì quái ngã một đằng, lỗ cháy lơ lửng một nẻo.
+
+Trong cảnh mẫu, `HitPoint` là một object con đặt trước ngực Burrow, kéo thả vào ô Sphere Center:
+
+![Inspector của BurrowSphereOut: Property Ping Pong đẩy _DissolveAmount từ 0 tới 1 trong 4 giây, Dissolve Shape có Sphere Center là HitPoint, Sample Points 512](/images/lab/dissolve/dissolve-p2-inspector-shape.webp)
 
 ![Bước 5: một lỗ cháy mở ra từ giữa ngực, các chỗ khác còn nguyên](/images/lab/dissolve/dissolve-p2-04-sphere-out.webp)
 

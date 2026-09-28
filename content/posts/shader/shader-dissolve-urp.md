@@ -70,7 +70,11 @@ half noise = SAMPLE_TEXTURE2D(_NoiseMap, sampler_NoiseMap, input.uv * _NoiseScal
 clip(noise - _DissolveAmount);
 ```
 
-`clip(x)` bỏ pixel khi `x` âm, và GPU không vẽ gì ở đó. Noise mình dùng là **Perlin_02** trong [SBS Noise Texture Pack](https://screamingbrainstudios.itch.io/noise-texture-pack), import dạng Single Channel, tắt sRGB, như texture noise của bài nước.
+`clip(x)` bỏ pixel khi `x` âm, và GPU không vẽ gì ở đó. Noise mình dùng là **Perlin_02** trong [SBS Noise Texture Pack](https://screamingbrainstudios.itch.io/noise-texture-pack), import dạng Single Channel, như texture noise của bài nước.
+
+![Import settings của Perlin_02: Texture Type là Single Channel, Channel là Red, Wrap Mode là Repeat, Generate Mipmap bật với Mipmap Filtering là Box. Preview ở dưới ghi định dạng R8 UNorm](/images/lab/dissolve/dissolve-p1-noise-import.webp)
+
+Single Channel chỉ giữ một kênh, một byte mỗi pixel (định dạng R8), và Unity đọc thẳng giá trị gốc chứ không đổi gamma như ảnh màu, nên trong Inspector không có ô sRGB. Để Texture Type là Default thì ô sRGB mặc định bật, noise bị đổi gamma và mọi ngưỡng cắt phía sau đều lệch.
 
 ![Bước 1: bụng Burrow bị cắt thành từng dải ngang, hai tay mất một khúc gọn gàng](/images/lab/dissolve/dissolve-01-uvnoise.webp)
 
@@ -149,7 +153,10 @@ half noise = /* ba hình chiếu triplanar như trên */;
 return saturate((noise - _NoiseRemap.x) / max(_NoiseRemap.y - _NoiseRemap.x, 1e-4h));
 ```
 
-`_NoiseRemap` là một Vector trên material, mình để (0.36, 0.64). Đổi noise khác thì đo lại. Có thể dùng Unity để đo: render riêng giá trị noise ra màn hình rồi đọc pixel. Mình thì đo thẳng file ảnh bằng một đoạn Python.
+`_NoiseRemap` là một Vector trên material, mình để (0.36, 0.64).
+
+![Inspector của material Dissolve_Burrow, mục Dissolve: Amount 0.45, Noise là Perlin_02, Noise Tiles per Meter 1.6, Noise Range 0.36 và 0.64, Edge Width 0.1, Edge Color HDR màu cam](/images/lab/dissolve/dissolve-p1-inspector-material.webp)
+ Đổi noise khác thì đo lại. Có thể dùng Unity để đo: render riêng giá trị noise ra màn hình rồi đọc pixel. Mình thì đo thẳng file ảnh bằng một đoạn Python.
 
 ## Bước 4: viền cháy
 
@@ -167,6 +174,10 @@ half3 color = DissolveShade(input, albedo) + _EdgeColor.rgb * edge;
 `edge` bằng 1 ngay trên đường cắt, giảm về 0 ở độ sâu `_EdgeWidth`. Màu viền được **cộng** vào sau khi đã tính ánh sáng, vì viền cháy tự phát ra ánh sáng chứ không nhận ánh sáng từ mặt trời. Nhân nó với lượng sáng thì viền nằm trong bóng sẽ tối đi, trông như sơn cam chứ không phải lửa.
 
 `_EdgeColor` là màu HDR, mình để (3.2, 1.0, 0.2): kênh đỏ vượt quá 1 nhiều lần. Bloom chỉ làm tỏa sáng những pixel sáng hơn Threshold, nên màu thường (tối đa 1) sẽ không bao giờ lóe lên. Trong khối `Properties`, thêm `[HDR]` trước tên thông số để Inspector cho phép chọn màu vượt 1.
+
+Bloom nằm trong một Volume của cảnh. Threshold 1 nghĩa là chỉ pixel nào sáng hơn trắng mới tỏa sáng, nên tường, sàn, da Burrow (đều dưới 1) không bị nhòe, chỉ viền cháy lóe lên.
+
+![Inspector của object PostProcess: Volume ở chế độ Global, profile có Bloom với Threshold 1, Intensity 0.6, Scatter 0.6](/images/lab/dissolve/dissolve-p1-bloom.webp)
 
 Code này chạy đúng khi Amount ở giữa, nhưng kéo về 0 thì thấy lỗi:
 
@@ -293,7 +304,7 @@ Một điều nữa: đừng để shader dissolve trên vật thể suốt cả
 
 ## File và texture trong bài
 
-**[bill-dissolve-urp.zip](/downloads/shaders/bill-dissolve-urp.zip)** (79 KB). Giải nén rồi chép nguyên thư mục `BillShaderLab` vào `Assets`. Gói có cả thư mục `Shaders/Toon`, vì dissolve dùng lại hàm chiếu sáng của toon. Material `Dissolve_Demo` mang đúng thông số dùng trong bài, trừ texture của Burrow.
+**[bill-dissolve-urp.zip](/downloads/shaders/bill-dissolve-urp.zip)** (83 KB). Giải nén rồi chép nguyên thư mục `BillShaderLab` vào `Assets`. Gói có cả thư mục `Shaders/Toon`, vì dissolve dùng lại hàm chiếu sáng của toon. Material `Dissolve_Demo` mang đúng thông số dùng trong bài, trừ texture của Burrow.
 
 Từng file lẻ ở dưới. Chữ nghiêng là thư mục cần đặt file vào, tính từ `BillShaderLab`: các shader include nhau bằng đường dẫn tương đối, đặt sai thư mục là Unity báo không tìm thấy file.
 
@@ -328,7 +339,7 @@ Texture dùng trong bài (bấm vào để tải ảnh gốc):
 <a href="/downloads/shaders/textures/toon/Ramp_TwoTone.png"><img class="strip" src="/downloads/shaders/textures/toon/Ramp_TwoTone.png" alt="Ramp hai tông"><strong>Ramp_TwoTone</strong><span>Ramp của phần chiếu sáng toon</span></a>
 </div>
 
-Perlin_02 import với **Texture Type: Single Channel**, **Channel: Red**, tắt **sRGB**, **Wrap Mode: Repeat**.
+Perlin_02 import với **Texture Type: Single Channel**, **Channel: Red**, **Wrap Mode: Repeat** (ảnh import settings ở bước 1).
 
 ## Tham khảo
 

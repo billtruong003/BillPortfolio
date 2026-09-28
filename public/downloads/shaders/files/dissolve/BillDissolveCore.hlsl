@@ -84,7 +84,7 @@ half DissolveTime(float3 positionOS, half3 normalOS)
 // or points near t = 0 would already be lifted at amount 0.
 half DissolveThreshold()
 {
-#if defined(_VERTEX_PUSH) || defined(_VERTEX_PULL)
+#if (defined(_VERTEX_PUSH) || defined(_VERTEX_PULL)) && !defined(DISSOLVE_NAIVE_VERTEX_START)
     half start = max(_EdgeWidth, _VertexBand);
 #else
     half start = _EdgeWidth;

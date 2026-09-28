@@ -188,7 +188,7 @@ Light mainLight = GetMainLight();
 color = lerp(color, _FoamColor.rgb * (mainLight.color * 0.8h + 0.2h), foam * _FoamColor.a);
 ```
 
-Noise lấy từ nhóm **Super Perlin** của pack SBS (SuperPerlin_03). Nhóm này có những vệt dài uốn lượn, cắt ngưỡng ra đúng hình vệt bọt. Texture noise import dạng **Single Channel**, tắt sRGB, vì đây là dữ liệu chứ không phải màu. Để sRGB bật thì Unity sẽ đổi gamma, và ngưỡng cắt bị lệch.
+Noise lấy từ nhóm **Super Perlin** của pack SBS (SuperPerlin_03). Nhóm này có những vệt dài uốn lượn, cắt ngưỡng ra đúng hình vệt bọt. Texture noise import dạng **Single Channel**, kênh **Red**, chứ không để Default. Kiểu Default mặc định bật ô sRGB: Unity coi ảnh là màu và đổi gamma khi đọc, nên giá trị noise bị lệch và ngưỡng cắt lệch theo. Single Channel đọc thẳng giá trị gốc (định dạng R8), và Inspector không có ô sRGB nào để lo.
 
 Dòng `normalTS.xy * _SurfaceFoamDistortion` cho gợn sóng uốn vệt bọt, để bọt trông như trôi trên mặt nước chứ không phải một tấm hình dán phía trên. Bọt nhân với màu đèn để khi trời chiều, bọt cũng ngả cam theo.
 
@@ -331,7 +331,7 @@ Texture dùng trong bài (bấm vào để tải ảnh gốc):
 <a href="/downloads/shaders/textures/water/SuperPerlin_09-128x128.png"><img src="/downloads/shaders/textures/water/SuperPerlin_09-128x128.png" alt="SuperPerlin 09"><strong>SuperPerlin_09</strong><span>Bọt bờ</span></a>
 </div>
 
-Hai ảnh ripple là ảnh xám. Unity chỉ biến chúng thành normal map khi import với **Texture Type: Normal map** và bật **Create from Grayscale**. Hai tile noise import với **Texture Type: Single Channel**, **Channel: Red** và tắt **sRGB**. Cả bốn ảnh đều để **Wrap Mode: Repeat**.
+Hai ảnh ripple là ảnh xám. Unity chỉ biến chúng thành normal map khi import với **Texture Type: Normal map** và bật **Create from Grayscale**. Hai tile noise import với **Texture Type: Single Channel**, **Channel: Red**. Cả bốn ảnh đều để **Wrap Mode: Repeat**.
 
 ## Tham khảo
 

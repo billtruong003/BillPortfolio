@@ -1,5 +1,5 @@
-// Generated for the dissolve tutorial, chapter 1. Edit DissolveTutorialPass.hlsl instead.
-Shader "Bill/Tutorial/Dissolve/01 UVNoise"
+// Generated for the dissolve tutorial, part 3: threshold that ignores the vertex band.
+Shader "Bill/Tutorial/Dissolve/11 VertexStartNaive"
 {
     Properties
     {
@@ -48,31 +48,53 @@ Shader "Bill/Tutorial/Dissolve/01 UVNoise"
         Tags { "RenderType" = "TransparentCutout" "RenderPipeline" = "UniversalPipeline" "Queue" = "AlphaTest" }
 
         HLSLINCLUDE
+        #define DISSOLVE_NAIVE_VERTEX_START
         #include "../../Dissolve/BillDissolveInput.hlsl"
-        // Shadow and depth passes of this chapter still know nothing about the dissolve.
-        void BillSurfaceClip(float2 uv) {}
         ENDHLSL
 
         Pass
         {
             Name "DissolveForward"
             Tags { "LightMode" = "UniversalForward" }
-            Cull Back
+            // Both sides: through a hole the inside of the shell has to be drawn.
+            Cull Off
 
             HLSLPROGRAM
             #pragma target 3.5
             #pragma vertex DissolveVertex
-            #pragma fragment DissolveTutorialFragment
+            #pragma fragment DissolveFragment
+
             #pragma shader_feature_local _SHAPE_NOISE _SHAPE_DIRECTION _SHAPE_SPHERE _SHAPE_GLOBAL
             #pragma shader_feature_local _VERTEX_NONE _VERTEX_PUSH _VERTEX_PULL
+
             #pragma multi_compile _ _MAIN_LIGHT_SHADOWS _MAIN_LIGHT_SHADOWS_CASCADE _MAIN_LIGHT_SHADOWS_SCREEN
             #pragma multi_compile _ _ADDITIONAL_LIGHTS
+            #pragma multi_compile_fragment _ _ADDITIONAL_LIGHT_SHADOWS
             #pragma multi_compile_fragment _ _SHADOWS_SOFT _SHADOWS_SOFT_LOW _SHADOWS_SOFT_MEDIUM _SHADOWS_SOFT_HIGH
             #pragma multi_compile_fragment _ _SCREEN_SPACE_OCCLUSION
             #pragma multi_compile _ _CLUSTER_LIGHT_LOOP
             #pragma multi_compile_fog
-            #define DISSOLVE_STEP 1
-            #include "DissolveTutorialPass.hlsl"
+            #pragma multi_compile_instancing
+
+            #include "../../Dissolve/BillDissolveForwardPass.hlsl"
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Name "Outline"
+            Tags { "LightMode" = "SRPDefaultUnlit" }
+            Cull Front
+
+            HLSLPROGRAM
+            #pragma target 3.5
+            #pragma vertex DissolveOutlineVertex
+            #pragma fragment DissolveOutlineFragment
+            #pragma shader_feature_local _SHAPE_NOISE _SHAPE_DIRECTION _SHAPE_SPHERE _SHAPE_GLOBAL
+            #pragma shader_feature_local _VERTEX_NONE _VERTEX_PUSH _VERTEX_PULL
+            #pragma multi_compile_fog
+            #pragma multi_compile_instancing
+            #include "../../Dissolve/BillDissolvePasses.hlsl"
             ENDHLSL
         }
 
@@ -81,15 +103,19 @@ Shader "Bill/Tutorial/Dissolve/01 UVNoise"
             Name "ShadowCaster"
             Tags { "LightMode" = "ShadowCaster" }
             ZWrite On
+            ZTest LEqual
             ColorMask 0
-            Cull Back
+            Cull Off
 
             HLSLPROGRAM
             #pragma target 3.5
-            #pragma vertex ShadowCasterVertex
-            #pragma fragment ShadowCasterFragment
+            #pragma vertex DissolveShadowVertex
+            #pragma fragment DissolveShadowFragment
+            #pragma shader_feature_local _SHAPE_NOISE _SHAPE_DIRECTION _SHAPE_SPHERE _SHAPE_GLOBAL
+            #pragma shader_feature_local _VERTEX_NONE _VERTEX_PUSH _VERTEX_PULL
             #pragma multi_compile_vertex _ _CASTING_PUNCTUAL_LIGHT_SHADOW
-            #include "../../Common/BillUtilityPasses.hlsl"
+            #pragma multi_compile_instancing
+            #include "../../Dissolve/BillDissolvePasses.hlsl"
             ENDHLSL
         }
 
@@ -99,12 +125,16 @@ Shader "Bill/Tutorial/Dissolve/01 UVNoise"
             Tags { "LightMode" = "DepthOnly" }
             ZWrite On
             ColorMask R
+            Cull Off
 
             HLSLPROGRAM
             #pragma target 3.5
-            #pragma vertex DepthVertex
-            #pragma fragment DepthOnlyFragment
-            #include "../../Common/BillUtilityPasses.hlsl"
+            #pragma vertex DissolveDepthVertex
+            #pragma fragment DissolveDepthOnlyFragment
+            #pragma shader_feature_local _SHAPE_NOISE _SHAPE_DIRECTION _SHAPE_SPHERE _SHAPE_GLOBAL
+            #pragma shader_feature_local _VERTEX_NONE _VERTEX_PUSH _VERTEX_PULL
+            #pragma multi_compile_instancing
+            #include "../../Dissolve/BillDissolvePasses.hlsl"
             ENDHLSL
         }
 
@@ -113,13 +143,17 @@ Shader "Bill/Tutorial/Dissolve/01 UVNoise"
             Name "DepthNormals"
             Tags { "LightMode" = "DepthNormals" }
             ZWrite On
+            Cull Off
 
             HLSLPROGRAM
             #pragma target 3.5
-            #pragma vertex DepthVertex
-            #pragma fragment DepthNormalsFragment
+            #pragma vertex DissolveDepthVertex
+            #pragma fragment DissolveDepthNormalsFragment
+            #pragma shader_feature_local _SHAPE_NOISE _SHAPE_DIRECTION _SHAPE_SPHERE _SHAPE_GLOBAL
+            #pragma shader_feature_local _VERTEX_NONE _VERTEX_PUSH _VERTEX_PULL
             #pragma multi_compile_fragment _ _GBUFFER_NORMALS_OCT
-            #include "../../Common/BillUtilityPasses.hlsl"
+            #pragma multi_compile_instancing
+            #include "../../Dissolve/BillDissolvePasses.hlsl"
             ENDHLSL
         }
     }

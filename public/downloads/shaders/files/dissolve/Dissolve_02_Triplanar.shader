@@ -24,7 +24,7 @@ Shader "Bill/Tutorial/Dissolve/02 Triplanar"
         [Header(Vertex)]
         [KeywordEnum(None, Push, Pull)] _Vertex ("Vertex Motion", Float) = 0
         _VertexBand ("Vertex Band", Range(0.01, 1)) = 0.25
-        _VertexNoiseMip ("Vertex Noise Mip (blur)", Range(0, 6)) = 3
+        _VertexNoiseMip ("Vertex Noise Mip (blur)", Range(0, 6)) = 5
         _PushDistance ("Push Distance (m)", Float) = 0.15
         _PullTarget ("Pull Target (world)", Vector) = (0, 2, 0, 0)
 

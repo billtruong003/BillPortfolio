@@ -72,6 +72,10 @@ void LateUpdate()
 
 `SetGlobalInteger` chứ không phải `SetGlobalInt`: cái tên sau là di sản cũ, thật ra nó ghi một số thực, và biến `int` trong shader sẽ đọc sai.
 
+Kết quả là một mặt nạ duy nhất chạy xuyên qua mọi object. Trong ảnh dưới, sàn, bức tường, bậc thang, bệ và thùng là năm object riêng với năm material riêng, nhưng cùng bị cắt theo một đường. Khung cam là gizmo của ba hình đang chọn.
+
+![Scene view: ba hình (cầu, hộp, viên nhộng) vẽ bằng khung cam, cắt ngang qua sàn, tường, bậc thang và thùng cùng một lúc](/images/lab/dissolve/dissolve-p4-sceneview-shapes.webp)
+
 ## Bước 2: signed distance
 
 Với một hình cầu, "pixel có nằm trong không" là so khoảng cách tới tâm với bán kính. Muốn ghép nhiều hình khác loại thì cần một cách hỏi chung cho mọi hình. Signed distance function (SDF) là cách đó: một hàm trả về khoảng cách từ điểm tới **bề mặt** của hình, âm nếu điểm nằm trong, dương nếu nằm ngoài, bằng 0 ngay trên bề mặt.
@@ -100,6 +104,10 @@ float SdCapsule(float3 p, float3 a, float3 b, float radius)
 - **Hình cầu** là khoảng cách tới tâm trừ bán kính.
 - **Hình hộp** gập điểm về góc phần tám dương bằng `abs`, vì hộp đối xứng. Sau đó đo xem điểm vượt khỏi mặt hộp bao xa. Trừ thêm `rounding` thì góc hộp được bo tròn.
 - **Viên nhộng** là mọi điểm cách một đoạn thẳng không quá `radius`. `h` là vị trí gần nhất trên đoạn `a` tới `b`, kẹp trong 0 tới 1 để không trượt ra ngoài hai đầu.
+
+Đọc công thức thì khó hình dung, nên mình viết thêm một shader debug (`Dissolve_10_SdfDebug`, có trong gói tải về). Nó tô mọi bề mặt theo khoảng cách: đỏ là bên trong hình, xanh là bên ngoài, mỗi vạch cách nhau 25 cm, vạch trắng là bề mặt của hình, chỗ khoảng cách bằng 0.
+
+![Bốn ảnh debug. Hình cầu: các vòng tròn đồng tâm. Hình hộp: vạch chạy song song các mặt, bo tròn ở góc. Viên nhộng: dải thẳng bo tròn hai đầu. Ảnh cuối: cả ba ghép lại, các vạch nối liền mạch ở chỗ hai hình gặp nhau](/images/lab/dissolve/dissolve-p4-sdf-debug.webp)
 
 Ba công thức này là công thức chuẩn, mình lấy từ danh sách của [Inigo Quilez](https://iquilezles.org/articles/distfunctions/). Trang đó có thêm vài chục hình khác, đều gắn vào đây được theo cùng một cách.
 
@@ -145,9 +153,13 @@ half TransitionClip(float3 positionOS, half3 normalOS)
 
 Noise được trừ 0.5 để dao động quanh 0: có chỗ mép lấn vào, có chỗ lùi ra, còn mép trung bình vẫn nằm đúng trên bề mặt hình. `_NoiseStrength` giờ là số mét mép được phép lệch.
 
+![Trái: Noise Strength 0, mép cắt là đường tròn, đường thẳng sạch sẽ như vẽ bằng compa. Phải: Noise Strength 0.35, mép lởm chởm và viền sáng chạy dọc theo](/images/lab/dissolve/dissolve-p4-noise-compare.webp)
+
 Chỗ đáng để ý là noise đọc theo **world space**, ngược hẳn với [phần 1](/lab/shader-dissolve-urp), nơi mình đã giải thích vì sao dissolve phải dùng object space. Lý do đảo lại vì đối tượng đã khác: tường, sàn, bậc thang là những object riêng biệt và đứng yên. Mép cắt chạy qua chỗ bức tường giáp sàn phải liền một mạch. Nếu mỗi object đọc noise theo không gian riêng của nó, tới chỗ giáp nhau hoa văn sẽ gãy khúc. Vật không di chuyển thì world space không có nhược điểm gì.
 
 `_SphereInvert` lật dấu khoảng cách. Không lật thì mọi thứ **trong** hình bị cắt, dùng để khoét tường. Lật thì chỉ phần **trong** hình được giữ, dùng để level hiện ra dần.
+
+![Cùng ba hình. Trái: không lật, level bị khoét thủng ở đúng chỗ ba hình. Phải: lật, level chỉ còn lại bên trong ba hình](/images/lab/dissolve/dissolve-p4-invert-compare.webp)
 
 ## Bước 4: gắn vào shader dissolve
 
@@ -157,7 +169,11 @@ Mình không viết shader mới. Mặt nạ global chỉ là hình dạng thứ
 [KeywordEnum(Noise, Direction, Sphere, Global)] _Shape ("Shape", Float) = 0
 ```
 
-và trong hàm cắt chung:
+Trên material, chọn **Shape: Global** và tick ô **Invert** nếu muốn giữ phần bên trong. Các ô Direction, Sphere Center hay Sphere Radius không còn tác dụng; mặt nạ lấy hoàn toàn từ biến global.
+
+![Inspector của material GlobalKeep_Light: Shape là Global, ô Invert được tick, Noise Strength 0.35, Edge Width 0.08](/images/lab/dissolve/dissolve-p4-inspector-material.webp)
+
+Trong hàm cắt chung:
 
 **Shaders/Dissolve/BillDissolveCore.hlsl**
 
@@ -181,6 +197,8 @@ Vì mọi pass (màu, viền, bóng, depth) đều gọi `DissolveClip`, nên m�
 ## Bước 5: hình dạng là component
 
 Mỗi hình trong cảnh là một GameObject gắn component `TransitionShape`. Kéo, xoay, scale trong Scene view như mọi object khác; Gizmo vẽ khung hình khi được chọn.
+
+![Inspector của object Box: component Transition Shape với Kind là Box, Radius 0.25; bên dưới là Shape Pulse dùng cho ảnh động](/images/lab/dissolve/dissolve-p4-inspector-shape.webp)
 
 **Scripts/TransitionShape.cs** (trích)
 
@@ -225,6 +243,10 @@ Game góc nhìn từ trên xuống nào cũng gặp: nhân vật đi ra sau tư�
 ![Burrow đang đứng sau bức tường tối, không thấy đâu](/images/lab/dissolve/dissolve-p4-hidden.webp)
 
 Giải pháp: một viên nhộng chạy từ camera tới ngực nhân vật. Viên nhộng đi theo camera và nhân vật mỗi frame, nên bức tường nào chắn giữa hai điểm đó đều bị khoét. Chỉ vật cản mới dùng material có Shape là Global. Sàn dùng `Bill/Toon` thường nên viên nhộng đi xuyên qua sàn mà sàn vẫn nguyên.
+
+Viên nhộng là một `TransitionShape` gắn thẳng lên camera, Kind là Capsule, đầu cuối trỏ vào một object con đặt ở ngực nhân vật:
+
+![Inspector của Main Camera: component Transition Shape với Kind là Capsule, Radius 0.75, Capsule End là Chest, ô Stop Short Of End được tick](/images/lab/dissolve/dissolve-p4-inspector-capsule.webp)
 
 ![Bức tường trước mặt bị khoét một lỗ viền cháy đúng chỗ Burrow đứng, bức tường cam phía sau còn nguyên](/images/lab/dissolve/dissolve-p4-seethrough.webp)
 
@@ -309,6 +331,7 @@ Mọi file nằm trong [bill-dissolve-urp.zip](/downloads/shaders/bill-dissolve-
 </div>
 <div class="lesson-files"><strong>Shader từng bước</strong><em>Shaders/Tutorial/Dissolve</em>
 <a href="/downloads/shaders/files/dissolve/Dissolve_09_XRayNoStencil.shader" download>Dissolve_09_XRayNoStencil.shader<small>3 KB</small></a>
+<a href="/downloads/shaders/files/dissolve/Dissolve_10_SdfDebug.shader" download>Dissolve_10_SdfDebug.shader<small>3 KB</small></a>
 </div>
 <div class="lesson-files"><strong>Script</strong><em>Scripts</em>
 <a href="/downloads/shaders/files/dissolve/TransitionShape.cs" download>TransitionShape.cs<small>2 KB</small></a>

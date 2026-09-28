@@ -50,6 +50,14 @@ Hai dòng cuối là thứ đã chuẩn bị từ phần 1: pixel vẫn đọc n
 
 `DissolveDisplace` cũng được gọi trong vertex shader của pass bóng, pass depth và pass viền (xem phần 1). Bỏ sót pass nào thì pass đó vẫn thấy hình khối cũ: bóng đổ không phồng, còn viền thì vẽ theo cái vỏ không còn nữa.
 
+Kiểu chuyển động chọn trên material, trong mục **Vertex**. Mình dùng chung với hình dạng **Direction** của phần 2 (gắn `DissolveShape` lên vật), vì như bước 4 sẽ giải thích, đẩy mesh cần một hình dạng dẫn đường.
+
+![Inspector của material Dissolve_Burrow_Push: Shape là Direction, Vertex Motion là Push, Vertex Band 0.2, Vertex Noise Mip 5, Push Distance 0.1](/images/lab/dissolve/dissolve-p3-inspector-push.webp)
+
+Kết quả cuối cùng của các bước dưới đây trông thế này: dải đang cháy chạy từ chân lên, và chỗ nào đang cháy thì vỏ phồng ra chỗ đó.
+
+![Burrow ở Amount 0.2, 0.35 và 0.5: dải cháy đi từ chân lên ngực, thân loe ra đúng ở dải đó](/images/lab/dissolve/dissolve-p3-push-sequence.webp)
+
 ## Bước 2: đẩy một chiều
 
 Cách đầu tiên mình viết: vertex càng gần mép cắt thì bị đẩy ra càng xa, theo hướng normal. Gọi `d` là khoảng cách tới mép cắt, tính theo đơn vị của `t`:
@@ -63,9 +71,11 @@ positionOS += normalOS * _PushDistance * w;
 
 `w` bằng 1 ở mép cắt, giảm về 0 khi vertex nằm sâu trong phần còn nguyên quá `_VertexBand`. Dòng giữa là smoothstep viết tay, để chỗ bắt đầu phồng không bị gãy khúc.
 
-![Ba hộp tan từ dưới lên. Trái: đẩy một chiều, mép cắt rách thành từng mảnh tam giác. Giữa: đẩy thành bướu nhưng noise vẫn nét, vẫn rách. Phải: bướu với noise mờ, mép loe ra mượt như váy](/images/lab/dissolve/dissolve-p3-push-profile.webp)
+Mình thử trên một khối hộp chia 24 ô mỗi mặt, tan theo hướng từ dưới lên, để dễ nhìn hơn trên nhân vật:
 
-Hộp bên trái là kết quả: mép cắt tua tủa mảnh vụn. Lỗi nằm ở phần đã tan. Với `d` âm, `saturate` kẹp về 0, nên `w` bằng 1: mọi vertex đã bị cắt vẫn bị đẩy ra hết cỡ. Những vertex đó không hiện, vì pixel của chúng đã bị `clip`. Nhưng tam giác nằm vắt qua mép cắt có một đỉnh bị đẩy xa, một đỉnh ở gần, nên phần còn hiện của nó bị kéo xiên thành một mảnh nhọn.
+![Đẩy một chiều: mép cắt của hộp rách thành từng mảnh tam giác nhọn chĩa ra ngoài](/images/lab/dissolve/dissolve-p3-push-onesided.webp)
+
+Mép cắt tua tủa mảnh vụn. Lỗi nằm ở phần đã tan. Với `d` âm, `saturate` kẹp về 0, nên `w` bằng 1: mọi vertex đã bị cắt vẫn bị đẩy ra hết cỡ. Những vertex đó không hiện, vì pixel của chúng đã bị `clip`. Nhưng tam giác nằm vắt qua mép cắt có một đỉnh bị đẩy xa, một đỉnh ở gần, nên phần còn hiện của nó bị kéo xiên thành một mảnh nhọn.
 
 ## Bước 3: đẩy thành bướu
 
@@ -77,7 +87,9 @@ half w = 1.0h - saturate(abs(d) / max(_VertexBand, 1e-4h));
 
 Vertex đã tan xa quá `_VertexBand` quay về đúng chỗ cũ, nên tam giác vắt qua mép cắt không còn bị kéo xiên.
 
-Hộp ở giữa là kết quả: đỡ hơn, nhưng vẫn rách. Lần này lỗi không nằm ở đường cong mà ở **mật độ**. Hộp chia 24 ô mỗi cạnh, hai vertex cạnh nhau cách nhau khoảng 3 cm. Noise đọc ở mức mip 0 có chi tiết nhỏ hơn thế: hai vertex sát nhau có thể nhận hai giá trị `d` cách xa nhau, một cái bị đẩy 12 cm, cái bên cạnh không nhúc nhích. Mesh không thể hiện một chi tiết nhỏ hơn khoảng cách giữa các vertex của nó, và thứ gì nhỏ hơn thì thành gai.
+![Đẩy thành bướu nhưng noise vẫn nét: bớt mảnh lớn, nhưng mép cắt vẫn lởm chởm những khe nứt nhỏ](/images/lab/dissolve/dissolve-p3-push-bump.webp)
+
+Đỡ hơn, nhưng vẫn rách. Lần này lỗi không nằm ở đường cong mà ở **mật độ**. Hộp chia 24 ô mỗi cạnh, hai vertex cạnh nhau cách nhau khoảng 3 cm. Noise đọc ở mức mip 0 có chi tiết nhỏ hơn thế: hai vertex sát nhau có thể nhận hai giá trị `d` cách xa nhau, một cái bị đẩy 12 cm, cái bên cạnh không nhúc nhích. Mesh không thể hiện một chi tiết nhỏ hơn khoảng cách giữa các vertex của nó, và thứ gì nhỏ hơn thì thành gai.
 
 ## Bước 4: vertex đọc noise mờ
 
@@ -98,7 +110,13 @@ half SampleDissolveNoise(float2 uv, half mip)
 half d = DissolveTime(positionOS, normalOS, _VertexNoiseMip) - DissolveThreshold();
 ```
 
+Nhìn tận mắt ba mức mip của Perlin_02 thì dễ hình dung hơn. Mỗi mức mip là ảnh thu nhỏ một nửa so với mức trước, bằng bộ lọc Box (mặc định trong mục Advanced của import settings), rồi phóng to lại cùng cỡ để so:
+
+![Perlin_02 ở mip 0 (128 pixel), mip 3 (16 pixel) và mip 5 (4 pixel): từ nhiều chi tiết nhỏ, tới vài mảng lớn, tới chỉ còn bốn ô xám](/images/lab/dissolve/dissolve-p3-noise-mips.webp)
+
 Chọn mức mip bằng một phép tính nhỏ. Với `_NoiseScale` 2.2, một ô noise dài 1 / 2.2 = 0.45 m. Tile 128 pixel ở mip 0 thì mỗi pixel phủ 3.5 mm. Mỗi mức mip gấp đôi con số đó: mip 3 là 2.8 cm, xấp xỉ khoảng cách vertex, vẫn ra gai. Mip 5 là 11 cm, mỗi pixel noise phủ khoảng bốn vertex, và mép loe ra mượt như hộp bên phải. Mesh thưa hơn thì cần mức mip cao hơn.
+
+![Bướu với noise mờ: mép hộp loe ra mượt như váy, không còn khe nứt, mép cắt vẫn sắc](/images/lab/dissolve/dissolve-p3-push-blur.webp)
 
 Mép cắt thì vẫn nét, vì pixel vẫn đọc mip 0. Chỗ phồng do vertex quyết định chỉ còn là một đường bao mềm quanh mép cắt, không bám theo từng chi tiết nhỏ. Mắt người không nhận ra chỗ lệch đó, vì mép cắt với viền sáng mới là thứ thu hút ánh nhìn.
 
@@ -140,6 +158,8 @@ positionOS = TransformWorldToObject(positionWS);
 
 Cái mà ở bước 2 là lỗi (tam giác vắt qua mép cắt bị kéo xiên) giờ lại chính là hiệu ứng mình cần: những tam giác đó bị kéo dài thành các sợi chạy về đích, trông như vật bị hút vào. `w * w` làm vertex bám lại chỗ cũ lâu hơn một chút rồi mới lao đi, nên phần đang bị hút có dạng phễu chứ không phải một đường thẳng.
 
+![Burrow ở Amount 0.3, 0.5 và 0.7: phía gần quả cầu bắt đầu nhọn ra, rồi cả thân bị kéo thành phễu hướng về quả cầu](/images/lab/dissolve/dissolve-p3-pull-sequence.webp)
+
 Để phía gần đích tan trước, material dùng hình dạng **Sphere** của phần 2, với tâm cầu đặt tại đích. Script `DissolveShape` đẩy luôn tâm cầu vào `_PullTarget`:
 
 ```csharp
@@ -149,7 +169,11 @@ block.SetVector(PullTargetId, center);
 
 Gán quả cầu phát sáng vào ô `sphereCenter` là xong. Đích di chuyển thì dòng vertex cũng uốn theo.
 
-Kéo mesh có một cái bẫy mà cắt pixel không có: **culling**. Unity chỉ vẽ một vật khi hộp bao của nó nằm trong khung hình, và hộp bao đó tính theo mesh gốc. Vertex đã bị kéo lên tận quả cầu thì nằm ngoài hộp bao. Camera quay đi chỉ còn thấy quả cầu, thì cả con Burrow (kể cả dòng vertex đang bay vào cầu) bị bỏ qua không vẽ. Với `SkinnedMeshRenderer`, nới hộp bao ra:
+Kéo mesh có một cái bẫy mà cắt pixel không có: **culling**. Unity chỉ vẽ một vật khi hộp bao của nó nằm trong khung hình, và hộp bao đó tính theo mesh gốc. Vertex đã bị kéo lên tận quả cầu thì nằm ngoài hộp bao. Camera quay đi chỉ còn thấy quả cầu, thì cả con Burrow (kể cả dòng vertex đang bay vào cầu) bị bỏ qua không vẽ.
+
+![Khung vàng là hộp bao của Burrow ở tư thế gốc, thứ Unity dùng để quyết định có vẽ hay không. Dòng vertex bị kéo vươn ra khỏi khung, gần tới quả cầu](/images/lab/dissolve/dissolve-p3-bounds.webp)
+
+Với `SkinnedMeshRenderer`, nới hộp bao ra:
 
 ```csharp
 var bounds = skinned.localBounds;
@@ -161,7 +185,11 @@ Với `MeshRenderer` thường thì đặt `mesh.bounds` lớn hơn, giống cá
 
 ## Bước 7: đừng phồng trước khi bắt đầu
 
-Còn một chỗ sửa nhỏ nhưng dễ bỏ sót. Phần 1 cho ngưỡng bắt đầu từ `-_EdgeWidth` để Amount 0 không có viền sáng. Vertex có dải riêng là `_VertexBand`, thường rộng hơn viền. Nếu ngưỡng chỉ lùi theo viền, thì ở Amount 0 những vertex có `t` gần 0 đã nằm trong dải và bị đẩy, dù chưa có pixel nào bị cắt. Nên ngưỡng lùi theo dải nào rộng hơn:
+Còn một chỗ sửa nhỏ nhưng dễ bỏ sót. Phần 1 cho ngưỡng bắt đầu từ `-_EdgeWidth` để Amount 0 không có viền sáng. Vertex có dải riêng là `_VertexBand`, thường rộng hơn viền. Nếu ngưỡng chỉ lùi theo viền, thì ở Amount 0 những vertex có `t` gần 0 đã nằm trong dải và bị đẩy, dù chưa có pixel nào bị cắt:
+
+![Cả hai ảnh đều ở Amount 0, dải vertex 0.5. Trái: ngưỡng chỉ lùi theo viền, chân Burrow phình thành một khối và hai tay sưng lên. Phải: ngưỡng lùi theo dải vertex, Burrow nguyên vẹn](/images/lab/dissolve/dissolve-p3-start-compare.webp)
+
+Nên ngưỡng lùi theo dải nào rộng hơn:
 
 ```hlsl
 half DissolveThreshold()
@@ -192,6 +220,7 @@ Mọi file nằm trong [bill-dissolve-urp.zip](/downloads/shaders/bill-dissolve-
 </div>
 <div class="lesson-files"><strong>Shader từng bước</strong><em>Shaders/Tutorial/Dissolve</em>
 <a href="/downloads/shaders/files/dissolve/Dissolve_08_PushOneSided.shader" download>Dissolve_08_PushOneSided.shader<small>7 KB</small></a>
+<a href="/downloads/shaders/files/dissolve/Dissolve_11_VertexStartNaive.shader" download>Dissolve_11_VertexStartNaive.shader<small>7 KB</small></a>
 </div>
 <div class="lesson-files"><strong>Script</strong><em>Scripts và Editor</em>
 <a href="/downloads/shaders/files/dissolve/DissolveShape.cs" download>DissolveShape.cs<small>5 KB</small></a>
