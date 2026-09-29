@@ -2,6 +2,7 @@ import { postManifest } from '@/data/posts';
 import { PostHeader } from '@/components/lab/PostHeader';
 import { PostBody } from '@/components/lab/PostBody';
 import { TableOfContents } from '@/components/lab/TableOfContents';
+import { ReadTracker } from '@/components/lab/ReadTracker';
 import { LabNav } from '@/components/lab/LabNav';
 import { getSeriesNav } from '@/lib/series';
 import Link from 'next/link';
@@ -174,6 +175,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
                 </div>
             </div>
 
+            <ReadTracker slug={post.slug} />
 
             <footer className="relative z-10 py-12 text-center border-t border-white/5 bg-black/40 backdrop-blur-md">
                 <p className="text-zinc-600 font-mono text-xs">

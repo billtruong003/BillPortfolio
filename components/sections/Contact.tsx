@@ -5,6 +5,7 @@ import { SITE } from '@/lib/site';
 import { CONTACT_TOPICS } from '@/data/services';
 import { SELECT_TOPIC_EVENT } from '@/components/sections/Services';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { track } from '@/lib/analytics';
 
 // FormSubmit forwards the JSON body to this inbox. The first submission sends
 // an activation email that has to be confirmed once before messages arrive.
@@ -53,6 +54,7 @@ export const Contact = () => {
             });
             const json = await res.json().catch(() => ({}));
             if (!res.ok || String(json.success) !== 'true') throw new Error(json.message);
+            track('contact_submit', { topic: topicTitle });
             setStatus('sent');
             form.reset();
         } catch {

@@ -328,7 +328,7 @@ BillPortfolio/
 | Scrolling | Lenis (smooth scroll) |
 | Blog Pipeline | unified, remark, rehype, gray-matter, rehype-prism-plus |
 | Game Hosting | Unity WebGL Player (custom React wrapper) |
-| Analytics | Cloudflare Web Analytics (cookieless) |
+| Analytics | Umami Cloud (cookieless) |
 | Icons | Lucide React |
 | Fonts | Outfit (sans), JetBrains Mono (mono) |
 
@@ -336,9 +336,12 @@ BillPortfolio/
 
 ## Analytics
 
-Cloudflare Web Analytics (`components/logic/Analytics.tsx`): page views, referrers, countries,
-devices and Core Web Vitals. No cookies, no IP storage, so no consent banner. It renders only
-when `NEXT_PUBLIC_CF_BEACON_TOKEN` is set.
+Umami Cloud (`components/logic/Analytics.tsx`): page views, referrers, countries and devices,
+plus the custom events in `lib/analytics.ts` (`game_play`, `cv_download`, `contact_submit`,
+`post_read_complete`). Cookieless, so no consent banner. It only counts visits on
+billthedev.com; to exclude your own browser run `localStorage.setItem('umami.disabled', 1)` there.
+
+Cloudflare Web Analytics is optional and renders only when `NEXT_PUBLIC_CF_BEACON_TOKEN` is set.
 
 Search traffic (queries, impressions, clicks) comes from Google Search Console, verified by
 `public/googlec03293a34569369a.html` (keep that file, removing it unverifies the site). The sitemap is at `/sitemap.xml`.

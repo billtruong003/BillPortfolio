@@ -2,6 +2,7 @@
 import { Download } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { getAssetPath } from '@/lib/utils';
+import { track } from '@/lib/analytics';
 
 interface DownloadBtnProps {
     href: string;
@@ -14,6 +15,7 @@ export const DownloadBtn = ({ href, text = "Download CV" }: DownloadBtnProps) =>
             href={getAssetPath(href)}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => track('cv_download', { file: href })}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="group relative inline-flex items-center gap-3 px-8 py-4 bg-zinc-900 overflow-hidden border border-zinc-700 hover:border-primary transition-colors duration-300"
