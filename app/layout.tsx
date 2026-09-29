@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Outfit, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
-import { PipelineTrigger } from "@/components/logic/PipelineTrigger";
 import { Analytics } from "@/components/logic/Analytics";
 import { SITE } from "@/lib/site";
 
@@ -28,7 +27,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${outfit.variable} ${mono.variable}`}>
       <body className="antialiased bg-black text-white">
         <Analytics />
-        <PipelineTrigger />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

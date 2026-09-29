@@ -51,7 +51,7 @@ Chọn **A. Cloudflare Web Analytics** (free, không cookie, không cần banner
 - [x] Event mới: `game_play` (UnityPlayer), `cv_download` (DownloadBtn). `post_view`/`post_scroll`/`post_read_complete` chuyển từ code lặp trong ScrollTracker sang dùng chung
 - [ ] **Bill làm**: Cloudflare Dashboard → Web Analytics → Add site `www.billthedev.com` → copy beacon token → GitHub repo Settings → Secrets → thêm `NEXT_PUBLIC_CF_BEACON_TOKEN`. Không cần đụng code.
 
-**Lưu ý đổi so với kế hoạch cũ**: Cloudflare Web Analytics **không có API custom event** (chỉ page view + Core Web Vitals). Nên pipeline Google Apps Script **giữ lại** để nhận 5 event tuỳ chọn, không bỏ như dự định ban đầu. Muốn bỏ hẳn GAS thì phải đổi sang GA4 hoặc Cloudflare Zaraz — quyết định sau khi xem CF chạy một tuần.
+**Cập nhật 2026-09-29**: bỏ hẳn pipeline Google Apps Script (`lib/analytics.ts`, `ScrollTracker`, `PipelineTrigger`) vì dữ liệu nhân đôi, không có cột event, và sheet lưu IP khách. Analytics chuyển sang Umami Cloud (page view + 4 event: `game_play`, `cv_download`, `contact_submit`, `post_read_complete`); Cloudflare beacon giữ làm tuỳ chọn. Search Console xác minh bằng file `public/googlec03293a34569369a.html` (không được xoá).
 
 - [ ] Ghi nhớ: GitHub repo → Insights → Traffic chỉ giữ 14 ngày, chỉ tính clone/visit repo, KHÔNG phải traffic của site
 

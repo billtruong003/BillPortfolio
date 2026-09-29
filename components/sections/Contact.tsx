@@ -54,7 +54,7 @@ export const Contact = () => {
             });
             const json = await res.json().catch(() => ({}));
             if (!res.ok || String(json.success) !== 'true') throw new Error(json.message);
-            track('contact_submit', { topic: data.topic });
+            track('contact_submit', { topic: topicTitle });
             setStatus('sent');
             form.reset();
         } catch {

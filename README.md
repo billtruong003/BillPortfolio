@@ -37,9 +37,6 @@ NEXT_PUBLIC_YOUTUBE_API_KEY=your_key
 # Generate: node scripts/gen-admin-hash.mjs "YourPassword"
 NEXT_PUBLIC_ADMIN_HASH=your_hash
 
-# Google Apps Script URL (analytics endpoint)
-NEXT_PUBLIC_GAS_URL=your_gas_url
-
 # Cloudflare Web Analytics beacon token (Dashboard → Web Analytics → your site)
 # Optional: without it the beacon simply is not rendered.
 NEXT_PUBLIC_CF_BEACON_TOKEN=your_token
@@ -143,7 +140,7 @@ Posts are markdown files with YAML frontmatter. At build time, `compile-posts.mj
 ### `/lab/[slug]` — Blog Post Page
 
 **File:** `app/lab/[slug]/page.tsx`  
-**Components:** `PostHeader.tsx`, `PostBody.tsx`, `TableOfContents.tsx`, `ScrollTracker.tsx`
+**Components:** `PostHeader.tsx`, `PostBody.tsx`, `TableOfContents.tsx`
 
 Individual blog post with:
 
@@ -153,7 +150,6 @@ Individual blog post with:
 | Body | `PostBody.tsx` | Compiled HTML rendered in `.lab-prose` (custom typography in `globals.css`) |
 | Table of Contents | `TableOfContents.tsx` | Sticky sidebar (desktop only), IntersectionObserver highlights active heading |
 | Navigation | *(inline)* | Previous/Next post links at bottom |
-| Analytics | `ScrollTracker.tsx` | Invisible — tracks `post_view`, scroll depth (25/50/75/100%), `post_read_complete` via sendBeacon to GAS |
 
 **Syntax highlighting:** Prism theme in `globals.css` — supports HLSL, C#, GLSL, TypeScript, Python, and more. Dark sci-fi palette (amber keywords, green strings, blue functions on `#0A0A0A`).
 
@@ -259,7 +255,7 @@ BillPortfolio/
 │   ├── webgl/                      # UnityPlayer for game arcade
 │   ├── ui/                         # Shared UI (Badge, GlitchText, DownloadBtn, etc.)
 │   ├── layout/                     # SmoothScroll wrapper
-│   └── logic/                      # PipelineTrigger (analytics init)
+│   └── logic/                      # Analytics beacon, JSON-LD
 │
 ├── content/
 │   └── posts/                      # Markdown blog posts (source)
@@ -332,7 +328,7 @@ BillPortfolio/
 | Scrolling | Lenis (smooth scroll) |
 | Blog Pipeline | unified, remark, rehype, gray-matter, rehype-prism-plus |
 | Game Hosting | Unity WebGL Player (custom React wrapper) |
-| Analytics | Google Apps Script (sendBeacon, privacy-respecting) |
+| Analytics | Umami Cloud (cookieless) |
 | Icons | Lucide React |
 | Fonts | Outfit (sans), JetBrains Mono (mono) |
 
@@ -340,19 +336,15 @@ BillPortfolio/
 
 ## Analytics
 
-Privacy-respecting analytics via Google Apps Script:
+Umami Cloud (`components/logic/Analytics.tsx`): page views, referrers, countries and devices,
+plus the custom events in `lib/analytics.ts` (`game_play`, `cv_download`, `contact_submit`,
+`post_read_complete`). Cookieless, so no consent banner. It only counts visits on
+billthedev.com; to exclude your own browser run `localStorage.setItem('umami.disabled', 1)` there.
 
-**Page-level** (`useAnalyticsPipeline.ts`):
-- Page path, referrer, UTM params
-- No IP collection, no User-Agent fingerprinting
-- Respects Do Not Track (DNT)
+Cloudflare Web Analytics is optional and renders only when `NEXT_PUBLIC_CF_BEACON_TOKEN` is set.
 
-**Blog post-level** (`ScrollTracker.tsx`):
-- `post_view` — fires once per session per slug (sessionStorage dedup)
-- `post_scroll` — fires at 25%, 50%, 75%, 100% scroll depth
-- `post_read_complete` — fires when time on page >= 80% of estimated reading time
-
-All events sent via `navigator.sendBeacon()` to the GAS endpoint.
+Search traffic (queries, impressions, clicks) comes from Google Search Console, verified by
+`public/googlec03293a34569369a.html` (keep that file, removing it unverifies the site). The sitemap is at `/sitemap.xml`.
 
 ---
 
