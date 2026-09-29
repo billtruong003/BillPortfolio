@@ -1,0 +1,40 @@
+name: Shapewright
+
+on:
+  pull_request:
+    paths: ["shapewright/**", ".github/workflows/shapewright.yml"]
+  push:
+    branches-ignore: ["main"]
+    paths: ["shapewright/**", ".github/workflows/shapewright.yml"]
+  workflow_dispatch:
+
+concurrency:
+  group: shapewright-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: shapewright
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install
+        run: |
+          pip install -r requirements.txt ruff
+          cd tools/gltf-validator && npm install --no-audit --no-fund
+      - name: Lint
+        run: ruff check shapewright tests
+      - name: Tests (shapes, ops, validators, determinism, golden geometry)
+        run: python -m pytest -q
+      - name: Benchmark assets
+        run: ./sw bench
+      - name: Export benchmark (Khronos glTF-Validator + round-trip)
+        run: ./sw export tavern_chair --out /tmp/tavern_chair.glb
