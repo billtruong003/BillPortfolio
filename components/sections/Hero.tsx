@@ -14,47 +14,65 @@ const Hero3D = dynamic(() => import('@/components/canvas/Hero3D').then(mod => mo
     loading: () => <div className="w-full h-full" />,
 });
 
+const hasHardwareWebGL = () => {
+    const gl = document.createElement('canvas').getContext('webgl');
+    if (!gl) return false;
+    const info = gl.getExtension('WEBGL_debug_renderer_info');
+    const renderer = info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : '';
+    gl.getExtension('WEBGL_lose_context')?.loseContext();
+    return !/swiftshader|llvmpipe|software/i.test(renderer);
+};
+
+const FIRST_INTERACTION = ['pointerdown', 'touchstart', 'wheel', 'scroll', 'keydown'] as const;
+
 /**
- * The live 3D model only runs where it is cheap: a desktop-width screen, motion allowed, and
- * hardware WebGL. Phones, reduced motion and software renderers (SwiftShader, llvmpipe — which is
- * also what Lighthouse uses) get a still render of the same model instead of a frame loop that
- * blocks the main thread.
+ * Whether to run the live 3D model. Software WebGL (SwiftShader, llvmpipe, which is also what
+ * Lighthouse uses) and reduced motion never get it: there every frame is a long task. Desktop
+ * screens start it right away; phones start it on the first touch or scroll, so it stays out
+ * of the initial load.
  */
 const useLive3D = () => {
     const [live, setLive] = useState(false);
 
     useEffect(() => {
-        const wide = window.matchMedia('(min-width: 1024px)').matches;
-        const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (!wide || calm) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if (window.matchMedia('(min-width: 1024px)').matches) {
+            setLive(hasHardwareWebGL());
+            return;
+        }
 
-        const gl = document.createElement('canvas').getContext('webgl');
-        if (!gl) return;
-        const info = gl.getExtension('WEBGL_debug_renderer_info');
-        const renderer = info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : '';
-        gl.getExtension('WEBGL_lose_context')?.loseContext();
-        if (/swiftshader|llvmpipe|software/i.test(renderer)) return;
-
-        setLive(true);
+        // The WebGL probe itself costs a context, so phones only pay it after the first interaction.
+        const start = () => {
+            FIRST_INTERACTION.forEach((e) => window.removeEventListener(e, start));
+            setLive(hasHardwareWebGL());
+        };
+        FIRST_INTERACTION.forEach((e) => window.addEventListener(e, start, { passive: true }));
+        return () => FIRST_INTERACTION.forEach((e) => window.removeEventListener(e, start));
     }, []);
 
     return live;
 };
 
+/** A still render of the model, kept on top of the canvas until the live model has loaded. */
 const HeroModel = () => {
     const live = useLive3D();
-    if (live) return <Hero3D />;
+    const [ready, setReady] = useState(false);
 
     return (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-            src={getAssetPath('/images/hero-model-poster.webp')}
-            alt=""
-            width={502}
-            height={640}
-            decoding="async"
-            className="w-full h-full object-contain"
-        />
+        <div className="relative w-full h-full">
+            {live && <Hero3D onReady={() => setReady(true)} />}
+            {!ready && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                    src={getAssetPath('/images/hero-model-poster.webp')}
+                    alt=""
+                    width={502}
+                    height={640}
+                    decoding="async"
+                    className="absolute inset-0 w-full h-full object-contain pointer-events-none"
+                />
+            )}
+        </div>
     );
 };
 

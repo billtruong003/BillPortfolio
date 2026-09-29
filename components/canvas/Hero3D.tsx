@@ -74,7 +74,7 @@ declare global {
     }
 }
 
-const HologramModel = () => {
+const HologramModel = ({ onReady }: { onReady?: () => void }) => {
     const materialRef = useRef<THREE.ShaderMaterial>(null);
     const [useFallback, setUseFallback] = useState(false);
 
@@ -106,6 +106,10 @@ const HologramModel = () => {
             });
         };
     }, [scene]);
+
+    useEffect(() => {
+        if (scene) onReady?.();
+    }, [scene, onReady]);
 
     const meshes = useMemo(() => {
         const m: THREE.Mesh[] = [];
@@ -182,11 +186,11 @@ const useInView = () => {
     return [ref, inView] as const;
 };
 
-export const Hero3D = () => {
+export const Hero3D = ({ onReady }: { onReady?: () => void }) => {
     const [ref, inView] = useInView();
 
     return (
-        <div ref={ref} className="w-full h-full min-h-[500px] lg:min-h-[600px] cursor-grab active:cursor-grabbing relative z-10">
+        <div ref={ref} className="w-full h-full lg:min-h-[600px] cursor-grab active:cursor-grabbing relative z-10">
             <Canvas
                 frameloop={inView ? "always" : "never"}
                 camera={{ position: [0, 0, 5], fov: 30 }}
@@ -200,7 +204,7 @@ export const Hero3D = () => {
                 }}
             >
                 <Suspense fallback={null}>
-                    <HologramModel />
+                    <HologramModel onReady={onReady} />
                 </Suspense>
 
                 <ContactShadows
