@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Outfit, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
-import { PipelineTrigger } from "@/components/logic/PipelineTrigger";
 import { Analytics } from "@/components/logic/Analytics";
 import { SITE } from "@/lib/site";
 
@@ -21,6 +20,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   twitter: { card: "summary_large_image" },
+  verification: { google: process.env.GOOGLE_SITE_VERIFICATION },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -28,7 +28,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${outfit.variable} ${mono.variable}`}>
       <body className="antialiased bg-black text-white">
         <Analytics />
-        <PipelineTrigger />
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
