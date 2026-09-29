@@ -162,3 +162,11 @@ Cộng lại: (0.769 + 4.000) / 7.948 = 0.600 ✓. Nhưng bài học là **cửa
 - Trôi theo trục Y (mây bay) — `direction` là vector nên chỉ là đổi số
 - Đổi hoa văn theo từng màn: hiện cả ba màn dùng chung một lớp
 - Lớp thứ hai làm cho ra hồn: cần một hoa văn tương phản cao hơn, không phải thêm một lớp nhạt nữa
+
+## Đính chính (2026-09-29, lúc chụp ảnh cho bài 14)
+
+- `ParallaxLayer` thêm `[DefaultExecutionOrder(200)]`: `CameraFollow` mang 100, nên trước đó nền đọc vị trí camera của frame trước.
+- Import `Backgrounds/1.png`: Mesh Type Full Rect, Wrap Repeat (cần cho Draw Mode Tiled).
+- Đo lại (lab `_TutorialStages/Stage14`, material Sprite-Unlit-Default): tile 4 × 4, reset 6.667 s; Drift 0 → 3.024 trong 5.02 s (0.600 u/s); camera +4 → nền −1.400 so với camera. Mảng nền 200 × 100 px: 2 màu (77,94,135) và (69,86,131). Bản hai lớp tint 0.24: 4 màu, chênh ~3.
+
+Ảnh: `D:/Projects/Tutorial/TutorialShots/14/`.

@@ -251,3 +251,10 @@ Cùng họ với chuyện ở chặng 14: gửi 25 lần nhấn `D` thật nhanh
 **Lỗi 6 đáng đứng cạnh lỗi collider boss của bài 15** thành một cặp: cả hai đều vì tin vào ô sprite thay vì hình vẽ trong ô. Và cả hai đều do **người nhìn** phát hiện trước công cụ — nên bài nên nói thẳng rằng script đo chỉ bắt được thứ bạn nghĩ ra để đo.
 
 **Kết bài bằng ba công cụ**, không phải sáu bản vá: `Playtest`, `ReachAudit` và `art_vs_collider.py`. Bản vá hết hạn, công cụ thì chạy lại được mỗi lần đụng vào level.
+
+## Đính chính (2026-09-29, lúc viết bài 16)
+
+- `tools/art_vs_collider.py` viết lại thành C# chạy trong Unity: `Scripts/Debug/ArtAudit.cs` (đọc PNG bằng `LoadImage`, so đáy hình với đáy collider và tâm ngang, chạy Play mode). Level3: 9 dòng đánh dấu, đều cố ý (5 ngọc, 2 cờ, flyer, cannon lệch 0.125 vì nòng). Tái hiện lỗi cũ: Box_1 dy −0.313, Boss dx −0.780.
+- ReachAudit Level3: OK; tạm đưa thùng/cờ/cửa về Default → 5 UNREACHABLE.
+- Playtest Level1 (nhân vật Cân bằng, 5 đoạn): gem 1 @1.06 s, gem 2 @0.84, gem 3 @1.14 (nhảy đôi), gem 4 @0.70, gem 5 + ALL GEMS @0.78, ROOM COMPLETE + EXIT @1.00, 0 chết, `cleared0=True`. Tái hiện lỗi layer: đi 6 → 29.4 trong 2.94 s không một sự kiện, đúng log gốc.
+- Viết lại series tìm thêm 7 lỗi im lặng (charger bay qua mép, muzzle, flyer dive, cờ boss không ai đọc, SpriteFlash trắng, GraceUntil không ai đọc, thứ tự ParallaxLayer). Chi tiết ở đính chính journal 11, 12, 13, 17.

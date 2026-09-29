@@ -167,3 +167,11 @@ Cú rung kéo dài 0.15 s. Một lệnh MCP mất vài giây. Đọc `transform.
 - Nhạc nền → 14
 - Hitstop (đứng hình vài frame lúc trúng đòn) — cân nhắc, dễ thành khó chịu
 - Xoá `JuiceProbe`, `MotionRecorder`, `PatrolTracker`, `ChargerTracker` trước khi build → 14
+
+## Đính chính (2026-09-29, lúc chụp ảnh cho bài 13)
+
+- `SpriteFlash.fallbackColor` trắng không làm gì với Sprite-Unlit-Default (shader nhân màu, sprite vốn trắng): boss không hề chớp. Đổi mặc định thành (1, 0.35, 0.35), đã sửa giá trị trong PLT_13_Juice và PLT_14_Level3.
+- `PlayerLife.GraceUntil` (bài 08) chưa ai đọc. `GameFeel` thêm `Blink()`: trong thời gian bất tử đổi alpha sprite người chơi 0.3 ↔ 1 mỗi 0.08 s (`blinkPeriod` 0.16, `blinkAlpha` 0.3). Đổi alpha chứ không bật tắt `enabled` vì `PlayerLife` dùng `enabled` lúc chết.
+- Đo lại (lab `_TutorialStages/Stage13`, spawn ở góc dưới trái): rung 0.10/0.18/0.30/0.32 thò ra ngoài phòng 0.000; 0.60 thò 0.105, 0.068, 0.013 ở ba lần chạy. Nhảy đầy cao 5.22, rơi 31.6 u/s → rung; gõ 0.03 s cao 1.22, rơi 13.75 → không rung. Nhấp nháy 7 lần trong 1.2 s. Đánh boss bằng input thật: BossEvents 3, BossShakes 3, EnemiesBound 7.
+
+Ảnh và CSV: `D:/Projects/Tutorial/TutorialShots/13/`.

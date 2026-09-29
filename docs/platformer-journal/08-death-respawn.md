@@ -94,3 +94,14 @@ Thứ tự trong `DeathRoutine`: teleport → `body.simulated = true` → `Refre
 - Snap chân xuống sàn lúc respawn (mục vấp 4)
 - Gem, thùng gỗ, cửa thoát → 09
 - Đặt thêm bẫy loại 2, 3 (sprite 2.png hình tròn 1.88×1.88, 3.png cao 2.0) → 09 hoặc 14
+
+## Đính chính (2026-09-29, lúc chụp ảnh cho bài 08)
+
+- Bẫy `Traps/1.png` là **bàn dập** (mặt đỏ trên cột xám, nhấp lên xuống), không phải gai. Chiều cao phần có hình qua 7 frame: 16, 14, 13, 24, 26, 24, 20 px, tức 0.81 tới 1.62 unit; rộng 32 px (2 unit) ở mọi frame.
+- Collider bẫy chọn khớp tư thế thấp: Size (2.0, 0.9), Offset (0, 0.5). Collider cũ 2.2 × 1.6 cao tới 1.9 unit, cao hơn cả frame cao nhất: cú nhảy từ x 42.3 bị giết ở x 42.95, chân 1.505 trên mặt sàn, trong lúc mặt bàn dập frame 1_6 chỉ cao 1.25. Collider mới: cùng cú nhảy qua an toàn, chân thấp nhất 1.505 so với đỉnh vùng chết 0.95.
+- Checkpoint_2 dời về x = 22 (trigger 1.5 × 2.6, offset (0, 1.5)), respawnOffset (0, 0) vì cả cờ lẫn nhân vật pivot ở chân.
+- Đo bằng code bài 08 (captureFramerate 50): chạy từ x 40 chết ở 0.36 s (x 42.97), điều khiển lại 1.18 s (0.82 s sau khi chết), hết bất tử 2.40 s. Lượt chạy từ x 18: cờ 2 kéo lên ở x 20.79, chết ở 2.80 s, hồi sinh đúng (22, 2.0) rồi 2.015.
+- Cần sorting layer `FX` (PlayVfx đặt sortingLayerName "FX"); bài 08 hướng dẫn thêm.
+- `Deaths` là property, không hiện ở Debug Inspector. Bài hướng dẫn đếm bằng Debug.Log tạm trong `Died`.
+
+Ảnh và CSV: `D:/Projects/Tutorial/TutorialShots/08/`.

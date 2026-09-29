@@ -137,3 +137,16 @@ Sửa: thêm property `Invulnerable` thật, và `Kill()` kiểm tra `IsDead || 
 - Bất tử ngắn sau hồi sinh (đã có `Invulnerable`, chưa gắn vào `DeathRoutine`)
 - Flyer đẩy được người chơi khi va chạm — nên đổi collider flyer thành trigger
 - Âm thanh, hiệu ứng chết → 13
+
+## Đính chính (2026-09-29, lúc chụp ảnh cho bài 11)
+
+Ba lỗi mới tìm ra khi dựng lại lab `_TutorialStages/Stage11`, đã sửa cả trong code/scene cuối:
+
+- **Charger lao qua mép và bay ngang.** Kinematic không có trọng lực, "lao hụt là rơi" không bao giờ đúng. Thử trên bệ 1: bay ngang ở y 7 từ x 13 tới 39.45. Sửa `TickCharge`: `!GroundAhead()` thì quay đầu về Walk (không choáng). Sau sửa dừng ở x 16.13.
+- **Muzzle pháo còn theo pivot cũ** (−1.1, −0.1): đạn sinh trong mặt đất/cột, tự trả pool ngay. Đo: 3 phát trong 5 s, người đứng trước pháo không chết. Muzzle mới (−1.0, 1.0) theo pixel miệng nòng: chết sau 0.46 s. Đã sửa trong PLT_11, PLT_12, PLT_13, PLT_14_Level2, PLT_14_Level3.
+- **Flyer dừng bổ nhào cách đầu 0.38** vì công thức bỏ quên `box.offset.y`. Đo: 4 lần bổ nhào, đáy collider dừng 0.37–0.46 trên đầu, không giết được người đứng yên. Sửa: `bounds.max.y - box.offset.y + box.size.y * 0.5f`, chết sau 0.34 s.
+- `EnemyData.standHeight` (không ai đọc) đã xoá, `colliderOffset` mặc định đổi thành (0, 0.85).
+- Số đo lại: charger Telegraph 0.00 → Charge 0.52 → Stunned 1.00 ở x 34.89 (kỳ vọng 34.94); giẫm lúc Telegraph thì người chết sau 0.22 s; pool 18 phát trong 31 s, cách nhau 1.80 s, luôn 8 object con.
+- Lab đặt pháo trên đỉnh cột phải (55, 23), flyer trên bệ 1 (12, 13), charger ở (40, 2).
+
+Ảnh và CSV: `D:/Projects/Tutorial/TutorialShots/11/`.

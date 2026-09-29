@@ -113,3 +113,19 @@ Plan ghi bẫy PPC snap theo lưới pixel làm follow giật nấc. Setting hi�
 - Parallax background (6 lớp trong pack) — 13 hoặc bài riêng, không phải camera lesson
 - Chuyển phòng (đổi `room` reference + SnapTo) → 14
 - Thử PPC Pixel Snapping → 13
+
+## Đính chính (2026-09-29, đo lại cho bài 05)
+
+Đo bằng code cuối (có `targetOffset` 0.85 từ chặng 16), `Time.captureFramerate = 50` để mỗi frame đúng một bước vật lý:
+
+| Test | Kết quả |
+|---|---|
+| Nhảy tại chỗ trên bệ 3, camera bám 1:1 | camY lên xuống **5.24 u** |
+| Như trên, camera cuối | camY range **0.000** (17.85 suốt) |
+| Chạy ngang | rời biên trái khi player x = 14.91; dẫn trước **0.51 u** khi chạy đều (journal gốc 0.42 do mẫu ghi ở FixedUpdate, trước nội suy); chạm biên phải 47.65 khi player bị cột chặn ở 47.385 |
+| Rơi từ bệ 3, smooth rồi clamp | chạm 9.35 với tốc độ **41 u/s** rồi khựng |
+| Rơi từ bệ 3, clamp đích rồi smooth | tốc độ lớn nhất **25.6 u/s**, đáp êm |
+
+Vấp 1 gốc ("13.46 → 9.35 trong 0.12 s") không lặp lại đúng số vì kịch bản rơi khác; hiện tượng thì giống.
+
+Ảnh và CSV: `D:/Projects/Tutorial/TutorialShots/05/`.

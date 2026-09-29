@@ -109,3 +109,12 @@ Clip 6 frame ở 20 fps = 0.3 s, không loop. Nếu để "trên không sau air 
 - Clip cho Char2, Char3 → 07 (cùng cách, khác sheet)
 - Hit → 08
 - Squash & stretch lúc đáp → 13
+
+## Đính chính (2026-09-29, lúc chụp ảnh cho bài 06)
+
+- Kéo nhiều sprite thả lên GameObject: Unity tạo clip **12 fps**, dài 1 s, loop, kèm Animator và controller đặt theo tên GameObject (đã thử bằng `SpriteUtility.AddAnimationToGO`). Bài hướng dẫn đổi Samples thành 20.
+- Sprite rect của các sheet nhân vật (Char1..3) đổi alignment từ Custom (0.5, 0) sang **BottomCenter** (cùng pivot) để ảnh Sprite Editor khớp thao tác "Pivot Bottom Center". 21 clip, 0 keyframe null sau khi đổi.
+- Đo lại bằng code bài 06 (captureFramerate 50): chuỗi Idle → Run → Jump → Fall → DoubleJump 0.32 s → Jump → Fall → WallSlide (chạm cột) → Fall → Idle; trong khe flipX đổi đúng bước wall jump.
+- Sheet Wall_Jump: mép phẳng áp tường ở bên **phải**, mặt nhìn trái ⇒ `flipX = FacingSign < 0` đúng cả hai phía.
+
+Ảnh và CSV: `D:/Projects/Tutorial/TutorialShots/06/`.

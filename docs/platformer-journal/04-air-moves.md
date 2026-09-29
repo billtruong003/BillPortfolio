@@ -91,3 +91,20 @@ Test E cú hai giữ 0.3 s rồi nhả ở 0.80 khi vy = 6.1 → cut → thấp 
 - Animation Wall_Jump / Double_Jump / Fall → 06
 - `canWallJump` / `maxJumps` sẽ đi vào `PlayerData` → 07 (đây là hai field phân biệt ba nhân vật)
 - Camera → 05
+
+## Đính chính (2026-09-28, đo lại cho bài 04)
+
+Đo bằng đúng code bài 04 (`Assets/_TutorialStages/Stage04`), bơm input ở đầu mỗi bước vật lý:
+
+| Test | Kết quả |
+|---|---|
+| Double jump, cú hai bấm ở đỉnh cú đầu | tổng **9.63 u** (5.225 + 4.41). Thấp hơn bệ 2 (10 so với sàn) ⇒ bảng bài 01 ghi "bệ 2 dùng double jump" là sai, đã sửa: bệ 2 lên bằng nhảy thường từ bệ 1 |
+| Trượt tường | vy = −4.00 suốt 127 bước, x = 53.385 |
+| Wall jump khoá 0.15 | vx = −10 trong **8 bước**, ra xa tường 2.46 u (vách trái ở 2.77) |
+| Wall jump không khoá | chỉ ra 1.06 u, quay lại dính tường sau 0.4 s (không phải "1 frame") |
+| Hộp dò tường 1.7 | ngay bước rời mép phải bệ 1 báo wall = −1 một bước; bấm sớm thì coyote đất thắng, bấm muộn thì wall coyote đã hết ⇒ không lộ lỗi trong kịch bản này |
+| Hộp dò tường 1.2 | không có tín hiệu giả |
+
+Vấp 2 gốc ("rời mép là trượt −4") sai: trượt cần đẩy phím về phía tường. Hậu quả thật chỉ là tín hiệu tường giả một bước.
+
+Ảnh và CSV: `D:/Projects/Tutorial/TutorialShots/04/`.

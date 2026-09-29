@@ -91,3 +91,19 @@ Dài, dễ quên khi thêm số mới. Cân nhắc cho motor đọc thẳng `dat
 - Custom editor làm mờ field khi có data — nice-to-have, có thể bỏ
 - Màn chọn nhân vật → 14
 - Portrait dùng cho UI → 14
+
+## Đính chính (2026-09-29, đo lại cho bài 07)
+
+- `Gravity`/`JumpVelocity` của PlayerData là property, **Inspector không hiện**. Bài không được viết "hiện trong Inspector".
+- Đo lại cùng kịch bản với code bài 07 (bộ đo đọc `Rigidbody2D.position`; lần đầu đọc `transform.position` bị trễ một bước do Interpolate, ra trượt 0.63 là sai):
+
+| | Cân bằng | Nhẹ | Nặng |
+|---|---|---|---|
+| Trượt | 0.27 u / 0.08 s | 0.21 u / 0.06 s | 0.49 u / 0.16 s |
+| Cao | 5.225 | **6.19** (journal gốc 6.26) | 4.23 |
+| Trên không | 0.72 | 0.78 | 0.56 |
+
+- Nặng nhảy 4.23 < 5 ⇒ không lên được bệ 1 bằng nhảy thường trong phòng mẫu.
+- Bài dạy biến Player thành prefab (project gốc không có prefab Player; mỗi scene một object).
+
+Ảnh và CSV: `D:/Projects/Tutorial/TutorialShots/07/`.

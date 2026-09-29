@@ -105,3 +105,14 @@ Hệ quả nhỏ: đội đầu vào đáy thùng thì `OnCollisionEnter2D` vẫ
 - Đặt lại vị trí gem cho cần nhảy mới lấy được
 - Thùng loại 2, 3 (sprite 2_*, 3_*) — dùng khi có nhiều phòng
 - `RoomState.ResetRoom()` viết rồi nhưng chưa ai gọi → 14
+
+## Đính chính (2026-09-29, lúc chụp ảnh cho bài 09)
+
+- Vị trí chốt (khớp scene cuối): Gem_1 (12, 8.5), Gem_2 (27, 13.4) sau Trap_B, Gem_3 (38, 18.5), Gem_4 (56.5, 5.5) sau cột phải, Gem_5 (30, 5.5). Gem collider r = 0.6 (không phải 0.8), layer `Pickup`, SpriteSequence 7 frame 10 fps.
+- Thùng: layer `Ground`, pivot (0.5, 5/32), collider 1.375 × 1.375 offset (0, 0.6875), hitsToBreak 2 (mặc định trong code là 1).
+- Cửa: layer `Interactable`, collider 2.5 × 3 offset (0, 1.75). Locked sprite là `End_Pressed_0`, frame bóng trắng của cúp.
+- Đo lại bằng code bài 09 (lab `_TutorialStages/Stage09`, input thật từng đoạn): đi vào thùng dừng x 18.70; thùng ở Default + ô Player×Default tắt thì đi tới 20.5; thả từ y 7 chạm thùng sau 0.26 s, chân trên đỉnh 0.015, nảy cao 2.7; lần hai sau 0.52 s thì vỡ. Ngọc 5 nhảy thấp qua Box_2 (không cần nảy), ngọc 3 cần nhảy đôi từ bệ 2 (đỉnh 21.24), vượt cột: nhảy đôi từ bệ 3 lên đỉnh cột trái (23.015), nhảy thường sang cột phải. Cửa khoá khi 4/5, mở khi 5/5, "Qua phòng" ở x 57.18.
+- Bản sai thứ tự `Taken` tái hiện được: 2 ngọc biến mất, GemChanged không phát lần nào sau 5 dòng đăng ký.
+- Bài thêm `RoomLog` tạm (Platformer.Debugging) để thấy số đếm trước khi có HUD.
+
+Ảnh và CSV: `D:/Projects/Tutorial/TutorialShots/09/`.

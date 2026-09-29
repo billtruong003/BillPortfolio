@@ -98,3 +98,13 @@ Tạo layer bằng code phải đi qua `ProjectSettings/TagManager.asset`, khôn
 - Hook test cho recorder trên PlayerMotor → 03
 - Flip sprite theo hướng → 06 (FacingSign đã có sẵn)
 - gravityScale 4 là tạm
+
+## Đính chính (2026-09-28, lúc chụp ảnh cho bài 02)
+
+- Code bài 02 dạy theo dạng cuối: `FixedUpdate` lấy `v`, `v = ApplyRun(v)`, ghi lại. Đã biên dịch và chạy đúng đoạn code trong bài (namespace tạm `Platformer.Tutorial.Stage02`, `Assets/_TutorialStages/Stage02`).
+- Collider sau khi sửa pivot: size (1.2, 1.7), **offset (0, 0.85)** (journal gốc ghi −0.15 là của pivot Center). Material `PM_NoFriction` gắn ở **Rigidbody2D**, không ở collider.
+- Đo lại bằng bàn phím ảo (`InputSystem.AddDevice<Keyboard>` + `backgroundBehavior = IgnoreFocus`): input tới sau 2 bước; tăng tốc 6 bước = 0.12 s; dừng 4 bước = 0.08 s; **trượt 0.27 u** tính từ bước game đọc được nhả phím (journal gốc 0.45 u là tính cả độ trễ đọc phím).
+- Bị bậc chặn ở x = 29.385 (mép collider 29.985). Đứng yên trên sàn ở y = 2.015.
+- decelTime 0.3 ⇒ 15 bước, trượt ≈ 1.26 u (tính theo công thức, chưa đo).
+
+Ảnh gốc và CSV: `D:/Projects/Tutorial/TutorialShots/02/`.

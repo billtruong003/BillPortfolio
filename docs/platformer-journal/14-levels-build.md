@@ -203,3 +203,11 @@ Test build trong trình duyệt: gửi 25 lần nhấn `D`, người chơi đứ
 - Điều khiển cảm ứng cho điện thoại, `touch: false` trong registry
 - Font pixel cho UI: hiện đang dùng LiberationSans của TMP, lệch tông với art
 - Ba nhân vật của bài 07 chưa cho người chơi chọn trong game
+
+## Đính chính (2026-09-29, lúc viết bài 15)
+
+- Thêm chọn nhân vật (bài 07 đã hứa): `LevelCatalog.characters` (3 PlayerData), `GameProgress.SelectedCharacter/SelectCharacter` (key `plt.character`), `LevelRunner.ApplyCharacter()` trong `Start` (motor.Apply + animator.ApplyData), `LevelSelectScreen.BuildCharacters()` dùng chung prefab nút (portrait vào `Number`, `clearedIcon` vào `Badge`). Scene `PLT_14_LevelSelect`: Grid dời lên y 30, thêm `CharacterRow` (HorizontalLayoutGroup, y 88) và `CharacterLabel` (y 48).
+- Đo trong Play: chọn Nhẹ → Level1 motor `moveSpeed 10.5`, `maxJumps 2`, controller `Player_Char2`, JumpVelocity 30.95. Nhặt 5 ngọc → exit mở → vào cửa: `finished=True`, `cleared0=True`, `best=5`. Level3: thanh máu hiện sau hit đầu, fill 129.33/194 px.
+- Build WebGL giờ nằm trên Cloudflare R2 (commit dcae217), thư mục `public/webgl-games/*/Build/` bị gitignore.
+
+Ảnh: `D:/Projects/Tutorial/TutorialShots/15/`.

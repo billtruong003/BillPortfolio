@@ -129,3 +129,12 @@ Pack không có clip "mệt/choáng" cho Brute (khác Charger có `Stun`). Dùng
 - Cửa phòng boss đóng lại khi vào → 14
 - Rung màn hình khi boss đâm vách → 13
 - Âm thanh telegraph/charge/hit → 13
+
+## Đính chính (2026-09-29, lúc chụp ảnh cho bài 12)
+
+- Đấu trường chốt (khớp PLT_14_Level3): xoá hai cột, khối vách x 48–51 × y 2–5 (mặt trên y 6), đấu trường x 52–62, boss (58, 2). Bài 12 dựng trong scene riêng `Room_Boss` (bản sao căn phòng), xoá khẩu pháo trên cột phải.
+- Pivot Brute (0.6736, 0), collider 1.7 × 1.6 offset (0, 0.8) (không phải 2.6 × 2.6).
+- `BossBrute.Touch` giờ đọc cờ `stompableOnlyWhenVulnerable` (`open = Vulnerable || !flag`); trước đó cờ trong asset không ai đọc. Hành vi với cờ bật không đổi.
+- Đo lại (lab `_TutorialStages/Stage12`, input thật, người đứng trên vách chờ): Telegraph 0.92 → Recover ở 53.06; giẫm 1 ở 1.98 (vy 22); bản `Touch` cũ tái hiện đúng log `Recover isStomp=True` rồi `Hurt isStomp=True` → chết ở 2.56. Bản sửa: 3 lần giẫm (1.98, 7.46, 12.26), 0 lần chết, Telegraph 0.92/0.68/0.52, Recover 1.36/1.02, dừng ở 53.06 và 61.12.
+
+Ảnh và CSV: `D:/Projects/Tutorial/TutorialShots/12/`.

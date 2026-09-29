@@ -106,3 +106,14 @@ Test T nảy ở y=4.71 với vy = 20.0 — bằng đúng lúc giẫm thùng ở
 - Địch dùng `PrefabPool` của `_Common` → 11 (cannonball)
 - Animation Jump/Fall của Jumper (pack có sẵn) chưa dùng — địch hiện chỉ đi bộ
 - Âm thanh giẫm → 13
+
+## Đính chính (2026-09-29, lúc chụp ảnh cho bài 10)
+
+- Sau chặng 15 sprite địch pivot ở chân (0.5, 0) và collider offset (0, 0.85), nên công thức "y = mặt sàn + 1.0" ở trên đã cũ: giờ đặt địch ở đúng y của mặt sàn (2 / 7 / 17).
+- Hộp dò tường không còn 0.12 × 1.2 gõ tay: chiều cao lấy từ collider qua `Common.Probe` (collider 1.7 − 2 × margin 0.25 = 1.2). Bài 10 giới thiệu `Probe` luôn.
+- Lab `_TutorialStages/Stage10`: Enemy_A bệ 1 (14, 7), Enemy_B chuyển lên bệ 3 (40, 17) vì bệ 2 có Trap_B và sàn có Trap_A. Điểm quay đo lại: A 8.96 / 16.04, B 34.96 / 42.04, mỗi chiều 2.36 s. Địch tạm giữa hai thùng quay ở 21.60 / 26.40.
+- Đặt cao 1.5: turnDelay 0.1 thì đi lại 14.00 ↔ 14.36 mỗi 0.12 s; turnDelay 0 thì 301 lần quay trong 6 s, đứng im.
+- Giẫm: chạm sau 0.20 s, chân trên đỉnh 0.01, nảy 20, cao 2.73. Chạm ngang trên bệ 3: chết ở 0.20 s, x 37.93, địch đi tiếp.
+- Vòng lặp chết (cờ 2 ở x 22, địch tạm đi tuần giữa hai thùng, người đứng yên 8 s): grace 0 chết 6 lần, hai lần 0.02 s sau hồi sinh; grace 1.2 chết 3 lần, sớm nhất 2.18 s sau hồi sinh.
+
+Ảnh và CSV: `D:/Projects/Tutorial/TutorialShots/10/`.

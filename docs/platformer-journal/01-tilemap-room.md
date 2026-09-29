@@ -107,3 +107,14 @@ Composite bắt buộc có Rigidbody2D trên cùng object; đặt **Static** vì
 - Xoá `DropTest_Box`
 - Chưa có background layer — bài 05 hoặc 13 (parallax là juice)
 - Tilemap thứ hai cho decor không có collider (bụi cỏ 19·20, gem 4, đá 9·10·25·26)
+
+## Đính chính (2026-09-28, lúc chụp ảnh cho bài 01)
+
+- Inspector Unity 6 **không hiện Path Count**. Mục Info của Composite Collider 2D chỉ có Shape Count = **14** (5 path bị chia thành 14 mảnh lồi). Câu kiểm tra của bài dùng Shape Count 14 so với 528 khi Composite Operation = None.
+- Không có chỗ nào mỏng một ô trong cả phòng này lẫn 3 màn ở chặng 14 (đếm bằng code: thinRow = thinCol = 0). 6 rule hàng đơn/cột đơn là để phòng khi người đọc tự vẽ.
+- Thùng rơi lệch 0.0148 không phải đúng contact offset (0.01). Thử lại bằng khối `Tileset_92` 1×1: đáy 7.0148 so với mặt bệ 7.0.
+- Viền tối của gạch (33, 31, 48) gần trùng nền `#1A1C2C` nên ảnh chụp nền tối trông như có khe. Ảnh so sánh chụp nền `#8B9BB4`.
+- Người đọc không cần 176 Tile asset: RuleTile tham chiếu sprite, palette chỉ cần kéo `RT_Grass` vào. Palette đã tạo: `Art/Tiles/Palettes/PAL_Grass.prefab`.
+- Cắt tileset phải bật **Keep Empty Rects** để tên sprite trùng số ô trong lưới.
+
+Ảnh gốc: `D:/Projects/Tutorial/TutorialShots/01/`.

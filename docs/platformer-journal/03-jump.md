@@ -122,3 +122,22 @@ Sample t=0 của Test D báo grounded=1 dù đặt ở y=10, vì `IsGrounded` ch
 - Wall detect / slide / jump → 04
 - Cắt animation Jump/Fall/Double_Jump → 06
 - Bù nửa step: không làm, đã quyết
+
+## Đính chính (2026-09-28, lúc đo lại cho bài 03)
+
+Đo lại bằng đúng code bài 03 (`Assets/_TutorialStages/Stage03`), bộ đo bơm trạng thái phím vào motor ở đầu mỗi bước vật lý (`[DefaultExecutionOrder(-100)]`), không đi qua Input System để khỏi lệch vì Editor chạy nền:
+
+| Test | Kết quả |
+|---|---|
+| Giữ hết | cao **5.225** (5.5 − 0.275), đỉnh sau 0.38 s, chạm đất sau 0.72 s, chạm trần −32 trước khi đáp |
+| Chạm 0.08 s (4 bước) | **2.40 u** (46%) |
+| Cắt mỗi bước (bản sai) | vy 22 → 7.43 → 1.60, cao **2.10 u** |
+| Bấm 0.06 s sau khi mất đất | nhảy được, đang rơi vy −3.575, đáp lên mép trái bệ 2 |
+| Bấm 0.14 s | không nhảy, rơi xuống sàn sau 0.30 s, buffer hết hạn |
+| Bấm 0.24 s | ngoài coyote, còn 0.08 s tới sàn ⇒ buffer bật lên ngay bước chạm đất, cao 5.225 |
+
+Chi tiết mới: `coyoteCounter` bị trừ ngay trong bước đầu mất đất nên cửa sổ thật với coyoteTime 0.1 là **4 bước = 0.08 s**. Test C1 gốc "bấm sau 0.08 s" chỉ đúng nếu tính từ bước sau.
+
+Lượt đo đầu dùng bàn phím ảo qua Input System: lệnh nhả phím tới trễ ~0.3 s vì Editor chạy nền, số không dùng được.
+
+Ảnh và CSV: `D:/Projects/Tutorial/TutorialShots/03/`.
