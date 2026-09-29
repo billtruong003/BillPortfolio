@@ -78,7 +78,7 @@ const HologramModel = () => {
     const materialRef = useRef<THREE.ShaderMaterial>(null);
     const [useFallback, setUseFallback] = useState(false);
 
-    const gltf = useGLTF(getAssetPath("/models/hero-model.glb"), true) as any;
+    const gltf = useGLTF(getAssetPath("/models/hero-model.glb")) as any;
 
     useFrame((state) => {
         if (materialRef.current) {
@@ -167,12 +167,30 @@ const FallbackShape = ({ materialRef }: { materialRef: any }) => (
     </Center>
 );
 
+/** Stops the render loop while the hero is scrolled out of view. */
+const useInView = () => {
+    const ref = useRef<HTMLDivElement>(null);
+    const [inView, setInView] = useState(true);
+
+    useEffect(() => {
+        if (!ref.current) return;
+        const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting));
+        observer.observe(ref.current);
+        return () => observer.disconnect();
+    }, []);
+
+    return [ref, inView] as const;
+};
+
 export const Hero3D = () => {
+    const [ref, inView] = useInView();
+
     return (
-        <div className="w-full h-full min-h-[500px] lg:min-h-[600px] cursor-grab active:cursor-grabbing relative z-10">
+        <div ref={ref} className="w-full h-full min-h-[500px] lg:min-h-[600px] cursor-grab active:cursor-grabbing relative z-10">
             <Canvas
+                frameloop={inView ? "always" : "never"}
                 camera={{ position: [0, 0, 5], fov: 30 }}
-                dpr={[1, 2]}
+                dpr={[1, 1.5]}
                 gl={{
                     alpha: true,
                     antialias: true,

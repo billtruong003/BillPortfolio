@@ -19,7 +19,14 @@ const config: Config = {
         primary: "#FFB84D",
         secondary: "#888888",
       },
+      keyframes: {
+        'hero-in': {
+          from: { opacity: '0', transform: 'translateY(20px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
       animation: {
+        'hero-in': 'hero-in 0.5s ease-out both',
         'spin-slow': 'spin 20s linear infinite',
         'glitch': 'glitch 1s linear infinite',
       },
