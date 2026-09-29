@@ -6,11 +6,57 @@ import { DownloadBtn } from '@/components/ui/DownloadBtn';
 import { resumeData } from '@/data/resume';
 import { Github, Linkedin, Mail, Facebook, Youtube, Twitter, LucideIcon, ExternalLink, ChevronDown, Gamepad2, ArrowRight } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
+import { getAssetPath } from '@/lib/utils';
 
 const Hero3D = dynamic(() => import('@/components/canvas/Hero3D').then(mod => mod.Hero3D), {
     ssr: false,
     loading: () => <div className="w-full h-full" />,
 });
+
+/**
+ * The live 3D model only runs where it is cheap: a desktop-width screen, motion allowed, and
+ * hardware WebGL. Phones, reduced motion and software renderers (SwiftShader, llvmpipe — which is
+ * also what Lighthouse uses) get a still render of the same model instead of a frame loop that
+ * blocks the main thread.
+ */
+const useLive3D = () => {
+    const [live, setLive] = useState(false);
+
+    useEffect(() => {
+        const wide = window.matchMedia('(min-width: 1024px)').matches;
+        const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!wide || calm) return;
+
+        const gl = document.createElement('canvas').getContext('webgl');
+        if (!gl) return;
+        const info = gl.getExtension('WEBGL_debug_renderer_info');
+        const renderer = info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : '';
+        gl.getExtension('WEBGL_lose_context')?.loseContext();
+        if (/swiftshader|llvmpipe|software/i.test(renderer)) return;
+
+        setLive(true);
+    }, []);
+
+    return live;
+};
+
+const HeroModel = () => {
+    const live = useLive3D();
+    if (live) return <Hero3D />;
+
+    return (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+            src={getAssetPath('/images/hero-model-poster.webp')}
+            alt=""
+            width={502}
+            height={640}
+            decoding="async"
+            className="w-full h-full object-contain"
+        />
+    );
+};
 
 const SOCIAL_ICONS: Record<string, LucideIcon> = {
     github: Github,
@@ -30,12 +76,8 @@ export const Hero = () => (
 
         <div className="container mx-auto px-6 relative z-10">
             <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-0">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="w-full lg:w-1/2 flex flex-col justify-center"
-                >
+                {/* CSS, not framer-motion: this column holds the LCP text, so it must not wait for hydration. */}
+                <div className="w-full lg:w-1/2 flex flex-col justify-center animate-hero-in motion-reduce:animate-none">
                     <div className="flex items-center gap-2 mb-8 self-start px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
                         <span className="relative flex h-2 w-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400/60 motion-reduce:animate-none" />
@@ -89,7 +131,7 @@ export const Hero = () => (
                             );
                         })}
                     </div>
-                </motion.div>
+                </div>
 
                 {/* On phones the model is decoration only, so it must not swallow vertical swipes. */}
                 <motion.div
@@ -100,7 +142,7 @@ export const Hero = () => (
                     aria-hidden
                 >
                     <div className="w-full h-full scale-110 lg:scale-125">
-                        <Hero3D />
+                        <HeroModel />
                     </div>
                 </motion.div>
             </div>
