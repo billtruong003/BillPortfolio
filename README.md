@@ -40,10 +40,6 @@ NEXT_PUBLIC_ADMIN_HASH=your_hash
 # Cloudflare Web Analytics beacon token (Dashboard → Web Analytics → your site)
 # Optional: without it the beacon simply is not rendered.
 NEXT_PUBLIC_CF_BEACON_TOKEN=your_token
-
-# Google Search Console HTML-tag verification (only the content="..." value)
-# Optional: without it no verification meta tag is rendered.
-GOOGLE_SITE_VERIFICATION=your_code
 ```
 
 ### How to get YouTube API Key
@@ -344,8 +340,8 @@ Cloudflare Web Analytics (`components/logic/Analytics.tsx`): page views, referre
 devices and Core Web Vitals. No cookies, no IP storage, so no consent banner. It renders only
 when `NEXT_PUBLIC_CF_BEACON_TOKEN` is set.
 
-Search traffic (queries, impressions, clicks) comes from Google Search Console, verified through
-`GOOGLE_SITE_VERIFICATION`. The sitemap is at `/sitemap.xml`.
+Search traffic (queries, impressions, clicks) comes from Google Search Console, verified by
+`public/googlec03293a34569369a.html` (keep that file, removing it unverifies the site). The sitemap is at `/sitemap.xml`.
 
 ---
 
