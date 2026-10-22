@@ -14,6 +14,7 @@ import { LabShowcase } from "@/components/sections/LabShowcase";
 import { SiteNav } from "@/components/layout/SiteNav";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { ProjectModal } from "@/components/overlay/ProjectModal";
+import { Lucy } from "@/components/overlay/Lucy";
 import { JsonLd } from "@/components/logic/JsonLd";
 import type { Metadata } from "next";
 import { graph, person, website } from "@/lib/schema";
@@ -57,6 +58,7 @@ export default function Home() {
       </div>
 
       <ProjectModal />
+      <Lucy />
       <SiteFooter />
     </main>
     </>

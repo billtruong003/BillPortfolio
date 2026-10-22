@@ -6,4 +6,5 @@ export const NAV_LINKS = [
     { label: 'Dev Lab', href: '/lab' },
     { label: 'Docs', href: '/docs' },
     { label: 'Algorithms', href: '/docs/algorithms' },
+    { label: 'Studio ↗', href: 'https://billthedevstudio.com/' },
 ];

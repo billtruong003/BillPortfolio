@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { SiteNav } from '@/components/layout/SiteNav';
 import { SiteFooter } from '@/components/layout/SiteFooter';
+import { Lucy } from '@/components/overlay/Lucy';
 import { Experience } from '@/components/sections/Experience';
 import { JsonLd } from '@/components/logic/JsonLd';
 import { SITE, absoluteUrl } from '@/lib/site';
@@ -59,6 +60,7 @@ export default function AboutPage() {
             </section>
             <Experience />
             <SiteFooter />
+            <Lucy />
         </main>
     );
 }
