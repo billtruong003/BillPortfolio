@@ -6,10 +6,10 @@ import type { Metadata } from 'next';
 import { SITE, absoluteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
-    title: 'Dev Lab | Bill The Dev',
+    title: `Dev Lab | ${SITE.siteName}`,
     description: 'Step-by-step Unity 6 series by Bill Truong: build a game from an empty scene to a playable Web build.',
     alternates: { canonical: absoluteUrl('/lab/'), types: { 'application/rss+xml': absoluteUrl('/lab/feed.xml') } },
-    openGraph: { type: 'website', url: absoluteUrl('/lab/'), siteName: SITE.name, title: 'Dev Lab | Bill The Dev', description: 'Step-by-step Unity 6 series by Bill Truong: build a game from an empty scene to a playable Web build.' },
+    openGraph: { type: 'website', url: absoluteUrl('/lab/'), siteName: SITE.siteName, title: `Dev Lab | ${SITE.siteName}`, description: 'Step-by-step Unity 6 series by Bill Truong: build a game from an empty scene to a playable Web build.' },
 };
 
 export default function LabPage() {

@@ -25,10 +25,10 @@ export function generateMetadata({ params }: Params): Metadata {
     if (!series) return { title: 'Series Not Found' };
     const url = absoluteUrl(`/lab/series/${params.id}/`);
     return {
-        title: `${series.name} | ${SITE.name} Lab`,
+        title: `${series.name} | ${SITE.siteName} Lab`,
         description: series.description,
         alternates: { canonical: url, ...(hasEnglish(series.id) ? { languages: { vi: absoluteUrl(`/lab/series/${series.id}/`), en: absoluteUrl(`/lab/series/${series.id}-en/`) } } : {}) },
-        openGraph: { type: 'website', url, siteName: SITE.name, title: series.name, description: series.description },
+        openGraph: { type: 'website', url, siteName: SITE.siteName, title: series.name, description: series.description },
     };
 }
 

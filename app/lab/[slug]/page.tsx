@@ -25,13 +25,13 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     const images = post.coverImage ? [{ url: absoluteUrl(post.coverImage), alt: post.title }] : undefined;
 
     return {
-        title: `${post.title} | ${SITE.name} Lab`,
+        title: `${post.title} | ${SITE.siteName} Lab`,
         description: post.excerpt,
         alternates: { canonical: url, languages: Object.fromEntries(getTranslations(postManifest.posts, post).map(p => [p.lang, absoluteUrl(`/lab/${p.slug}/`)])) },
         openGraph: {
             type: 'article',
             url,
-            siteName: SITE.name,
+            siteName: SITE.siteName,
             title: post.title,
             description: post.excerpt,
             locale: post.lang === 'vi' ? 'vi_VN' : 'en_US',

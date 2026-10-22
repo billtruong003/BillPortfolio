@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     const pages: MetadataRoute.Sitemap = [
         { url: absoluteUrl('/'), changeFrequency: 'monthly', priority: 1 },
+        { url: absoluteUrl('/about/'), changeFrequency: 'monthly', priority: 0.9 },
         { url: absoluteUrl('/lab/'), lastModified: latestPost, changeFrequency: 'weekly', priority: 0.8 },
         { url: absoluteUrl('/arcade/'), changeFrequency: 'monthly', priority: 0.6 },
     ];

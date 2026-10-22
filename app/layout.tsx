@@ -10,13 +10,13 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
-  title: `${SITE.name} | ${SITE.title}`,
+  title: `${SITE.siteName} | ${SITE.title}`,
   description: SITE.description,
   openGraph: {
-    title: `${SITE.name} | ${SITE.title}`,
+    title: `${SITE.siteName} | ${SITE.title}`,
     description: SITE.description,
     url: SITE.url,
-    siteName: SITE.name,
+    siteName: SITE.siteName,
     type: "website",
   },
   twitter: { card: "summary_large_image" },

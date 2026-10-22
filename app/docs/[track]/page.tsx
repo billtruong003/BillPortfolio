@@ -20,7 +20,7 @@ export function generateMetadata({ params }: Params): Metadata {
     const track = getTrack(params.track);
     if (!track) return { title: 'Không tìm thấy' };
     return {
-        title: `Học ${track.name} | ${SITE.name}`,
+        title: `Học ${track.name} | ${SITE.siteName}`,
         description: track.description,
         alternates: { canonical: absoluteUrl(`/docs/${track.id}/`) },
     };

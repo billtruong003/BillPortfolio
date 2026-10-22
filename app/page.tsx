@@ -15,8 +15,8 @@ import { SiteNav } from "@/components/layout/SiteNav";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { ProjectModal } from "@/components/overlay/ProjectModal";
 import { JsonLd } from "@/components/logic/JsonLd";
-import { SITE } from "@/lib/site";
-import resume from "@/data/resume.json";
+import type { Metadata } from "next";
+import { graph, person, website } from "@/lib/schema";
 import registry from "@/public/webgl-games/registry.json";
 import { postManifest } from "@/data/posts";
 
@@ -28,22 +28,13 @@ const ParticleBackground = dynamic(
   { ssr: false }
 );
 
-const personJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: resume.profile.name,
-  jobTitle: resume.profile.title,
-  description: resume.profile.about,
-  url: SITE.url,
-  email: resume.profile.contact.email,
-  address: { "@type": "PostalAddress", addressLocality: "Ho Chi Minh City", addressCountry: "VN" },
-  sameAs: resume.socials.map((s) => s.url),
-};
+// the home page states who the site is about (lib/schema.ts, shared ids with the studio site)
+export const metadata: Metadata = { alternates: { canonical: '/' } };
 
 export default function Home() {
   return (
     <>
-    <JsonLd data={personJsonLd} />
+    <JsonLd data={graph(website, person)} />
     <main className="relative min-h-screen w-full bg-[#050505] overflow-hidden">
       <div className="fixed inset-0 z-0 pointer-events-none">
         <ParticleBackground />

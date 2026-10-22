@@ -8,7 +8,7 @@ import { getDocPages } from '@/data/docs';
 import { SITE, absoluteUrl } from '@/lib/site';
 
 export const metadata: Metadata = {
-    title: `Docs lập trình tiếng Việt | ${SITE.name}`,
+    title: `Docs lập trình tiếng Việt | ${SITE.siteName}`,
     description: 'Tài liệu lập trình cơ bản bằng tiếng Việt: C#, Python, JavaScript, TypeScript, HLSL cho Unity và các bài giải thuật hay gặp khi phỏng vấn.',
     alternates: { canonical: absoluteUrl('/docs/') },
 };

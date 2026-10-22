@@ -30,13 +30,13 @@ export function generateMetadata({ params }: Params): Metadata {
     if (!track || !page) return { title: 'Không tìm thấy' };
     const url = absoluteUrl(`/docs/${track.id}/${page.slug}/`);
     return {
-        title: `${page.title} | ${track.name} | ${SITE.name}`,
+        title: `${page.title} | ${track.name} | ${SITE.siteName}`,
         description: page.description,
         alternates: { canonical: url },
         openGraph: {
             type: 'article',
             url,
-            siteName: SITE.name,
+            siteName: SITE.siteName,
             title: page.title,
             description: page.description,
             locale: 'vi_VN',

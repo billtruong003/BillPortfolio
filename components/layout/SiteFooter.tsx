@@ -17,6 +17,9 @@ export const SiteFooter = () => (
             <div>
                 <p className="font-mono font-bold text-zinc-100">{SITE.name}</p>
                 <p className="mt-2 text-zinc-400">{SITE.title}</p>
+                <p className="mt-2 text-zinc-400">
+                    Founder of <a href="https://billthedevstudio.com/" className="text-primary hover:underline underline-offset-4">Bill The Dev</a>, an indie game studio
+                </p>
                 <a href={`mailto:${SITE.email}`} className="mt-4 inline-block text-primary hover:underline underline-offset-4">
                     {SITE.email}
                 </a>
