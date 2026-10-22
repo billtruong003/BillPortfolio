@@ -10,14 +10,14 @@ const LUCY_API = "https://api.billthedevstudio.com/lucy/chat";
 const EMAIL = "truongbill003@gmail.com";
 
 const T = {
-  ask: "Ask Lucy", role: "Bill's assistant", ai: "Bill's assistant · AI",
-  hello: "Hi, I'm Lucy, Bill's assistant. Ask me about his work, the companies he worked at, how he works, his rates, or how to reach him.",
+  ask: "Ask L.U.C.Y", role: "Bill's assistant", ai: "Bill's assistant · AI",
+  hello: "Hi, I'm L.U.C.Y, Bill's assistant. Ask me about his work, the companies he worked at, how he works, his rates, or how to reach him.",
   tease: "Want the short version of Bill's career? Ask me.",
-  placeholder: "Ask about Bill", send: "Send", close: "Close", thinking: "Lucy is thinking", you: "You asked:",
-  busy: `Lucy is busy right now. Write to ${EMAIL}.`, error: `Lucy can't answer right now. Write to ${EMAIL}.`,
+  placeholder: "Ask about Bill", send: "Send", close: "Close", thinking: "L.U.C.Y is thinking", you: "You asked:",
+  busy: `L.U.C.Y is busy right now. Write to ${EMAIL}.`, error: `L.U.C.Y can't answer right now. Write to ${EMAIL}.`,
   chips: ["What did Bill do at GEM?", "How does Bill like to work?", "What are his rates?"],
   leave: { open: "Leave a message for Bill", title: "Send to Bill", name: "Your name", contact: "Email, Zalo or Telegram", message: "What do you have in mind?",
-           send: "Send to Bill", sending: "Sending…", back: "Back to chat", note: "Lucy passes your message, your contact and this chat to Bill. Nothing else.",
+           send: "Send to Bill", sending: "Sending…", back: "Back to chat", note: "L.U.C.Y passes your message, your contact and this chat to Bill. Nothing else.",
            sent: "Sent. Bill reads every message and will get back to you at", failed: `That didn't go through. Your message is still here; try again or email ${EMAIL}.`,
            limited: `You've already sent Bill a few messages today. He'll get back to you; for anything urgent, email ${EMAIL}.`,
            badContact: "Please leave an email, or a phone, Zalo or Telegram, so Bill can reply.", another: "Send another message" },
@@ -158,7 +158,7 @@ export function Lucy() {
           {tease && (
             <div className="lucy-pop relative mb-[108px] mr-[-14px] max-w-[230px] rounded-[14px_14px_4px_14px] bg-white py-2.5 pl-3.5 pr-7 text-[14px] leading-snug text-[#1C1917] shadow-[0_10px_30px_rgb(0_0_0/.5)]">
               <button type="button" onClick={hideTease} aria-label={T.close} className="absolute right-1 top-1 inline-flex h-6 w-6 items-center justify-center rounded-full text-[#8A837C] hover:text-[#1C1917]"><X size={14} /></button>
-              <b className="block text-[13px] tracking-[0.06em] text-[#5B48C9]">LUCY</b>
+              <b className="block text-[13px] tracking-[0.06em] text-[#5B48C9]">L.U.C.Y</b>
               <button type="button" onClick={openIt} className="text-left">{T.tease}</button>
             </div>
           )}
@@ -172,7 +172,7 @@ export function Lucy() {
       )}
 
       {open && (
-        <motion.section role="dialog" aria-label={`Lucy, ${T.ai}`}
+        <motion.section role="dialog" aria-label={`L.U.C.Y, ${T.ai}`}
           initial={reduce ? false : { opacity: 0, y: 28, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ type: "spring", stiffness: 380, damping: 30 }} style={{ transformOrigin: "100% 100%" }}
           className="fixed inset-x-2 bottom-2 z-[65] h-[min(600px,86dvh)] overflow-hidden rounded-[18px] border border-[#3D3766] bg-gradient-to-b from-[#2B2547] from-0% to-[#1E2142] to-60% shadow-[0_30px_80px_rgb(0_0_0/.6)] sm:inset-x-auto sm:bottom-6 sm:right-6 sm:h-[620px] sm:w-[440px]">
@@ -192,7 +192,7 @@ export function Lucy() {
             </motion.div>
           </motion.div>
           <div className="absolute left-3 top-3.5 flex flex-col gap-0.5">
-            <b className="text-[20px] font-black text-white">Lucy</b>
+            <b className="text-[20px] font-black text-white">L.U.C.Y</b>
             <span className="text-[13px] text-[#CFC8FF]">{T.ai}</span>
           </div>
           <button type="button" onClick={() => setOpen(false)} aria-label={T.close} className="absolute right-3 top-3 z-10 inline-flex h-10 w-10 items-center justify-center rounded-[10px] bg-black/35 text-white hover:bg-black/50"><X size={18} /></button>
@@ -239,7 +239,7 @@ export function Lucy() {
           ) : (
           <div className="absolute inset-x-2.5 bottom-2.5 flex flex-col gap-2.5">
             <div className="relative min-h-[132px] rounded-xl border-2 border-[#B7A6FF] bg-[#141210]/95 px-4 pb-4 pt-6" aria-live="polite">
-              <span className="absolute -top-3.5 left-3.5 rounded-md bg-[#B7A6FF] px-3 py-0.5 text-[14px] font-black tracking-[0.06em] text-[#1B1640]">LUCY</span>
+              <span className="absolute -top-3.5 left-3.5 rounded-md bg-[#B7A6FF] px-3 py-0.5 text-[14px] font-black tracking-[0.06em] text-[#1B1640]">L.U.C.Y</span>
               {busy ? (
                 <>
                   {lastQuestion && <p className="m-0 text-[15px] text-[#CFC8FF]">{T.you} <b className="text-white">{lastQuestion.text}</b></p>}
