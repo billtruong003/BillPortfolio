@@ -87,11 +87,11 @@ export const Services = () => (
 
             <p className="mt-8 text-sm text-zinc-400">
                 Hiring for a full-time Unity role instead?{' '}
-                <button type="button" onClick={() => askAbout('full-time')} className="text-primary hover:underline underline-offset-4">
+                <button type="button" onClick={() => askAbout('full-time')} className="text-primary underline decoration-primary/50 underline-offset-4 hover:decoration-primary">
                     Tell me about the role
                 </button>
                 {' '}or{' '}
-                <a href={getAssetPath('/Bill_Resume.pdf')} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline underline-offset-4">
+                <a href={getAssetPath('/Bill_Resume.pdf')} target="_blank" rel="noopener noreferrer" className="text-primary underline decoration-primary/50 underline-offset-4 hover:decoration-primary">
                     download my CV
                 </a>.
             </p>
