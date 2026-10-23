@@ -70,7 +70,7 @@ const StatBox = ({ icon, label, value, accent }: { icon: React.ReactNode; label:
     <div className="flex flex-col items-center gap-1 py-2 bg-white/5 rounded-lg border border-white/5 hover:border-white/10 transition-colors">
         <div className={`${accent} opacity-60`}>{icon}</div>
         <span className="text-sm font-bold text-white tabular-nums">{value}</span>
-        <span className="text-[9px] font-mono text-zinc-500 uppercase tracking-widest">{label}</span>
+        <span className="text-[9px] font-mono text-zinc-400 uppercase tracking-widest">{label}</span>
     </div>
 );
 
@@ -118,7 +118,7 @@ const ChannelCard = ({ config, stats, loading }: { config: ChannelConfig; stats:
                             {config.handle}
                         </span>
                     </div>
-                    <p className="text-xs text-zinc-500 mt-2 line-clamp-2">{config.label}</p>
+                    <p className="text-xs text-zinc-400 mt-2 line-clamp-2">{config.label}</p>
                 </div>
 
                 <div className="grid grid-cols-3 gap-3 mt-auto pt-4 border-t border-white/5">
@@ -217,7 +217,7 @@ export const YouTubeChannels = () => {
                         );
                     })()}
 
-                    <p className="text-zinc-500 text-sm max-w-md">
+                    <p className="text-zinc-400 text-sm max-w-md">
                         Unity dev content, VR gameplay and AI experiments.
                     </p>
                 </div>

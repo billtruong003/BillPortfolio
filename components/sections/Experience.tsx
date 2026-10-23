@@ -59,7 +59,7 @@ export const Experience = () => {
                                         <h3 className="text-xl font-bold text-zinc-100 group-hover:text-primary transition-colors">
                                             {item.role}
                                         </h3>
-                                        <span className="font-mono text-xs text-zinc-500 bg-white/5 px-2 py-1 rounded border border-white/5">
+                                        <span className="font-mono text-xs text-zinc-400 bg-white/5 px-2 py-1 rounded border border-white/5">
                                             {item.period}
                                         </span>
                                     </div>
@@ -73,7 +73,7 @@ export const Experience = () => {
                                     {item.achievements && (
                                         <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
                                             {item.achievements.map((ach, i) => (
-                                                <li key={i} className="text-xs text-zinc-500 flex gap-3 bg-zinc-900/30 p-2 rounded border border-white/5 hover:border-white/10 transition-colors">
+                                                <li key={i} className="text-xs text-zinc-400 flex gap-3 bg-zinc-900/30 p-2 rounded border border-white/5 hover:border-white/10 transition-colors">
                                                     <span className="text-primary mt-0.5">▹</span>
                                                     {ach}
                                                 </li>

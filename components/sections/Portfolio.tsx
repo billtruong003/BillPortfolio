@@ -39,7 +39,7 @@ export const Portfolio = () => {
                     <h2 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight">
                         Projects & <span className="text-primary">open source</span>
                     </h2>
-                    <p className="text-zinc-500 max-w-md">
+                    <p className="text-zinc-400 max-w-md">
                         Shaders, tools, web apps and small games I built on my own.
                     </p>
                 </div>
@@ -52,7 +52,7 @@ export const Portfolio = () => {
                             className={`px-4 py-2 text-sm font-mono uppercase tracking-wider transition-all border ${
                                 activeFilter === filter 
                                 ? 'border-primary text-primary bg-primary/10 shadow-[0_0_10px_rgba(255,184,77,0.2)]' 
-                                : 'border-zinc-800 text-zinc-500 hover:border-zinc-700 hover:text-zinc-300'
+                                : 'border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:text-zinc-300'
                             }`}
                         >
                             {filter}

@@ -27,7 +27,7 @@ export const Certifications = () => {
                                         {cert.name}
                                     </div>
                                     <div className="flex justify-between items-center mt-1">
-                                        <span className="text-zinc-500 text-xs font-mono">{cert.issuer}</span>
+                                        <span className="text-zinc-400 text-xs font-mono">{cert.issuer}</span>
                                         <span className="text-zinc-600 text-[10px] font-mono border border-white/5 px-1.5 rounded bg-black/40">
                                             {cert.date}
                                         </span>

@@ -74,7 +74,7 @@ export const LabShowcase = () => (
                             <div className="p-5 flex flex-col flex-1">
                                 <h3 className="font-bold text-zinc-100 group-hover:text-primary transition-colors">{post.title}</h3>
                                 <p className="mt-2 text-sm text-zinc-400 line-clamp-2">{post.excerpt}</p>
-                                <span className="mt-auto pt-4 text-xs font-mono text-zinc-500">{post.readingTime} min read</span>
+                                <span className="mt-auto pt-4 text-xs font-mono text-zinc-400">{post.readingTime} min read</span>
                             </div>
                         </Link>
                     ))}

@@ -56,11 +56,11 @@ export const PostCard = forwardRef<HTMLAnchorElement, { post: BlogPost }>(({ pos
                     </p>
 
                     <div className="flex items-center justify-between pt-3 border-t border-zinc-800/50">
-                        <div className="flex items-center gap-1.5 text-[10px] font-mono text-zinc-500">
+                        <div className="flex items-center gap-1.5 text-[10px] font-mono text-zinc-400">
                             <Calendar size={10} />
                             {new Date(post.date).toLocaleDateString(post.lang === 'vi' ? 'vi-VN' : 'en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}
                         </div>
-                        <div className="flex items-center gap-1.5 text-[10px] font-mono text-zinc-500">
+                        <div className="flex items-center gap-1.5 text-[10px] font-mono text-zinc-400">
                             <Clock size={10} />
                             {post.readingTime} {post.lang === 'vi' ? 'phút đọc' : 'min read'}
                         </div>

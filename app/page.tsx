@@ -1,4 +1,4 @@
-import dynamic from "next/dynamic";
+import { LiveBackground } from "@/components/canvas/LiveBackground";
 import { Hero } from "@/components/sections/Hero";
 import { ImpactNumbers } from "@/components/sections/ImpactNumbers";
 import { TrustedBy } from "@/components/sections/TrustedBy";
@@ -24,10 +24,6 @@ import { postManifest } from "@/data/posts";
 const gameCount = registry.games.length;
 const labPostCount = new Set(postManifest.posts.map((p) => p.translationKey || p.slug)).size;
 
-const ParticleBackground = dynamic(
-  () => import("@/components/canvas/ParticleBackground").then((mod) => mod.ParticleBackground),
-  { ssr: false }
-);
 
 // the home page states who the site is about (lib/schema.ts, shared ids with the studio site)
 export const metadata: Metadata = { alternates: { canonical: '/' } };
@@ -38,7 +34,7 @@ export default function Home() {
     <JsonLd data={graph(website, person)} />
     <main className="relative min-h-screen w-full bg-[#050505] overflow-hidden">
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <ParticleBackground />
+        <LiveBackground />
       </div>
 
       <SiteNav />

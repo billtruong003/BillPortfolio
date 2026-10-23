@@ -71,7 +71,7 @@ export const ImpactNumbers = ({ gameCount, labPostCount }: { gameCount: number; 
                             <div className="text-xs md:text-sm font-bold text-zinc-200 uppercase tracking-wider mb-1">
                                 {stat.label}
                             </div>
-                            <div className="text-[10px] text-zinc-500 font-mono">
+                            <div className="text-[10px] text-zinc-400 font-mono">
                                 {stat.sub}
                             </div>
                         </motion.div>

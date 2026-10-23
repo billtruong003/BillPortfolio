@@ -43,7 +43,7 @@ export const TableOfContents = ({ headings, lang = 'en' }: { headings: PostHeadi
                     } ${
                         activeId === h.id
                             ? 'border-primary text-primary font-medium'
-                            : 'border-transparent text-zinc-500 hover:text-zinc-300 hover:border-zinc-600'
+                            : 'border-transparent text-zinc-400 hover:text-zinc-300 hover:border-zinc-600'
                     }`}
                 >
                     {h.text}

@@ -92,7 +92,7 @@ export const GameArcade = ({ games, autoPlayGameId }: GameArcadeProps) => {
                         <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white">
                             Game <span className="text-primary">Arcade</span>
                         </h2>
-                        <p className="text-zinc-500 mt-3 max-w-lg text-sm">
+                        <p className="text-zinc-400 mt-3 max-w-lg text-sm">
                             Playable WebGL builds — chạy trực tiếp trên browser. Click vào game để chơi ngay.
                         </p>
                     </div>
@@ -106,7 +106,7 @@ export const GameArcade = ({ games, autoPlayGameId }: GameArcadeProps) => {
                                     className={`flex items-center gap-2 px-4 py-2 text-xs font-mono uppercase tracking-wider border rounded-lg transition-all duration-300 ${
                                         activeGenre === genre
                                             ? 'border-primary text-primary bg-primary/10 shadow-[0_0_15px_rgba(255,184,77,0.15)]'
-                                            : 'border-zinc-800 text-zinc-500 hover:border-zinc-700 hover:text-zinc-300 bg-zinc-900/50'
+                                            : 'border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:text-zinc-300 bg-zinc-900/50'
                                     }`}>
                                     {genre !== 'all' && <Icon size={14} />}{genre}
                                 </button>
@@ -186,7 +186,7 @@ export const GameArcade = ({ games, autoPlayGameId }: GameArcadeProps) => {
                                                 </button>
                                                 {game.externalUrl && (
                                                     <a href={game.externalUrl} target="_blank" rel="noopener noreferrer" aria-label={`Open ${game.title} in a new tab`}
-                                                        className="p-2.5 text-zinc-500 hover:text-white border border-white/10 hover:border-white/30 rounded-lg transition-colors">
+                                                        className="p-2.5 text-zinc-400 hover:text-white border border-white/10 hover:border-white/30 rounded-lg transition-colors">
                                                         <ExternalLink size={14} />
                                                     </a>
                                                 )}

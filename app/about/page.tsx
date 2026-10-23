@@ -39,7 +39,7 @@ export default function AboutPage() {
                 <div className="container mx-auto max-w-4xl flex flex-col gap-6">
                     <span className="font-mono text-primary text-xs tracking-[0.4em] uppercase">About</span>
                     <h1 className="text-4xl md:text-6xl font-black text-zinc-100 tracking-tight">
-                        {resume.profile.name} <span className="text-zinc-500">(Trương Ngọc Châu)</span>
+                        {resume.profile.name} <span className="text-zinc-400">(Trương Ngọc Châu)</span>
                     </h1>
                     <p className="text-zinc-300 text-lg leading-relaxed max-w-3xl">{resume.profile.about}</p>
                     <p className="text-zinc-300 text-lg leading-relaxed max-w-3xl">

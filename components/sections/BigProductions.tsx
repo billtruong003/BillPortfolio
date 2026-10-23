@@ -42,7 +42,7 @@ export const BigProductions = () => {
                     <h2 className="text-3xl font-bold text-zinc-100 mb-4">
                         Selected Work
                     </h2>
-                    <p className="text-zinc-500 text-sm max-w-2xl">
+                    <p className="text-zinc-400 text-sm max-w-2xl">
                         Products I worked on at studios, plus my own projects. Click a card for the story.
                     </p>
                 </div>
@@ -88,7 +88,7 @@ export const BigProductions = () => {
 
                                 <div className="grid grid-cols-2 gap-4 border-t border-white/5 pt-3 mt-auto">
                                     <div>
-                                        <div className="flex items-center gap-1.5 text-zinc-500 text-[10px] uppercase font-mono mb-1">
+                                        <div className="flex items-center gap-1.5 text-zinc-400 text-[10px] uppercase font-mono mb-1">
                                             <Building2 size={12} /> Company
                                         </div>
                                         <div className="text-zinc-200 text-sm font-semibold">
@@ -96,7 +96,7 @@ export const BigProductions = () => {
                                         </div>
                                     </div>
                                     <div>
-                                        <div className="flex items-center gap-1.5 text-zinc-500 text-[10px] uppercase font-mono mb-1">
+                                        <div className="flex items-center gap-1.5 text-zinc-400 text-[10px] uppercase font-mono mb-1">
                                             <UserCircle size={12} /> Role
                                         </div>
                                         <div className="text-zinc-200 text-sm font-semibold">
@@ -115,7 +115,7 @@ export const BigProductions = () => {
                     viewport={{ once: true }}
                     className="flex flex-col items-center justify-center pt-8 border-t border-white/5"
                 >
-                    <p className="text-zinc-500 font-mono text-xs md:text-sm text-center max-w-lg mb-6 leading-relaxed">
+                    <p className="text-zinc-400 font-mono text-xs md:text-sm text-center max-w-lg mb-6 leading-relaxed">
                         Studio and personal work above. 
                         <br className="hidden md:block"/>
                         For a deeper dive into technical experiments, open-source tools, and shaders, explore the portfolio below.
@@ -129,7 +129,7 @@ export const BigProductions = () => {
                         <span className="text-xs font-mono text-zinc-300 group-hover:text-white tracking-widest uppercase">
                             View Technical Portfolio
                         </span>
-                        <ArrowDown size={14} className="text-zinc-500 group-hover:text-primary group-hover:translate-y-1 transition-all" />
+                        <ArrowDown size={14} className="text-zinc-400 group-hover:text-primary group-hover:translate-y-1 transition-all" />
                     </button>
                 </motion.div>
             </div>

@@ -45,7 +45,7 @@ export const SiteFooter = () => (
                 ))}
             </ul>
         </div>
-        <p className="pb-8 text-center text-xs font-mono text-zinc-500">
+        <p className="pb-8 text-center text-xs font-mono text-zinc-400">
             © {new Date().getFullYear()} {SITE.author}
         </p>
     </footer>

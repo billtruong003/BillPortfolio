@@ -36,7 +36,7 @@ export const PostHeader = ({ post }: { post: BlogPost }) => {
                 {post.title}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-zinc-500 mb-6">
+            <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-zinc-400 mb-6">
                 <div className="flex items-center gap-1.5">
                     <Calendar size={12} />
                     {new Date(post.date).toLocaleDateString(post.lang === 'vi' ? 'vi-VN' : 'en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}

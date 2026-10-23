@@ -58,7 +58,7 @@ export const Services = () => (
                             </ul>
 
                             <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-3 pt-4 border-t border-white/5">
-                                <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider">See</span>
+                                <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider">See</span>
                                 {service.proof.map((p) => {
                                     const external = p.href.startsWith('http');
                                     const className = 'inline-flex items-center gap-1 text-sm text-zinc-300 hover:text-primary underline-offset-4 hover:underline focus-visible:text-primary';
@@ -85,7 +85,7 @@ export const Services = () => (
                 })}
             </div>
 
-            <p className="mt-8 text-sm text-zinc-500">
+            <p className="mt-8 text-sm text-zinc-400">
                 Hiring for a full-time Unity role instead?{' '}
                 <button type="button" onClick={() => askAbout('full-time')} className="text-primary hover:underline underline-offset-4">
                     Tell me about the role

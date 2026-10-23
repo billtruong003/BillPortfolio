@@ -20,7 +20,7 @@ const DIRECT_LINKS = [
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
 const FIELD =
-    'w-full px-4 py-3 bg-zinc-900/60 border border-white/10 rounded-lg text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary';
+    'w-full px-4 py-3 bg-zinc-900/60 border border-white/10 rounded-lg text-zinc-100 placeholder:text-zinc-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary';
 
 export const Contact = () => {
     const [topic, setTopic] = useState(CONTACT_TOPICS[0].id);
@@ -109,7 +109,7 @@ export const Contact = () => {
                     </label>
 
                     <label className="block">
-                        <span className="block mb-2 text-sm text-zinc-300">Budget <span className="text-zinc-500">(optional)</span></span>
+                        <span className="block mb-2 text-sm text-zinc-300">Budget <span className="text-zinc-400">(optional)</span></span>
                         <input name="budget" placeholder="e.g. $2,000, or hourly" className={FIELD} />
                     </label>
 

@@ -47,8 +47,8 @@ const SeriesCard = ({
                     <span className="text-xl">{series.icon}</span>
                     <span className="font-bold text-sm text-zinc-100">{series.name}</span>
                 </div>
-                <p className="text-[11px] text-zinc-500 leading-relaxed mb-3">{series.description}</p>
-                <div className="flex items-center gap-3 text-[10px] font-mono text-zinc-500">
+                <p className="text-[11px] text-zinc-400 leading-relaxed mb-3">{series.description}</p>
+                <div className="flex items-center gap-3 text-[10px] font-mono text-zinc-400">
                     <span className="flex items-center gap-1">
                         <BookOpen size={10} />
                         {posts.length} {lang === 'vi' ? 'bài' : 'lessons'}
@@ -169,12 +169,12 @@ export const PostGrid = ({ posts: allPosts }: { posts: BlogPost[] }) => {
                         {value === 'vi' ? 'Tiếng Việt' : 'English'}
                     </button>
                 ))}
-                <span className="text-xs text-zinc-500">{lang === 'vi' ? 'Bài chưa có bản dịch giữ ngôn ngữ gốc.' : 'Untranslated articles retain their original language.'}</span>
+                <span className="text-xs text-zinc-400">{lang === 'vi' ? 'Bài chưa có bản dịch giữ ngôn ngữ gốc.' : 'Untranslated articles retain their original language.'}</span>
             </div>
             {/* Series Cards */}
             {seriesData.length > 0 && (
                 <div>
-                    <h2 className="text-xs font-mono text-zinc-500 uppercase tracking-widest mb-4">
+                    <h2 className="text-xs font-mono text-zinc-400 uppercase tracking-widest mb-4">
                         📚 {lang === 'vi' ? 'Lộ trình học' : 'Learning Paths'}
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -211,7 +211,7 @@ export const PostGrid = ({ posts: allPosts }: { posts: BlogPost[] }) => {
 
                     {/* Search */}
                     <div className="relative max-w-md">
-                        <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
+                        <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" />
                         <input
                             type="text"
                             placeholder={lang === 'vi' ? 'Tìm bài viết...' : 'Search posts...'}
@@ -220,7 +220,7 @@ export const PostGrid = ({ posts: allPosts }: { posts: BlogPost[] }) => {
                             className="w-full pl-11 pr-4 py-3 bg-zinc-900/60 border border-zinc-800 rounded-lg text-sm text-zinc-200 placeholder:text-zinc-600 font-mono focus:border-primary/50 focus:outline-none transition-colors"
                         />
                         {searchQuery && (
-                            <button onClick={() => setSearch('')} aria-label="Clear search" className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white">
+                            <button onClick={() => setSearch('')} aria-label="Clear search" className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white">
                                 <X size={14} />
                             </button>
                         )}
@@ -233,7 +233,7 @@ export const PostGrid = ({ posts: allPosts }: { posts: BlogPost[] }) => {
                             className={`px-3 py-1.5 text-xs font-mono uppercase tracking-wider transition-all border rounded ${
                                 activeCategory === 'all'
                                     ? 'border-primary text-primary bg-primary/10'
-                                    : 'border-zinc-800 text-zinc-500 hover:border-zinc-700 hover:text-zinc-300'
+                                    : 'border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:text-zinc-300'
                             }`}
                         >
                             {lang === 'vi' ? 'Tất cả' : 'All'} ({posts.length})
@@ -245,7 +245,7 @@ export const PostGrid = ({ posts: allPosts }: { posts: BlogPost[] }) => {
                                 className={`px-3 py-1.5 text-xs font-mono uppercase tracking-wider transition-all border rounded ${
                                     activeCategory === cat.name
                                         ? 'border-primary text-primary bg-primary/10'
-                                        : 'border-zinc-800 text-zinc-500 hover:border-zinc-700 hover:text-zinc-300'
+                                        : 'border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:text-zinc-300'
                                 }`}
                             >
                                 {cat.name.replace('-', ' ')} ({cat.count})
@@ -262,7 +262,7 @@ export const PostGrid = ({ posts: allPosts }: { posts: BlogPost[] }) => {
                                 className={`px-2 py-1 text-[10px] font-mono transition-all border rounded-full ${
                                     activeTags.includes(tag.name)
                                         ? 'border-primary text-primary bg-primary/10'
-                                        : 'border-zinc-800 text-zinc-500 hover:border-zinc-600'
+                                        : 'border-zinc-800 text-zinc-400 hover:border-zinc-600'
                                 }`}
                             >
                                 #{tag.name}
@@ -275,8 +275,8 @@ export const PostGrid = ({ posts: allPosts }: { posts: BlogPost[] }) => {
             {/* Active filters */}
             {hasFilters && (
                 <div className="flex items-center gap-3">
-                    <Filter size={12} className="text-zinc-500" />
-                    <span className="text-[10px] font-mono text-zinc-500">
+                    <Filter size={12} className="text-zinc-400" />
+                    <span className="text-[10px] font-mono text-zinc-400">
                         {lang === 'vi' ? `${filtered.length} bài viết` : `${filtered.length} posts found`}
                     </span>
                     <button onClick={clearFilters} className="text-[10px] font-mono text-primary hover:underline">
@@ -298,7 +298,7 @@ export const PostGrid = ({ posts: allPosts }: { posts: BlogPost[] }) => {
 
                     {filtered.length === 0 && (
                         <div className="text-center py-16">
-                            <p className="text-zinc-500 font-mono text-sm">{lang === 'vi' ? 'Không có bài viết phù hợp.' : 'No posts match your filters.'}</p>
+                            <p className="text-zinc-400 font-mono text-sm">{lang === 'vi' ? 'Không có bài viết phù hợp.' : 'No posts match your filters.'}</p>
                         </div>
                     )}
 

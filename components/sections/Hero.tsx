@@ -6,41 +6,15 @@ import { DownloadBtn } from '@/components/ui/DownloadBtn';
 import { resumeData } from '@/data/resume';
 import { Github, Linkedin, Mail, Facebook, Youtube, Twitter, LucideIcon, ExternalLink, ChevronDown, Gamepad2, ArrowRight } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
 import { getAssetPath } from '@/lib/utils';
+import { useLive3D } from '@/hooks/useLive3D';
 
 const Hero3D = dynamic(() => import('@/components/canvas/Hero3D').then(mod => mod.Hero3D), {
     ssr: false,
     loading: () => <div className="w-full h-full" />,
 });
 
-/**
- * The live 3D model only runs where it is cheap: a desktop-width screen, motion allowed, and
- * hardware WebGL. Phones, reduced motion and software renderers (SwiftShader, llvmpipe — which is
- * also what Lighthouse uses) get a still render of the same model instead of a frame loop that
- * blocks the main thread.
- */
-const useLive3D = () => {
-    const [live, setLive] = useState(false);
-
-    useEffect(() => {
-        const wide = window.matchMedia('(min-width: 1024px)').matches;
-        const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (!wide || calm) return;
-
-        const gl = document.createElement('canvas').getContext('webgl');
-        if (!gl) return;
-        const info = gl.getExtension('WEBGL_debug_renderer_info');
-        const renderer = info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : '';
-        gl.getExtension('WEBGL_lose_context')?.loseContext();
-        if (/swiftshader|llvmpipe|software/i.test(renderer)) return;
-
-        setLive(true);
-    }, []);
-
-    return live;
-};
-
+// Phones, reduced motion and software renderers get a still render of the same model (hooks/useLive3D).
 const HeroModel = () => {
     const live = useLive3D();
     if (live) return <Hero3D />;
@@ -151,7 +125,7 @@ export const Hero = () => (
             </div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-zinc-500 z-10 pointer-events-none">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-zinc-400 z-10 pointer-events-none">
             <ChevronDown className="animate-bounce motion-reduce:animate-none" size={16} strokeWidth={1} />
         </div>
     </section>

@@ -50,7 +50,8 @@ export function Lucy() {
   const [msgs, setMsgs] = useState<Msg[]>([{ from: "lucy", text: T.hello }]);
   const [q, setQ] = useState("");
   const [busy, setBusy] = useState(false);
-  const [shown, setShown] = useState(true);
+  // hidden until the effect below decides: on phones she must not paint over the hero (and become the LCP) before hydration
+  const [shown, setShown] = useState(false);
   const [tease, setTease] = useState(false);
   const log = useRef<HTMLDivElement>(null);
   const input = useRef<HTMLInputElement>(null);
@@ -165,7 +166,7 @@ export function Lucy() {
           <button type="button" onClick={openIt} aria-label={`${T.ask}, ${T.role}`} tabIndex={shown ? 0 : -1} className="group block">
             <span className="lucy-sway block origin-bottom transition-transform duration-300 [transition-timing-function:cubic-bezier(.34,1.56,.64,1)] group-hover:-translate-y-2 group-hover:scale-105">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={getAssetPath("/img/lucy/lucy-wave.webp")} alt="" className="lucy-breathe -mb-3 block w-[104px] origin-bottom sm:w-[140px]" />
+              <img src={getAssetPath("/img/lucy/lucy-wave-sm.webp")} alt="" width={140} height={140} decoding="async" className="lucy-breathe -mb-3 block w-[104px] origin-bottom sm:w-[140px]" />
             </span>
           </button>
         </div>

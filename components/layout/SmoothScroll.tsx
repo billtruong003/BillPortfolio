@@ -11,6 +11,9 @@ export const SmoothScroll = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        // Smooth wheel scrolling only means something with a mouse; on phones its frame loop just burned CPU
+        // (PageSpeed counted ~2 s of main-thread work against layout.js).
+        if (!window.matchMedia('(pointer: fine)').matches) return;
 
         const lenis = new Lenis({
             duration: 1.2,

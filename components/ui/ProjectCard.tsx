@@ -103,8 +103,8 @@ export const ProjectCard = ({ project }: { project: Project }) => {
                         {project.title}
                     </h3>
                     {project.url.includes('github') ? 
-                        <Github size={16} className="text-zinc-500 shrink-0 group-hover:text-zinc-300 transition-colors" /> : 
-                        <ExternalLink size={16} className="text-zinc-500 shrink-0 group-hover:text-zinc-300 transition-colors" />
+                        <Github size={16} className="text-zinc-400 shrink-0 group-hover:text-zinc-300 transition-colors" /> : 
+                        <ExternalLink size={16} className="text-zinc-400 shrink-0 group-hover:text-zinc-300 transition-colors" />
                     }
                 </div>
                 

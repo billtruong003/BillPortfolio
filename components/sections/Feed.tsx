@@ -131,7 +131,7 @@ export const Feed = () => {
                         <span className="text-primary font-mono">04.</span> 
                         <span className="text-zinc-100">Social Transmissions</span>
                     </h2>
-                    <p className="text-zinc-500 text-sm mt-2 max-w-lg font-light">
+                    <p className="text-zinc-400 text-sm mt-2 max-w-lg font-light">
                         Archived communications from external networks.
                     </p>
                 </div>
