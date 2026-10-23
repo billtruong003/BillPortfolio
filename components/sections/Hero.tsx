@@ -66,8 +66,8 @@ export const Hero = () => (
                     </h1>
 
                     <p className="text-primary font-mono text-lg md:text-xl mb-3">{resumeData.profile.title}</p>
-                    <a href="https://billthedevstudio.com/" className="group mb-8 self-start inline-flex items-center gap-1.5 font-mono text-sm md:text-base text-zinc-300 hover:text-primary transition-colors">
-                        Founder of <span className="font-bold text-zinc-100 group-hover:text-primary">Bill The Dev</span>, my indie game studio <ExternalLink size={14} aria-hidden />
+                    <a href="https://billthedevstudio.com/" className="group mb-8 self-start font-mono text-sm md:text-base text-zinc-300 hover:text-primary transition-colors">
+                        Founder of <span className="font-bold text-zinc-100 group-hover:text-primary">Bill The Dev</span>, my indie game studio <ExternalLink size={14} aria-hidden className="inline -mt-0.5 ml-0.5" />
                     </a>
 
                     <p className="mb-10 max-w-lg pl-6 border-l-2 border-primary/50 text-zinc-300 text-base md:text-lg leading-relaxed">
