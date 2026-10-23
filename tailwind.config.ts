@@ -20,9 +20,11 @@ const config: Config = {
         secondary: "#888888",
       },
       keyframes: {
+        // a slide only, no fade: text that starts at opacity 0 does not count as painted, so the hero
+        // never became the LCP and a small nav link did, seconds later
         'hero-in': {
-          from: { opacity: '0', transform: 'translateY(20px)' },
-          to: { opacity: '1', transform: 'translateY(0)' },
+          from: { transform: 'translateY(20px)' },
+          to: { transform: 'translateY(0)' },
         },
       },
       animation: {
