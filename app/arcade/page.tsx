@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { GameArcade } from '@/components/sections/GameArcade';
 import { WebGLGame, WebGLGameRegistry } from '@/types';
-import { ArrowLeft, Gamepad2, Loader2 } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Gamepad2, Loader2 } from 'lucide-react';
 import { getAssetPath } from '@/lib/utils';
 import dynamic from 'next/dynamic';
 
@@ -64,7 +64,14 @@ export default function ArcadePage() {
                             </span>
                         )}
                     </div>
-                    <div className="w-24" /> {/* Spacer */}
+                    {/* The studio's own games live on the studio portal; this arcade keeps work samples. */}
+                    <a
+                        href="https://play.billthedevstudio.com/"
+                        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-primary/40 bg-primary/10 text-primary font-mono text-xs uppercase tracking-wider hover:bg-primary hover:text-black transition-colors"
+                    >
+                        <span><span className="hidden sm:inline">Studio </span>games</span>
+                        <ArrowUpRight size={14} />
+                    </a>
                 </nav>
 
                 {/* Content */}
