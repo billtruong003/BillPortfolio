@@ -9,6 +9,7 @@ import rehypeRaw from 'rehype-raw';
 import rehypeSlug from 'rehype-slug';
 import rehypePrismPlus from 'rehype-prism-plus';
 import rehypeStringify from 'rehype-stringify';
+import rehypeTrailingSlash from './rehype-trailing-slash.mjs';
 
 // Compiles content/docs/<track>/*.md into data/docs.json and writes
 // docs/image-concepts.md, the list of illustration slots still waiting for an image.
@@ -49,6 +50,7 @@ const processor = unified()
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
     .use(rehypeSlug)
+    .use(rehypeTrailingSlash)
     .use(rehypePrismPlus, { ignoreMissing: true })
     .use(rehypeStringify);
 

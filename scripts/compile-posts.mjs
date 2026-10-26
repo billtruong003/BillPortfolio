@@ -9,6 +9,7 @@ import rehypeRaw from 'rehype-raw';
 import rehypeSlug from 'rehype-slug';
 import rehypePrismPlus from 'rehype-prism-plus';
 import rehypeStringify from 'rehype-stringify';
+import rehypeTrailingSlash from './rehype-trailing-slash.mjs';
 import readingTime from 'reading-time';
 
 const POSTS_DIR = path.resolve('content/posts');
@@ -75,6 +76,7 @@ async function compilePost(filePath) {
         .use(remarkRehype, { allowDangerousHtml: true })
         .use(rehypeRaw)
         .use(rehypeSlug)
+        .use(rehypeTrailingSlash)
         .use(rehypePrismPlus, { ignoreMissing: true })
         .use(rehypeStringify);
 
