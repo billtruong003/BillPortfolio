@@ -1,10 +1,18 @@
 # BillPortfolio — Task Board
 
-Cập nhật: 2026-09-13. Tick `[x]` khi xong. Thứ tự phase là thứ tự làm.
+Cập nhật: 2026-10-28. Tick `[x]` khi xong. Thứ tự phase là thứ tự làm.
+
+## Đã làm ngoài kế hoạch (14/09 – 26/10/2026)
+- Series Platformer (#1–#16) và 6 bài shader, docs, resume, redesign site
+- Font Lexend (tiếng Việt một mặt chữ); trang chủ nhẹ trên điện thoại (không three.js, không scroll loop)
+- L.U.C.Y trên portfolio, link sang studio; trang privacy HordeCall; `app-ads.txt`; IndexNow key
+- Arcade: Bruh Arrows, Meh Merge, Nah Blocks
+- 28/10: merge dependabot #18 (minor/patch) và #15 (upload-pages-artifact v5, artifact không còn mang `.nojekyll`, không ảnh hưởng vì deploy qua Actions). Xoá nhánh `claude/stoic-maxwell-h8rb38`, `claude/bold-hypatia-bik7mh` (đã bị `86bb1b4` thay thế), `claude/update-casual-games-nH4Iw`, `lab-shaders-redesign`
+- Nhánh `claude/jolly-pasteur-0x4amo` là code ShapeWright lạc vào repo này: **không merge**. Xoá sau khi chắc repo `billtruong003/ShapeWright` đã đủ
 
 ---
 
-## Phase 1 — Dọn Lab (`/lab`) ✅ xong 13/09/2026 (branch claude/stoic-maxwell-h8rb38, chưa merge main)
+## Phase 1 — Dọn Lab (`/lab`) ✅ xong 13/09/2026 (đã vào main)
 
 ### 1.1 Lỗi thấy được ngay
 - [x] Bổ sung 2 ảnh cover bị thiếu: `public/images/posts/toon-shader-cover.jpg`, `public/images/posts/biome-shader-cover.jpg` (2 bài featured đang vỡ ảnh, live 404)
@@ -49,7 +57,7 @@ Chọn **A. Cloudflare Web Analytics** (free, không cookie, không cần banner
 - [x] `deploy.yml` truyền `NEXT_PUBLIC_CF_BEACON_TOKEN` vào bước build
 - [x] `lib/analytics.ts`: một `track()`/`trackOnce()` cho mọi custom event, tôn trọng Do Not Track, không có endpoint thì im lặng bỏ qua
 - [x] Event mới: `game_play` (UnityPlayer), `cv_download` (DownloadBtn). `post_view`/`post_scroll`/`post_read_complete` chuyển từ code lặp trong ScrollTracker sang dùng chung
-- [ ] **Bill làm**: Cloudflare Dashboard → Web Analytics → Add site `www.billthedev.com` → copy beacon token → GitHub repo Settings → Secrets → thêm `NEXT_PUBLIC_CF_BEACON_TOKEN`. Không cần đụng code.
+- [ ] (Tuỳ chọn, Umami đã chạy) **Bill làm**: Cloudflare Dashboard → Web Analytics → Add site `www.billthedev.com` → copy beacon token → GitHub repo Settings → Secrets → thêm `NEXT_PUBLIC_CF_BEACON_TOKEN`. Không cần đụng code.
 
 **Cập nhật 2026-09-29**: bỏ hẳn pipeline Google Apps Script (`lib/analytics.ts`, `ScrollTracker`, `PipelineTrigger`) vì dữ liệu nhân đôi, không có cột event, và sheet lưu IP khách. Analytics chuyển sang Umami Cloud (page view + 4 event: `game_play`, `cv_download`, `contact_submit`, `post_read_complete`); Cloudflare beacon giữ làm tuỳ chọn. Search Console xác minh bằng file `public/googlec03293a34569369a.html` (không được xoá).
 
@@ -85,7 +93,7 @@ Chọn **A. Cloudflare Web Analytics** (free, không cookie, không cần banner
 ### 3.3 Hạ tầng
 - [x] Icon theo convention Next: `apple-touch-icon.png` → `app/apple-icon.png`, `site.webmanifest` → `app/manifest.webmanifest` (điền name/theme/background, trước đó name rỗng và icon trỏ 404). 4 PNG còn lại chuyển sang `public/`. Trước đó **5 file icon không hề ra được build**; giờ `<link rel="manifest">` và `<link rel="apple-touch-icon">` đã xuất hiện
 - [ ] **Bill làm**: YouTube API key → Google Cloud Console → restrict HTTP referrer `*.billthedev.com/*`
-- [ ] **Bill làm**: R2 gắn custom domain `cdn.billthedev.com` thay `pub-*.r2.dev`, cập nhật `registry.json`
+- [ ] **Bill làm**: R2 gắn custom domain `cdn.billthedev.com` thay `pub-*.r2.dev`; dev đổi 10 `buildPath` trong `public/webgl-games/registry.json`
 - [ ] **Bill làm**: build Brotli + set `Content-Encoding: br` trên R2 (Merge Fruit 129 MB, shmup 49 MB)
 - [ ] (Tuỳ chọn) Fetch YouTube stats lúc build trong GitHub Action + cron redeploy → client không cần key
 
@@ -93,7 +101,8 @@ Chọn **A. Cloudflare Web Analytics** (free, không cookie, không cần banner
 - [x] Hero mobile: tên + CTA lên trên fold. Trước đó khung 3D `order-1 h-[500px]` đẩy hết chữ xuống dưới; giờ chữ `order-1`, model `order-2 h-[40vh]`. Đo trên 375×812: nút Download CV ở y 481–539, trong màn hình
 - [x] 8 link/button icon-only đã có `aria-label` (side nav Hero, social, ProjectModal prev/next/close, UnityPlayer info/mute/fullscreen/close)
 - [x] `cmd-center`: **giữ**, sửa copy sai sự thật "ALL ACCESS ATTEMPTS ARE LOGGED" → "PERSONAL DASHBOARD • SHA-256 CLIENT-SIDE CHECK / SESSION-ONLY, NOTHING IS RECORDED". Bỏ hẳn trang thì tiết kiệm 137 kB, để Bill quyết
-- [ ] **Bill quyết**: form liên hệ (Formspree / Web3Forms) thay `mailto:` — cần tạo tài khoản lấy endpoint
+- [x] Form liên hệ gửi qua FormSubmit.co (`components/sections/Contact.tsx`), event `contact_submit`
+  - [ ] **Bill làm**: gửi thử form một lần, xác nhận email kích hoạt của FormSubmit nếu chưa làm
 
 ---
 
@@ -112,7 +121,7 @@ Project Unity riêng: `D:\Projects\Tutorial` (Unity 6000.3.10f1, URP, Input Syst
 | 6 | Shader (URP) | `_Shader` | ⬜ (bài 10 shmup đã có shader HLSL đầu tiên: SpriteFlash) |
 
 ### 4.2 Shoot 'em up — việc còn lại trước khi viết bài
-- [ ] Upload `D:\Projects\Tutorial\Builds\WebGL\ShootEmUp\Build` lên R2: `node scripts/upload-r2-assets.mjs <folder> shmup/Build` (cần env R2), rồi đổi `buildPath` trong `registry.json` từ `/webgl-games/shmup/Build` sang URL R2 — Bill làm (hiện chỉ chạy local vì `Build/` gitignore)
+- [x] (29/09, `dcae217`, cả platformer) Upload `D:\Projects\Tutorial\Builds\WebGL\ShootEmUp\Build` lên R2: `node scripts/upload-r2-assets.mjs <folder> shmup/Build` (cần env R2), rồi đổi `buildPath` trong `registry.json` từ `/webgl-games/shmup/Build` sang URL R2 — Bill làm (hiện chỉ chạy local vì `Build/` gitignore)
 - [ ] Chụp tay các ảnh ghi "chụp tay" trong journal (Hub, Package Manager, menu Create, Build Profiles, frame nổ)
 - [ ] Ảnh Input Actions editor với Move mở rộng (bản MCP đang gập)
 - [ ] Biên tập ảnh (khoanh/mũi tên) theo cột "Edit" trong từng journal
