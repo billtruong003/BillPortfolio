@@ -4,6 +4,8 @@
 > **Đánh giá gốc:** `reports/2026-10-30-eval-hotrod-garage-sim.md` (25/35, GO) · `reports/2026-10-30-eval-gym-zombie-runner.md` (bản pivot 28/35, GO)
 > **Điều khoản Steam** (xem `reports/2026-10-30-insight-report-steam.md`): mỗi game tốn $100 Steam Direct, được hoàn khi đạt $1.000 doanh thu. Phải chờ 21 ngày sau khi trả phí. Trang Coming Soon phải public ≥ 2 tuần trước khi ra (Steamworks, Oct 2026).
 
+> **Cập nhật 30/10/2026:** dev chọn làm **Gym Zombie Runner TRƯỚC** (Next Fest tháng 2/2027), còn Hot Rod Garage làm sau (Next Fest tháng 6/2027). Bảng thứ tự bên dưới là đề xuất ban đầu, hai game đã đổi chỗ cho nhau.
+
 ## 1. Nguyên tắc: làm lần lượt, nhưng mở trang sớm
 - **Không code song song 2 game.** Làm solo mà chia đôi thời gian thì dễ không game nào ra kịp Next Fest.
 - **Mở trang Coming Soon sớm cho cả hai** để gom wishlist càng sớm càng tốt. Wishlist là thứ cần thời gian để tích lũy.

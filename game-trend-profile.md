@@ -14,6 +14,6 @@
 - **Paid UA:** none
 - **Strengths:** programming (Unity); art is OK (can make decent-looking art)
 - **Weaknesses:** level / game design (main weakness)
-- **Unfinished projects:** Hot Rod Garage (sim, planned #1, target Feb 2027 Next Fest, launch Mar 2027); Gym Zombie Runner (speed-as-weapon runner, planned #2, target Jun 2027 Next Fest)
+- **Unfinished projects:** Gym Zombie Runner (speed-as-weapon runner, #1, target Feb 2027 Next Fest — reg 10 Jan, demo 18 Jan); Hot Rod Garage (car garage sim, #2, target Jun 2027 Next Fest — reg 25 Apr, demo 10 May)
 - **Preferences:** first Steam release in under 3 months
 - **Report language:** Vietnamese
